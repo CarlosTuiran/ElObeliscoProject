@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Models\Domain.Models.csproj" />
+    <ProjectReference Include="..\Infra.Datos\Infra.Datos.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controller\" />
+    <Folder Include="Services\" />
+    <Folder Include="Request\" />
+  </ItemGroup>
+
+</Project>

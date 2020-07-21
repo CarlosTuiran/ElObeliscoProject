@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\Domain.Models\Domain.Models.csproj" />
   </ItemGroup>
 
 </Project>
