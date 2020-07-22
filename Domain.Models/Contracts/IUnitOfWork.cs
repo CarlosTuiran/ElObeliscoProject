@@ -8,6 +8,7 @@ namespace Domain.Models.Contracts
     public interface IUnitOfWork : IDisposable
     {
         IDFacturaServiceRepository DFacturaServiceRepository { get; }
+        IMFacturaServiceRepository MFacturaServiceRepository { get; }
         int Commit();
     }
 }

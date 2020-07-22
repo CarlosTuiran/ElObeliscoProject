@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static Domain.Models.Base.BaseEntity;
 
 namespace Domain.Models.Entities
 {
-    public class MFactura
+    public class MFactura : Entity<int>
     {
         public int idMfactura { get; set; }
         public int idEmpleado { get; set; }

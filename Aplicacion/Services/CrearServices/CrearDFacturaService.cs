@@ -44,7 +44,7 @@ namespace Aplicacion.Services.CrearServices
             }
             else
             {
-                return new CrearDFacturaResponse() { Message = $"Estudiante ya existe" };
+                return new CrearDFacturaResponse() { Message = $"Detalle de Factura ya existe" };
             }
         }
     }
