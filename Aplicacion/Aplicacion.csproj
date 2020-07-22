@@ -11,8 +11,10 @@
 
   <ItemGroup>
     <Folder Include="Controller\" />
-    <Folder Include="Services\" />
     <Folder Include="Request\" />
+    <Folder Include="Services\CrearServices\" />
+    <Folder Include="Services\ActualizarServices\" />
+    <Folder Include="Services\ConsultarServices\" />
   </ItemGroup>
 
 </Project>
