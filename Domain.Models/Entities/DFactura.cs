@@ -1,20 +1,24 @@
-﻿using System;
+﻿using Domain.Models.Base;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
+using static Domain.Models.Base.BaseEntity;
 
 namespace Domain.Models.Entities
 {
-    public class DFactura
+    public class DFactura : Entity<int>
     {
         public int idDFactura { get; set; }
         public int idMfactura { get; set; }
-        public int Referencia { get; set; }
+        public string Referencia { get; set; }
         public int idPromocion { get; set; }
         public double Cantidad { get; set; }
         public double PrecioUnitario { get; set; }
         public double PrecioTotal { get; set; }
+        public DateTime FechaFactura { get; set; }
 
-        public DFactura(int idDFactura, int idMfactura, int referencia, int idPromocion, double cantidad, double precioUnitario, double precioTotal)
+        public DFactura(int idDFactura, int idMfactura, string referencia, int idPromocion, double cantidad, double precioUnitario, double precioTotal)
         {
             this.idDFactura = idDFactura;
             this.idMfactura = idMfactura;
@@ -23,6 +27,7 @@ namespace Domain.Models.Entities
             Cantidad = cantidad;
             PrecioUnitario = precioUnitario;
             PrecioTotal = precioTotal;
+            FechaFactura = DateTime.Today;
         }
 
         public IReadOnlyList<string> CanCrear(DFactura dFactura)

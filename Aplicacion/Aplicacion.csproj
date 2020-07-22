@@ -11,8 +11,6 @@
 
   <ItemGroup>
     <Folder Include="Controller\" />
-    <Folder Include="Request\" />
-    <Folder Include="Services\CrearServices\" />
     <Folder Include="Services\ActualizarServices\" />
     <Folder Include="Services\ConsultarServices\" />
   </ItemGroup>
