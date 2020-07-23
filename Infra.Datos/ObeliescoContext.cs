@@ -17,5 +17,14 @@ namespace Infra.Datos
         public DbSet<DFactura> DFactura { get; set; }
         public DbSet<MFactura> MFactura { get; set; }
         public DbSet<Producto> Producto { get; set; }
+        public DbSet<Inventario> Inventario { get; set; }
+        public DbSet<Empleado> Empleado { get; set; }
+        public DbSet<Terceros> Terceros { get; set; }
+        public DbSet<Nomina> Nomina { get; set; }
+        public DbSet<TipoMovimiento> TipoMovimiento { get; set; }
+
+
+
+
     }
 }
