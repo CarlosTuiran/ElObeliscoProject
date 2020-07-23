@@ -13,17 +13,20 @@ namespace Domain.Models.Entities
         public int idMfactura { get; set; }
         public string Referencia { get; set; }
         public int idPromocion { get; set; }
-        public double Cantidad { get; set; }
+        public string Bodega { get; set; }
+        public int Cantidad { get; set; }
         public double PrecioUnitario { get; set; }
         public double PrecioTotal { get; set; }
         public DateTime FechaFactura { get; set; }
+        
 
-        public DFactura(int idDFactura, int idMfactura, string referencia, int idPromocion, double cantidad, double precioUnitario, double precioTotal)
+        public DFactura(int idDFactura, int idMfactura, string referencia, int idPromocion, string bodega, int cantidad, double precioUnitario, double precioTotal)
         {
             this.idDFactura = idDFactura;
             this.idMfactura = idMfactura;
             Referencia = referencia;
             this.idPromocion = idPromocion;
+            this.Bodega = bodega;
             Cantidad = cantidad;
             PrecioUnitario = precioUnitario;
             PrecioTotal = precioTotal;
