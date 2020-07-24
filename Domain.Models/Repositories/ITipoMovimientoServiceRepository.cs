@@ -6,7 +6,7 @@ using Domain.Models.Entities;
 
 namespace Domain.Models.Repositories
 {
-    public interface ITipoMovimientoServiceRepository IGenericRepository<TipoMovimiento>
+    public interface ITipoMovimientoServiceRepository: IGenericRepository<TipoMovimiento>
     {
     }
 }

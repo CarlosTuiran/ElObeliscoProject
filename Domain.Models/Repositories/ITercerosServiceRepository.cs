@@ -6,7 +6,7 @@ using Domain.Models.Entities;
 
 namespace Domain.Models.Repositories
 {
-    public interface ITercerosServiceRepository IGenericRepository<Terceros>
+    public interface ITercerosServiceRepository: IGenericRepository<Terceros>
     {
     }
 }

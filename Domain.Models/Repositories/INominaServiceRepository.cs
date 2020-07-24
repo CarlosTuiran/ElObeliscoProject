@@ -6,7 +6,7 @@ using Domain.Models.Entities;
 
 namespace Domain.Models.Repositories
 {
-    interface INominaServiceRepository IGenericRepository<Nomina>
+    public interface INominaServiceRepository: IGenericRepository<Nomina>
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Domain.Models.Repositories
 {
-    public interface IInventarioServiceRepository : IGenericRepository<Inventario>
+    public interface IInventarioServiceRepository: IGenericRepository<Inventario>
     {
     }
 }
