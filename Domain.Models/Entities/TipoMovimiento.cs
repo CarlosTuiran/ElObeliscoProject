@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static Domain.Models.Base.BaseEntity;
 
 namespace Domain.Models.Entities
 {
-    public class TipoMovimiento
+    public class TipoMovimiento : Entity<int>
     {
         public int idMovimiento { get; set; }
         public string Nombre { get; set; }
