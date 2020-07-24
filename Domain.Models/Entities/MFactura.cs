@@ -20,7 +20,7 @@ namespace Domain.Models.Entities
         public double IVA { get; set; }
         public double Total { get; set; }
         public double Abono { get; set; }
-        public String EstadoFactura { get; set; }
+        public string EstadoFactura { get; set; }
 
         public MFactura(int idMfactura, int idEmpleado, int nit, int idMovimiento, string tipoMovimiento, DateTime fechaFactura, 
             DateTime fechaPago, double subTotal, double valorDevolucion, double descuento, double iVA, double total, double abono, string estadoFactura)

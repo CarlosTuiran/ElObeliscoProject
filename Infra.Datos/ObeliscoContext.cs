@@ -5,9 +5,9 @@ using System;
 
 namespace Infra.Datos
 {
-    public class ObeliescoContext : DbContextBase
+    public class ObeliscoContext : DbContextBase
     {
-        public ObeliescoContext(DbContextOptions options) : base(options)
+        public ObeliscoContext(DbContextOptions options) : base(options)
         {
         }
         /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

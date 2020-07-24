@@ -24,7 +24,7 @@ namespace Aplicacion.Services.CrearServices
             var dFactura = _unitOfWork.DFacturaServiceRepository.FindFirstOrDefault(t => t.idDFactura == request.idDFactura);
             if (dFactura == null)
             {
-                DFactura newDFactura = new DFactura(request.idDFactura, request.idMfactura, request.Referencia, request.idPromocion, request.Cantidad, request.PrecioUnitario, request.PrecioTotal);
+                DFactura newDFactura = new DFactura(request.idDFactura, request.idMfactura, request.Referencia, request.idPromocion, request.Bodega, request.Cantidad, request.PrecioUnitario, request.PrecioTotal);
                 IReadOnlyList<string> errors = newDFactura.CanCrear(newDFactura);
                 if (errors.Any())
                 {
