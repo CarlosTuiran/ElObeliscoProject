@@ -14,14 +14,13 @@ namespace Aplicacion.Request
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string Estado { get; set; }
-
-        public class CrearEmpleadoResponse
+    }
+    public class CrearEmpleadoResponse
+    {
+        public string Message { get; set; }
+        public bool isOk()
         {
-            public string Message { get; set; }
-            public bool isOk()
-            {
-                return this.Message.Equals("Empleado Creado Exitosamente");
-            }
+            return this.Message.Equals("Empleado Creado Exitosamente");
         }
     }
 }

@@ -20,15 +20,13 @@ namespace Aplicacion.Request
         public double Total { get; set; }
         public double Abono { get; set; }
         public String EstadoFactura { get; set; }
-
-        public class CrearMFacturaResponse
+    }
+    public class CrearMFacturaResponse
+    {
+        public string Message { get; set; }
+        public bool isOk()
         {
-            public string Message { get; set; }
-            public bool isOk()
-            {
-                return this.Message.Equals("Factura Creadas Exitosamente");
-            }
+            return this.Message.Equals("Factura Creadas Exitosamente");
         }
-
     }
 }

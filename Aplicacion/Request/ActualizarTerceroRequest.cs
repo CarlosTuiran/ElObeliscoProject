@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Aplicacion.Request
 {
-    public class CrearTerceroRequest
+    public class ActualizarTerceroRequest
     {
         public int Nit { get; set; }
         public string Nombre { get; set; }
@@ -15,12 +15,12 @@ namespace Aplicacion.Request
         public string Direccion { get; set; }
         public string Descripcion { get; set; }
     }
-    public class CrearTerceroResponse
+    public class ActualizarTerceroResponse
     {
         public string Message { get; set; }
         public bool isOk()
         {
-            return this.Message.Equals("Empleado Creado Exitosamente");
+            return this.Message.Equals("Empleado Actualizado Exitosamente");
         }
     }
 }
