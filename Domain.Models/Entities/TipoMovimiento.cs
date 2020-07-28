@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static Domain.Models.Base.BaseEntity;
 
 namespace Domain.Models.Entities
 {
@@ -16,7 +17,7 @@ namespace Domain.Models.Entities
             Nombre = nombre;
         }
 
-        public IReadOnlyList<string> CanCrear(MFactura mFactura)
+        public IReadOnlyList<string> CanCrear(TipoMovimiento tipoMovimiento)
         {
             var errors = new List<string>();
             if (this.idMovimiento == 0)

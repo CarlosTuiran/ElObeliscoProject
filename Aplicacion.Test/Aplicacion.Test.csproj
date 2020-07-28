@@ -19,4 +19,9 @@
     <ProjectReference Include="..\Infra.Datos\Infra.Datos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CrearTests\" />
+    <Folder Include="ActualizarTests\" />
+  </ItemGroup>
+
 </Project>
