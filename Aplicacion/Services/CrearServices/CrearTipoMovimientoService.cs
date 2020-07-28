@@ -9,7 +9,7 @@ using static Aplicacion.Request.CrearTipoMovimientoRequest;
 
 namespace Aplicacion.Services.CrearServices
 {
-    class CrearTipoMovimientoService
+    public class CrearTipoMovimientoService
     {
         readonly IUnitOfWork _unitOfWork;
 
