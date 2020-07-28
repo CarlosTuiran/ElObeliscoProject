@@ -1,5 +1,6 @@
 ﻿using Domain.Models.Contracts;
 using Domain.Models.Repositories;
+using Infra.Datos.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,78 @@ namespace Infra.Datos.Base
 
         //Repositorios Por aca
 
-        public IDFacturaServiceRepository DFacturaServiceRepository => throw new NotImplementedException();
+        private IDFacturaServiceRepository _dFacturaServiceRepository;
+        public IDFacturaServiceRepository DFacturaServiceRepository { 
+            get 
+            {
+                return _dFacturaServiceRepository ?? (_dFacturaServiceRepository= new DFacturaServiceRepository(_dbContext));
+            } 
+        }
 
-        public IMFacturaServiceRepository MFacturaServiceRepository => throw new NotImplementedException();
+        private IMFacturaServiceRepository _mFacturaServiceRepository;
+        public IMFacturaServiceRepository MFacturaServiceRepository
+        {
+            get
+            {
+                return _mFacturaServiceRepository ?? (_mFacturaServiceRepository = new MFacturaServiceRepository(_dbContext));
+            }
+        }
 
-        public IProductoServiceRepository ProductoServiceRepository => throw new NotImplementedException();
+        private IProductoServiceRepository _productoServiceRepository;
+        public IProductoServiceRepository ProductoServiceRepository
+        {
+            get
+            {
+                return _productoServiceRepository ?? (_productoServiceRepository = new ProductoServiceRepository(_dbContext));
+            }
+        }
+
+        private IInventarioServiceRepository _inventarioServiceRepository;
+        public IInventarioServiceRepository InventarioServiceRepository
+        {
+            get
+            {
+                return _inventarioServiceRepository ?? (_inventarioServiceRepository = new InventarioServiceRepository(_dbContext));
+            }
+        }
+
+        private IEmpleadoServiceRepository _empleadoServiceRepository;
+        public IEmpleadoServiceRepository EmpleadoServiceRepository
+        {
+            get
+            {
+                return _empleadoServiceRepository ?? (_empleadoServiceRepository = new EmpleadoServiceRepository(_dbContext));
+            }
+        }
+
+        private INominaServiceRepository _nominaServiceRepository;
+        public INominaServiceRepository NominaServiceRepository
+        {
+            get
+            {
+                return _nominaServiceRepository ?? (_nominaServiceRepository = new NominaServiceRepository(_dbContext));
+            }
+        }
+
+        private ITercerosServiceRepository _tercerosServiceRepository;
+        public ITercerosServiceRepository TercerosServiceRepository
+        {
+            get
+            {
+                return _tercerosServiceRepository ?? (_tercerosServiceRepository = new TercerosServiceRepository(_dbContext));
+            }
+        }
+
+        private ITipoMovimientoServiceRepository _tipoMovimientoServiceRepository;
+        public ITipoMovimientoServiceRepository TipoMovimientoServiceRepository
+        {
+            get
+            {
+                return _tipoMovimientoServiceRepository ?? (_tipoMovimientoServiceRepository = new TipoMovimientoServiceRepository(_dbContext));
+            }
+        }
+
+        
 
         public int Commit()
         {

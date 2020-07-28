@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Domain.Models.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using static Domain.Models.Base.BaseEntity;
+
 
 namespace Domain.Models.Entities
 {
@@ -16,6 +17,10 @@ namespace Domain.Models.Entities
         public double PrecioVenta { get; set; }
         public double IVA { get; set; }
         public DateTime FechaRegistro { get; set; }
+        public Producto()
+        {
+
+        }        
         public Producto(string referencia, string descripcion, string formatoventa, string marca ,string fabrica,
             double costo, double precioventa, double iva)
         {

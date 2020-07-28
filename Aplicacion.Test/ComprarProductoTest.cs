@@ -2,6 +2,7 @@ using Infra.Datos;
 using NUnit.Framework;
 using Infra.Datos.Base;
 using Microsoft.EntityFrameworkCore;
+using Aplicacion.Services.Eventos;
 
 namespace Aplicacion.Test
 {

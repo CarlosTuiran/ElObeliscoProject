@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Domain.Models.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Domain.Models.Entities
 {
-    public class Terceros
+    public class Terceros : Entity<int>
     {
         public int Nit { get; set; }
         public string Nombre { get; set; }

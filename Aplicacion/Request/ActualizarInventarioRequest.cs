@@ -6,7 +6,7 @@ namespace Aplicacion.Request
 {
     public class ActualizarInventarioRequest
     {
-        public double id { get; set; }
+        
         public string Referencia { get; set; }
         public int Cantidad { get; set; }
         public string Bodega { get; set; }

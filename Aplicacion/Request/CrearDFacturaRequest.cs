@@ -13,17 +13,17 @@ namespace Aplicacion.Request
         public string Bodega { get; set; }
         public int Cantidad { get; set; }
         public double PrecioUnitario { get; set; }
-        public double PrecioTotal { get; set; }
         public DateTime FechaFactura { get; set; }
 
-        public class CrearDFacturaResponse
-        {
-            public string Message { get; set; }
-            public bool isOk()
-            {
-                return this.Message.Equals("Detalles de Factura Creado Exitosamente");
-            }
-        }
+        
 
+    }
+    public class CrearDFacturaResponse
+    {
+        public string Message { get; set; }
+        public bool isOk()
+        {
+            return this.Message.Equals("Detalles de Factura Creado Exitosamente");
+        }
     }
 }

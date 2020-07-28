@@ -11,7 +11,10 @@ namespace Domain.Models.Contracts
         IMFacturaServiceRepository MFacturaServiceRepository { get; }
         IProductoServiceRepository ProductoServiceRepository { get; }
         IInventarioServiceRepository InventarioServiceRepository { get; }
-       
+        IEmpleadoServiceRepository EmpleadoServiceRepository { get; }
+        INominaServiceRepository NominaServiceRepository { get; }
+        ITercerosServiceRepository TercerosServiceRepository { get; }
+        ITipoMovimientoServiceRepository TipoMovimientoServiceRepository { get; }
         int Commit();
     }
 }

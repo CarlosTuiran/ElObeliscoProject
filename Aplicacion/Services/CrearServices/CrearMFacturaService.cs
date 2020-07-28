@@ -5,11 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static Aplicacion.Request.CrearMFacturaRequest;
 
 namespace Aplicacion.Services.CrearServices
 {
-    class CrearMFacturaService
+    public class CrearMFacturaService
     {
         readonly IUnitOfWork _unitOfWork;
 
@@ -25,7 +24,7 @@ namespace Aplicacion.Services.CrearServices
             if (dFactura == null)
             {
                 MFactura newMFactura = new MFactura(request.idMfactura, request.idEmpleado, request.Nit, request.idMovimiento, request.TipoMovimiento, request.FechaFactura,
-                request.FechaPago, request.SubTotal, request.ValorDevolucion, request.Descuento, request.IVA, request.Total, request.Abono, request.EstadoFactura);
+                request.FechaPago, request.SubTotal, request.ValorDevolucion, request.Descuento, request.IVA, /*request.Total,*/ request.Abono, request.EstadoFactura);
                 IReadOnlyList<string> errors = newMFactura.CanCrear(newMFactura);
                 if (errors.Any())
                 {

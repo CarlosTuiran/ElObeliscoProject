@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using static Domain.Models.Base.BaseEntity;
+
 
 namespace Domain.Models.Entities
 {
@@ -20,7 +20,7 @@ namespace Domain.Models.Entities
         public DateTime FechaFactura { get; set; }
         
 
-        public DFactura(int idDFactura, int idMfactura, string referencia, int idPromocion, string bodega, int cantidad, double precioUnitario, double precioTotal)
+        public DFactura(int idDFactura, int idMfactura, string referencia, int idPromocion, string bodega, int cantidad, double precioUnitario)
         {
             this.idDFactura = idDFactura;
             this.idMfactura = idMfactura;
@@ -29,7 +29,7 @@ namespace Domain.Models.Entities
             this.Bodega = bodega;
             Cantidad = cantidad;
             PrecioUnitario = precioUnitario;
-            PrecioTotal = precioTotal;
+            PrecioTotal = CalcularPrecioTotal();
             FechaFactura = DateTime.Today;
         }
 
@@ -40,9 +40,15 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Cantidad vacio");
             if (this.PrecioUnitario == 0)
                 errors.Add("Campo Precio Unitario vacio");
-            if (this.PrecioTotal == 0)
-                errors.Add("Campo Precio Total vacio");
+            /*if (this.PrecioTotal == 0)
+                errors.Add("Campo Precio Total vacio");*/
             return errors;
+        }
+
+        public double CalcularPrecioTotal()
+        {
+            double precioTotal= this.Cantidad * this.PrecioUnitario; //CUANDO SE DEFINAN LAS PROMOCIONES ACA TOCA AÑADIRLO
+            return precioTotal;
         }
     }
 }

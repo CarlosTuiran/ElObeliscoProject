@@ -23,7 +23,7 @@ namespace Aplicacion.Services.ActualizarServices
             Inventario inventario = _unitOfWork.InventarioServiceRepository.FindFirstOrDefault(t => t.Referencia == request.Referencia);
             if (inventario == null)
             {
-                Inventario newInventario = new Inventario(request.id, request.Referencia, request.Cantidad, request.Bodega);
+                Inventario newInventario = new Inventario(request.Referencia, request.Cantidad, request.Bodega);
                 IReadOnlyList<string> errors = newInventario.CanCrear(newInventario);
                 if (errors.Any())
                 {

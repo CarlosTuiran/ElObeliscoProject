@@ -17,18 +17,19 @@ namespace Aplicacion.Request
         public double ValorDevolucion { get; set; }
         public double Descuento { get; set; }
         public double IVA { get; set; }
-        public double Total { get; set; }
+        //public double Total { get; set; }
         public double Abono { get; set; }
         public String EstadoFactura { get; set; }
 
-        public class CrearMFacturaResponse
-        {
-            public string Message { get; set; }
-            public bool isOk()
-            {
-                return this.Message.Equals("Factura Creadas Exitosamente");
-            }
-        }
+        
 
+    }
+    public class CrearMFacturaResponse
+    {
+        public string Message { get; set; }
+        public bool isOk()
+        {
+            return this.Message.Equals("Factura Creadas Exitosamente");
+        }
     }
 }

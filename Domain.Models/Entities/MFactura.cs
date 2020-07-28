@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Domain.Models.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using static Domain.Models.Base.BaseEntity;
+
 
 namespace Domain.Models.Entities
 {
@@ -18,12 +19,12 @@ namespace Domain.Models.Entities
         public double ValorDevolucion { get; set; }
         public double Descuento { get; set; }
         public double IVA { get; set; }
-        public double Total { get; set; }
+        public double Total { get=> SubTotal-(SubTotal*Descuento)+(SubTotal*IVA); }
         public double Abono { get; set; }
         public string EstadoFactura { get; set; }
 
         public MFactura(int idMfactura, int idEmpleado, int nit, int idMovimiento, string tipoMovimiento, DateTime fechaFactura, 
-            DateTime fechaPago, double subTotal, double valorDevolucion, double descuento, double iVA, double total, double abono, string estadoFactura)
+            DateTime fechaPago, double subTotal, double valorDevolucion, double descuento, double iVA, /*double total,*/ double abono, string estadoFactura)
         {
             this.idMfactura = idMfactura;
             this.idEmpleado = idEmpleado;
@@ -36,7 +37,7 @@ namespace Domain.Models.Entities
             ValorDevolucion = valorDevolucion;
             Descuento = descuento;
             IVA = iVA;
-            Total = total;
+            /*Total = total;*/
             Abono = abono;
             EstadoFactura = estadoFactura;
         }

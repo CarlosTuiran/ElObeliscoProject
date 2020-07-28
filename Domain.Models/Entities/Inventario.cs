@@ -1,20 +1,21 @@
-﻿using System;
+﻿using Domain.Models.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using static Domain.Models.Base.BaseEntity;
+
 
 namespace Domain.Models.Entities
 {
     public class Inventario : Entity<int>
     {
-        public double id { get; set; }
+        
         public string Referencia { get; set; }
         public int Cantidad { get; set; }
         public string Bodega { get; set; }
 
-        public Inventario(double id, string referencia, int cantidad, string bodega)
+        public Inventario(string referencia, int cantidad, string bodega)
         {
-            this.id = id;
+            
             Referencia = referencia;
             Cantidad = cantidad;
             Bodega = bodega;
