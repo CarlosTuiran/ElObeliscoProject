@@ -22,7 +22,7 @@ namespace Aplicacion.Services.ActualizarServices
             Nomina nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdEmpleado == request.IdEmpleado);
             if (nomina == null)
             {
-                return new ActualizarNominaResponse() { Message = $"Nomina no existe" };
+                return new ActualizarNominaResponse() { Message = $"Empleado no existe" };
             }
             else
             {
@@ -32,7 +32,7 @@ namespace Aplicacion.Services.ActualizarServices
                 nomina.Seguro = request.Seguro;
                 _unitOfWork.NominaServiceRepository.Edit(nomina);
                 _unitOfWork.Commit();
-                return new ActualizarNominaResponse() { Message = $"Nomina actualizada Exitosamente" };
+                return new ActualizarNominaResponse() { Message = $"Empleado de nomina actualizado Exitosamente" };
             }
         }
     }
