@@ -17,7 +17,7 @@ namespace Domain.Models.Entities
         public string Direccion { get; set; }
         public string Descripcion { get; set; }
 
-        public Terceros(int nit, string nombre, string apellido, string tipoTercero, string celular, string correo, string direccion, string descripcion)
+        public Terceros(string nit, string nombre, string apellido, string tipoTercero, string celular, string correo, string direccion, string descripcion)
         {
             Nit = nit;
             Nombre = nombre;
@@ -32,7 +32,7 @@ namespace Domain.Models.Entities
         public IReadOnlyList<string> CanCrear(Terceros terceros)
         {
             var errors = new List<string>();
-            if (this.Nit == 0)
+            if (string.IsNullOrEmpty(this.Nit))
                 errors.Add("Campo Nit vacio");
             if (string.IsNullOrEmpty(this.Nombre))
                 errors.Add("Campo Nombre vacio");

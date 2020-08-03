@@ -21,10 +21,10 @@ namespace Aplicacion.Services.CrearServices
         public CrearNominaResponse Ejecutar(CrearNominaRequest request)
         {
 
-            var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.id == request.id);
+            var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdEmpleado == request.IdEmpleado);
             if (nomina == null)
             {
-                Nomina newNomina = new Nomina(request.id, request.IdEmpleado, request.SaldoBase, request.Seguro, request.SaldoTotal);
+                Nomina newNomina = new Nomina(request.IdEmpleado, request.SaldoBase, request.Seguro, request.SaldoTotal);
                 IReadOnlyList<string> errors = newNomina.CanCrear(newNomina);
                 if (errors.Any())
                 {

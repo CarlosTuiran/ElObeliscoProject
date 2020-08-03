@@ -25,7 +25,7 @@ namespace Aplicacion.Test.CrearTests
             _unitOfWork = new UnitOfWork(_context);
         }
 
-        [TestCaseSource("CreationsMFactura")]
+        [TestCaseSource("CreationsNomina")]
         public void CrearNomina(CrearNominaRequest nominaRequest, string expected)
         {
             _Nominaservice = new CrearNominaService(_unitOfWork);
@@ -43,7 +43,7 @@ namespace Aplicacion.Test.CrearTests
                     SaldoTotal = 1389000,
                     Seguro = 100000
                 },
-                "Nomina Creada Exitosamente"
+                "Empleado en Nomina Creado Exitosamente"
                 ).SetName("Crear Nomina Correctamente");
         }
     }

@@ -40,7 +40,7 @@ namespace Aplicacion.Test.CrearTests
                     idMovimiento = 1000001,
                     Nombre = "Pago Electrónico"
                 },
-                "Tipo Movimiento Creado Exitosamente"
+                "Tipo Movimiento creado Exitosamente"
                 ).SetName("Crear Tipo Movimiento Correctamente");
         }
     }

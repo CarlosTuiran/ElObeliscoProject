@@ -39,7 +39,7 @@ namespace Aplicacion.Services.CrearServices
                 {
                     _unitOfWork.TipoMovimientoServiceRepository.Add(newTipoMovimiento);
                     _unitOfWork.Commit();
-                    return new CrearTipoMovimientoResponse() { Message = $"Tipo Movimiento Exitosamente" };
+                    return new CrearTipoMovimientoResponse() { Message = $"Tipo Movimiento creado Exitosamente" };
                 }
             }
             else
