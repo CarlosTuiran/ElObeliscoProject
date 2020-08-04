@@ -15,6 +15,7 @@ namespace Domain.Models.Contracts
         INominaServiceRepository NominaServiceRepository { get; }
         ITercerosServiceRepository TercerosServiceRepository { get; }
         ITipoMovimientoServiceRepository TipoMovimientoServiceRepository { get; }
+        IUsuarioServiceRepository UsuarioServiceRepository { get; }
         int Commit();
     }
 }

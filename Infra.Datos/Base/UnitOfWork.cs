@@ -90,8 +90,15 @@ namespace Infra.Datos.Base
                 return _tipoMovimientoServiceRepository ?? (_tipoMovimientoServiceRepository = new TipoMovimientoServiceRepository(_dbContext));
             }
         }
+        private IUsuarioServiceRepository _usuarioServiceRepository;
+        public IUsuarioServiceRepository UsuarioServiceRepository
+        {
+            get
+            {
+                return _usuarioServiceRepository ?? (_usuarioServiceRepository = new UsuarioServiceRepository(_dbContext));
+            }
+        }
 
-        
 
         public int Commit()
         {

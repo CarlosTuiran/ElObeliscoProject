@@ -22,6 +22,7 @@ namespace Infra.Datos
         public DbSet<Terceros> Terceros { get; set; }
         public DbSet<Nomina> Nomina { get; set; }
         public DbSet<TipoMovimiento> TipoMovimiento { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
 
 
 
