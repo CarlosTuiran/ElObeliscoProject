@@ -10,10 +10,10 @@ namespace Infra.Datos
         public ObeliscoContext(DbContextOptions options) : base(options)
         {
         }
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"Server=localhost; database=cempreddp;uid=acceso;pwd=acceso;");
-        }*/
+            optionsBuilder.UseSqlServer(@"Data Source = ServidorSQL; Initial Catalog = BaseDatos; Integrated Security = True");
+        }
         public DbSet<DFactura> DFactura { get; set; }
         public DbSet<MFactura> MFactura { get; set; }
         public DbSet<Producto> Producto { get; set; }
