@@ -9,6 +9,7 @@ namespace Domain.Models.Entities
     public class Nomina : Entity<int>
     {
         
+        public int IdNomina { get; set; }
         public int IdEmpleado { get; set; }
         public double SaldoBase { get; set; }
         public double Seguro { get; set; }
