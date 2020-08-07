@@ -98,6 +98,14 @@ namespace Infra.Datos.Base
                 return _usuarioServiceRepository ?? (_usuarioServiceRepository = new UsuarioServiceRepository(_dbContext));
             }
         }
+        private ILiquidacionServiceRepository _liquidacionServiceRepository;
+        public ILiquidacionServiceRepository LiquidacionServiceRepository
+        {
+            get
+            {
+                return _liquidacionServiceRepository ?? (_liquidacionServiceRepository = new LiquidacionServiceRepository(_dbContext));
+            }
+        }
 
 
         public int Commit()
