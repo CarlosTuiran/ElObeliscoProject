@@ -23,7 +23,7 @@ namespace Aplicacion.Test
         {
             //optionsBuilder.UseMySql(@"Server=localhost; database=cempreddp;uid=acceso;pwd=acceso;");
             var optionsInMemory = new DbContextOptionsBuilder<ObeliscoContext>().UseInMemoryDatabase("Obelisco").Options;
-            _context = new ObeliscoContext(optionsInMemory);
+            _context = new ObeliscoContext(optionsInMemory); 
             _unitOfWork = new UnitOfWork(_context);
         }
 
@@ -41,9 +41,9 @@ namespace Aplicacion.Test
                 new CrearMFacturaRequest
                 {
                     idMfactura = 100000001,
-                    idEmpleado = 106522,
-                    Nit = 12789,
-                    idMovimiento = 7,
+                    EmpleadoId = 106522,
+                    TercerosId = 12789,
+                    TipoMovimientoId = 7,
                     TipoMovimiento = "Compra",
                     FechaFactura = DateTime.Now,
                     FechaPago = DateTime.Now,

@@ -21,7 +21,7 @@ namespace Aplicacion.Services.Eventos
         }
         public ComprarProductoResponse Ejecutar(ComprarProductoRequest request)
         {
-            var dFactura = _unitOfWork.DFacturaServiceRepository.FindBy(t => t.idMfactura == request.idMfactura);
+            var dFactura = _unitOfWork.DFacturaServiceRepository.FindBy(t => t.MfacturaId == request.idMfactura);
             if (dFactura != null)
             {
                 //cada producto en detalles de factura 

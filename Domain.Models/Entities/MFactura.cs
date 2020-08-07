@@ -9,9 +9,9 @@ namespace Domain.Models.Entities
     public class MFactura : Entity<int>
     {
         public int idMfactura { get; set; }
-        public int idEmpleado { get; set; }
-        public int Nit { get; set; }
-        public int idMovimiento { get; set; }
+        public int EmpleadoId { get; set; }
+        public int TercerosId { get; set; }
+        public int TipoMovimientoId { get; set; }
         public string TipoMovimiento { get; set; }
         public DateTime FechaFactura { get; set; }
         public DateTime FechaPago { get; set; }
@@ -22,14 +22,16 @@ namespace Domain.Models.Entities
         public double Total { get=> SubTotal-(SubTotal*Descuento)+(SubTotal*IVA); }
         public double Abono { get; set; }
         public string EstadoFactura { get; set; }
+        public List<DFactura> DFacturas { get; set; }
+        
 
         public MFactura(int idMfactura, int idEmpleado, int nit, int idMovimiento, string tipoMovimiento, DateTime fechaFactura, 
             DateTime fechaPago, double subTotal, double valorDevolucion, double descuento, double iVA, /*double total,*/ double abono, string estadoFactura)
         {
             this.idMfactura = idMfactura;
-            this.idEmpleado = idEmpleado;
-            Nit = nit;
-            this.idMovimiento = idMovimiento;
+            this.EmpleadoId = idEmpleado;
+            TercerosId = nit;
+            this.TipoMovimientoId = idMovimiento;
             TipoMovimiento = tipoMovimiento;
             FechaFactura = fechaFactura;
             FechaPago = fechaPago;

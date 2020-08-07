@@ -12,7 +12,7 @@ namespace Domain.Models.Entities
         public string Referencia { get; set; }
         public int Cantidad { get; set; }
         public string Bodega { get; set; }
-
+        public List<Producto> Productos { get; set; }
         public Inventario(string referencia, int cantidad, string bodega)
         {
             

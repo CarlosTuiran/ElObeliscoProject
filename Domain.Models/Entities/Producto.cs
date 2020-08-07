@@ -8,6 +8,11 @@ namespace Domain.Models.Entities
 {
     public class Producto : Entity<int>
     {
+        //public int? MyProperty { get; set; } <-- Propiedad Opcional
+        //public Fabrica MyProperty { get; set; } <-- Relacion 1 a 1
+        //public List<Fabrica> MyProperty { get; set; } <-- Relacion 1 a *
+        //[StringLength(100)] <-- Anotacion max 100 caracteres 
+
         public string Referencia { get; set; }
         public string Descripcion { get; set; }
         public string FormatoVenta { get; set; }
@@ -16,6 +21,7 @@ namespace Domain.Models.Entities
         public double Costo { get; set; }
         public double PrecioVenta { get; set; }
         public double IVA { get; set; }
+        public int InventarioId { get; set; } // PENDIENTE: esperando Inclusion al momento de  crear
         public DateTime FechaRegistro { get; set; }
         public Producto()
         {
