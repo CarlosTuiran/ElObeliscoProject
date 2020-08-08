@@ -19,7 +19,7 @@ namespace Aplicacion.Services.Eventos
         {
 
             var liquidacion = _unitOfWork.LiquidacionServiceRepository.FindFirstOrDefault(t => t.IdLiquidacion == request.IdLiquidacion);
-            var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina == request.IdNomina);
+            var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina == request.NominaId);
             if (liquidacion == null)
             {
                 if (nomina == null)
@@ -28,7 +28,7 @@ namespace Aplicacion.Services.Eventos
                 }
                 else 
                 {
-                    Liquidacion newLiquidacion = new Liquidacion(request.IdNomina, request.Monto);
+                    Liquidacion newLiquidacion = new Liquidacion(request.NominaId, request.Monto);
                     IReadOnlyList<string> errors = newLiquidacion.CanCrear(newLiquidacion);
                     if (errors.Any())
                     {

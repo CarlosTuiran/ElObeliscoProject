@@ -8,7 +8,7 @@ namespace Aplicacion.Request
     {
         public string Nombre { get; set; }
         public string Password { get; set; }
-        public int IdEmpleado { get; set; }
+        public int EmpleadoId { get; set; }
     }
     public class CrearUsuarioResponse
     {

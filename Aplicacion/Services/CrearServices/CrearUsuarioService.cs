@@ -20,14 +20,14 @@ namespace Aplicacion.Services.CrearServices
         public CrearUsuarioResponse Ejecutar(CrearUsuarioRequest request)
         {
 
-            var usuario = _unitOfWork.UsuarioServiceRepository.FindFirstOrDefault(t => t.IdEmpleado == request.IdEmpleado);
+            var usuario = _unitOfWork.UsuarioServiceRepository.FindFirstOrDefault(t => t.EmpleadoId == request.EmpleadoId);
             if (usuario == null)
             {
                 var usuarioRep = _unitOfWork.UsuarioServiceRepository.FindFirstOrDefault(t => t.Nombre == request.Nombre);
                 if (usuarioRep == null)
                     return new CrearUsuarioResponse() { Message = $"Usuario ya existe" };
 
-                Usuario newUsuario = new Usuario(request.Nombre,  request.Password, request.IdEmpleado);
+                Usuario newUsuario = new Usuario(request.Nombre,  request.Password, request.EmpleadoId);
                 IReadOnlyList<string> errors = newUsuario.CanCrear(newUsuario);
                 if (errors.Any())
                 {

@@ -9,15 +9,16 @@ namespace Domain.Models.Entities
     {
         public string Nombre { get; set; }
         public string Password { get; set; }
-        public int IdEmpleado { get; set; }
-        private string SharedSecret = "ElObeliescoPass123";
+        public int EmpleadoId { get; set; }
+
+        private const string SharedSecret = "ElObeliescoPass123";
         public Crypto Crypto;
         public Usuario(string nombre, string password, int idEmpleado)
         {
             this.Nombre = nombre;
             Crypto = new Crypto();
             this.Password = Encriptar(password);
-            this.IdEmpleado = idEmpleado;
+            this.EmpleadoId = idEmpleado;
         }
         public string Encriptar(string password)
         {
@@ -36,7 +37,7 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Nombre vacio");
             if (string.IsNullOrEmpty(this.Password))
                 errors.Add("Campo Password vacio");
-            if (this.IdEmpleado==0)
+            if (this.EmpleadoId==0)
                 errors.Add("Campo IdEmpleado vacio");
 
             /*if (this.PrecioTotal == 0)

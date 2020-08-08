@@ -11,12 +11,10 @@ namespace Aplicacion.Services.Eventos
     public class ComprarProductoService
     {
         readonly IUnitOfWork _unitOfWork;
-        private CrearProductoService crearProductoService;
         private ActualizarInventarioService actualizarInventarioService;
         public ComprarProductoService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            crearProductoService = new CrearProductoService(_unitOfWork);
             actualizarInventarioService = new ActualizarInventarioService(_unitOfWork);
         }
         public ComprarProductoResponse Ejecutar(ComprarProductoRequest request)

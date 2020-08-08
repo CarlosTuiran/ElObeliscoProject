@@ -74,7 +74,7 @@ namespace Aplicacion.Test
             yield return new TestCaseData(
                 new List<CrearDFacturaRequest> {
                 new CrearDFacturaRequest {
-                    idMfactura= 100000001,
+                    MfacturaId= 100000001,
                     idDFactura=1000001,
                     Referencia="9900-3333-2222",
                     Cantidad=2,
@@ -84,7 +84,7 @@ namespace Aplicacion.Test
                 },
                 new CrearDFacturaRequest
                 {
-                    idMfactura = 100000001,
+                    MfacturaId = 100000001,
                     idDFactura = 1000002,
                     Referencia = "7966-3333-2222",
                     Cantidad = 1,

@@ -7,7 +7,7 @@ namespace Aplicacion.Request
     public class PagarEmpleadoRequest
     {
         public int IdLiquidacion { get; set; }
-        public int IdNomina { get; set; }
+        public int NominaId { get; set; }
         public double Monto { get; set; }
     }
     public class PagarEmpleadoResponse

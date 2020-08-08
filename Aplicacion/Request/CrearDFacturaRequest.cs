@@ -7,9 +7,9 @@ namespace Aplicacion.Request
     public class CrearDFacturaRequest
     {
         public int idDFactura { get; set; }
-        public int idMfactura { get; set; }
+        public int MfacturaId { get; set; }
         public string Referencia { get; set; }
-        public int idPromocion { get; set; }
+        public int PromocionId { get; set; }
         public string Bodega { get; set; }
         public int Cantidad { get; set; }
         public double PrecioUnitario { get; set; }
