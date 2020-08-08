@@ -1,4 +1,5 @@
 ﻿using Domain.Models.Base;
+using Domain.Models.Entities.Operacionales;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,6 +24,8 @@ namespace Domain.Models.Entities
         public double IVA { get; set; }
         public int InventarioId { get; set; } // PENDIENTE: esperando Inclusion al momento de  crear
         public DateTime FechaRegistro { get; set; }
+        public List<ProductoDFactura> ProductoDFacturas { get; set; }
+
         public Producto()
         {
 
