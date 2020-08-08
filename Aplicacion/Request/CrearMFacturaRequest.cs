@@ -7,9 +7,9 @@ namespace Aplicacion.Request
     public class CrearMFacturaRequest
     {
         public int idMfactura { get; set; }
-        public int idEmpleado { get; set; }
-        public int Nit { get; set; }
-        public int idMovimiento { get; set; }
+        public int EmpleadoId { get; set; }
+        public int TercerosId { get; set; }
+        public int TipoMovimientoId { get; set; }
         public string TipoMovimiento { get; set; }
         public DateTime FechaFactura { get; set; }
         public DateTime FechaPago { get; set; }

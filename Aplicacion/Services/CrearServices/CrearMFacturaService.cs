@@ -23,7 +23,7 @@ namespace Aplicacion.Services.CrearServices
             var dFactura = _unitOfWork.MFacturaServiceRepository.FindFirstOrDefault(t => t.idMfactura == request.idMfactura);
             if (dFactura == null)
             {
-                MFactura newMFactura = new MFactura(request.idMfactura, request.idEmpleado, request.Nit, request.idMovimiento, request.TipoMovimiento, request.FechaFactura,
+                MFactura newMFactura = new MFactura(request.idMfactura, request.EmpleadoId, request.TercerosId, request.TipoMovimientoId, request.TipoMovimiento, request.FechaFactura,
                 request.FechaPago, request.SubTotal, request.ValorDevolucion, request.Descuento, request.IVA, /*request.Total,*/ request.Abono, request.EstadoFactura);
                 IReadOnlyList<string> errors = newMFactura.CanCrear(newMFactura);
                 if (errors.Any())

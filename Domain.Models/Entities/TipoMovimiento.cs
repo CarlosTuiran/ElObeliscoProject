@@ -10,6 +10,7 @@ namespace Domain.Models.Entities
     {
         public int idMovimiento { get; set; }
         public string Nombre { get; set; }
+        public List<MFactura> MFacturas { get; set; }
 
         public TipoMovimiento(int idMovimiento, string nombre)
         {

@@ -10,10 +10,16 @@ namespace Infra.Datos
         public ObeliscoContext(DbContextOptions options) : base(options)
         {
         }
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Server=localhost/SQLEXPRESS;Database=master;Trusted_Connection=True;");
             optionsBuilder.UseSqlServer("Data Source=SQLEXPRESS; Initial Catalog=ObeliescoDB Trusted_Connection=True;");
+        }
+        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<EstudianteCuerso>().HasKey(x => new { x.CursoId, x.EstudianteId });//llave compuesta 
+            modelBuilder.Entity<EstudianteCuerso>().HasQueryFilter(x=> x.Estado=="Activo");//Filtro por tipo que siempre se activa
+                    puede ignorarse con IgnoreQueryFliters
         }*/
         public DbSet<DFactura> DFactura { get; set; }
         public DbSet<MFactura> MFactura { get; set; }

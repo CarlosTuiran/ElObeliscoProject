@@ -15,6 +15,8 @@ namespace Domain.Models.Entities
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string Estado { get; set; }
+        public int NominaId { get; set; } //Foranea con Nomina
+        public List<MFactura> MFacturas { get; set; }
 
         public Empleado(int idEmpleado, string nombres, string apellidos, string cargo, string celular, string correo, string direccion, string estado)
         {

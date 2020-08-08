@@ -14,6 +14,7 @@ namespace Domain.Models.Entities
         public double SaldoBase { get; set; }
         public double Seguro { get; set; }
         public double SaldoTotal { get; set; }
+        public List<Empleado> Empleado { get; set; } //Relacion 1 a * con empleado 
 
         public Nomina(int idEmpleado, double saldoBase, double seguro, double saldoTotal)
         {
