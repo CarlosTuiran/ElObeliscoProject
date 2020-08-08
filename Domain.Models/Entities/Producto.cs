@@ -17,8 +17,8 @@ namespace Domain.Models.Entities
         public string Referencia { get; set; }
         public string Descripcion { get; set; }
         public string FormatoVenta { get; set; }
-        public string Marca { get; set; }
-        public string Fabrica { get; set; }
+        public string? Marca { get; set; }
+        public string? Fabrica { get; set; }
         public double Costo { get; set; }
         public double PrecioVenta { get; set; }
         public double IVA { get; set; }

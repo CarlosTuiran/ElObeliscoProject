@@ -17,6 +17,7 @@ namespace Domain.Models.Contracts
         ITipoMovimientoServiceRepository TipoMovimientoServiceRepository { get; }
         IUsuarioServiceRepository UsuarioServiceRepository { get; }
         ILiquidacionServiceRepository LiquidacionServiceRepository { get; }
+        ITiempoServiceRepository TiempoServiceRepository { get; }
         int Commit();
     }
 }

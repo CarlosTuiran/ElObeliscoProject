@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Domain.Models.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Domain.Models.Entities
 {
-    public class Tiempo
+	public class Tiempo : Entity<int>
     {
 		public DateTime Fecha { get; set; }
 		public int Año { get; set; }

@@ -11,7 +11,7 @@ namespace Aplicacion.Request
         public int TercerosId { get; set; }
         public int TipoMovimientoId { get; set; }
         public string TipoMovimiento { get; set; }
-        public DateTime FechaFactura { get; set; }
+        public DateTime FechaFactura { get => DateTime.Now; }
         public DateTime FechaPago { get; set; }
         public double SubTotal { get; set; }
         public double ValorDevolucion { get; set; }

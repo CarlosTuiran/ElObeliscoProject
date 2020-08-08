@@ -9,7 +9,7 @@ using static Aplicacion.Request.ActualizarInventarioRequest;
 
 namespace Aplicacion.Services.ActualizarServices
 {
-    class ActualizarInventarioService
+    public class ActualizarInventarioService
     {
         readonly IUnitOfWork _unitOfWork;
 

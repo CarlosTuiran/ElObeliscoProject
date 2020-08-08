@@ -23,8 +23,7 @@ namespace Aplicacion.Services.CrearServices
             var producto = _unitOfWork.ProductoServiceRepository.FindFirstOrDefault(t => t.Referencia == request.Referencia);
             if (producto == null)
             {
-                Producto newProducto = new Producto(request.Referencia, request.Descripcion, request.FormatoVenta, request.Marca, request.Fabrica,
-                    request.Costo, request.PrecioVenta, request.IVA);
+                Producto newProducto = new Producto(request.Referencia, request.Descripcion, request.FormatoVenta, request.Marca, request.Fabrica, request.Costo, request.PrecioVenta, request.IVA);
                 IReadOnlyList<string> errors = newProducto.CanCrear(newProducto);
                 if (errors.Any())
                 {
