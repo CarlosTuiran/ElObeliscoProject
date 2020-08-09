@@ -107,6 +107,14 @@ namespace Infra.Datos.Base
             }
         }
 
+        private ITiempoServiceRepository _tiempoServiceRepository;
+        public ITiempoServiceRepository TiempoServiceRepository
+        {
+            get
+            {
+                return _tiempoServiceRepository ?? (_tiempoServiceRepository = new TiempoServiceRepository(_dbContext));
+            }
+        }
 
         public int Commit()
         {

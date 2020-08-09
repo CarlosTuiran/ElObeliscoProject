@@ -31,6 +31,7 @@ namespace Infra.Datos
         public DbSet<TipoMovimiento> TipoMovimiento { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Liquidacion> Liquidacion { get; set; }
+        public DbSet<Tiempo> Tiempo { get; set; }
 
 
 

@@ -45,7 +45,7 @@ namespace Aplicacion.Test
                     TercerosId = 12789,
                     TipoMovimientoId = 7,
                     TipoMovimiento = "Compra",
-                    FechaFactura = DateTime.Now,
+                    //FechaFactura = DateTime.Now,
                     FechaPago = DateTime.Now,
                     SubTotal = 10000,
                     ValorDevolucion = 0,
@@ -79,7 +79,7 @@ namespace Aplicacion.Test
                     Referencia="9900-3333-2222",
                     Cantidad=2,
                     PrecioUnitario=2500,
-                    FechaFactura=DateTime.Now,
+                    //FechaFactura=DateTime.Now,
                     Bodega ="BD1",
                 },
                 new CrearDFacturaRequest
@@ -89,7 +89,7 @@ namespace Aplicacion.Test
                     Referencia = "7966-3333-2222",
                     Cantidad = 1,
                     PrecioUnitario = 5000,
-                    FechaFactura = DateTime.Now,
+                    //FechaFactura = DateTime.Now,
                     Bodega = "BD1",
                 }},
                 "Detalle de Facturas Creado Exitosamente"

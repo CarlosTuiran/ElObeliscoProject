@@ -27,7 +27,7 @@ namespace Aplicacion.Services.CrearServices
             if (dFactura == null)
             {
 
-                DFactura newDFactura = new DFactura(request.idDFactura, request.idMfactura, request.Referencia, request.idPromocion,request.Bodega, request.Cantidad, request.PrecioUnitario, consultarFechaService.ConsultarFecha(request.FechaFactura));
+                DFactura newDFactura = new DFactura(request.idDFactura, request.MfacturaId, request.Referencia, request.PromocionId,request.Bodega, request.Cantidad, request.PrecioUnitario, consultarFechaService.ConsultarFecha(request.FechaFactura));
                 IReadOnlyList<string> errors = newDFactura.CanCrear(newDFactura);
                 if (errors.Any())
                 {
