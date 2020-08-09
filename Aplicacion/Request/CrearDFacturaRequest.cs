@@ -13,7 +13,7 @@ namespace Aplicacion.Request
         public string Bodega { get; set; }
         public int Cantidad { get; set; }
         public double PrecioUnitario { get; set; }
-        public DateTime FechaFactura { get; set; }
+        public DateTime FechaFactura { get => DateTime.Now; }
 
         
 
