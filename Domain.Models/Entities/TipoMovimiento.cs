@@ -17,7 +17,10 @@ namespace Domain.Models.Entities
             this.idMovimiento = idMovimiento;
             Nombre = nombre;
         }
+        public TipoMovimiento()
+        {
 
+        }
         public IReadOnlyList<string> CanCrear(TipoMovimiento tipoMovimiento)
         {
             var errors = new List<string>();

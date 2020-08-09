@@ -13,6 +13,10 @@ namespace Domain.Models.Entities
 
         private const string SharedSecret = "ElObeliescoPass123";
         public Crypto Crypto;
+        public Usuario()
+        {
+
+        }
         public Usuario(string nombre, string password, int idEmpleado)
         {
             this.Nombre = nombre;

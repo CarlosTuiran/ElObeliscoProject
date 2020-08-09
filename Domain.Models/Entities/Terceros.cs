@@ -17,7 +17,10 @@ namespace Domain.Models.Entities
         public string Direccion { get; set; }
         public string? Descripcion { get; set; }
         public List<MFactura> MFacturas { get; set; }
+        public Terceros()
+        {
 
+        }
         public Terceros(string nit, string nombre, string apellido, string tipoTercero, string celular, string correo, string direccion, string descripcion)
         {
             Nit = nit;

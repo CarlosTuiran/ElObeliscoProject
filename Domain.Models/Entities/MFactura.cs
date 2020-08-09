@@ -23,8 +23,10 @@ namespace Domain.Models.Entities
         public double Abono { get; set; }
         public string EstadoFactura { get; set; }
         public List<DFactura> DFacturas { get; set; }
-        
 
+        public MFactura()
+        {
+        }
 
 
         public MFactura(int idMfactura, int idEmpleado, int nit, int idMovimiento, string tipoMovimiento, int fechaFactura,

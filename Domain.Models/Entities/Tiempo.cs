@@ -19,5 +19,9 @@ namespace Domain.Models.Entities
 		public string NombreMesCorto { get; set; }
 		public string NombreDia { get; set; }
 		public string NombreDiaCorto { get; set; }
+        public Tiempo()
+        {
+
+        }
 	}
 }

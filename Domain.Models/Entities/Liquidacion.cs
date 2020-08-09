@@ -11,7 +11,10 @@ namespace Domain.Models.Entities
         public int NominaId { get; set; }
         public DateTime FechaPago { get; set; }
         public double Monto { get; set; }
-
+        public Liquidacion()
+        {
+                
+        }
         public Liquidacion(int idNomina, double monto)
         {
             NominaId = idNomina;

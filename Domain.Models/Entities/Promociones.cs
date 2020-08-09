@@ -10,6 +10,9 @@ namespace Domain.Models.Entities
     {
         public double PorcentajeDesc { get; set; }
         public List<PromocionesDFactura> PromocionesDFacturas { get; set; }
+        public Promociones()
+        {
 
+        }
     }
 }

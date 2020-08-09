@@ -23,7 +23,10 @@ namespace Domain.Models.Entities
             Seguro = seguro;
             SaldoTotal = saldoTotal;
         }
+        public Nomina()
+        {
 
+        }
         public IReadOnlyList<string> CanCrear(Nomina nomina)
         {
             var errors = new List<string>();

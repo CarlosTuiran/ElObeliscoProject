@@ -22,6 +22,7 @@ namespace Domain.Models.Entities
         public List<ProductoDFactura> ProductoDFacturas { get; set; }
         public List<PromocionesDFactura> PromocionesDFacturas { get; set; }
 
+        public DFactura(){}
         public DFactura(int idDFactura, int idMfactura, string referencia, int idpromocion, string bodega, int cantidad, double precioUnitario, int fechaFactura)
         {
             this.idDFactura = idDFactura;
