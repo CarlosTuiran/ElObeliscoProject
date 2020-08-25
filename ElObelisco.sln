@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Test", "Domain.Test\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aplicacion.Test", "Aplicacion.Test\Aplicacion.Test.csproj", "{9946B30A-4E2A-4BEF-8DA2-6F4F43798E6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI_MODERNISTA", "..\GUI-Modern-Parte-1-Formulario-Moderno-y-Plano-C-Sharp-y-WinForm\GUI_MODERNISTA\GUI_MODERNISTA.csproj", "{D31F941D-85E3-495C-829A-C320E58E73E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.UI", "UI.UI\GUI_MODERNISTA\UI.csproj", "{D31F941D-85E3-495C-829A-C320E58E73E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
