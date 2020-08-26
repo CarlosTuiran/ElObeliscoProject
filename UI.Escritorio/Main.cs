@@ -44,7 +44,7 @@ namespace UI.Escritorio
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            btninicio_Click(null ,e);
         }
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -82,15 +82,28 @@ namespace UI.Escritorio
         {
             Application.Exit();
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void AbrirFormEnPanel(object formhija)
         {
-
+            if (this.panelContenedor.Controls.Count > 0)
+                this.panelContenedor.Controls.RemoveAt(0);
+            Form fh = formhija as Form;
+            fh.TopLevel = false;
+            fh.Dock = DockStyle.Fill;
+            this.panelContenedor.Controls.Add(fh);
+            this.panelContenedor.Tag = fh;
+            fh.Show();
+           
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void btnproductos_Click(object sender, EventArgs e)
         {
-
+            AbrirFormEnPanel(new productos());
         }
+
+        private void btninicio_Click(object sender, EventArgs e)
+        {
+            AbrirFormEnPanel(new inicio());
+        }
+       
     }
 }
