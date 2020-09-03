@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace UI.Escritorio
 {
-    public partial class inicio : Form
+    public partial class frmPrincipal : Form
     {
-        public inicio()
+        public frmPrincipal()
         {
             InitializeComponent();
         }
+
     }
 }
