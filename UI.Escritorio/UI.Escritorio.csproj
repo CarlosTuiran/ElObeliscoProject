@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Images\" />
-    <Folder Include="Registrar\" />
+    <Folder Include="Consultas\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -88,7 +88,7 @@
             this.panelMenuLateral.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenuLateral.Location = new System.Drawing.Point(0, 0);
             this.panelMenuLateral.Name = "panelMenuLateral";
-            this.panelMenuLateral.Size = new System.Drawing.Size(250, 561);
+            this.panelMenuLateral.Size = new System.Drawing.Size(300, 911);
             this.panelMenuLateral.TabIndex = 0;
             // 
             // panelSubMenuReportes
@@ -99,7 +99,7 @@
             this.panelSubMenuReportes.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSubMenuReportes.Location = new System.Drawing.Point(0, 863);
             this.panelSubMenuReportes.Name = "panelSubMenuReportes";
-            this.panelSubMenuReportes.Size = new System.Drawing.Size(233, 120);
+            this.panelSubMenuReportes.Size = new System.Drawing.Size(283, 120);
             this.panelSubMenuReportes.TabIndex = 2;
             this.panelSubMenuReportes.Visible = false;
             // 
@@ -108,12 +108,12 @@
             this.btnReportePagos.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnReportePagos.FlatAppearance.BorderSize = 0;
             this.btnReportePagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReportePagos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnReportePagos.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnReportePagos.ForeColor = System.Drawing.Color.White;
             this.btnReportePagos.Location = new System.Drawing.Point(0, 80);
             this.btnReportePagos.Name = "btnReportePagos";
-            this.btnReportePagos.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnReportePagos.Size = new System.Drawing.Size(233, 40);
+            this.btnReportePagos.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnReportePagos.Size = new System.Drawing.Size(283, 40);
             this.btnReportePagos.TabIndex = 0;
             this.btnReportePagos.Text = "Reporte Pagos";
             this.btnReportePagos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -125,12 +125,12 @@
             this.btnReporteCompras.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnReporteCompras.FlatAppearance.BorderSize = 0;
             this.btnReporteCompras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReporteCompras.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnReporteCompras.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnReporteCompras.ForeColor = System.Drawing.Color.White;
             this.btnReporteCompras.Location = new System.Drawing.Point(0, 40);
             this.btnReporteCompras.Name = "btnReporteCompras";
-            this.btnReporteCompras.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnReporteCompras.Size = new System.Drawing.Size(233, 40);
+            this.btnReporteCompras.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnReporteCompras.Size = new System.Drawing.Size(283, 40);
             this.btnReporteCompras.TabIndex = 0;
             this.btnReporteCompras.Text = "Reporte Compras";
             this.btnReporteCompras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -142,12 +142,12 @@
             this.btnReporteVentas.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnReporteVentas.FlatAppearance.BorderSize = 0;
             this.btnReporteVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReporteVentas.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnReporteVentas.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnReporteVentas.ForeColor = System.Drawing.Color.White;
             this.btnReporteVentas.Location = new System.Drawing.Point(0, 0);
             this.btnReporteVentas.Name = "btnReporteVentas";
-            this.btnReporteVentas.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnReporteVentas.Size = new System.Drawing.Size(233, 40);
+            this.btnReporteVentas.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnReporteVentas.Size = new System.Drawing.Size(283, 40);
             this.btnReporteVentas.TabIndex = 0;
             this.btnReporteVentas.Text = "Reporte Ventas";
             this.btnReporteVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -159,12 +159,12 @@
             this.btnReportes.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnReportes.FlatAppearance.BorderSize = 0;
             this.btnReportes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReportes.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnReportes.Font = new System.Drawing.Font("Century Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnReportes.ForeColor = System.Drawing.Color.White;
             this.btnReportes.Location = new System.Drawing.Point(0, 818);
             this.btnReportes.Name = "btnReportes";
-            this.btnReportes.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnReportes.Size = new System.Drawing.Size(233, 45);
+            this.btnReportes.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnReportes.Size = new System.Drawing.Size(283, 45);
             this.btnReportes.TabIndex = 1;
             this.btnReportes.Text = "Reportes";
             this.btnReportes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -176,12 +176,12 @@
             this.btnPagos.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnPagos.FlatAppearance.BorderSize = 0;
             this.btnPagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPagos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnPagos.Font = new System.Drawing.Font("Century Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnPagos.ForeColor = System.Drawing.Color.White;
             this.btnPagos.Location = new System.Drawing.Point(0, 773);
             this.btnPagos.Name = "btnPagos";
-            this.btnPagos.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnPagos.Size = new System.Drawing.Size(233, 45);
+            this.btnPagos.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnPagos.Size = new System.Drawing.Size(283, 45);
             this.btnPagos.TabIndex = 1;
             this.btnPagos.Text = "Pagos";
             this.btnPagos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -196,7 +196,7 @@
             this.panelSubMenuEmpleados.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSubMenuEmpleados.Location = new System.Drawing.Point(0, 653);
             this.panelSubMenuEmpleados.Name = "panelSubMenuEmpleados";
-            this.panelSubMenuEmpleados.Size = new System.Drawing.Size(233, 120);
+            this.panelSubMenuEmpleados.Size = new System.Drawing.Size(283, 120);
             this.panelSubMenuEmpleados.TabIndex = 2;
             this.panelSubMenuEmpleados.Visible = false;
             // 
@@ -205,12 +205,12 @@
             this.btnConsultarEmpleados.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnConsultarEmpleados.FlatAppearance.BorderSize = 0;
             this.btnConsultarEmpleados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarEmpleados.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnConsultarEmpleados.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnConsultarEmpleados.ForeColor = System.Drawing.Color.White;
             this.btnConsultarEmpleados.Location = new System.Drawing.Point(0, 80);
             this.btnConsultarEmpleados.Name = "btnConsultarEmpleados";
-            this.btnConsultarEmpleados.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnConsultarEmpleados.Size = new System.Drawing.Size(233, 40);
+            this.btnConsultarEmpleados.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnConsultarEmpleados.Size = new System.Drawing.Size(283, 40);
             this.btnConsultarEmpleados.TabIndex = 0;
             this.btnConsultarEmpleados.Text = "Consultar Empleados";
             this.btnConsultarEmpleados.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -222,12 +222,12 @@
             this.btnActualizarEmpleado.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnActualizarEmpleado.FlatAppearance.BorderSize = 0;
             this.btnActualizarEmpleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnActualizarEmpleado.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnActualizarEmpleado.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnActualizarEmpleado.ForeColor = System.Drawing.Color.White;
             this.btnActualizarEmpleado.Location = new System.Drawing.Point(0, 40);
             this.btnActualizarEmpleado.Name = "btnActualizarEmpleado";
-            this.btnActualizarEmpleado.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnActualizarEmpleado.Size = new System.Drawing.Size(233, 40);
+            this.btnActualizarEmpleado.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnActualizarEmpleado.Size = new System.Drawing.Size(283, 40);
             this.btnActualizarEmpleado.TabIndex = 0;
             this.btnActualizarEmpleado.Text = "Actualizar Empleado";
             this.btnActualizarEmpleado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -239,12 +239,12 @@
             this.btnRegistrarEmpleado.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnRegistrarEmpleado.FlatAppearance.BorderSize = 0;
             this.btnRegistrarEmpleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrarEmpleado.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnRegistrarEmpleado.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnRegistrarEmpleado.ForeColor = System.Drawing.Color.White;
             this.btnRegistrarEmpleado.Location = new System.Drawing.Point(0, 0);
             this.btnRegistrarEmpleado.Name = "btnRegistrarEmpleado";
-            this.btnRegistrarEmpleado.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnRegistrarEmpleado.Size = new System.Drawing.Size(233, 40);
+            this.btnRegistrarEmpleado.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnRegistrarEmpleado.Size = new System.Drawing.Size(283, 40);
             this.btnRegistrarEmpleado.TabIndex = 0;
             this.btnRegistrarEmpleado.Text = "Registrar Empleado";
             this.btnRegistrarEmpleado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -256,12 +256,12 @@
             this.btnEmpleados.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnEmpleados.FlatAppearance.BorderSize = 0;
             this.btnEmpleados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEmpleados.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnEmpleados.Font = new System.Drawing.Font("Century Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnEmpleados.ForeColor = System.Drawing.Color.White;
             this.btnEmpleados.Location = new System.Drawing.Point(0, 608);
             this.btnEmpleados.Name = "btnEmpleados";
-            this.btnEmpleados.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnEmpleados.Size = new System.Drawing.Size(233, 45);
+            this.btnEmpleados.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnEmpleados.Size = new System.Drawing.Size(283, 45);
             this.btnEmpleados.TabIndex = 1;
             this.btnEmpleados.Text = "Empleados";
             this.btnEmpleados.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -276,7 +276,7 @@
             this.panelSubMenuTerceros.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSubMenuTerceros.Location = new System.Drawing.Point(0, 488);
             this.panelSubMenuTerceros.Name = "panelSubMenuTerceros";
-            this.panelSubMenuTerceros.Size = new System.Drawing.Size(233, 120);
+            this.panelSubMenuTerceros.Size = new System.Drawing.Size(283, 120);
             this.panelSubMenuTerceros.TabIndex = 2;
             this.panelSubMenuTerceros.Visible = false;
             // 
@@ -285,12 +285,12 @@
             this.btnConsultarTerceros.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnConsultarTerceros.FlatAppearance.BorderSize = 0;
             this.btnConsultarTerceros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarTerceros.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnConsultarTerceros.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnConsultarTerceros.ForeColor = System.Drawing.Color.White;
             this.btnConsultarTerceros.Location = new System.Drawing.Point(0, 80);
             this.btnConsultarTerceros.Name = "btnConsultarTerceros";
-            this.btnConsultarTerceros.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnConsultarTerceros.Size = new System.Drawing.Size(233, 40);
+            this.btnConsultarTerceros.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnConsultarTerceros.Size = new System.Drawing.Size(283, 40);
             this.btnConsultarTerceros.TabIndex = 0;
             this.btnConsultarTerceros.Text = "Consultar Terceros";
             this.btnConsultarTerceros.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -302,12 +302,12 @@
             this.btnActualizarTercero.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnActualizarTercero.FlatAppearance.BorderSize = 0;
             this.btnActualizarTercero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnActualizarTercero.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnActualizarTercero.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnActualizarTercero.ForeColor = System.Drawing.Color.White;
             this.btnActualizarTercero.Location = new System.Drawing.Point(0, 40);
             this.btnActualizarTercero.Name = "btnActualizarTercero";
-            this.btnActualizarTercero.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnActualizarTercero.Size = new System.Drawing.Size(233, 40);
+            this.btnActualizarTercero.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnActualizarTercero.Size = new System.Drawing.Size(283, 40);
             this.btnActualizarTercero.TabIndex = 0;
             this.btnActualizarTercero.Text = "Actualizar Tercero";
             this.btnActualizarTercero.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -319,12 +319,12 @@
             this.btnRegistrarTercero.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnRegistrarTercero.FlatAppearance.BorderSize = 0;
             this.btnRegistrarTercero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrarTercero.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnRegistrarTercero.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnRegistrarTercero.ForeColor = System.Drawing.Color.White;
             this.btnRegistrarTercero.Location = new System.Drawing.Point(0, 0);
             this.btnRegistrarTercero.Name = "btnRegistrarTercero";
-            this.btnRegistrarTercero.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnRegistrarTercero.Size = new System.Drawing.Size(233, 40);
+            this.btnRegistrarTercero.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnRegistrarTercero.Size = new System.Drawing.Size(283, 40);
             this.btnRegistrarTercero.TabIndex = 0;
             this.btnRegistrarTercero.Text = "Registrar Tercero";
             this.btnRegistrarTercero.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -336,12 +336,12 @@
             this.btnTerceros.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnTerceros.FlatAppearance.BorderSize = 0;
             this.btnTerceros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTerceros.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnTerceros.Font = new System.Drawing.Font("Century Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnTerceros.ForeColor = System.Drawing.Color.White;
             this.btnTerceros.Location = new System.Drawing.Point(0, 443);
             this.btnTerceros.Name = "btnTerceros";
-            this.btnTerceros.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnTerceros.Size = new System.Drawing.Size(233, 45);
+            this.btnTerceros.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnTerceros.Size = new System.Drawing.Size(283, 45);
             this.btnTerceros.TabIndex = 1;
             this.btnTerceros.Text = "Terceros";
             this.btnTerceros.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -356,7 +356,7 @@
             this.panelSubMenuFacturacion.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSubMenuFacturacion.Location = new System.Drawing.Point(0, 323);
             this.panelSubMenuFacturacion.Name = "panelSubMenuFacturacion";
-            this.panelSubMenuFacturacion.Size = new System.Drawing.Size(233, 120);
+            this.panelSubMenuFacturacion.Size = new System.Drawing.Size(283, 120);
             this.panelSubMenuFacturacion.TabIndex = 2;
             this.panelSubMenuFacturacion.Visible = false;
             // 
@@ -365,12 +365,12 @@
             this.btnConsultarFactura.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnConsultarFactura.FlatAppearance.BorderSize = 0;
             this.btnConsultarFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultarFactura.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnConsultarFactura.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnConsultarFactura.ForeColor = System.Drawing.Color.White;
             this.btnConsultarFactura.Location = new System.Drawing.Point(0, 80);
             this.btnConsultarFactura.Name = "btnConsultarFactura";
-            this.btnConsultarFactura.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnConsultarFactura.Size = new System.Drawing.Size(233, 40);
+            this.btnConsultarFactura.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnConsultarFactura.Size = new System.Drawing.Size(283, 40);
             this.btnConsultarFactura.TabIndex = 0;
             this.btnConsultarFactura.Text = "Consultar Facturas";
             this.btnConsultarFactura.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -382,12 +382,12 @@
             this.btnActualizarFactura.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnActualizarFactura.FlatAppearance.BorderSize = 0;
             this.btnActualizarFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnActualizarFactura.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnActualizarFactura.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnActualizarFactura.ForeColor = System.Drawing.Color.White;
             this.btnActualizarFactura.Location = new System.Drawing.Point(0, 40);
             this.btnActualizarFactura.Name = "btnActualizarFactura";
-            this.btnActualizarFactura.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnActualizarFactura.Size = new System.Drawing.Size(233, 40);
+            this.btnActualizarFactura.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnActualizarFactura.Size = new System.Drawing.Size(283, 40);
             this.btnActualizarFactura.TabIndex = 0;
             this.btnActualizarFactura.Text = "Actualizar Factura";
             this.btnActualizarFactura.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -399,12 +399,12 @@
             this.btnRegistrarFactura.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnRegistrarFactura.FlatAppearance.BorderSize = 0;
             this.btnRegistrarFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrarFactura.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnRegistrarFactura.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnRegistrarFactura.ForeColor = System.Drawing.Color.White;
             this.btnRegistrarFactura.Location = new System.Drawing.Point(0, 0);
             this.btnRegistrarFactura.Name = "btnRegistrarFactura";
-            this.btnRegistrarFactura.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnRegistrarFactura.Size = new System.Drawing.Size(233, 40);
+            this.btnRegistrarFactura.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnRegistrarFactura.Size = new System.Drawing.Size(283, 40);
             this.btnRegistrarFactura.TabIndex = 0;
             this.btnRegistrarFactura.Text = "Registrar Factura";
             this.btnRegistrarFactura.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -416,12 +416,12 @@
             this.btnFacturacion.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnFacturacion.FlatAppearance.BorderSize = 0;
             this.btnFacturacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFacturacion.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnFacturacion.Font = new System.Drawing.Font("Century Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnFacturacion.ForeColor = System.Drawing.Color.White;
             this.btnFacturacion.Location = new System.Drawing.Point(0, 278);
             this.btnFacturacion.Name = "btnFacturacion";
-            this.btnFacturacion.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnFacturacion.Size = new System.Drawing.Size(233, 45);
+            this.btnFacturacion.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnFacturacion.Size = new System.Drawing.Size(283, 45);
             this.btnFacturacion.TabIndex = 1;
             this.btnFacturacion.Text = "Facturacion";
             this.btnFacturacion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -436,7 +436,7 @@
             this.panelSubMenuProductos.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSubMenuProductos.Location = new System.Drawing.Point(0, 158);
             this.panelSubMenuProductos.Name = "panelSubMenuProductos";
-            this.panelSubMenuProductos.Size = new System.Drawing.Size(233, 120);
+            this.panelSubMenuProductos.Size = new System.Drawing.Size(283, 120);
             this.panelSubMenuProductos.TabIndex = 2;
             this.panelSubMenuProductos.Visible = false;
             // 
@@ -445,12 +445,12 @@
             this.btnInventario.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnInventario.FlatAppearance.BorderSize = 0;
             this.btnInventario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInventario.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnInventario.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnInventario.ForeColor = System.Drawing.Color.White;
             this.btnInventario.Location = new System.Drawing.Point(0, 80);
             this.btnInventario.Name = "btnInventario";
-            this.btnInventario.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnInventario.Size = new System.Drawing.Size(233, 40);
+            this.btnInventario.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnInventario.Size = new System.Drawing.Size(283, 40);
             this.btnInventario.TabIndex = 0;
             this.btnInventario.Text = "Inventario";
             this.btnInventario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -462,12 +462,12 @@
             this.btnActualizarProducto.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnActualizarProducto.FlatAppearance.BorderSize = 0;
             this.btnActualizarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnActualizarProducto.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnActualizarProducto.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnActualizarProducto.ForeColor = System.Drawing.Color.White;
             this.btnActualizarProducto.Location = new System.Drawing.Point(0, 40);
             this.btnActualizarProducto.Name = "btnActualizarProducto";
-            this.btnActualizarProducto.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnActualizarProducto.Size = new System.Drawing.Size(233, 40);
+            this.btnActualizarProducto.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnActualizarProducto.Size = new System.Drawing.Size(283, 40);
             this.btnActualizarProducto.TabIndex = 0;
             this.btnActualizarProducto.Text = "Actualizar Producto";
             this.btnActualizarProducto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -479,12 +479,12 @@
             this.btnRegistrarProducto.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnRegistrarProducto.FlatAppearance.BorderSize = 0;
             this.btnRegistrarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrarProducto.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnRegistrarProducto.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnRegistrarProducto.ForeColor = System.Drawing.Color.White;
             this.btnRegistrarProducto.Location = new System.Drawing.Point(0, 0);
             this.btnRegistrarProducto.Name = "btnRegistrarProducto";
-            this.btnRegistrarProducto.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnRegistrarProducto.Size = new System.Drawing.Size(233, 40);
+            this.btnRegistrarProducto.Padding = new System.Windows.Forms.Padding(65, 0, 0, 0);
+            this.btnRegistrarProducto.Size = new System.Drawing.Size(283, 40);
             this.btnRegistrarProducto.TabIndex = 0;
             this.btnRegistrarProducto.Text = "Registrar Producto";
             this.btnRegistrarProducto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -496,12 +496,12 @@
             this.btnProductos.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnProductos.FlatAppearance.BorderSize = 0;
             this.btnProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProductos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnProductos.Font = new System.Drawing.Font("Century Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnProductos.ForeColor = System.Drawing.Color.White;
             this.btnProductos.Location = new System.Drawing.Point(0, 113);
             this.btnProductos.Name = "btnProductos";
-            this.btnProductos.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnProductos.Size = new System.Drawing.Size(233, 45);
+            this.btnProductos.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnProductos.Size = new System.Drawing.Size(283, 45);
             this.btnProductos.TabIndex = 1;
             this.btnProductos.Text = "Productos";
             this.btnProductos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -515,7 +515,7 @@
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(233, 113);
+            this.panelLogo.Size = new System.Drawing.Size(283, 113);
             this.panelLogo.TabIndex = 0;
             // 
             // pictureBox1
@@ -525,7 +525,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(233, 113);
+            this.pictureBox1.Size = new System.Drawing.Size(283, 113);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -535,23 +535,23 @@
             // 
             this.panelFormHijo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
             this.panelFormHijo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelFormHijo.Location = new System.Drawing.Point(250, 0);
+            this.panelFormHijo.Location = new System.Drawing.Point(300, 0);
             this.panelFormHijo.Name = "panelFormHijo";
-            this.panelFormHijo.Size = new System.Drawing.Size(684, 561);
+            this.panelFormHijo.Size = new System.Drawing.Size(984, 911);
             this.panelFormHijo.TabIndex = 1;
             // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(934, 561);
+            this.ClientSize = new System.Drawing.Size(1284, 911);
             this.Controls.Add(this.panelFormHijo);
             this.Controls.Add(this.panelMenuLateral);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MaximumSize = new System.Drawing.Size(1300, 950);
-            this.MinimumSize = new System.Drawing.Size(950, 600);
+            this.MinimumSize = new System.Drawing.Size(1300, 950);
             this.Name = "frmPrincipal";
-            this.Text = "frmPrincipal";
+            this.Text = "Principal";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panelMenuLateral.ResumeLayout(false);
             this.panelSubMenuReportes.ResumeLayout(false);
             this.panelSubMenuEmpleados.ResumeLayout(false);

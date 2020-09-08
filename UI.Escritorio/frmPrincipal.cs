@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using UI.Escritorio.Actualizar;
+using UI.Escritorio.Registrar;
 
 namespace UI.Escritorio
 {
@@ -41,7 +43,7 @@ namespace UI.Escritorio
 
         private void btnRegistrarProducto_Click(object sender, EventArgs e)
         {
-            openFormHijo(new Productos());
+            openFormHijo(new RegistrarProducto());
             //---
             //El codigo
             //---
@@ -57,6 +59,7 @@ namespace UI.Escritorio
 
         private void btnActualizarProducto_Click(object sender, EventArgs e)
         {
+            openFormHijo(new ActualizarProducto());
             //---
             //El codigo
             //---
@@ -108,6 +111,7 @@ namespace UI.Escritorio
 
         private void btnActualizarTercero_Click(object sender, EventArgs e)
         {
+            openFormHijo(new ActualizarTercero());
             //---
             //El codigo
             //---
@@ -116,6 +120,7 @@ namespace UI.Escritorio
 
         private void btnRegistrarTercero_Click(object sender, EventArgs e)
         {
+            openFormHijo(new RegistrarTercero());
             //---
             //El codigo
             //---
@@ -138,6 +143,7 @@ namespace UI.Escritorio
 
         private void btnActualizarFactura_Click(object sender, EventArgs e)
         {
+            openFormHijo(new ActualizarFactura());
             //---
             //El codigo
             //---
@@ -146,6 +152,7 @@ namespace UI.Escritorio
 
         private void btnRegistrarFactura_Click(object sender, EventArgs e)
         {
+            openFormHijo(new RegistrarFactura());
             //---
             //El codigo
             //---
@@ -168,6 +175,7 @@ namespace UI.Escritorio
 
         private void btnActualizarEmpleado_Click(object sender, EventArgs e)
         {
+            openFormHijo(new ActualizarEmpleado());
             //---
             //El codigo
             //---
@@ -176,6 +184,7 @@ namespace UI.Escritorio
 
         private void btnRegistrarEmpleado_Click(object sender, EventArgs e)
         {
+            openFormHijo(new RegistrarEmpleado());
             //---
             //El codigo
             //---

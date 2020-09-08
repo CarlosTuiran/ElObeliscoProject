@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace UI.Escritorio
+namespace UI.Escritorio.Registrar
 {
-    public partial class Productos : Form
+    public partial class RegistrarTercero : Form
     {
-        public Productos()
+        public RegistrarTercero()
         {
             InitializeComponent();
         }
