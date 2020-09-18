@@ -1,6 +1,6 @@
 using System;
 
-namespace UI.UI
+namespace UI
 {
     public class WeatherForecast
     {
