@@ -17,7 +17,7 @@ namespace Domain.Models.Entities
         public string Bodega { get; set; }
         public int Cantidad { get; set; }
         public double PrecioUnitario { get; set; }
-        public double PrecioTotal { get; set; }
+        public double PrecioTotal { get=> this.Cantidad * this.PrecioUnitario;}//CUANDO SE DEFINAN LAS PROMOCIONES ACA TOCA AÑADIRLO
         public int FechaFactura { get; set; }
         public List<ProductoDFactura> ProductoDFacturas { get; set; }
         public List<PromocionesDFactura> PromocionesDFacturas { get; set; }
@@ -32,7 +32,7 @@ namespace Domain.Models.Entities
             this.Bodega = bodega;
             Cantidad = cantidad;
             PrecioUnitario = precioUnitario;
-            PrecioTotal = CalcularPrecioTotal();
+           // PrecioTotal = CalcularPrecioTotal();
             FechaFactura = fechaFactura;
         }
 
@@ -54,10 +54,10 @@ namespace Domain.Models.Entities
             return errors;
         }
 
-        public double CalcularPrecioTotal()
+        /*public double CalcularPrecioTotal()
         {
             double precioTotal= this.Cantidad * this.PrecioUnitario; //CUANDO SE DEFINAN LAS PROMOCIONES ACA TOCA AÑADIRLO
             return precioTotal;
-        }
+        }*/
     }
 }

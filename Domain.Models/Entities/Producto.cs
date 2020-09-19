@@ -22,7 +22,7 @@ namespace Domain.Models.Entities
         public double Costo { get; set; }
         public double PrecioVenta { get; set; }
         public double IVA { get; set; }
-        public int InventarioId { get; set; } // PENDIENTE: esperando Inclusion al momento de  crear
+        //public int InventarioId { get; set; } // PENDIENTE: esperando Inclusion al momento de  crear
         public DateTime FechaRegistro { get; set; }
         public List<ProductoDFactura> ProductoDFacturas { get; set; }
 

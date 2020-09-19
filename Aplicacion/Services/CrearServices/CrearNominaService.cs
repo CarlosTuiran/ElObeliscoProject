@@ -24,7 +24,7 @@ namespace Aplicacion.Services.CrearServices
             var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdEmpleado == request.IdEmpleado);
             if (nomina == null)
             {
-                Nomina newNomina = new Nomina(request.IdEmpleado, request.SaldoBase, request.Seguro, request.SaldoTotal);
+                Nomina newNomina = new Nomina(request.IdEmpleado, request.SaldoBase, request.Seguro);
                 IReadOnlyList<string> errors = newNomina.CanCrear(newNomina);
                 if (errors.Any())
                 {
