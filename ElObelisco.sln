@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.UI", "1.UI", "{155B9001-0C7A-45DE-ADA5-4EF3E0789FDE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Aplicacion", "2.Aplicacion", "{5BF2DC54-F088-40F6-9976-A5BB81637825}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Domain", "3.Domain", "{1CA176FF-4CC0-4BC1-A017-C215E6257231}"
@@ -20,6 +18,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Test", "Domain.Test\Domain.Test.csproj", "{A4822A43-E91F-49F6-8AA0-92D6C91F7A00}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aplicacion.Test", "Aplicacion.Test\Aplicacion.Test.csproj", "{9946B30A-4E2A-4BEF-8DA2-6F4F43798E6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{2887EC31-5995-4D9A-9FD5-EEBE7BC44AEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +47,10 @@ Global
 		{9946B30A-4E2A-4BEF-8DA2-6F4F43798E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9946B30A-4E2A-4BEF-8DA2-6F4F43798E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9946B30A-4E2A-4BEF-8DA2-6F4F43798E6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2887EC31-5995-4D9A-9FD5-EEBE7BC44AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2887EC31-5995-4D9A-9FD5-EEBE7BC44AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2887EC31-5995-4D9A-9FD5-EEBE7BC44AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2887EC31-5995-4D9A-9FD5-EEBE7BC44AEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
