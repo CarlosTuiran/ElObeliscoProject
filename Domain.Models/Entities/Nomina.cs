@@ -13,15 +13,15 @@ namespace Domain.Models.Entities
         public int IdEmpleado { get; set; }
         public double SaldoBase { get; set; }
         public double Seguro { get; set; }
-        public double SaldoTotal { get; set; }
+        public double SaldoTotal { get => SaldoBase + Seguro; }
         public List<Empleado> Empleado { get; set; } //Relacion 1 a * con empleado 
         public List<Liquidacion> Liquidacions { get; set; }
-        public Nomina(int idEmpleado, double saldoBase, double seguro, double saldoTotal)
+        public Nomina(int idEmpleado, double saldoBase, double seguro)
         {
             IdEmpleado = idEmpleado;
             SaldoBase = saldoBase;
             Seguro = seguro;
-            SaldoTotal = saldoTotal;
+            
         }
         public Nomina()
         {

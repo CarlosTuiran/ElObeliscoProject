@@ -18,6 +18,10 @@ namespace Domain.Models.Entities
         public int NominaId { get; set; } //Foranea con Nomina
         public List<MFactura> MFacturas { get; set; }
         public Usuario Usuario { get; set; }
+        public Empleado()
+        {
+
+        }
         public Empleado(int idEmpleado, string nombres, string apellidos, string cargo, string celular, string correo, string direccion, string estado)
         {
             IdEmpleado = idEmpleado;

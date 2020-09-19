@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200806235602_inicial.cs" />
+    <Compile Remove="Migrations\20200806235602_inicial.Designer.cs" />
+    <Compile Remove="Migrations\20200809002317_Prueba.cs" />
+    <Compile Remove="Migrations\20200809002317_Prueba.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Domain.Models\Domain.Models.csproj" />
   </ItemGroup>
 

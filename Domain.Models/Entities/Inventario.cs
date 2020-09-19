@@ -13,6 +13,10 @@ namespace Domain.Models.Entities
         public int Cantidad { get; set; }
         public string Bodega { get; set; }
         public List<Producto> Productos { get; set; }
+        public Inventario()
+        {
+
+        }
         public Inventario(string referencia, int cantidad, string bodega)
         {
             

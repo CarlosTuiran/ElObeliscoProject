@@ -4,14 +4,16 @@ using Infra.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infra.Datos.Migrations
 {
     [DbContext(typeof(ObeliscoContext))]
-    partial class ObeliscoContextModelSnapshot : ModelSnapshot
+    [Migration("20200919210254_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,7 +187,7 @@ namespace Infra.Datos.Migrations
                         new
                         {
                             Id = 1,
-                            FechaPago = new DateTime(2020, 9, 19, 16, 5, 13, 281, DateTimeKind.Local).AddTicks(436),
+                            FechaPago = new DateTime(2020, 9, 19, 16, 2, 52, 513, DateTimeKind.Local).AddTicks(540),
                             IdLiquidacion = 0,
                             Monto = 1500000.0,
                             NominaId = 1
@@ -394,7 +396,7 @@ namespace Infra.Datos.Migrations
                             Costo = 3000.0,
                             Descripcion = "Llave Inglesa",
                             Fabrica = "Ferres SAS",
-                            FechaRegistro = new DateTime(2020, 9, 19, 16, 5, 13, 269, DateTimeKind.Local).AddTicks(5618),
+                            FechaRegistro = new DateTime(2020, 9, 19, 16, 2, 52, 503, DateTimeKind.Local).AddTicks(2335),
                             FormatoVenta = "Unidad",
                             IVA = 0.29999999999999999,
                             Marca = "Ferres",
@@ -619,7 +621,7 @@ namespace Infra.Datos.Migrations
                     b.HasOne("Domain.Models.Entities.MFactura", null)
                         .WithMany("DFacturas")
                         .HasForeignKey("MfacturaId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -628,7 +630,7 @@ namespace Infra.Datos.Migrations
                     b.HasOne("Domain.Models.Entities.Nomina", null)
                         .WithMany("Empleado")
                         .HasForeignKey("NominaId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -637,7 +639,7 @@ namespace Infra.Datos.Migrations
                     b.HasOne("Domain.Models.Entities.Nomina", null)
                         .WithMany("Liquidacions")
                         .HasForeignKey("NominaId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -646,19 +648,19 @@ namespace Infra.Datos.Migrations
                     b.HasOne("Domain.Models.Entities.Empleado", null)
                         .WithMany("MFacturas")
                         .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Models.Entities.Terceros", null)
                         .WithMany("MFacturas")
                         .HasForeignKey("TercerosId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Models.Entities.TipoMovimiento", null)
                         .WithMany("MFacturas")
                         .HasForeignKey("TipoMovimientoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -667,13 +669,13 @@ namespace Infra.Datos.Migrations
                     b.HasOne("Domain.Models.Entities.DFactura", null)
                         .WithMany("ProductoDFacturas")
                         .HasForeignKey("DFacturaId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Models.Entities.Producto", null)
                         .WithMany("ProductoDFacturas")
                         .HasForeignKey("ProductoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -682,7 +684,7 @@ namespace Infra.Datos.Migrations
                     b.HasOne("Domain.Models.Entities.DFactura", null)
                         .WithMany("PromocionesDFacturas")
                         .HasForeignKey("DFacturaId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -690,8 +692,7 @@ namespace Infra.Datos.Migrations
                 {
                     b.HasOne("Domain.Models.Entities.Inventario", null)
                         .WithMany("Productos")
-                        .HasForeignKey("InventarioId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("InventarioId");
                 });
 
             modelBuilder.Entity("Domain.Models.Entities.Usuario", b =>
@@ -699,7 +700,7 @@ namespace Infra.Datos.Migrations
                     b.HasOne("Domain.Models.Entities.Empleado", null)
                         .WithOne("Usuario")
                         .HasForeignKey("Domain.Models.Entities.Usuario", "EmpleadoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

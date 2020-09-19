@@ -28,7 +28,8 @@ namespace Aplicacion.Services.ActualizarServices
             {
                 nomina.IdEmpleado = request.IdEmpleado;
                 nomina.SaldoBase = request.SaldoBase;
-                nomina.SaldoTotal = request.SaldoTotal;
+                
+                
                 nomina.Seguro = request.Seguro;
                 _unitOfWork.NominaServiceRepository.Edit(nomina);
                 _unitOfWork.Commit();
