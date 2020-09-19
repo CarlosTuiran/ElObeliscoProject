@@ -12,7 +12,7 @@ namespace Infra.Datos
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Server=localhost/SQLEXPRESS;Database=master;Trusted_Connection=True;");
+            //optionsBuilder.UseSqlServer("Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;");
             optionsBuilder.UseSqlServer("Data Source=SQLEXPRESS; Initial Catalog=ObeliescoDB Trusted_Connection=True;");
         }
         /*protected override void OnModelCreating(ModelBuilder modelBuilder)
