@@ -10,6 +10,7 @@ namespace Domain.Models.Entities
         public string Nombre { get; set; }
         public string Password { get; set; }
         public int EmpleadoId { get; set; }
+        public string Tipo { get; set; }
 
         private const string SharedSecret = "ElObeliescoPass123";
         public Crypto Crypto;
@@ -17,12 +18,13 @@ namespace Domain.Models.Entities
         {
 
         }
-        public Usuario(string nombre, string password, int idEmpleado)
+        public Usuario(string nombre, string password, int idEmpleado, string tipo)
         {
             this.Nombre = nombre;
             Crypto = new Crypto();
             this.Password = Encriptar(password);
             this.EmpleadoId = idEmpleado;
+            this.Tipo = tipo;
         }
         public string Encriptar(string password)
         {

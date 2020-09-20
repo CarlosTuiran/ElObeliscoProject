@@ -33,7 +33,7 @@ namespace Infra.Datos
                 Correo="RHerna@gmail.com", Direccion="Stranger Valley", Estado="Activo", Id=1, NominaId=1
                 });
             modelBuilder.Entity<Usuario>().HasData(
-                new Usuario(){EmpleadoId= 1, Nombre="RaulH", Password="raulh", Id=1
+                new Usuario(){EmpleadoId= 1, Nombre="RaulH", Password="raulh", Tipo="Admin" ,Id=1
                 });
             modelBuilder.Entity<Nomina>().HasData(
                 new Nomina(){ IdEmpleado= 2699540, IdNomina=1, SaldoBase=1400000, Seguro=100000, Id=1
