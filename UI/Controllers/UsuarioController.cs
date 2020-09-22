@@ -27,9 +27,10 @@ namespace UI.InterfazWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Usuario>> getUsuarios()
+        public async Task<ActionResult<IEnumerable<Usuario>>> getUsuarios()
         {
-            return Ok(_context.Usuario.ToListAsync());
+            var data = await _context.Usuario.ToListAsync();
+            return Ok(data);
         }
         /*
         [HttpPost]
