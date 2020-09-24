@@ -13,7 +13,7 @@ namespace Aplicacion.Test
 
     public class CrearFacturasTest
     {
-        ObeliscoContext _context;
+        ObeliscoTestContext _context;
         UnitOfWork _unitOfWork;
         CrearDFacturaService _Dservice;
         CrearMFacturaService _Mservice;
@@ -22,8 +22,8 @@ namespace Aplicacion.Test
         public void Setup()
         {
             //optionsBuilder.UseMySql(@"Server=localhost; database=cempreddp;uid=acceso;pwd=acceso;");
-            var optionsInMemory = new DbContextOptionsBuilder<ObeliscoContext>().UseInMemoryDatabase("Obelisco").Options;
-            _context = new ObeliscoContext(optionsInMemory); 
+            var optionsInMemory = new DbContextOptionsBuilder<ObeliscoTestContext>().UseInMemoryDatabase("Obelisco").Options;
+            _context = new ObeliscoTestContext(optionsInMemory); 
             _unitOfWork = new UnitOfWork(_context);
         }
 
@@ -46,7 +46,7 @@ namespace Aplicacion.Test
                     TipoMovimientoId = 7,
                     TipoMovimiento = "Compra",
                     //FechaFactura = DateTime.Now,
-                    FechaPago = DateTime.Now,
+                    FechaPago = DateTime.Now,                    
                     SubTotal = 10000,
                     ValorDevolucion = 0,
                     Descuento = 0,

@@ -64,14 +64,14 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Sub total erroneo");
             if (this.ValorDevolucion < 0)
                 errors.Add("Campo Valor devolucion vacio");
-            if (this.FechaFactura == 0)
-                errors.Add("Campo Fecha Factura vacio");
+            //if (!this.FechaFactura.HasValue) Nunca sera Vacio el default es 0
+            //    errors.Add("Campo Fecha Factura vacio");
             if (this.Descuento < 0)
                 errors.Add("Campo Descuento erroneo");
             if (this.IVA < 0)
                 errors.Add("Campo IVA erroneo");
-            if (this.FechaPago == 0)
-                errors.Add("Campo Fecha Pago vacio");
+            //if (!this.FechaPago.HasValue) Puede Crearse sin alguna fecha de Pago
+            //    errors.Add("Campo Fecha Pago vacio");
             if (this.ValorDevolucion < 0)
                 errors.Add("Campo Valor Devolucion Erroneo");
             if (this.Abono < 0)

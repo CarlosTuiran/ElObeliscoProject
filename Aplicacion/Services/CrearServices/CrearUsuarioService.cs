@@ -24,8 +24,8 @@ namespace Aplicacion.Services.CrearServices
             if (usuario == null)
             {
                 var usuarioRep = _unitOfWork.UsuarioServiceRepository.FindFirstOrDefault(t => t.Nombre == request.Nombre);
-                if (usuarioRep == null)
-                    return new CrearUsuarioResponse() { Message = $"Usuario ya existe" };
+                if (usuarioRep != null)
+                    return new CrearUsuarioResponse() { Message = $"Nombre de Usuario ya existe" };
 
                 Usuario newUsuario = new Usuario(request.Nombre,  request.Password, request.EmpleadoId, request.Tipo);
                 IReadOnlyList<string> errors = newUsuario.CanCrear(newUsuario);

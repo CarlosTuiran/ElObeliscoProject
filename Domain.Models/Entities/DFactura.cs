@@ -49,6 +49,8 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Cantidad vacio");
             if (this.PrecioUnitario == 0)
                 errors.Add("Campo Precio Unitario vacio");
+            //if (!this.FechaFactura.HasValue) Nunca sera vacio el Default es 0
+            //    errors.Add("Campo Fecha Factura vacio");
             /*if (this.PrecioTotal == 0)
                 errors.Add("Campo Precio Total vacio");*/
             return errors;

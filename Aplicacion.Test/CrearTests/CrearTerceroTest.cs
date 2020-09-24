@@ -12,7 +12,7 @@ namespace Aplicacion.Test.CrearTests
     [TestFixture]
     public class CrearTerceroTest
     {
-        ObeliscoContext _context;
+        ObeliscoTestContext _context;
         UnitOfWork _unitOfWork;
         CrearTerceroService _Terceroservice;
 
@@ -20,8 +20,8 @@ namespace Aplicacion.Test.CrearTests
         public void Setup()
         {
             //optionsBuilder.UseMySql(@"Server=localhost; database=cempreddp;uid=acceso;pwd=acceso;");
-            var optionsInMemory = new DbContextOptionsBuilder<ObeliscoContext>().UseInMemoryDatabase("Obelisco").Options;
-            _context = new ObeliscoContext(optionsInMemory);
+            var optionsInMemory = new DbContextOptionsBuilder<ObeliscoTestContext>().UseInMemoryDatabase("Obelisco").Options;
+            _context = new ObeliscoTestContext(optionsInMemory);
             _unitOfWork = new UnitOfWork(_context);
         }
 

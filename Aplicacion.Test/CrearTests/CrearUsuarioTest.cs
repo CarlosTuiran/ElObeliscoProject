@@ -12,7 +12,7 @@ namespace Aplicacion.Test.CrearTests
     [TestFixture]
     public class CrearUsuarioTest
     {
-        ObeliscoContext _context;
+        ObeliscoTestContext _context;
         UnitOfWork _unitOfWork;
         CrearUsuarioService _Usuarioservice;
 
@@ -20,8 +20,8 @@ namespace Aplicacion.Test.CrearTests
         public void Setup()
         {
             //optionsBuilder.UseMySql(@"Server=localhost; database=cempreddp;uid=acceso;pwd=acceso;");
-            var optionsInMemory = new DbContextOptionsBuilder<ObeliscoContext>().UseInMemoryDatabase("Obelisco").Options;
-            _context = new ObeliscoContext(optionsInMemory);
+            var optionsInMemory = new DbContextOptionsBuilder<ObeliscoTestContext>().UseInMemoryDatabase("Obelisco").Options;
+            _context = new ObeliscoTestContext(optionsInMemory);
             _unitOfWork = new UnitOfWork(_context);
         }
 
@@ -37,9 +37,10 @@ namespace Aplicacion.Test.CrearTests
             yield return new TestCaseData(
                 new CrearUsuarioRequest
                 {
-                    EmpleadoId = 1000001,
-                    Nombre = "Raul Andres",
-                    Password="acceso123"
+                    EmpleadoId = 1002301,
+                    Nombre = "RaulAgamez",
+                    Password="acceso123",
+                    Tipo="Admin"
 
                 },
                 "Usuario Creado Exitosamente"
