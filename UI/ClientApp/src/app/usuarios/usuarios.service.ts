@@ -5,7 +5,7 @@ import { IUsuario } from './usuarios.component';
 
 @Injectable({
   providedIn: 'root'
-})
+}) 
 export class UsuariosService {
 
   apiURL = this.baseUrl + "api/Usuario";
@@ -13,5 +13,8 @@ export class UsuariosService {
 
   getUsuarios(): Observable<IUsuario[]> {
     return this.http.get<IUsuario[]>(this.apiURL);
+  }
+  createUsuario(usuario: IUsuario): Observable<IUsuario> {
+    return this.http.post<IUsuario>(this.apiURL, usuario);
   }
 }

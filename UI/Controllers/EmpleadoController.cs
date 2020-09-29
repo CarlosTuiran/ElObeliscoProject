@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,26 +14,26 @@ namespace UI.InterfazWeb.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class EmpleadoController : ControllerBase
     {
         private readonly ObeliscoContext _context;
-        private CrearUsuarioService _service;
+        private CrearEmpleadoService _service;
         private UnitOfWork _unitOfWork;
 
-        public UsuarioController(ObeliscoContext context)
+        public EmpleadoController(ObeliscoContext context)
         {
             _context = context;
             _unitOfWork = new UnitOfWork(_context);
         }
 
         [HttpGet]
-        public IEnumerable<Usuario> GetUsuarios()
+        public IEnumerable<Empleado> GetEmpleados()
         {
-            return _context.Usuario;
+            return _context.Empleado;
         }
-        /*public async Task<ActionResult<IEnumerable<Usuario>>> getUsuarios()
+        /*public async Task<ActionResult<IEnumerable<Empleado>>> getEmpleados()
         {
-            var data = await _context.Usuario.ToListAsync();
+            var data = await _context.Empleado.ToListAsync();
             return Ok(data);
         }*/
         /*

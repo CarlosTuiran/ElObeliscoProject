@@ -22,7 +22,14 @@ namespace Domain.Models.Entities
         {
             this.Nombre = nombre;
             Crypto = new Crypto();
-            this.Password = Encriptar(password);
+            if (!string.IsNullOrEmpty(password) && !(password.Length < 6))
+            {
+                this.Password = Encriptar(password);
+            }
+            else
+            {
+                this.Password = password;
+            }
             this.EmpleadoId = idEmpleado;
             this.Tipo = tipo;
         }
@@ -41,11 +48,16 @@ namespace Domain.Models.Entities
             var errors = new List<string>();
             if (string.IsNullOrEmpty(this.Nombre))
                 errors.Add("Campo Nombre vacio");
-            if (string.IsNullOrEmpty(this.Password))
+            if (string.IsNullOrEmpty(this.Password)){
                 errors.Add("Campo Password vacio");
+            }else{ 
+                if (this.Password.Length<6)
+                    errors.Add("Campo Password debe tener minimo 6 caracteres");
+            }
             if (this.EmpleadoId==0)
                 errors.Add("Campo IdEmpleado vacio");
-
+            if (string.IsNullOrEmpty(this.Tipo))
+                errors.Add("Campo Tipo vacio");
             /*if (this.PrecioTotal == 0)
                 errors.Add("Campo Precio Total vacio");*/
             return errors;

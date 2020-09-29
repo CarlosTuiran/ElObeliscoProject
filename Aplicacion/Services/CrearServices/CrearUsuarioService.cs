@@ -31,7 +31,7 @@ namespace Aplicacion.Services.CrearServices
                 IReadOnlyList<string> errors = newUsuario.CanCrear(newUsuario);
                 if (errors.Any())
                 {
-                    string listaErrors = "Errores:";
+                    string listaErrors = "Errores: ";
                     foreach (var item in errors)
                     {
                         listaErrors += item.ToString();

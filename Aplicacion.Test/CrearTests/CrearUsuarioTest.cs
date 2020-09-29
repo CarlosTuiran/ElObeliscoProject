@@ -45,6 +45,83 @@ namespace Aplicacion.Test.CrearTests
                 },
                 "Usuario Creado Exitosamente"
                 ).SetName("Crear Usuario Correctamente");
+            yield return new TestCaseData(
+                new CrearUsuarioRequest
+                {
+                    EmpleadoId = 1002301,
+                    Nombre = "RaulAgamez",
+                    Password="acceso123",
+                    Tipo="Admin"
+
+                },
+                "Empleado ya tine un Usuario"
+                ).SetName("Crear Usuario con Id Repetido");
+            yield return new TestCaseData(
+                new CrearUsuarioRequest
+                {
+                    EmpleadoId = 1003301,
+                    Nombre = "RaulAgamez",
+                    Password="acceso123",
+                    Tipo="Admin"
+
+                },
+                "Nombre de Usuario ya existe"
+                ).SetName("Crear Usuario con nombre repetidido");
+            yield return new TestCaseData(
+                new CrearUsuarioRequest
+                {
+                    
+                    Nombre = "RaulAgamez1",
+                    Password="acceso123",
+                    Tipo="Admin"
+
+                },
+                "Errores: Campo IdEmpleado vacio"
+                ).SetName("Crear Usuario con campo EmpleadoId vacio");
+            yield return new TestCaseData(
+                new CrearUsuarioRequest
+                {
+                    EmpleadoId = 10033012,
+                    
+                    Password="acceso123",
+                    Tipo="Admin"
+
+                },
+                "Errores: Campo Nombre vacio"
+                ).SetName("Crear Usuario con campo Nombre vacio");
+            yield return new TestCaseData(
+                new CrearUsuarioRequest
+                {
+                    EmpleadoId = 1003303,
+                    Nombre = "RaulAgamez3",
+                    
+                    Tipo="Admin"
+
+                },
+                "Errores: Campo Password vacio"
+                ).SetName("Crear Usuario con Campo Password vacio");
+            yield return new TestCaseData(
+                new CrearUsuarioRequest
+                {
+                    EmpleadoId = 10033014,
+                    Nombre = "RaulAgamez4",
+                    Password="acceso123"
+                    
+
+                },
+                "Errores: Campo Tipo vacio"
+                ).SetName("Crear Usuario con Campo Tipo vacio");
+               yield return new TestCaseData(
+                new CrearUsuarioRequest
+                {
+                    EmpleadoId = 10033015,
+                    Nombre = "RaulAgamez5",
+                    Password="ac",
+                    Tipo="Admin"
+
+                },
+                "Errores: Campo Password debe tener minimo 6 caracteres"
+                ).SetName("Crear Usuario con Campo password de 5 caracteres");
         }
     }
 }
