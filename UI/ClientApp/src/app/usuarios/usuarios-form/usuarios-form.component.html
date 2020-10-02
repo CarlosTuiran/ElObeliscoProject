@@ -32,14 +32,14 @@
                 id="empleadoId"
                 type="text"
                 required
-                formControlName="tipo">
-          <option *ngFor="let empleado of empleados" [value]="empleado.idEmpleado">{{empleado.idEmpleado}}</option>
+                formControlName="empleadoId">
+          <option *ngFor="let empleado of empleados" [value]="empleado.idEmpleado">{{empleado.idEmpleado}} -- {{empleado.nombres}}</option>
           
 
         </select>
         <div class="alert alert-danger"  *ngIf="((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)">
           <span *ngIf="empleadoId.errors.required">
-            El campo Tipo es requerido
+            El campo Empleado es requerido
           </span>
         </div>
       </div>
