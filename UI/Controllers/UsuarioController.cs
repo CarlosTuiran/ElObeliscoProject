@@ -46,7 +46,7 @@ namespace UI.InterfazWeb.Controllers
             return Ok(data);
         }*/
 
-        [HttpPost("crear")]
+        [HttpPost]
         public async Task<IActionResult> CreateUsuario([FromBody] CrearUsuarioRequest usuario)
         {
             _service = new CrearUsuarioService(_unitOfWork);

@@ -35,7 +35,7 @@ export class UsuariosFormComponent implements OnInit {
     console.table(usuario); //ver usuario por consola
     this.usuariosService.createUsuario(usuario)
       .subscribe(usuario => this.onSaveSuccess(),
-        error => console.error(error))
+        error => console.error(error));
   }
   onSaveSuccess(){
     this.router.navigate(["/usuarios"]);
