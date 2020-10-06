@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aplicacion.Request;
 using Aplicacion.Services.CrearServices;
 using Domain.Models.Entities;
 using Infra.Datos;
@@ -31,20 +32,42 @@ namespace UI.InterfazWeb.Controllers
         {
             return _context.Usuario;
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUsuario([FromRoute] int id)
+        {
+            Usuario usuario= await _context.Usuario.SingleOrDefaultAsync(t=>t.Id==id);
+            if (usuario == null)
+                return NotFound();
+            return Ok(usuario);
+        }
         /*public async Task<ActionResult<IEnumerable<Usuario>>> getUsuarios()
         {
             var data = await _context.Usuario.ToListAsync();
             return Ok(data);
         }*/
-        /*
-        [HttpPost]
-        public ActionResult PostConvenio([FromBody] CrearEmpresaRequest empresa)
+
+        [HttpPost("crear")]
+        public async Task<IActionResult> CreateUsuario([FromBody] CrearUsuarioRequest usuario)
         {
-            _service = new CrearEmpresaService(_unitOfWork);
-            var rta = _service.Ejecutar(empresa);
+            _service = new CrearUsuarioService(_unitOfWork);
+            var rta = _service.Ejecutar(usuario);
             if (rta.isOk())
-                return Ok(rta.Message);
+            {
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("GetUsuario", new { id=usuario.EmpleadoId}, usuario);
+            }
             return BadRequest(rta.Message);
-        }*/
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUsuario([FromRoute] int id)
+        {
+            Usuario usuario = await _context.Usuario.SingleOrDefaultAsync(t => t.Id == id);
+            if (usuario == null)
+                return NotFound();
+            _context.Usuario.Remove(usuario);
+            await _context.SaveChangesAsync();
+            return Ok(usuario);
+        }
     }
 }
