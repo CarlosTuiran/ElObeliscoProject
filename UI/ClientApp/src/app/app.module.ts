@@ -3,8 +3,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -22,7 +20,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {ConfirmEqualValidatorDirective} from './usuarios/usuarios-form/confirm-equal-validator.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-
+import { DemoMaterialModule } from './material-module'; 
 
 @NgModule({
   declarations: [
@@ -42,9 +40,8 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSidenavModule,
-    MatListModule,
     BrowserAnimationsModule,
+    DemoMaterialModule,
     //ACA SE REGISTRAN TODOS LOS COMPONENTES
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
