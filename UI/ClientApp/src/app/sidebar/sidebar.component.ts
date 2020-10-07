@@ -11,8 +11,8 @@ export class SidebarComponent implements OnDestroy {
 
   fillerNav = [
     { name: "home", route: "", icon:"home" },
-    { name: "Gestión de Usuarios", route: "usuarios", icon:"perm_contact_calendar" }
-
+    { name: "Gestión de Usuarios", route: "usuarios", icon:"perm_contact_calendar" },
+    { name: "Gestión de Productos", route: "productos", icon: "perm_contact_calendar" }
 
   ]
   
