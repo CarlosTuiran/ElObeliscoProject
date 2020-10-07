@@ -5,19 +5,24 @@
 <table class="table" *ngIf="(productos && productos.length)">
   <thead>
     <tr>
-      <th>Nombre</th>
-      <th>Password</th>
-      <th>EmpleadoId</th>
-      <th>Tipo</th>
-
+      <th>Referencia</th>
+      <th>Descripción</th>
+      <th>Formato Venta</th>
+      <th>Marca</th>
+      <th>Fabrica</th>
+      <th>Costo</th>
+      <th>Precio Venta</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let productos of productos">
-      <td>{{usuario.nombre}}</td>
-      <td>{{usuario.password}}</td>
-      <td>{{usuario.empleadoId}}</td>
-      <td>{{usuario.tipo}}</td>
+    <tr *ngFor="let producto of productos">
+      <td>{{producto.referencia}}</td>
+      <td>{{producto.descripcion}}</td>
+      <td>{{producto.formatoVenta}}</td>
+      <td>{{producto.marca}}</td>
+      <td>{{producto.fabrica}}</td>
+      <td>{{producto.costo}}</td>
+      <td>{{producto.precioVenta}}</td>
       <td>
         <button>Editar</button>
         <button>Borrar</button>

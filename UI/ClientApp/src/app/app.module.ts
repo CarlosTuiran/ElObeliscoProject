@@ -23,7 +23,9 @@ import {ConfirmEqualValidatorDirective} from './usuarios/usuarios-form/confirm-e
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { DemoMaterialModule } from './material-module';
-import { ProductosComponent } from './productos/productos.component'; 
+import { ProductosComponent } from './productos/productos.component';
+import { EmpleadosFormComponent } from './empleados/empleados-form/empleados-form.component';
+import { ProductosFormComponent } from './productos/productos-form/productos-form.component'; 
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { ProductosComponent } from './productos/productos.component';
     EmpleadosComponent,
     SidebarComponent,
     ProductosComponent,
+    EmpleadosFormComponent,
+    ProductosFormComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -55,7 +59,8 @@ import { ProductosComponent } from './productos/productos.component';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'usuarios', component: UsuariosComponent },
       { path: 'usuarios-crear', component: UsuariosFormComponent },
-      { path: 'productos', component: ProductosComponent }
+      { path: 'productos', component: ProductosComponent },
+      { path: 'productos-crear', component: ProductosFormComponent }
 
 
     ]),

@@ -42,7 +42,7 @@ export class UsuariosComponent implements OnInit {
         },
       },
       ajax: (dataTablesParameters: any, callback) => {
-        this.usuariosService.getUsuarios.subscribe(resp => {
+        /*this.usuariosService.getUsuarios.subscribe(resp => {
             this.Members = resp.data;
             this.NumberOfMembers = resp.data.length;
             $('.dataTables_length>label>select, .dataTables_filter>label>input').addClass('form-control-sm');
@@ -55,7 +55,7 @@ export class UsuariosComponent implements OnInit {
               $('.dataTables_empty').css('display', 'none');
             }
           }
-          );
+          );*/
       },
       columns: [{ data: 'doi' }, { data: 'nombre' }, { data: 'fecha_de_ingreso' }]
     };
