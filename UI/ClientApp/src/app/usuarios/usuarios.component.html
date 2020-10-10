@@ -3,7 +3,8 @@
 <p *ngIf="!(usuarios && usuarios.length)"> No Existen Usuarios Registrados</p>
 
 <div class="table-responsive">
-  <table id="data-tables" class="table table-striped table-bordered" *ngIf="(usuarios && usuarios.length)">
+  <table   datatable [dtOptions]="dtOptions" class="table table-striped table-bordered row-border hover"
+     id="data-tables">
     <thead>
       <tr>
         <th>Nombre</th>

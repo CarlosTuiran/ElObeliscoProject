@@ -1,6 +1,10 @@
 import { DataTablesResponse } from '../tablas/data-tables-response';
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from './usuarios.service';
+
+declare var $: any;
+declare var jQuery: any;
+
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
@@ -11,6 +15,8 @@ export class UsuariosComponent implements OnInit {
   //lista de Usuarios que tendra la pagina
   usuarios: IUsuario[];
   dtOptions: DataTables.Settings = {};
+  NumberOfItems = 0;
+
   //inyeccion del servicio que se comunicara con la web api
   constructor(private usuariosService: UsuariosService) { }
 
@@ -42,22 +48,26 @@ export class UsuariosComponent implements OnInit {
         },
       },
       ajax: (dataTablesParameters: any, callback) => {
-        /*this.usuariosService.getUsuarios.subscribe(resp => {
-            this.Members = resp.data;
-            this.NumberOfMembers = resp.data.length;
+        this.usuariosService.http
+        .post<DataTablesResponse>(
+          this.usuariosService.apiURL + 'read_records_dt.php',
+          dataTablesParameters, {}
+        ).subscribe(resp => {
+            this.usuarios = resp.data;
+            this.NumberOfItems = resp.data.length;
             $('.dataTables_length>label>select, .dataTables_filter>label>input').addClass('form-control-sm');
             callback({
               recordsTotal: resp.recordsTotal,
               recordsFiltered: resp.recordsFiltered,
               data: []
             });
-            if (this.NumberOfMembers > 0) {
+            if (this.NumberOfItems > 0) {
               $('.dataTables_empty').css('display', 'none');
             }
           }
-          );*/
+          );
       },
-      columns: [{ data: 'doi' }, { data: 'nombre' }, { data: 'fecha_de_ingreso' }]
+      columns: [{ data: 'nombre' }, { data: 'password' }, { data: 'empleadoId' },{ data: 'tipo' } ]
     };
   }
 
