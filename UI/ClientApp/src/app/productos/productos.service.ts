@@ -14,7 +14,16 @@ export class ProductosService {
   getProductos(): Observable<IProducto[]> {
     return this.http.get<IProducto[]>(this.apiURL);
   }
+
+  getProducto(productoId: string): Observable<IProducto> {
+    return this.http.get<IProducto>(this.apiURL + '/' + productoId);
+  }
+
   createProductos(producto: IProducto): Observable<IProducto> {
     return this.http.post<IProducto>(this.apiURL, producto);
+  }
+
+  updateProducto(producto: IProducto): Observable<IProducto> {
+    return this.http.put<IProducto>(this.apiURL + "/" + producto.referencia, producto);
   }
 }

@@ -20,8 +20,8 @@
         <td>{{usuario.empleadoId}}</td>
         <td>{{usuario.tipo}}</td>
         <td>
-          <button>Editar</button>
-          <button>Borrar</button>
+          <button class="btn btn-primary" [routerLink]='["/usuarios-editar/" + usuario.id]'>Editar</button>
+          <button class="btn btn-danger">Borrar</button>
         </td>
       </tr>
     </tbody>

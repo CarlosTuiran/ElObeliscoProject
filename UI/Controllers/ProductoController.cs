@@ -65,5 +65,37 @@ namespace UI.Controllers
             await _context.SaveChangesAsync();
             return Ok(producto);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutProducto([FromRoute] string id, [FromBody] CrearProductoRequest producto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (id != producto.Referencia)
+            {
+                return BadRequest();
+            }
+            _context.Entry(producto).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                /*if (!UsuarioExist(id))
+                {
+
+                }
+                else
+                {
+                    throw;
+                }*/
+            }
+
+            return NoContent();
+        }
     }
 }

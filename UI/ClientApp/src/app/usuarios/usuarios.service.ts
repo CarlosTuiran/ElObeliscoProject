@@ -14,7 +14,17 @@ export class UsuariosService {
   getUsuarios(): Observable<IUsuario[]> {
     return this.http.get<IUsuario[]>(this.apiURL);
   }
+
+  getUsuario(usuarioId: string): Observable<IUsuario> {
+    return this.http.get<IUsuario>(this.apiURL + '/' + usuarioId);
+  }
+
   createUsuario(usuario: IUsuario): Observable<IUsuario> {
     return this.http.post<IUsuario>(this.apiURL, usuario);
   }
+
+  updateUsuario(usuario: IUsuario): Observable<IUsuario> {
+    return this.http.put<IUsuario>(this.apiURL + "/" + usuario.empleadoId.toString(), usuario);
+  }
+
 }
