@@ -1,4 +1,5 @@
-<h1>Agregar Usuario</h1>
+<h1 *ngIf="modoEdicion">Editar Usuario</h1>
+<h1 *ngIf="!modoEdicion">Agregar Usuario</h1>
 <form class="form-horizontal" novalidate
       (ngSubmit)="save()" [formGroup]="formGroup">
   <fieldset>
@@ -12,7 +13,6 @@
         <input class="form-control"
                id="nombreId"
                type="text"
-               
                formControlName="nombre" />
         <div class="alert alert-danger" *ngIf="((nombre.touched || nombre.dirty )&& nombre.invalid)">
           <span *ngIf="nombre.errors.required">
@@ -34,10 +34,10 @@
                 required
                 formControlName="empleadoId">
           <option *ngFor="let empleado of empleados" [value]="empleado.id">{{empleado.idEmpleado}} -- {{empleado.nombres}}</option>
-          
+
 
         </select>
-        <div class="alert alert-danger"  *ngIf="((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)">
+        <div class="alert alert-danger" *ngIf="((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)">
           <span *ngIf="empleadoId.errors.required">
             El campo Empleado es requerido
           </span>
@@ -54,7 +54,7 @@
         <input class="form-control"
                id="passwordId"
                type="password"
-               required 
+               required
                formControlName="password" />
         <div class="alert alert-danger" *ngIf="((password.touched || password.dirty)&& password.invalid)">
           <span *ngIf="password.errors.required">
@@ -101,7 +101,7 @@
           <option value="Empleado">Empleado</option>
 
         </select>
-        <div class="alert alert-danger"  *ngIf="((tipo.touched || tipo.dirty)&& tipo.invalid)">
+        <div class="alert alert-danger" *ngIf="((tipo.touched || tipo.dirty)&& tipo.invalid)">
           <span *ngIf="tipo.errors.required">
             El campo Tipo es requerido
           </span>
@@ -109,7 +109,7 @@
       </div>
     </div>
 
-    
+
 
     <div class="form-group">
       <div class="col-md-4 col-md-offset-2">

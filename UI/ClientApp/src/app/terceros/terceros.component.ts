@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { DataTablesResponse } from '../tablas/data-tables-response';
-import { ProductosService } from './productos.service';
+import { TercerosService } from './terceros.service';
 
 @Component({
-  selector: 'app-productos',
-  templateUrl: './productos.component.html',
-  styleUrls: ['./productos.component.css']
+  selector: 'app-terceros',
+  templateUrl: './terceros.component.html',
+  styleUrls: ['./terceros.component.css']
 })
-export class ProductosComponent implements OnInit {
+export class TercerosComponent implements OnInit {
 
-  productos: IProducto[];
+  terceros: ITercero[];
   dtOptions: DataTables.Settings = {};
 
-  constructor(private productosService: ProductosService) { }
+  constructor(private tercerosService: TercerosService) { }
 
   ngOnInit() {
-    this.productosService.getProductos()
-      .subscribe(productos => this.productos = productos,
+    this.tercerosService.getTerceros()
+      .subscribe(terceros => this.terceros = terceros,
         error => console.error(error));
 
     this.dtOptions = {
@@ -46,16 +46,15 @@ export class ProductosComponent implements OnInit {
       columns: [{ data: 'doi' }, { data: 'nombre' }, { data: 'fecha_de_ingreso' }]
     }
   }
-}
 
-export interface IProducto {
-  referencia: string,
-  descripcion: string,
-  formatoVenta: string,
-  marca: string,
-  fabrica: string,
-  costo: number,
-  precioVenta: number,
-  iva: number,
-  fechaRegistro: Date
+}
+export interface ITercero {
+  nit: string,
+  nombre: string,
+  apellidos: string,
+  tipoTercero: string,
+  celular: string,
+  correo: string,
+  direccion: string,
+  descripcion: string
 }

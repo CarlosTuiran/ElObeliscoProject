@@ -1,4 +1,5 @@
-<h1>Agregar Producto</h1>
+<h1 *ngIf="modoEdicion">Editar Producto</h1>
+<h1 *ngIf="!modoEdicion">Agregar Producto</h1>
 <form class="form-horizontal" novalidate
       (ngSubmit)="save()" [formGroup]="formGroup">
   <fieldset>

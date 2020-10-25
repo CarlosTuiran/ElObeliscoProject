@@ -25,7 +25,9 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { DemoMaterialModule } from './material-module';
 import { ProductosComponent } from './productos/productos.component';
 import { EmpleadosFormComponent } from './empleados/empleados-form/empleados-form.component';
-import { ProductosFormComponent } from './productos/productos-form/productos-form.component'; 
+import { ProductosFormComponent } from './productos/productos-form/productos-form.component';
+import { TercerosComponent } from './terceros/terceros.component';
+import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.component'; 
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { ProductosFormComponent } from './productos/productos-form/productos-for
     ProductosComponent,
     EmpleadosFormComponent,
     ProductosFormComponent,
+    TercerosComponent,
+    TercerosFormComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -62,7 +66,10 @@ import { ProductosFormComponent } from './productos/productos-form/productos-for
       { path: 'usuarios-editar/:id', component: UsuariosFormComponent },
       { path: 'productos', component: ProductosComponent },
       { path: 'productos-crear', component: ProductosFormComponent },
-      { path: 'productos-editar/:id', component: ProductosFormComponent }
+      { path: 'productos-editar/:id', component: ProductosFormComponent },
+      { path: 'terceros', component: TercerosComponent },
+      { path: 'terceros-crear', component: TercerosFormComponent },
+      { path: 'terceros-editar/:id', component: TercerosFormComponent }
 
 
     ]),

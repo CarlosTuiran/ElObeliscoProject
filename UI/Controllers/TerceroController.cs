@@ -11,73 +11,77 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace UI.Controllers
+namespace UI.InterfazWeb.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductoController : ControllerBase
+    public class TerceroController : ControllerBase
     {
         private readonly ObeliscoContext _context;
-        private CrearProductoService _service;
+        private CrearTerceroService _service;
         private UnitOfWork _unitOfWork;
 
-        public ProductoController(ObeliscoContext context)
+        public TerceroController(ObeliscoContext context)
         {
             _context = context;
             _unitOfWork = new UnitOfWork(_context);
         }
 
         [HttpGet]
-        public IEnumerable<Producto> GetProductos()
+        public IEnumerable<Terceros> GetTerceros()
         {
-            return _context.Producto;
+            return _context.Terceros;
         }
-
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProducto([FromRoute] string id)
+        public async Task<IActionResult> GetTercero([FromRoute] string id)
         {
-            Producto producto = await _context.Producto.SingleOrDefaultAsync(t => t.Referencia == id);
-            if (producto == null)
+            Terceros terceros = await _context.Terceros.SingleOrDefaultAsync(t => t.Nit == id);
+            if (terceros == null)
                 return NotFound();
-            return Ok(producto);
+            return Ok(terceros);
         }
-        
-        [HttpPost]
-        public async Task<IActionResult> CreateProducto([FromBody] CrearProductoRequest producto)
+        /*public async Task<ActionResult<IEnumerable<Usuario>>> getUsuarios()
         {
-            _service = new CrearProductoService(_unitOfWork);
-            var rta = _service.Ejecutar(producto);
+            var data = await _context.Usuario.ToListAsync();
+            return Ok(data);
+        }*/
+
+        [HttpPost]
+        public async Task<IActionResult> CreateTercero([FromBody] CrearTerceroRequest tercero)
+        {
+            _service = new CrearTerceroService(_unitOfWork);
+            var rta = _service.Ejecutar(tercero);
             if (rta.isOk())
             {
                 await _context.SaveChangesAsync();
-                return CreatedAtAction("GetProducto", new { id = producto.Referencia }, producto);
+                return CreatedAtAction("GetTercero", new { id = tercero.Nit }, tercero);
             }
             return BadRequest(rta.Message);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProducto([FromRoute] string referencia)
+        public async Task<IActionResult> DeleteTercero([FromRoute] string id)
         {
-            Producto producto = await _context.Producto.SingleOrDefaultAsync(t => t.Referencia == referencia);
-            if (producto == null)
+            Terceros terceros = await _context.Terceros.SingleOrDefaultAsync(t => t.Nit == id);
+            if (terceros == null)
                 return NotFound();
-            _context.Producto.Remove(producto);
+            _context.Terceros.Remove(terceros);
             await _context.SaveChangesAsync();
-            return Ok(producto);
+            return Ok(terceros);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducto([FromRoute] string id, [FromBody] CrearProductoRequest producto)
+        public async Task<IActionResult> PutTercero([FromRoute] string id, [FromBody] CrearTerceroRequest tercero)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (id != producto.Referencia)
+            if (id != tercero.Nit)
             {
                 return BadRequest();
             }
-            _context.Entry(producto).State = EntityState.Modified;
+            _context.Entry(tercero).State = EntityState.Modified;
 
             try
             {

@@ -17,7 +17,6 @@ export class ProductosFormComponent implements OnInit {
   modoEdicion: boolean = false;
   productoId: string;
 
-
   formGroup = this.fb.group({
     referencia: ['', [Validators.required]],
     descripcion: ['', [Validators.required]],
@@ -27,7 +26,7 @@ export class ProductosFormComponent implements OnInit {
     costo: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     precioVenta: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
   });
-  productos: IProducto[];
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       if (params["id"] == undefined) {
@@ -35,7 +34,7 @@ export class ProductosFormComponent implements OnInit {
       }
 
       this.modoEdicion = true;
-      this.productoId = params["Referencia"];
+      this.productoId = params["id"];
       this.productosService.getProducto(this.productoId).subscribe(producto => this.cargarFormulario(producto),
         error => console.error(error));
     });
@@ -45,12 +44,12 @@ export class ProductosFormComponent implements OnInit {
       referencia: producto.referencia,
       descripcion: producto.descripcion,
       formatoVenta: producto.formatoVenta,
+      fabrica: producto.fabrica,
       marca: producto.marca,
       costo: producto.costo,
       precioVenta: producto.precioVenta
     });
   }
-
 
   save() {
     let producto: IProducto = Object.assign({}, this.formGroup.value);
