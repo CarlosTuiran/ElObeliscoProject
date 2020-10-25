@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { IUsuario } from '../usuarios.component';
 import { UsuariosService } from '../usuarios.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IEmpleado } from 'src/app/empleados/empleados.component';
 import { EmpleadosService } from 'src/app/empleados/empleados.service';
+import { param } from 'jquery';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-usuarios-form',
@@ -13,9 +15,12 @@ import { EmpleadosService } from 'src/app/empleados/empleados.service';
 })
 export class UsuariosFormComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private usuariosService: UsuariosService, 
-    private empleadoService: EmpleadosService, private router: Router) { }
-  
+  constructor(private fb: FormBuilder, private usuariosService: UsuariosService,
+    private empleadoService: EmpleadosService, private router: Router, private activatedRoute: ActivatedRoute) { }
+
+  modoEdicion: boolean = false;
+  usuarioId: number;
+
   formGroup = this.fb.group({
     nombre: ['', [Validators.required]],
     empleadoId: ['', [Validators.required]],
@@ -27,15 +32,47 @@ export class UsuariosFormComponent implements OnInit {
   ngOnInit() {
     this.empleadoService.getEmpleados() //ACA EVENTUALMENTE SOLO DEBE LLAMAR UNA FUNCION QUE RETORNE LAS ID DE LOS EMPLEADOS SIN USUARIOS
         .subscribe(empleados => this.empleados = empleados,
+          error => console.error(error));
+
+    this.activatedRoute.params.subscribe(params => {
+      if (params["id"] == undefined) {
+        return;
+      }
+
+      this.modoEdicion = true;
+      this.usuarioId = params["id"];
+      this.usuariosService.getUsuario(this.usuarioId.toString()).subscribe(usuario => this.cargarFormulario(usuario),
         error => console.error(error));
+    });
+  }
+
+  cargarFormulario(usuario: IUsuario) {
+    this.formGroup.patchValue({
+      nombre: usuario.nombre,
+      empleadoId: usuario.empleadoId,
+      password: usuario.password,
+      passwordRep: usuario.password,
+      tipo: usuario.tipo
+    });
   }
 
   save() {
     let usuario: IUsuario = Object.assign({}, this.formGroup.value);
     console.table(usuario); //ver usuario por consola
-    this.usuariosService.createUsuario(usuario)
-      .subscribe(usuario => this.onSaveSuccess(),
-        error => console.error(error));
+    
+
+    if (this.modoEdicion) {
+      // edita un usuario
+      usuario.empleadoId = this.usuarioId;
+      this.usuariosService.updateUsuario(usuario)
+        .subscribe(usuario => this.onSaveSuccess(),
+          error => console.error(error));
+    } else {
+      // crea un usuario
+      this.usuariosService.createUsuario(usuario)
+        .subscribe(usuario => this.onSaveSuccess(),
+          error => console.error(error));
+    }
   }
   onSaveSuccess(){
     this.router.navigate(["/usuarios"]);

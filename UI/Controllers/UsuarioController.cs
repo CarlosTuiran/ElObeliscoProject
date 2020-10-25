@@ -69,5 +69,37 @@ namespace UI.InterfazWeb.Controllers
             await _context.SaveChangesAsync();
             return Ok(usuario);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUsuario([FromRoute] int id, [FromBody] CrearUsuarioRequest usuario) 
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (id != usuario.EmpleadoId)
+            {
+                return BadRequest();
+            }
+            _context.Entry(usuario).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateConcurrencyException)
+            {
+                /*if (!UsuarioExist(id))
+                {
+
+                }
+                else
+                {
+                    throw;
+                }*/
+            }
+
+            return NoContent();
+        }
     }
 }

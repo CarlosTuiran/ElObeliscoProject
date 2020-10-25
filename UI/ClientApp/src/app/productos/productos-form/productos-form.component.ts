@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { IProducto } from '../productos.component';
 import { ProductosService } from '../productos.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-productos-form',
@@ -12,7 +12,11 @@ import { Router } from '@angular/router';
 export class ProductosFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private productosService: ProductosService,
-    private router: Router) { }
+    private router: Router, private activatedRoute: ActivatedRoute) { }
+
+  modoEdicion: boolean = false;
+  productoId: string;
+
 
   formGroup = this.fb.group({
     referencia: ['', [Validators.required]],
@@ -25,15 +29,44 @@ export class ProductosFormComponent implements OnInit {
   });
   productos: IProducto[];
   ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      if (params["id"] == undefined) {
+        return;
+      }
 
+      this.modoEdicion = true;
+      this.productoId = params["Referencia"];
+      this.productosService.getProducto(this.productoId).subscribe(producto => this.cargarFormulario(producto),
+        error => console.error(error));
+    });
   }
+  cargarFormulario(producto: IProducto) {
+    this.formGroup.patchValue({
+      referencia: producto.referencia,
+      descripcion: producto.descripcion,
+      formatoVenta: producto.formatoVenta,
+      marca: producto.marca,
+      costo: producto.costo,
+      precioVenta: producto.precioVenta
+    });
+  }
+
 
   save() {
     let producto: IProducto = Object.assign({}, this.formGroup.value);
     console.table(producto); //ver usuario por consola
-    this.productosService.createProductos(producto)
-      .subscribe(usuario => this.onSaveSuccess(),
-        error => console.error(error));
+    if (this.modoEdicion) {
+      // edita un usuario
+      producto.referencia = this.productoId;
+      this.productosService.updateProducto(producto)
+        .subscribe(usuario => this.onSaveSuccess(),
+          error => console.error(error));
+    } else {
+      // crea un usuario
+      this.productosService.createProductos(producto)
+        .subscribe(usuario => this.onSaveSuccess(),
+          error => console.error(error));
+    }
   }
   onSaveSuccess() {
     this.router.navigate(["/productos"]);

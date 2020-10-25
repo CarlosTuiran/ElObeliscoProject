@@ -59,8 +59,10 @@ import { ProductosFormComponent } from './productos/productos-form/productos-for
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'usuarios', component: UsuariosComponent },
       { path: 'usuarios-crear', component: UsuariosFormComponent },
+      { path: 'usuarios-editar/:id', component: UsuariosFormComponent },
       { path: 'productos', component: ProductosComponent },
-      { path: 'productos-crear', component: ProductosFormComponent }
+      { path: 'productos-crear', component: ProductosFormComponent },
+      { path: 'productos-editar/:id', component: ProductosFormComponent }
 
 
     ]),
