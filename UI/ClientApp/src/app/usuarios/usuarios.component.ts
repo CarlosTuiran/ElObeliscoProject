@@ -1,5 +1,5 @@
 import { DataTablesResponse } from '../tablas/data-tables-response';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UsuariosService } from './usuarios.service';
 
 declare var $: any;
@@ -12,21 +12,24 @@ declare var jQuery: any;
 })
 export class UsuariosComponent implements OnInit {
 
+  @ViewChild('dataTable', { static: true }) table:ElementRef;
   //lista de Usuarios que tendra la pagina
   usuarios: IUsuario[];
-  dtOptions: DataTables.Settings = {};
+  datatable: any;
+  dtOptions: any;
+  //dtOptions: DataTables.Settings = {};
   NumberOfItems = 0;
 
   //inyeccion del servicio que se comunicara con la web api
   constructor(private usuariosService: UsuariosService) { }
 
   ngOnInit() {
-    this.usuariosService.getUsuarios()
+    /*this.usuariosService.getUsuarios()
       //los usuarios que vengan desde el web service añadelos a la lista de usuarios de esta clase
       .subscribe(usuarios => this.usuarios = usuarios,
-        error => console.error(error));
+        error => console.error(error));*/
 
-    this.dtOptions = {
+    /*this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
       serverSide: true,
@@ -49,12 +52,12 @@ export class UsuariosComponent implements OnInit {
       },
       ajax: (dataTablesParameters: any, callback) => {
         this.usuariosService.http
-        .post<DataTablesResponse>(
-          this.usuariosService.apiURL + 'read_records_dt.php',
-          dataTablesParameters, {}
+        .get<DataTablesResponse>(
+          this.usuariosService.apiURL,
+          dataTablesParameters
         ).subscribe(resp => {
-            this.usuarios = resp.data;
-            this.NumberOfItems = resp.data.length;
+            resp => this.usuarios = resp.data;
+            resp=>this.NumberOfItems = resp.data.length;
             $('.dataTables_length>label>select, .dataTables_filter>label>input').addClass('form-control-sm');
             callback({
               recordsTotal: resp.recordsTotal,
@@ -68,7 +71,36 @@ export class UsuariosComponent implements OnInit {
           );
       },
       columns: [{ data: 'nombre' }, { data: 'password' }, { data: 'empleadoId' },{ data: 'tipo' } ]
+    };*/
+    this.dtOptions = {
+      "ajax": {
+        url: this.usuariosService.apiURL,
+        type: 'GET',
+        dataType:'json',
+        dataFilter: function (resp) { debugger; return resp; },
+        error: function (err) { debugger;}
+      },
+      columns:[
+        {
+        title: 'Nombre',
+          data:'nombre'
+        },
+        {
+          title: 'Password',
+          data: 'password'
+        },
+        {
+          title: 'EmpleadoId',
+          data: 'empleadoId'
+        },
+        {
+          title: 'Tipo',
+          data: 'tipo'
+        }
+        ]
     };
+    this.datatable = $(this.table.nativeElement);
+    this.datatable.DataTable(this.dtOptions);
   }
 
 }
