@@ -55,13 +55,13 @@ export class ProductosFormComponent implements OnInit {
     let producto: IProducto = Object.assign({}, this.formGroup.value);
     console.table(producto); //ver usuario por consola
     if (this.modoEdicion) {
-      // edita un usuario
+      // edita
       producto.referencia = this.productoId;
       this.productosService.updateProducto(producto)
         .subscribe(usuario => this.onSaveSuccess(),
           error => console.error(error));
     } else {
-      // crea un usuario
+      // crea
       this.productosService.createProductos(producto)
         .subscribe(usuario => this.onSaveSuccess(),
           error => console.error(error));

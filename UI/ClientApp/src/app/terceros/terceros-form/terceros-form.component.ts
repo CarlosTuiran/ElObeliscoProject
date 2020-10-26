@@ -17,7 +17,6 @@ export class TercerosFormComponent implements OnInit {
   modoEdicion: boolean = false;
   terceroId: string;
 
-
   formGroup = this.fb.group({
     nit: ['', [Validators.required]],
     nombre: ['', [Validators.required]],
@@ -28,7 +27,7 @@ export class TercerosFormComponent implements OnInit {
     direccion: ['', [Validators.required]],
     descripcion: ['', [Validators.required]]
   });
-  terceros: ITercero[];
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       if (params["id"] == undefined) {
@@ -36,7 +35,7 @@ export class TercerosFormComponent implements OnInit {
       }
 
       this.modoEdicion = true;
-      this.terceroId = params["Nit"];
+      this.terceroId = params["id"];
       this.tercerosService.getTercero(this.terceroId).subscribe(tercero => this.cargarFormulario(tercero),
         error => console.error(error));
     });
@@ -59,13 +58,13 @@ export class TercerosFormComponent implements OnInit {
     let tercero: ITercero = Object.assign({}, this.formGroup.value);
     console.table(tercero); //ver usuario por consola
     if (this.modoEdicion) {
-      // edita un usuario
+      // edita
       tercero.nit = this.terceroId;
       this.tercerosService.updateTercero(tercero)
         .subscribe(tercero => this.onSaveSuccess(),
           error => console.error(error));
     } else {
-      // crea un usuario
+      // crea
       this.tercerosService.createTerceros(tercero)
         .subscribe(tercero => this.onSaveSuccess(),
           error => console.error(error));
