@@ -28,6 +28,7 @@ import { EmpleadosFormComponent } from './empleados/empleados-form/empleados-for
 import { ProductosFormComponent } from './productos/productos-form/productos-form.component';
 import { TercerosComponent } from './terceros/terceros.component';
 import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.component'; 
+import { TercerosService } from './terceros/terceros.service';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,7 @@ import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.co
     BrowserAnimationsModule
   ],
   //aca se agregan todos los services
-  providers: [UsuariosService, EmpleadosService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
+  providers: [UsuariosService, EmpleadosService, TercerosService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -36,7 +36,7 @@ namespace Aplicacion.Services.ActualizarServices
                 producto.Referencia = request.Referencia;
                 _unitOfWork.ProductoServiceRepository.Edit(producto);
                 _unitOfWork.Commit();
-                return new ActualizarProductoResponse() { Message = $"Producto actualizado Exitosamente" };
+                return new ActualizarProductoResponse() { Message = $"Producto Actualizado Exitosamente" };
             }
         }
     }

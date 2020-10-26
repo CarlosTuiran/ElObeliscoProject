@@ -20,7 +20,7 @@ export class TercerosFormComponent implements OnInit {
   formGroup = this.fb.group({
     nit: ['', [Validators.required]],
     nombre: ['', [Validators.required]],
-    apellidos: ['', [Validators.required]],
+    apellido: ['', [Validators.required]],
     tipoTercero: ['', [Validators.required]],
     celular: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     correo: ['', [Validators.required]],
@@ -44,7 +44,7 @@ export class TercerosFormComponent implements OnInit {
     this.formGroup.patchValue({
       nit: tercero.nit,
       nombre: tercero.nombre,
-      apellidos: tercero.apellidos,
+      apellido: tercero.apellido,
       tipoTercero: tercero.tipoTercero,
       celular: tercero.celular,
       correo: tercero.correo,
@@ -52,7 +52,6 @@ export class TercerosFormComponent implements OnInit {
       descripcion: tercero.descripcion
     });
   }
-
 
   save() {
     let tercero: ITercero = Object.assign({}, this.formGroup.value);
@@ -65,7 +64,7 @@ export class TercerosFormComponent implements OnInit {
           error => console.error(error));
     } else {
       // crea
-      this.tercerosService.createTerceros(tercero)
+      this.tercerosService.createTercero(tercero)
         .subscribe(tercero => this.onSaveSuccess(),
           error => console.error(error));
     }
@@ -80,8 +79,8 @@ export class TercerosFormComponent implements OnInit {
   get nombre() {
     return this.formGroup.get('nombre');
   }
-  get apellidos() {
-    return this.formGroup.get('apellidos');
+  get apellido() {
+    return this.formGroup.get('apellido');
   }
   get tipoTercero() {
     return this.formGroup.get('tipoTercero');

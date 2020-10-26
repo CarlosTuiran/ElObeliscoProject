@@ -35,7 +35,7 @@ namespace Aplicacion.Services.ActualizarServices
                 terceros.TipoTercero = request.TipoTercero;
                 _unitOfWork.TercerosServiceRepository.Edit(terceros);
                 _unitOfWork.Commit();
-                return new ActualizarTerceroResponse() { Message = $"Tercero actualizado Exitosamente" };
+                return new ActualizarTerceroResponse() { Message = $"Tercero Actualizado Exitosamente" };
             }
         }
     }

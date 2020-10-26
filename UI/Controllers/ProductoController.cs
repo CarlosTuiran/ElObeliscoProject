@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Aplicacion.Request;
+using Aplicacion.Services.ActualizarServices;
 using Aplicacion.Services.CrearServices;
 using Domain.Models.Entities;
 using Infra.Datos;
@@ -20,7 +21,7 @@ namespace UI.Controllers
         private readonly ObeliscoContext _context;
         private CrearProductoService _service;
         private UnitOfWork _unitOfWork;
-
+        private ActualizarProductoService _actualizarService;
         public ProductoController(ObeliscoContext context)
         {
             _context = context;
@@ -67,35 +68,16 @@ namespace UI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducto([FromRoute] string id, [FromBody] CrearProductoRequest producto)
+        public async Task<IActionResult> PutProducto([FromRoute] string id, [FromBody] ActualizarProductoRequest producto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            if (id != producto.Referencia)
-            {
-                return BadRequest();
-            }
-            _context.Entry(producto).State = EntityState.Modified;
-
-            try
+            _actualizarService = new ActualizarProductoService(_unitOfWork);
+            var rta = _actualizarService.Ejecutar(producto);
+            if (rta.isOk())
             {
                 await _context.SaveChangesAsync();
+                return CreatedAtAction("GetProducto", new { id = producto.Referencia }, producto);
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                /*if (!UsuarioExist(id))
-                {
-
-                }
-                else
-                {
-                    throw;
-                }*/
-            }
-
-            return NoContent();
+            return BadRequest(rta.Message);
         }
     }
 }

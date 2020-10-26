@@ -41,18 +41,18 @@
     </div>
 
     <div class="form-group"
-         [ngClass]="{'has-error': ((apellidos.touched || apellidos.dirty) && apellidos.invalid)}">
+         [ngClass]="{'has-error': ((apellido.touched || apellido.dirty) && apellido.invalid)}">
       <label class="col-md-2 control-label"
-             for="apellidosId">Apellidos del Tercero</label>
+             for="apellidoId">Apellido del Tercero</label>
 
       <div class="col-md-8">
         <input class="form-control"
-               id="apellidosId"
+               id="apellidoId"
                type="text"
-               formControlName="apellidos" />
-        <div class="alert alert-danger" *ngIf="((apellidos.touched || apellidos.dirty )&& apellidos.invalid)">
-          <span *ngIf="apellidos.errors.required">
-            El campo Apellidos es requerido
+               formControlName="apellido" />
+        <div class="alert alert-danger" *ngIf="((apellido.touched || apellido.dirty )&& apellido.invalid)">
+          <span *ngIf="apellido.errors.required">
+            El campo Apellido es requerido
           </span>
         </div>
       </div>
