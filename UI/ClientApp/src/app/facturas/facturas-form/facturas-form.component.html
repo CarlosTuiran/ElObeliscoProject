@@ -1,0 +1,363 @@
+<h1 *ngIf="modoEdicion">Editar Producto</h1>
+<h1 *ngIf="!modoEdicion">Agregar Factura</h1>
+<mat-divider></mat-divider>
+<br>  
+<form class="form-horizontal" novalidate
+       [formGroup]="formGroup">
+  <fieldset>
+    <div class="row">
+    <div class="form-group col-md-3"
+        [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)}">
+        <label class="col-md-10 control-label"
+            for="empleadoId">Identificacion del Empleado</label>
+
+        <div class="col-md-10">
+            <select class="form-control"
+            id="empleadoId"
+            type="text"
+            required
+            formControlName="empleadoId">
+            <option *ngFor="let empleado of empleados" [value]="empleado.idEmpleado">{{empleado.idEmpleado}} -- {{empleado.nombres}}</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)">
+                <span *ngIf="empleadoId.errors.required">
+                    El campo Empleado es requerido
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-3"
+        [ngClass]="{'has-error': ((tercerosId.touched || tercerosId.dirty)&& tercerosId.invalid)}">
+        <label class="col-md-10 control-label"
+            for="terceroId">Identificacion del Tercero</label>
+
+        <div class="col-md-10">
+            <select class="form-control"
+            id="terceroId"
+            type="text"
+            required
+            formControlName="tercerosId">
+            <option *ngFor="let tercero of terceros" [value]="tercero.nit">{{tercero.nit}} -- {{tercero.nombre}}</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="((tercerosId.touched || tercerosId.dirty)&& tercerosId.invalid)">
+                <span *ngIf="tercerosId.errors.required">
+                    El campo tercero es requerido
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-3"
+        [ngClass]="{'has-error': ((tipoMovimientoId.touched || tipoMovimientoId.dirty)&& tipoMovimientoId.invalid)}">
+        <label class="col-md-10 control-label"
+            for="tipoMovimientoId">Identificacion de Pago</label>
+
+        <div class="col-md-10">
+            <select class="form-control"
+            id="tipoMovimientoId"
+            type="text"
+            required
+            formControlName="tipoMovimientoId">
+            <option *ngFor="let tipoMovimiento of tipoMovimientos" [value]="tipoMovimiento.idMovimiento">{{tipoMovimiento.idMovimiento}} -- {{tipoMovimiento.nombre}}</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="((tipoMovimientoId.touched || tipoMovimientoId.dirty)&& tipoMovimientoId.invalid)">
+                <span *ngIf="tipoMovimientoId.errors.required">
+                    El campo tipoMovimiento es requerido
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-3"
+        [ngClass]="{'has-error': ((tipoMovimiento.touched || tipoMovimiento.dirty)&& tipoMovimiento.invalid)}">
+        <label class="col-md-10 control-label"
+        for="tipoMovimiento">Identificacion del Movimiento</label>
+
+        <div class="col-md-8">
+            <select class="form-control"
+            id="tipoMovimientoid"
+            type="text"
+            required
+            formControlName="tipoMovimiento">
+            <option value="Compra">Compra</option>
+            <option value="Venta">Venta</option>            
+            </select>
+            <div class="alert alert-danger" *ngIf="((tipoMovimiento.touched || tipoMovimiento.dirty)&& tipoMovimiento.invalid)">
+                <span *ngIf="tipoMovimiento.errors.required">
+                    El campo tipoMovimiento es requerido
+                </span>
+            </div>
+        </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="row">
+    
+    <div class="form-group col-md-3">
+        <div class="col-md-10">
+            <mat-form-field color="accent" appearance="fill">
+                <mat-label>FechaPago</mat-label>
+                <input 
+                id="fechaPagoId"
+                formControlName="fechaPago" matInput [matDatepicker]="picker1">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+        
+    
+  
+  <div class="form-group col-md-3"
+         [ngClass]="{'has-error': ((valorDevolucion.touched || valorDevolucion.dirty) && valorDevolucion.invalid)}">
+      <label class="col-md-10 control-label"
+             for="valorDevolucionId">ValorDevolucion de la Factura</label>
+
+      <div class="col-md-10">
+        <input class="form-control"
+               id="valorDevolucionId"
+               type="text"
+               formControlName="valorDevolucion" />
+        <div class="alert alert-danger" *ngIf="((valorDevolucion.touched || valorDevolucion.dirty )&& valorDevolucion.invalid)">
+          <span *ngIf="valorDevolucion.errors.required">
+            El campo ValorDevolucion es requerido
+          </span>
+          <span *ngIf="valorDevolucion.errors.pattern">
+            El campo ValorDevolucion es numerico
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group col-md-3"
+         [ngClass]="{'has-error': ((descuento.touched || descuento.dirty) && descuento.invalid)}">
+      <label class="col-md-10 control-label"
+             for="descuentoId">Descuento de la Factura</label>
+
+      <div class="col-md-10">
+        <input class="form-control"
+               id="descuentoId"
+               type="text"
+               formControlName="descuento" />
+        <div class="alert alert-danger" *ngIf="((descuento.touched || descuento.dirty )&& descuento.invalid)">
+          <span *ngIf="descuento.errors.required">
+            El campo Descuento es requerido
+          </span>
+          <span *ngIf="descuento.errors.pattern">
+            El campo Descuento es numerico
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group col-md-3"
+         [ngClass]="{'has-error': ((iVA.touched || iVA.dirty) && iVA.invalid)}">
+      <label class="col-md-10 control-label"
+             for="iVAId">IVA de la Factura</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="iVAId"
+               type="text"
+               formControlName="iVA" />
+        <div class="alert alert-danger" *ngIf="((iVA.touched || iVA.dirty )&& iVA.invalid)">
+          <span *ngIf="iVA.errors.required">
+            El campo IVA es requerido
+          </span>
+          <span *ngIf="iVA.errors.pattern">
+            El campo IVA es numerico
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <br>  
+  <div class="row">
+    <div class="form-group col-md-4"
+         [ngClass]="{'has-error': ((abono.touched || abono.dirty) && abono.invalid)}">
+      <label class="col-md-10 control-label"
+             for="abonoId">Abono de la Factura</label>
+
+      <div class="col-md-10">
+        <input class="form-control"
+               id="abonoId"
+               type="text"
+               formControlName="abono" />
+        <div class="alert alert-danger" *ngIf="((abono.touched || abono.dirty )&& abono.invalid)">
+          <span *ngIf="abono.errors.required">
+            El campo abono es requerido
+          </span>
+          <span *ngIf="abono.errors.pattern">
+            El campo abono es numerico
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group col-md-4"
+         >
+      <label class="col-md-10 control-label"
+             for="subTotalId">SubTotal de la Factura</label>
+
+      <div class="col-md-10">
+        <input class="form-control"
+               id="subTotalId"
+               type="text"
+               disabled />
+        
+      </div>
+    </div>
+
+    <div class="form-group col-md-4"
+        [ngClass]="{'has-error': ((estadoFactura.touched || estadoFactura.dirty)&& estadoFactura.invalid)}">
+        <label class="col-md-3 control-label"
+        for="estadoFacturaId">Estado</label>
+
+        <div class="col-md-6">
+            <select class="form-control"
+            id="estadoFacturaid"
+            type="text"
+            required
+            formControlName="estadoFactura">
+            <option value="Pagado">Pagado</option>
+            <option value="Pendiente">Pendiente</option>            
+            </select>
+            <div class="alert alert-danger" *ngIf="((estadoFactura.touched || estadoFactura.dirty)&& estadoFactura.invalid)">
+                <span *ngIf="estadoFactura.errors.required">
+                    El campo estadoFactura es requerido
+                </span>
+            </div>
+        </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <br>
+  <h3>Agregar Nuevo Producto</h3>
+  <div class="form-group example-button-container">
+   <button mat-fab color="primary" aria-label="Agregar Nuevo Producto"
+    (click)="agregarDFactura()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="scroll_vertical">
+    <div formArrayName="dfacturas" *ngFor="let dfactura of dfacturas.controls;
+    let i=index">
+      <div [formGroupName]="i">
+        <div class="form-group row">
+
+          <div class="form-group col-md-3"
+          [ngClass]="{'has-error': ((referencia.touched || referencia.dirty)&& referencia.invalid)}">
+          <label class="col-md-10 control-label"
+              for="referencia">Producto</label>
+
+          <div class="col-md-10">
+              <select class="form-control"
+              id="referencia"
+              type="text"
+              required
+              formControlName="referencia">
+              <option *ngFor="let producto of referencias" [value]="producto.referencia">{{producto.referencia}} -- {{producto.descripcion}}</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="((referencia.touched || referencia.dirty)&& referencia.invalid)">
+                  <span *ngIf="referencia.errors.required">
+                      El campo Producto es requerido
+                  </span>
+              </div>
+          </div>
+          </div>
+        
+
+        <div class="form-group col-md-3" >
+          <label class="col-md-5 control-label"
+            for="promocionId">Promocion</label>
+          <div class="col-md-5">
+            <select class="form-control"
+            id="promocionId"
+            type="text"            
+            formControlName="promocionId">
+            <option *ngFor="let promocion of promociones" [value]="promocion.nombre">{{promocion.nombre}} -- {{promocion.porcentajeDesc}}</option>
+            </select>            
+          </div>
+        </div>
+
+        <div class="form-group col-md-2"
+          [ngClass]="{'has-error': ((bodega.touched || bodega.dirty)&& bodega.invalid)}">
+          <label class="col-md-5 control-label"
+            for="bodega">Bodega</label>
+
+          <div class="col-md-5">
+            <select class="form-control"
+            id="bodega"
+            type="text"
+            required
+            formControlName="bodega">
+            <option *ngFor="let bodega of bodegas" [value]="bodega.bodegaId">{{bodega.bodegaId}} -- {{bodega.nombre}}</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="((bodega.touched || bodega.dirty)&& bodega.invalid)">
+                <span *ngIf="bodega.errors.required">
+                    El campo tipoMovimiento es requerido
+                </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-2"
+         [ngClass]="{'has-error': ((cantidad.touched || cantidad.dirty) && cantidad.invalid)}">
+          <label class="col-md-5 control-label"
+             for="cantidadId">Cantidad </label>
+
+          <div class="col-md-5">
+            <input class="form-control"
+               id="cantidadId"
+               type="text"
+               formControlName="cantidad" />
+            <div class="alert alert-danger" *ngIf="((cantidad.touched || cantidad.dirty )&& cantidad.invalid)">
+              <span *ngIf="cantidad.errors.required">
+                El campo cantidad es requerido
+              </span>
+              <span *ngIf="cantidad.errors.pattern">
+                El campo cantidad es numerico
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 example-button-container">
+          <button mat-fab color="warn" aria-label="Eliminar"
+            (click)="removerDFactura(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+<br>
+<br>
+    <div class="form-group">
+        <div class="col-md-4 col-md-offset-2">
+          <span>
+            <button class="btn btn-success"
+                    type="submit"
+                    [disabled]="!formGroup.valid">
+              Salvar
+            </button>
+            <button class="btn btn-secondary"
+                    type="button"
+                    (click)="refresh()">
+              Refrescar
+            </button>
+            <button class="btn"
+                    type="button"
+                    [routerLink]='["/productos"]'>
+              Cancelar
+            </button>
+          </span>
+  
+        </div>
+  
+      </div>
+    </fieldset>
+  </form>
+  
+  

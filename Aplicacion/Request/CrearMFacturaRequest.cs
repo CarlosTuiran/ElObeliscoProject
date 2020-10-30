@@ -6,7 +6,7 @@ namespace Aplicacion.Request
 {
     public class CrearMFacturaRequest
     {
-        public int idMfactura { get; set; }
+        public int idMfactura { get; set; } 
         public int EmpleadoId { get; set; }
         public int TercerosId { get; set; }
         public int TipoMovimientoId { get; set; }

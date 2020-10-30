@@ -23,12 +23,24 @@ import {ConfirmEqualValidatorDirective} from './usuarios/usuarios-form/confirm-e
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { DemoMaterialModule } from './material-module';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ProductosComponent } from './productos/productos.component';
 import { EmpleadosFormComponent } from './empleados/empleados-form/empleados-form.component';
 import { ProductosFormComponent } from './productos/productos-form/productos-form.component';
 import { TercerosComponent } from './terceros/terceros.component';
-import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.component'; 
+import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.component';
+import { TercerosService} from './terceros/terceros.service';
+import { FacturasComponent } from './facturas/facturas.component'; 
+import { FacturasService} from './facturas/facturas.service';
+import { FacturasFormComponent } from './facturas/facturas-form/facturas-form.component';
+import { TipoMovimentosComponent } from './facturas/tipo-movimentos/tipo-movimentos.component';
+import { TipoMovimientosService } from './facturas/tipo-movimentos/tipo-movimientos.service';
+import { BodegasComponent} from './bodegas/bodegas.component';
+import { BodegasService} from './bodegas/bodegas.service';
+import { PromocionesComponent} from './promociones/promociones.component';
+import { PromocionesService} from './promociones/promociones.service';
 
+import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +58,11 @@ import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.co
     ProductosFormComponent,
     TercerosComponent,
     TercerosFormComponent,
+    FacturasComponent,
+    FacturasFormComponent,
+    TipoMovimentosComponent,
+    BodegasComponent,
+    PromocionesComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -54,8 +71,9 @@ import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.co
     ReactiveFormsModule,
     BrowserAnimationsModule,
     DemoMaterialModule,
+    NgxMatSelectSearchModule,    
     CommonModule,
-    DataTablesModule,
+    DataTablesModule,MatDatepickerModule ,MatNativeDateModule,
     //ACA SE REGISTRAN TODOS LOS COMPONENTES
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -69,14 +87,17 @@ import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.co
       { path: 'productos-editar/:id', component: ProductosFormComponent },
       { path: 'terceros', component: TercerosComponent },
       { path: 'terceros-crear', component: TercerosFormComponent },
-      { path: 'terceros-editar/:id', component: TercerosFormComponent }
+      { path: 'terceros-editar/:id', component: TercerosFormComponent },
+      { path: 'facturas', component: FacturasComponent },
+      { path: 'facturas-crear', component: FacturasFormComponent }
 
 
     ]),
     BrowserAnimationsModule
   ],
   //aca se agregan todos los services
-  providers: [UsuariosService, EmpleadosService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
+  providers: [UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, 
+    BodegasService, PromocionesService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

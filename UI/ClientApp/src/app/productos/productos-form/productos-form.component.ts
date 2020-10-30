@@ -26,7 +26,7 @@ export class ProductosFormComponent implements OnInit {
     costo: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     precioVenta: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
   });
-
+ 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       if (params["id"] == undefined) {

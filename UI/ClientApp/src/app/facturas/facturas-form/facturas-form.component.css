@@ -1,0 +1,7 @@
+div.scroll_vertical {
+	height: 300px;
+	width: 1100px;
+	overflow: auto;
+	border: 1px solid;	
+	padding: 8px;
+}

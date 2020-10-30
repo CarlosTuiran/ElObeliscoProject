@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataTablesResponse } from '../tablas/data-tables-response';
 import { TercerosService } from './terceros.service';
-
+ 
 @Component({
   selector: 'app-terceros',
   templateUrl: './terceros.component.html',
