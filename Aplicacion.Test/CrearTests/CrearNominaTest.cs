@@ -39,9 +39,9 @@ namespace Aplicacion.Test.CrearTests
                 new CrearNominaRequest
                 {
                     IdEmpleado = 1000001,
-                    SaldoBase = 1300000,
-                    SaldoTotal = 1389000,
-                    Seguro = 100000
+                    DiasTrabajados = 1300000,
+                    SalarioBase = 1389000,
+                    SubTransporte = "Si"
                 },
                 "Empleado en Nomina Creado Exitosamente"
                 ).SetName("Crear Nomina Correctamente");

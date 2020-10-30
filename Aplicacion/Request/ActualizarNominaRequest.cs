@@ -6,17 +6,18 @@ namespace Aplicacion.Request
 {
     public class ActualizarNominaRequest
     {
+        public string IdNomina { get; set; }
         public int IdEmpleado { get; set; }
-        public double SaldoBase { get; set; }
-        public double Seguro { get; set; }
-        public double SaldoTotal { get; set; }
+        public int DiasTrabajados { get; set; }
+        public double SalarioBase { get; set; }
+        public string SubTransporte { get; set; }
     }
     public class ActualizarNominaResponse
     {
         public string Message { get; set; }
         public bool isOk()
         {
-            return this.Message.Equals("Nomina Actualizada Exitosamente");
+            return this.Message.Equals("Empleado en Nomina Actualizado Exitosamente");
         }
     }
 }

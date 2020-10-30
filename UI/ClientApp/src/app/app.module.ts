@@ -40,10 +40,10 @@ import { TercerosService } from './terceros/terceros.service';
     UsuariosComponent,
     UsuariosFormComponent,
     ConfirmEqualValidatorDirective,
-    EmpleadosComponent,
     SidebarComponent,
-    ProductosComponent,
+    EmpleadosComponent,
     EmpleadosFormComponent,
+    ProductosComponent,
     ProductosFormComponent,
     TercerosComponent,
     TercerosFormComponent,
@@ -70,14 +70,17 @@ import { TercerosService } from './terceros/terceros.service';
       { path: 'productos-editar/:id', component: ProductosFormComponent },
       { path: 'terceros', component: TercerosComponent },
       { path: 'terceros-crear', component: TercerosFormComponent },
-      { path: 'terceros-editar/:id', component: TercerosFormComponent }
+      { path: 'terceros-editar/:id', component: TercerosFormComponent },
+      { path: 'empleados', component: EmpleadosComponent },
+      { path: 'empleados-crear', component: EmpleadosFormComponent },
+      { path: 'empleados-editar/:id', component: EmpleadosFormComponent }
 
 
     ]),
     BrowserAnimationsModule
   ],
   //aca se agregan todos los services
-  providers: [UsuariosService, EmpleadosService, TercerosService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
+  providers: [UsuariosService, EmpleadosService, TercerosService, EmpleadosService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

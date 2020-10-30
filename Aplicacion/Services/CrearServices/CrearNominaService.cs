@@ -21,10 +21,10 @@ namespace Aplicacion.Services.CrearServices
         public CrearNominaResponse Ejecutar(CrearNominaRequest request)
         {
 
-            var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdEmpleado == request.IdEmpleado);
+            var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina == request.IdNomina || t.IdEmpleado == request.IdEmpleado);
             if (nomina == null)
             {
-                Nomina newNomina = new Nomina(request.IdEmpleado, request.SaldoBase, request.Seguro);
+                Nomina newNomina = new Nomina(request.IdNomina, request.IdEmpleado, request.DiasTrabajados, request.SalarioBase, request.SubTransporte);
                 IReadOnlyList<string> errors = newNomina.CanCrear(newNomina);
                 if (errors.Any())
                 {
@@ -44,7 +44,7 @@ namespace Aplicacion.Services.CrearServices
             }
             else
             {
-                return new CrearNominaResponse() { Message = $"EMpleado en Nomina ya existe" };
+                return new CrearNominaResponse() { Message = $"Empleado en Nomina ya existe" };
             }
         }
     }

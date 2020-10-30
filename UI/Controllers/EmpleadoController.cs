@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aplicacion.Request;
 using Aplicacion.Services.CrearServices;
+using Aplicacion.Services.ActualizarServices;
 using Domain.Models.Entities;
 using Infra.Datos;
 using Infra.Datos.Base;
@@ -19,6 +21,7 @@ namespace UI.InterfazWeb.Controllers
         private readonly ObeliscoContext _context;
         private CrearEmpleadoService _service;
         private UnitOfWork _unitOfWork;
+        private ActualizarEmpleadoService _actualizarService;
 
         public EmpleadoController(ObeliscoContext context)
         {
@@ -31,20 +34,51 @@ namespace UI.InterfazWeb.Controllers
         {
             return _context.Empleado;
         }
-        /*public async Task<ActionResult<IEnumerable<Empleado>>> getEmpleados()
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEmpleado([FromRoute] int id)
         {
-            var data = await _context.Empleado.ToListAsync();
-            return Ok(data);
-        }*/
-        /*
+            Empleado empleado = await _context.Empleado.SingleOrDefaultAsync(t => t.IdEmpleado == id);
+            if (empleado == null)
+                return NotFound();
+            return Ok(empleado);
+        }
+
         [HttpPost]
-        public ActionResult PostConvenio([FromBody] CrearEmpresaRequest empresa)
+        public async Task<IActionResult> CreateEmpleado([FromBody] CrearEmpleadoRequest empleado)
         {
-            _service = new CrearEmpresaService(_unitOfWork);
-            var rta = _service.Ejecutar(empresa);
+            _service = new CrearEmpleadoService(_unitOfWork);
+            var rta = _service.Ejecutar(empleado);
             if (rta.isOk())
-                return Ok(rta.Message);
+            {
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("GetEmpleado", new { id = empleado.IdEmpleado }, empleado);
+            }
             return BadRequest(rta.Message);
-        }*/
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteEmpleado([FromRoute] int id)
+        {
+            Empleado empleado = await _context.Empleado.SingleOrDefaultAsync(t => t.IdEmpleado == id);
+            if (empleado == null)
+                return NotFound();
+            _context.Empleado.Remove(empleado);
+            await _context.SaveChangesAsync();
+            return Ok(empleado);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutEmpleado([FromRoute] int id, [FromBody] ActualizarEmpleadoRequest empleado)
+        {
+            _actualizarService = new ActualizarEmpleadoService(_unitOfWork);
+            var rta = _actualizarService.Ejecutar(empleado);
+            if (rta.isOk())
+            {
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("GetEmpleado", new { id = empleado.IdEmpleado }, empleado);
+            }
+            return BadRequest(rta.Message);
+        }
     }
 }

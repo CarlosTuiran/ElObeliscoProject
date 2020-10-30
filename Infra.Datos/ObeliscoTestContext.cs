@@ -30,7 +30,7 @@ namespace Infra.Datos
             });
             modelBuilder.Entity<Empleado>().HasData(
                 new Empleado(){IdEmpleado= 2699540, Nombres="Raul Hernandez", Apellidos="Ferra Ito", Cargo="Cajero", Celular="31688888",
-                Correo="RHerna@gmail.com", Direccion="Stranger Valley", Estado="Activo", Id=1, NominaId=1
+                Correo="RHerna@gmail.com", Direccion="Stranger Valley", Estado="Activo", Id=1
                 });
             modelBuilder.Entity<Usuario>().HasData(
                 new Usuario(){EmpleadoId= 1, Nombre="RaulH", Password="raulh", Tipo="Admin" ,Id=1
@@ -102,7 +102,7 @@ namespace Infra.Datos
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Liquidacion> Liquidacion { get; set; }
         public DbSet<Tiempo> Tiempo { get; set; }
-
+        public DbSet<TotalLiquidacion> TotalLiquidacion { get; set; }
 
 
     }
