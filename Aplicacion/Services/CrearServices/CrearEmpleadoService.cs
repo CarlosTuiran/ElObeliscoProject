@@ -24,7 +24,7 @@ namespace Aplicacion.Services.CrearServices
             var empleado = _unitOfWork.EmpleadoServiceRepository.FindFirstOrDefault(t => t.IdEmpleado == request.IdEmpleado);
             if (empleado == null)
             {
-                Empleado newEmpleado = new Empleado(request.IdEmpleado, request.Nombres, request.Apellidos, request.Cargo, request.Celular, request.Correo, request.Direccion);
+                Empleado newEmpleado = new Empleado(request.IdEmpleado, request.Nombres, request.Apellidos, request.Cargo, request.Celular, request.Correo, request.Direccion, request.Estado);
                 IReadOnlyList<string> errors = newEmpleado.CanCrear(newEmpleado);
                 if (errors.Any())
                 {

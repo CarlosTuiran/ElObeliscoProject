@@ -17,6 +17,8 @@ namespace Domain.Models.Entities
         public double Pension { get; set; }
         public double TotalDeducido { get; set; }
         public double TotalPagar { get; set; }
+        public TotalLiquidacion TotalLiquidacion { get; set; }
+        
         public Liquidacion()
         {
                 

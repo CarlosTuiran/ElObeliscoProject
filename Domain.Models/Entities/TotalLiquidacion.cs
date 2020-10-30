@@ -13,7 +13,7 @@ namespace Domain.Models.Entities
         public double Icbf { get; set; }
         public double Comfacesar { get; set; }
         public double Total { get; set; }
-
+        public int LiquidacionId { get; set; }
         public TotalLiquidacion(int idLiquidacion, double valorTotalNomina, double sena, double icbf, double comfacesar, double total)
         {
             IdLiquidacion = idLiquidacion;
