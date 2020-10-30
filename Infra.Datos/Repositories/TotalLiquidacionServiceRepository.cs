@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Infra.Datos.Repositories
 {
-    public class TotalLiquidacionServiceRepository : GenericRepository<Nomina>, ITotalLiquidacionServiceRepository
+    public class TotalLiquidacionServiceRepository : GenericRepository<TotalLiquidacion>, ITotalLiquidacionServiceRepository
     {
         public TotalLiquidacionServiceRepository(IDbContext context) : base(context)
         {

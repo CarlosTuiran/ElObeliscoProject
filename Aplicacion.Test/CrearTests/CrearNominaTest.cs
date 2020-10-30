@@ -38,7 +38,7 @@ namespace Aplicacion.Test.CrearTests
             yield return new TestCaseData(
                 new CrearNominaRequest
                 {
-                    IdEmpleado = 1000001,
+                    IdEmpleado = 2699540,
                     DiasTrabajados = 1300000,
                     HorasExtras = 4,
                     SalarioBase = 1389000,

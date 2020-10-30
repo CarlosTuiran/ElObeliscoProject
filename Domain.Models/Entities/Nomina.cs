@@ -14,7 +14,7 @@ namespace Domain.Models.Entities
         public int HorasExtras { get; set; }
         public double SalarioBase { get; set; }
         public double SubTransporte { get; set; }
-
+        public List<Liquidacion> Liquidacion { get; set; }
         public Nomina(string idNomina, int idEmpleado, int diasTrabajados, int horasExtras, double salarioBase, double subTransporte)
         {
             IdNomina = idNomina;
