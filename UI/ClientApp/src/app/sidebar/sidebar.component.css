@@ -31,8 +31,14 @@ h1.example-app-name {
 }
 
 mat-sidenav {
-  width: 15%;
+  width: 13%;
   background: #F6EDEB;
+}
+
+mat-sidenav-content{
+  width: 70%;
+  background: White;
+  padding: 40px;
 }
 
 .icono {

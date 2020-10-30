@@ -28,6 +28,7 @@ import { ProductosComponent } from './productos/productos.component';
 import { EmpleadosFormComponent } from './empleados/empleados-form/empleados-form.component';
 import { ProductosFormComponent } from './productos/productos-form/productos-form.component';
 import { TercerosComponent } from './terceros/terceros.component';
+<<<<<<< HEAD
 import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.component';
 import { TercerosService} from './terceros/terceros.service';
 import { FacturasComponent } from './facturas/facturas.component'; 
@@ -39,6 +40,10 @@ import { BodegasComponent} from './bodegas/bodegas.component';
 import { BodegasService} from './bodegas/bodegas.service';
 import { PromocionesComponent} from './promociones/promociones.component';
 import { PromocionesService} from './promociones/promociones.service';
+=======
+import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.component'; 
+import { TercerosService } from './terceros/terceros.service';
+>>>>>>> b7110173a5c4852bf186a9c5ca6df993936824c0
 
 import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
 @NgModule({
@@ -96,8 +101,12 @@ import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
     BrowserAnimationsModule
   ],
   //aca se agregan todos los services
+<<<<<<< HEAD
   providers: [UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, 
     BodegasService, PromocionesService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
+=======
+  providers: [UsuariosService, EmpleadosService, TercerosService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
+>>>>>>> b7110173a5c4852bf186a9c5ca6df993936824c0
   entryComponents: [SidebarComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

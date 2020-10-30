@@ -20,7 +20,7 @@ namespace Aplicacion.Request
         public string Message { get; set; }
         public bool isOk()
         {
-            return this.Message.Equals("Empleado Creado Exitosamente");
+            return this.Message.Equals("Tercero Creado Exitosamente");
         }
     }
 }

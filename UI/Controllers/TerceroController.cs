@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aplicacion.Request;
 using Aplicacion.Services.CrearServices;
+using Aplicacion.Services.ActualizarServices;
 using Domain.Models.Entities;
 using Infra.Datos;
 using Infra.Datos.Base;
@@ -20,6 +21,7 @@ namespace UI.InterfazWeb.Controllers
         private readonly ObeliscoContext _context;
         private CrearTerceroService _service;
         private UnitOfWork _unitOfWork;
+        private ActualizarTerceroService _actualizarService;
 
         public TerceroController(ObeliscoContext context)
         {
@@ -71,35 +73,16 @@ namespace UI.InterfazWeb.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTercero([FromRoute] string id, [FromBody] CrearTerceroRequest tercero)
+        public async Task<IActionResult> PutTercero([FromRoute] string id, [FromBody] ActualizarTerceroRequest tercero)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            if (id != tercero.Nit)
-            {
-                return BadRequest();
-            }
-            _context.Entry(tercero).State = EntityState.Modified;
-
-            try
+            _actualizarService = new ActualizarTerceroService(_unitOfWork);
+            var rta = _actualizarService.Ejecutar(tercero);
+            if (rta.isOk())
             {
                 await _context.SaveChangesAsync();
+                return CreatedAtAction("GetTercero", new { id = tercero.Nit }, tercero);
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                /*if (!UsuarioExist(id))
-                {
-
-                }
-                else
-                {
-                    throw;
-                }*/
-            }
-
-            return NoContent();
+            return BadRequest(rta.Message);
         }
     }
 }

@@ -51,7 +51,7 @@ export class TercerosComponent implements OnInit {
 export interface ITercero {
   nit: string,
   nombre: string,
-  apellidos: string,
+  apellido: string,
   tipoTercero: string,
   celular: string,
   correo: string,

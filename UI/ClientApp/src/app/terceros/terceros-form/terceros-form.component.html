@@ -7,7 +7,7 @@
     <div class="form-group"
          [ngClass]="{'has-error': ((nit.touched || nit.dirty) && nit.invalid)}">
       <label class="col-md-2 control-label"
-             for="nitId">Nit</label>
+             for="nitId">Nit del Tercero</label>
 
       <div class="col-md-8">
         <input class="form-control"
@@ -32,7 +32,7 @@
                id="nombreId"
                type="text"
                formControlName="nombre" />
-        <div class="alert alert-danger" *ngIf="((nombre.touched || nombre.dirty )&& nombre.invalid)">
+        <div class="alert alert-danger" *ngIf="((nombre.touched || nombre.dirty ) && nombre.invalid)">
           <span *ngIf="nombre.errors.required">
             El campo Nombre es requerido
           </span>
@@ -41,17 +41,17 @@
     </div>
 
     <div class="form-group"
-         [ngClass]="{'has-error': ((apellidos.touched || apellidos.dirty) && apellidos.invalid)}">
+         [ngClass]="{'has-error': ((apellido.touched || apellido.dirty) && apellido.invalid)}">
       <label class="col-md-2 control-label"
-             for="apellidosId">Apellido del Tercero</label>
+             for="apellidoId">Apellido del Tercero</label>
 
       <div class="col-md-8">
         <input class="form-control"
-               id="apellidosId"
+               id="apellidoId"
                type="text"
-               formControlName="apellidos" />
-        <div class="alert alert-danger" *ngIf="((apellidos.touched || apellidos.dirty )&& apellidos.invalid)">
-          <span *ngIf="apellidos.errors.required">
+               formControlName="apellido" />
+        <div class="alert alert-danger" *ngIf="((apellido.touched || apellido.dirty )&& apellido.invalid)">
+          <span *ngIf="apellido.errors.required">
             El campo Apellido es requerido
           </span>
         </div>
@@ -61,7 +61,7 @@
     <div class="form-group"
          [ngClass]="{'has-error': ((tipoTercero.touched || tipoTercero.dirty) && tipoTercero.invalid)}">
       <label class="col-md-2 control-label"
-             for="tipoTerceroId">Tipo de Tercero</label>
+             for="tipoTerceroId">Tipo Tercero</label>
 
       <div class="col-md-8">
         <input class="form-control"
@@ -70,25 +70,7 @@
                formControlName="tipoTercero" />
         <div class="alert alert-danger" *ngIf="((tipoTercero.touched || tipoTercero.dirty )&& tipoTercero.invalid)">
           <span *ngIf="tipoTercero.errors.required">
-            El campo tipo Tercero es requerido
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group"
-         [ngClass]="{'has-error': ((fabrica.touched || fabrica.dirty) && fabrica.invalid)}">
-      <label class="col-md-2 control-label"
-             for="fabricaId">Fabrica del Producto</label>
-
-      <div class="col-md-8">
-        <input class="form-control"
-               id="fabricaId"
-               type="text"
-               formControlName="fabrica" />
-        <div class="alert alert-danger" *ngIf="((fabrica.touched || fabrica.dirty )&& fabrica.invalid)">
-          <span *ngIf="fabrica.errors.required">
-            El campo Fabrica es requerido
+            El campo Tipo Tercero es requerido
           </span>
         </div>
       </div>
@@ -108,6 +90,9 @@
           <span *ngIf="celular.errors.required">
             El campo Celular es requerido
           </span>
+          <span *ngIf="celular.errors.pattern">
+            El campo Celular es numerico
+          </span>
         </div>
       </div>
     </div>
@@ -122,7 +107,7 @@
                id="correoId"
                type="email"
                formControlName="correo" />
-        <div class="alert alert-danger" *ngIf="((correo.touched || correo.dirty )&& correo.invalid)">
+        <div class="alert alert-danger" *ngIf="((correo.touched || correo.dirty ) && correo.invalid)">
           <span *ngIf="correo.errors.required">
             El campo Correo es requerido
           </span>
@@ -140,7 +125,7 @@
                id="direccionId"
                type="text"
                formControlName="direccion" />
-        <div class="alert alert-danger" *ngIf="((direccion.touched || direccion.dirty )&& direccion.invalid)">
+        <div class="alert alert-danger" *ngIf="((direccion.touched || direccion.dirty ) && direccion.invalid)">
           <span *ngIf="direccion.errors.required">
             El campo Direccion es requerido
           </span>
@@ -151,21 +136,20 @@
     <div class="form-group"
          [ngClass]="{'has-error': ((descripcion.touched || descripcion.dirty) && descripcion.invalid)}">
       <label class="col-md-2 control-label"
-             for="descripcionId">Descripción del Tercero</label>
+             for="descripcionId">Descripcion del Tercero</label>
 
       <div class="col-md-8">
         <input class="form-control"
                id="descripcionId"
                type="text"
                formControlName="descripcion" />
-        <div class="alert alert-danger" *ngIf="((descripcion.touched || descripcion.dirty )&& descripcion.invalid)">
+        <div class="alert alert-danger" *ngIf="((descripcion.touched || descripcion.dirty ) && descripcion.invalid)">
           <span *ngIf="descripcion.errors.required">
             El campo Descripcion es requerido
           </span>
         </div>
       </div>
     </div>
-
 
     <div class="form-group">
       <div class="col-md-4 col-md-offset-2">
@@ -187,4 +171,3 @@
     </div>
   </fieldset>
 </form>
-

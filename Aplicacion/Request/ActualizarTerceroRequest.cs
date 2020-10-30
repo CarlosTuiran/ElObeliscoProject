@@ -14,13 +14,14 @@ namespace Aplicacion.Request
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string Descripcion { get; set; }
+        public string Estado { get; set; }
     }
     public class ActualizarTerceroResponse
     {
         public string Message { get; set; }
         public bool isOk()
         {
-            return this.Message.Equals("Empleado Actualizado Exitosamente");
+            return this.Message.Equals("Tercero Actualizado Exitosamente");
         }
     }
 }

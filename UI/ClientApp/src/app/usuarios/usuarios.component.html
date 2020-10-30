@@ -1,9 +1,29 @@
 <h1>Usuarios</h1>
-<button [routerLink]='["/usuarios-crear"]' class="btn btn-primary">Agregar Usuarios</button>
-
+<button [routerLink]='["/usuarios-crear"]' class="btn btn-primary">Agregar Usuario</button>
+<p *ngIf="!(usuarios && usuarios.length)"> No Existen Usuarios Registrados</p>
 
 <div class="table-responsive">
-  <table   #dataTable  class="table table-striped table-bordered row-border hover">
-    </table>
-    
+  <table id="data-tables" class="table table-striped table-bordered" *ngIf="(usuarios && usuarios.length)">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Password</th>
+        <th>Empleado Id</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{usuario.nombre}}</td>
+        <td>{{usuario.password}}</td>
+        <td>{{usuario.empleadoId}}</td>
+        <td>{{usuario.tipo}}</td>
+        <td>
+          <button class="btn btn-primary" [routerLink]='["/usuarios-editar/" + usuario.id]'>Editar</button>
+          <button class="btn btn-danger">Borrar</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
 </div>

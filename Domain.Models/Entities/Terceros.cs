@@ -16,6 +16,7 @@ namespace Domain.Models.Entities
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string? Descripcion { get; set; }
+        public string Estado = "Activo";
         public List<MFactura> MFacturas { get; set; }
         public Terceros()
         {
@@ -50,7 +51,6 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Correo vacio");
             if (string.IsNullOrEmpty(this.Direccion))
                 errors.Add("Campo Direccion vacio");
-
             return errors;
         }
     }

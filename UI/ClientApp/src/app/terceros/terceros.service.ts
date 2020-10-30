@@ -19,7 +19,7 @@ export class TercerosService {
     return this.http.get<ITercero>(this.apiURL + '/' + terceroId);
   }
 
-  createTerceros(tercero: ITercero): Observable<ITercero> {
+  createTercero(tercero: ITercero): Observable<ITercero> {
     return this.http.post<ITercero>(this.apiURL, tercero);
   }
 

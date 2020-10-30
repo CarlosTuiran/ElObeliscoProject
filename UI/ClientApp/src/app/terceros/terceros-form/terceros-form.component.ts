@@ -17,18 +17,17 @@ export class TercerosFormComponent implements OnInit {
   modoEdicion: boolean = false;
   terceroId: string;
 
-
   formGroup = this.fb.group({
     nit: ['', [Validators.required]],
     nombre: ['', [Validators.required]],
-    apellidos: ['', [Validators.required]],
+    apellido: ['', [Validators.required]],
     tipoTercero: ['', [Validators.required]],
     celular: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     correo: ['', [Validators.required]],
     direccion: ['', [Validators.required]],
     descripcion: ['', [Validators.required]]
   });
-  terceros: ITercero[];
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       if (params["id"] == undefined) {
@@ -36,7 +35,7 @@ export class TercerosFormComponent implements OnInit {
       }
 
       this.modoEdicion = true;
-      this.terceroId = params["Nit"];
+      this.terceroId = params["id"];
       this.tercerosService.getTercero(this.terceroId).subscribe(tercero => this.cargarFormulario(tercero),
         error => console.error(error));
     });
@@ -45,7 +44,7 @@ export class TercerosFormComponent implements OnInit {
     this.formGroup.patchValue({
       nit: tercero.nit,
       nombre: tercero.nombre,
-      apellidos: tercero.apellidos,
+      apellido: tercero.apellido,
       tipoTercero: tercero.tipoTercero,
       celular: tercero.celular,
       correo: tercero.correo,
@@ -54,19 +53,18 @@ export class TercerosFormComponent implements OnInit {
     });
   }
 
-
   save() {
     let tercero: ITercero = Object.assign({}, this.formGroup.value);
     console.table(tercero); //ver usuario por consola
     if (this.modoEdicion) {
-      // edita un usuario
+      // edita
       tercero.nit = this.terceroId;
       this.tercerosService.updateTercero(tercero)
         .subscribe(tercero => this.onSaveSuccess(),
           error => console.error(error));
     } else {
-      // crea un usuario
-      this.tercerosService.createTerceros(tercero)
+      // crea
+      this.tercerosService.createTercero(tercero)
         .subscribe(tercero => this.onSaveSuccess(),
           error => console.error(error));
     }
@@ -81,8 +79,8 @@ export class TercerosFormComponent implements OnInit {
   get nombre() {
     return this.formGroup.get('nombre');
   }
-  get apellidos() {
-    return this.formGroup.get('apellidos');
+  get apellido() {
+    return this.formGroup.get('apellido');
   }
   get tipoTercero() {
     return this.formGroup.get('tipoTercero');
