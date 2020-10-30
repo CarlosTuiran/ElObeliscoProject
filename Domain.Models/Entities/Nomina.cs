@@ -11,14 +11,16 @@ namespace Domain.Models.Entities
         public string IdNomina { get; set; }
         public int IdEmpleado { get; set; }
         public int DiasTrabajados { get; set; }
+        public int HorasExtras { get; set; }
         public double SalarioBase { get; set; }
-        public string SubTransporte { get; set; }
+        public double SubTransporte { get; set; }
 
-        public Nomina(string idNomina, int idEmpleado, int diasTrabajados, double salarioBase, string subTransporte)
+        public Nomina(string idNomina, int idEmpleado, int diasTrabajados, int horasExtras, double salarioBase, double subTransporte)
         {
             IdNomina = idNomina;
             IdEmpleado = idEmpleado;
             DiasTrabajados = diasTrabajados;
+            HorasExtras = horasExtras;
             SalarioBase = salarioBase;
             SubTransporte = subTransporte;
         }
@@ -36,8 +38,6 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Dias Trabajados vacio");
             if (nomina.SalarioBase == 0)
                 errors.Add("Campo Salario Base vacio");
-            if (string.IsNullOrEmpty(nomina.SubTransporte))
-                errors.Add("Campo Subsidio Transporte vacio");
             if (string.IsNullOrEmpty(nomina.IdNomina))
                 errors.Add("Campo Subsidio Identificacion Nomina vacio");
             return errors;

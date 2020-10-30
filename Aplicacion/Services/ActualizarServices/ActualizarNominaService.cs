@@ -28,6 +28,7 @@ namespace Aplicacion.Services.ActualizarServices
             {
                 nomina.IdEmpleado = request.IdEmpleado;
                 nomina.DiasTrabajados = request.DiasTrabajados;
+                nomina.HorasExtras = request.HorasExtras;
                 nomina.SalarioBase = request.SalarioBase;
                 nomina.SubTransporte = request.SubTransporte;
                 _unitOfWork.NominaServiceRepository.Edit(nomina);

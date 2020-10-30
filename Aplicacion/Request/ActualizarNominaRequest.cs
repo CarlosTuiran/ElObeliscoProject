@@ -9,8 +9,9 @@ namespace Aplicacion.Request
         public string IdNomina { get; set; }
         public int IdEmpleado { get; set; }
         public int DiasTrabajados { get; set; }
+        public int HorasExtras { get; set; }
         public double SalarioBase { get; set; }
-        public string SubTransporte { get; set; }
+        public double SubTransporte { get; set; }
     }
     public class ActualizarNominaResponse
     {
