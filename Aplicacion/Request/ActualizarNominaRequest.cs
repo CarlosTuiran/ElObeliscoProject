@@ -6,7 +6,9 @@ namespace Aplicacion.Request
 {
     public class ActualizarNominaRequest
     {
-        public string IdNomina { get; set; }
+        int Month = DateTime.Now.Month;
+        int Year = DateTime.Now.Year;
+        public string IdNomina { get => Month + " - " + Year; }
         public int IdEmpleado { get; set; }
         public int DiasTrabajados { get; set; }
         public int HorasExtras { get; set; }

@@ -1,0 +1,125 @@
+<h1 *ngIf="modoEdicion">Editar Nomina</h1>
+<h1 *ngIf="!modoEdicion">Agregar Nomina</h1>
+<form class="form-horizontal" novalidate
+      (ngSubmit)="save()" [formGroup]="formGroup">
+  <fieldset>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)}">
+      <label class="col-md-2 control-label"
+             for="empleadoId">Identificacion del Empleado</label>
+
+      <div class="col-md-8">
+        <select class="form-control"
+                id="empleadoId"
+                type="text"
+                required
+                formControlName="empleadoId">
+          <option *ngFor="let empleado of empleados" [value]="empleado.id">{{empleado.idEmpleado}} -- {{empleado.nombres}}</option>
+
+
+        </select>
+        <div class="alert alert-danger" *ngIf="((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)">
+          <span *ngIf="empleadoId.errors.required">
+            El campo Empleado es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((diasTrabajados.touched || diasTrabajados.dirty)&& diasTrabajados.invalid)}">
+      <label class="col-md-2 control-label"
+             for="diasTrabajadosId">Días Trabajados</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="diasTrabajadosId"
+               type="number"
+               required
+               formControlName="diasTrabajados" />
+        <div class="alert alert-danger" *ngIf="((diasTrabajados.touched || diasTrabajados.dirty)&& diasTrabajados.invalid)">
+          <span *ngIf="diasTrabajados.errors.required">
+            El campo Días Trabajados es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((horasExtras.touched || horasExtras.dirty)&& horasExtras.invalid)}">
+      <label class="col-md-2 control-label"
+             for="horasExtrasId">Horas Extras</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="horasExtrasId"
+               type="number"
+               required
+               formControlName="horasExtras" />
+        <div class="alert alert-danger" *ngIf="((horasExtras.touched || horasExtras.dirty)&& horasExtras.invalid)">
+          <span *ngIf="horasExtras.errors.required">
+            El campo Horas Extras es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((salarioBase.touched || salarioBase.dirty)&& salarioBase.invalid)}">
+      <label class="col-md-2 control-label"
+             for="salarioBaseId">Salario Base del empleado</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="salarioBaseId"
+               type="number"
+               required
+               formControlName="salarioBase" />
+        <div class="alert alert-danger" *ngIf="((salarioBase.touched || salarioBase.dirty)&& salarioBase.invalid)">
+          <span *ngIf="salarioBase.errors.required">
+            El campo Salario base del empleado es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group"
+         [ngClass]="{'has-error': ((subTransporte.touched || subTransporte.dirty)&& subTransporte.invalid)}">
+      <label class="col-md-2 control-label"
+             for="subTransporteId">Subsidio de transporte del empleado</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="subTransporteId"
+               type="number"
+               required
+               formControlName="subTransporte" />
+        <div class="alert alert-danger" *ngIf="((subTransporte.touched || subTransporte.dirty)&& subTransporte.invalid)">
+          <span *ngIf="subTransporte.errors.required">
+            El campo Subsidio de transporte es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-4 col-md-offset-2">
+        <span>
+          <button class="btn btn-success"
+                  type="submit"
+                  [disabled]="!formGroup.valid">
+            Salvar
+          </button>
+          <button class="btn"
+                  type="button"
+                  [routerLink]='["/nominas"]'>
+            Cancelar
+          </button>
+        </span>
+
+      </div>
+
+    </div>
+  </fieldset>
+</form>
+
+

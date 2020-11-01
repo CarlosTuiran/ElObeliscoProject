@@ -18,26 +18,13 @@ namespace Aplicacion.Services.Eventos
         public PagarEmpleadoResponse Ejecutar(PagarEmpleadoRequest request)
         {
 
-            var liquidacion = _unitOfWork.LiquidacionServiceRepository.FindFirstOrDefault(t => t.IdLiquidacion == request.IdNomina && t.IdEmpleado == request.IdEmpleado);
-            Nomina nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina == request.IdNomina && t.IdEmpleado == request.IdEmpleado);
+            var liquidacion = _unitOfWork.LiquidacionServiceRepository.FindFirstOrDefault(t => t.NominaId == request.IdNomina && t.IdEmpleado == request.IdEmpleado);
+            var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina == request.IdNomina && t.IdEmpleado == request.IdEmpleado);
 
             if (liquidacion == null)
             {
-                string Day = DateTime.Now.Day.ToString();
-                string Month = DateTime.Now.Month.ToString();
-                string Year = DateTime.Now.Year.ToString();
                 Liquidacion newLiquidacion = new Liquidacion();
-                newLiquidacion.IdLiquidacion = Day + "/" + Month + "/" + Year;
-                newLiquidacion.NominaId = nomina.IdNomina;
-                newLiquidacion.IdEmpleado = nomina.IdEmpleado;
-                newLiquidacion.SueldoOrdinario = nomina.SalarioBase * nomina.DiasTrabajados;
-                newLiquidacion.SubTransporte = nomina.SubTransporte * nomina.DiasTrabajados;
-                double HE = (((nomina.SalarioBase/30)/8)*1.25)*nomina.HorasExtras ;
-                newLiquidacion.TotalDevengado = newLiquidacion.SueldoOrdinario + newLiquidacion.SubTransporte + HE;
-                newLiquidacion.Salud = (newLiquidacion.TotalDevengado - newLiquidacion.SubTransporte) * 0.04;
-                newLiquidacion.Pension = (newLiquidacion.TotalDevengado - newLiquidacion.SubTransporte) * 0.04;
-                newLiquidacion.TotalDeducido = newLiquidacion.Salud + newLiquidacion.Pension;
-                newLiquidacion.TotalPagar = newLiquidacion.TotalDevengado - newLiquidacion.TotalDeducido;
+                newLiquidacion.CalculoLiquidacion(nomina);
                 IReadOnlyList<string> errors = newLiquidacion.CanCrear(newLiquidacion);
                 if (errors.Any())
                 {
@@ -58,7 +45,6 @@ namespace Aplicacion.Services.Eventos
             else 
             {
                 return new PagarEmpleadoResponse() { Message = $"Ya le ha pagado a este empleado" };
-
             }
         }
     }

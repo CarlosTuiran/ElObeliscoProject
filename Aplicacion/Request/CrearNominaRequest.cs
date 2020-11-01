@@ -6,10 +6,10 @@ namespace Aplicacion.Request
 {
     public class CrearNominaRequest
     {
-        string Month = DateTime.Now.Month.ToString();
-        string Year = DateTime.Now.Year.ToString();
+        int Month = DateTime.Now.Month;
+        int Year = DateTime.Now.Year;
 
-        public string IdNomina { get => Month + "de" + Year; }
+        public string IdNomina { get => Month + " - " + Year; }
         public int IdEmpleado { get; set; }
         public int DiasTrabajados { get; set; }
         public int HorasExtras { get; set; }

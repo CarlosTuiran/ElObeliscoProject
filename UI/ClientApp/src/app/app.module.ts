@@ -29,6 +29,13 @@ import { ProductosFormComponent } from './productos/productos-form/productos-for
 import { TercerosComponent } from './terceros/terceros.component';
 import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.component'; 
 import { TercerosService } from './terceros/terceros.service';
+import { NominaComponent } from './nomina/nomina.component';
+import { NominaService } from './nomina/nomina.service';
+import { NominaFormComponent } from './nomina/nomina-form/nomina-form.component';
+import { TotalLiquidacionComponent } from './total-liquidacion/total-liquidacion.component';
+import { TotalLiquidacionService } from './total-liquidacion/total-liquidacion.service';
+import { LiquidacionComponent } from './liquidacion/liquidacion.component';
+import { LiquidacionService } from './liquidacion/liquidacion.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +54,10 @@ import { TercerosService } from './terceros/terceros.service';
     ProductosFormComponent,
     TercerosComponent,
     TercerosFormComponent,
+    NominaComponent,
+    NominaFormComponent,
+    TotalLiquidacionComponent,
+    LiquidacionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -73,14 +84,18 @@ import { TercerosService } from './terceros/terceros.service';
       { path: 'terceros-editar/:id', component: TercerosFormComponent },
       { path: 'empleados', component: EmpleadosComponent },
       { path: 'empleados-crear', component: EmpleadosFormComponent },
-      { path: 'empleados-editar/:id', component: EmpleadosFormComponent }
-
+      { path: 'empleados-editar/:id', component: EmpleadosFormComponent },
+      { path: 'nominas', component: NominaComponent },
+      { path: 'nominas-crear', component: NominaFormComponent },
+      { path: 'nominas-editar/:id', component: NominaFormComponent },
+      { path: 'liquidaciones', component: LiquidacionComponent },
+      { path: 'total-liquidaciones', component: TotalLiquidacionComponent }
 
     ]),
     BrowserAnimationsModule
   ],
   //aca se agregan todos los services
-  providers: [UsuariosService, EmpleadosService, TercerosService, EmpleadosService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
+  providers: [UsuariosService, EmpleadosService, TercerosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

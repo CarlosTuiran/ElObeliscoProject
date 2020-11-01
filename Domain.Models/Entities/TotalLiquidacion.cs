@@ -7,28 +7,36 @@ namespace Domain.Models.Entities
 {
     public class TotalLiquidacion : Entity<int>
     {
-        public int IdLiquidacion { get; set; } 
+        public int Mes { get; set; }
+        public int Anio { get; set; }
         public double ValorTotalNomina { get; set; }
         public double Sena { get; set; }
         public double Icbf { get; set; }
         public double Comfacesar { get; set; }
         public double Total { get; set; }
-        public int LiquidacionId { get; set; }
-        public TotalLiquidacion(int idLiquidacion, double valorTotalNomina, double sena, double icbf, double comfacesar, double total)
+        public string NominaId { get; set; }
+
+        public TotalLiquidacion(int mes, int anio, double valorTotalNomina, double sena, double icbf, double comfacesar, double total, string nominaId)
         {
-            IdLiquidacion = idLiquidacion;
+            Mes = mes;
+            Anio = anio;
             ValorTotalNomina = valorTotalNomina;
             Sena = sena;
             Icbf = icbf;
             Comfacesar = comfacesar;
             Total = total;
+            NominaId = nominaId;
         }
+
+        public TotalLiquidacion() { }
 
         public IReadOnlyList<string> CanCrear(TotalLiquidacion totalLiquidacion)
         {
             var errors = new List<string>();
-            if (totalLiquidacion.IdLiquidacion == 0)
-                errors.Add("Campo Identificacion Liquidacion vacio");
+            if (totalLiquidacion.Mes == 0)
+                errors.Add("Campo Mes vacio");
+            if (totalLiquidacion.Anio == 0)
+                errors.Add("Campo Año vacio");
             if (totalLiquidacion.ValorTotalNomina == 0)
                 errors.Add("Campo Valor Total de Nomina vacio");
             if (totalLiquidacion.Sena == 0)
@@ -41,6 +49,19 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Total vacio");
 
             return errors;
+        }
+
+        public void CrearTotalLiquidacion(List<Liquidacion> Liquidaciones) 
+        {
+            
+            foreach (var liquidacion in Liquidaciones)
+            {
+                this.ValorTotalNomina += liquidacion.TotalPagar;
+            }
+            this.Sena = this.ValorTotalNomina * 0.02;
+            this.Icbf = this.ValorTotalNomina * 0.03;
+            this.Comfacesar = this.ValorTotalNomina * 0.04;
+            this.Total = this.Sena + this.Icbf + this.Comfacesar;
         }
     }
 }

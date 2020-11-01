@@ -1,0 +1,33 @@
+<h1>Nomina</h1>
+<button [routerLink]='["/nominas-crear"]' class="btn btn-primary">Agregar Empleado a nomina</button>
+<p *ngIf="!(nominas && nominas.length)"> No Existen Empleados en Nomina Registrados</p>
+
+<div class="table-responsive">
+  <table id="data-tables" class="table table-striped table-bordered" *ngIf="(nominas && nominas.length)">
+    <thead>
+      <tr>
+        <th>Identificacion Nomina</th>
+        <th>Identificacon empleado</th>
+        <th>Dias trabajados</th>
+        <th>Horas extras</th>
+        <th>Salario Base</th>
+        <th>Subsidio de transporte</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let nomina of nominas">
+        <td>{{nomina.idNomina}}</td>
+        <td>{{nomina.idEmpleado}}</td>
+        <td>{{nomina.diasTrabajados}}</td>
+        <td>{{nomina.horasExtras}}</td>
+        <td>{{nomina.salarioBase}}</td>
+        <td>{{nomina.subTransporte}}</td>
+        <td>
+          <button class="btn btn-primary" [routerLink]='["/nominas-editar/" + nomina.idEmpleado]'>Editar</button>
+          <button class="btn btn-danger" (onClick)="Pagar(nomina.idNomina, nomina.idEmpleado)" >Pagar</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>

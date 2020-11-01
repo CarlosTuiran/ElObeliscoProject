@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,12 +7,9 @@ namespace Aplicacion.Request
 {
     public class CrearTotalLiquidacionRequest
     {
-        public int IdLiquidacion { get; set; }
-        public double ValorTotalNomina { get; set; }
-        public double Sena { get; set; }
-        public double Icbf { get; set; }
-        public double Comfacesar { get; set; }
-        public double Total { get; set; }
+        public string NominaId { get; set; }
+        public int Mes { get; set; }
+        public int Anio { get; set; }
     }
 
     public class CrearTotalLiquidacionResponse

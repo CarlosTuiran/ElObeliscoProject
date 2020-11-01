@@ -6,16 +6,14 @@ namespace Aplicacion.Request
 {
     public class ActualizarLiquidacionRequest
     {
-        public string IdLiquidacion { get; set; }
-        public string NominaId { get; set; }
+        int Month = DateTime.Now.Month;
+        int Year = DateTime.Now.Year;
+        public string IdNomina { get => Month + " - " + Year; }
         public int IdEmpleado { get; set; }
-        public double SueldoOrdinario { get; set; }
+        public int DiasTrabajados { get; set; }
+        public int HorasExtras { get; set; }
+        public double SalarioBase { get; set; }
         public double SubTransporte { get; set; }
-        public double TotalDevengado { get; set; }
-        public double Salud { get; set; }
-        public double Pension { get; set; }
-        public double TotalDeducido { get; set; }
-        public double TotalPagar { get; set; }
     }
 
     public class ActualizarLiquidacionResponse
@@ -23,7 +21,7 @@ namespace Aplicacion.Request
         public string Message { get; set; }
         public bool isOk()
         {
-            return this.Message.Equals("Liquidacion Actualizado Exitosamente");
+            return this.Message.Equals("Liquidacion Actualizada Exitosamente");
         }
     }
 }
