@@ -40,14 +40,14 @@ namespace UI.Controllers
             return Ok(factura);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateFacturas([FromBody] CrearMFacturaRequest requestM, [FromBody] List<CrearDFacturaRequest> requestD)
+        public async Task<IActionResult> CreateFacturas([FromBody] CrearMFacturaRequest request)
         {
             _service = new CrearFacturasService(_unitOfWork);
-            var rta = _service.Ejecutar(requestM, requestD);
+            var rta = _service.Ejecutar(request);
             if (rta.isOk())
             {
                 await _context.SaveChangesAsync();
-                return CreatedAtAction("GetUsuario", new { id = requestM.idMfactura }, requestM);
+                return CreatedAtAction("GetFactura", new { id = request.idMfactura }, request);
             }
             return BadRequest(rta.Message);
         }

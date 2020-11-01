@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+
 
 namespace Aplicacion.Request
 {
@@ -20,7 +22,7 @@ namespace Aplicacion.Request
         //public double Total { get; set; }
         public double Abono { get; set; }
         public String EstadoFactura { get; set; }
-
+        public List<CrearDFacturaRequest> DFacturas { get; set; }
         
 
     }

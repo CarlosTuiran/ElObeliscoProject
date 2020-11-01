@@ -33,7 +33,8 @@ export interface IMFactura{
    descuento :number,
    iVA :number,
    abono :number,
-   estadoFactura: string
+   estadoFactura: string,
+   dfacturas: IDFactura[] 
 
 }
 export interface IDFactura{

@@ -23,7 +23,7 @@ namespace Aplicacion.Services.CrearServices
 
         }
 
-        public CrearFacturasResponse Ejecutar(CrearMFacturaRequest requestM, List<CrearDFacturaRequest> requestD)
+        public CrearFacturasResponse Ejecutar(CrearMFacturaRequest requestM)
         {
             var listMFacturas=_unitOfWork.MFacturaServiceRepository.GetAll();
             var lastMFactura = listMFacturas.TakeLast(1).ToArray();//ultima factura
@@ -31,6 +31,7 @@ namespace Aplicacion.Services.CrearServices
             var rtaMService = crearMFacturaService.Ejecutar(requestM);
             if (rtaMService.isOk())
             {
+                var requestD=requestM.DFacturas;
                 foreach (var item in requestD)
                 {
                     item.MfacturaId = requestM.idMfactura; //Relaciona cada d factura con la m factura
@@ -40,7 +41,7 @@ namespace Aplicacion.Services.CrearServices
                 }
                 _unitOfWork.Commit();
                 return new CrearFacturasResponse { Message = "Facturas Creadas Exitosamente" };
-                            }
+            }
             else
             {
                 return new CrearFacturasResponse { Message = rtaMService.Message };

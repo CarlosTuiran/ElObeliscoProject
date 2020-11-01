@@ -10,7 +10,22 @@
         [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)}">
         <label class="col-md-10 control-label"
             for="empleadoId">Identificacion del Empleado</label>
-
+            <mat-form-field id="empleadoid" [ngClass]="{'has-error': ((estadoFactura.touched || estadoFactura.dirty)&& estadoFactura.invalid)}">
+              <mat-select formControlName="empleadoid" placeholder="Empleado" #empleadoSelect>
+                <mat-option>
+                  <ngx-mat-select-search [formControl]="empleadoFilter"></ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let empleado of filteredEmpleados | async" [value]="empleado.idEmpleado">
+                  {{empleado.idEmpleado}}--{{empleado.nombres}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="alert alert-danger" *ngIf="((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)">
+              <span *ngIf="empleadoId.errors.required">
+                  El campo Empleado es requerido
+              </span>
+            </div>
+         <!--  
         <div class="col-md-10">
             <select class="form-control"
             id="empleadoId"
@@ -18,13 +33,8 @@
             required
             formControlName="empleadoId">
             <option *ngFor="let empleado of empleados" [value]="empleado.idEmpleado">{{empleado.idEmpleado}} -- {{empleado.nombres}}</option>
-            </select>
-            <div class="alert alert-danger" *ngIf="((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)">
-                <span *ngIf="empleadoId.errors.required">
-                    El campo Empleado es requerido
-                </span>
-            </div>
-        </div>
+            </select>            
+        </div>-->
     </div>
 
     <div class="form-group col-md-3"
@@ -209,12 +219,20 @@
       </div>
     </div>
 
-    <div class="form-group col-md-4"
-        [ngClass]="{'has-error': ((estadoFactura.touched || estadoFactura.dirty)&& estadoFactura.invalid)}">
+    <div class="form-group col-md-4"    >
         <label class="col-md-3 control-label"
         for="estadoFacturaId">Estado</label>
-
-        <div class="col-md-6">
+        <mat-form-field id="estadoFacturaid" [ngClass]="{'has-error': ((estadoFactura.touched || estadoFactura.dirty)&& estadoFactura.invalid)}">
+          <mat-select formControlName="estadoFactura" placeholder="Estado" #estadoSelect>
+            <mat-option>
+              <ngx-mat-select-search [formControl]="estadoFilter"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let estado of filteredEstados | async" [value]="estado.nombre">
+              {{estado.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+       <!-- <div class="col-md-6">
             <select class="form-control"
             id="estadoFacturaid"
             type="text"
@@ -228,7 +246,12 @@
                     El campo estadoFactura es requerido
                 </span>
             </div>
-        </div>
+        </div>-->
+        <div class="alert alert-danger" *ngIf="((estadoFactura.touched || estadoFactura.dirty)&& estadoFactura.invalid)">
+          <span *ngIf="estadoFactura.errors.required">
+              El campo estadoFactura es requerido
+          </span>
+      </div>
     </div>
   </div>
   <mat-divider></mat-divider>
@@ -269,9 +292,9 @@
         
 
         <div class="form-group col-md-3" >
-          <label class="col-md-5 control-label"
+          <label class="col-md-10 control-label"
             for="promocionId">Promocion</label>
-          <div class="col-md-5">
+          <div class="col-md-10">
             <select class="form-control"
             id="promocionId"
             type="text"            
@@ -283,10 +306,10 @@
 
         <div class="form-group col-md-2"
           [ngClass]="{'has-error': ((bodega.touched || bodega.dirty)&& bodega.invalid)}">
-          <label class="col-md-5 control-label"
+          <label class="col-md-10 control-label"
             for="bodega">Bodega</label>
 
-          <div class="col-md-5">
+          <div class="col-md-10">
             <select class="form-control"
             id="bodega"
             type="text"
@@ -304,10 +327,10 @@
 
         <div class="form-group col-md-2"
          [ngClass]="{'has-error': ((cantidad.touched || cantidad.dirty) && cantidad.invalid)}">
-          <label class="col-md-5 control-label"
+          <label class="col-md-10 control-label"
              for="cantidadId">Cantidad </label>
 
-          <div class="col-md-5">
+          <div class="col-md-10">
             <input class="form-control"
                id="cantidadId"
                type="text"
@@ -330,6 +353,7 @@
         </div>
       </div>
       </div>
+      <mat-divider></mat-divider>
     </div>
   </div>
 <br>
