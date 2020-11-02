@@ -14,10 +14,7 @@ export class SidebarComponent implements OnDestroy {
     { name: "Gestión de Usuarios", route: "usuarios", icon:"supervised_user_circle" },
     { name: "Gestión de Productos", route: "productos", icon: "assignment" },
     { name: "Gestión de Terceros", route: "terceros", icon: "perm_contact_calendar" },
-    { name: "Facturacion", route: "facturas", icon: "shopping_bag" }
-    { name: "Gestión de Usuarios", route: "usuarios", icon:"perm_contact_calendar" },
-    { name: "Gestión de Productos", route: "productos", icon: "perm_contact_calendar" },
-    { name: "Gestión de Terceros", route: "terceros", icon: "perm_contact_calendar" },
+    { name: "Facturacion", route: "facturas", icon: "shopping_bag" },
     { name: "Gestión de Empleados", route: "empleados", icon: "perm_contact_calendar" },
     { name: "Gestión de Nomina", route: "nominas", icon: "perm_contact_calendar" },
     { name: "Liquidaciones", route: "liquidaciones", icon: "perm_contact_calendar" },

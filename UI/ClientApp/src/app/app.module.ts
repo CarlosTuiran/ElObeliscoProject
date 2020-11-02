@@ -39,8 +39,6 @@ import { BodegasComponent} from './bodegas/bodegas.component';
 import { BodegasService} from './bodegas/bodegas.service';
 import { PromocionesComponent} from './promociones/promociones.component';
 import { PromocionesService} from './promociones/promociones.service';
-import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.component'; 
-import { TercerosService } from './terceros/terceros.service';
 import { NominaComponent } from './nomina/nomina.component';
 import { NominaService } from './nomina/nomina.service';
 import { NominaFormComponent } from './nomina/nomina-form/nomina-form.component';
@@ -102,9 +100,7 @@ import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
       { path: 'terceros-crear', component: TercerosFormComponent },
       { path: 'terceros-editar/:id', component: TercerosFormComponent },
       { path: 'facturas', component: FacturasComponent },
-      { path: 'facturas-crear', component: FacturasFormComponent }
-
-      { path: 'terceros-editar/:id', component: TercerosFormComponent },
+      { path: 'facturas-crear', component: FacturasFormComponent },
       { path: 'empleados', component: EmpleadosComponent },
       { path: 'empleados-crear', component: EmpleadosFormComponent },
       { path: 'empleados-editar/:id', component: EmpleadosFormComponent },
@@ -118,9 +114,8 @@ import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
     BrowserAnimationsModule
   ],
   //aca se agregan todos los services
-  providers: [UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, 
+  providers: [UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
     BodegasService, PromocionesService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
-  providers: [UsuariosService, EmpleadosService, TercerosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
