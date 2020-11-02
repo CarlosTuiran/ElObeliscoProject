@@ -1,12 +1,10 @@
 <h1>Liquidacion</h1>
-<button [routerLink]='["/liquidaciones-crear"]' class="btn btn-primary">Agregar Liquidacion</button>
 <p *ngIf="!(liquidaciones && liquidaciones.length)"> No Existen Empleados en Liquidacion Registrados</p>
 
 <div class="table-responsive">
   <table id="data-tables" class="table table-striped table-bordered" *ngIf="(liquidaciones && liquidaciones.length)">
     <thead>
       <tr>
-        <th>Identificacion Nomina</th>
         <th>Identificacion Empleado</th>
         <th>Mes</th>
         <th>Año</th>
@@ -20,8 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let totalliquidacion of liquidaciones">
-        <td>{{liquidacion.nominaId}}</td>
+      <tr *ngFor="let liquidacion of liquidaciones">
         <td>{{liquidacion.idEmpleado}}</td>
         <td>{{liquidacion.mes}}</td>
         <td>{{liquidacion.anio}}</td>
@@ -36,4 +33,4 @@
     </tbody>
   </table>
 </div>
-<button class="btn btn-danger" (onClick)="Total()">Pagar</button>
+<button class="btn btn-danger" (click)="Total()">Total Liquidaciones</button>

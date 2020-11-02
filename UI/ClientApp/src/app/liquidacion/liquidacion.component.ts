@@ -13,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LiquidacionComponent implements OnInit {
 
   liquidaciones: ILiquidacion[];
-
+  liquidacion:any;
   constructor(private liquidacionService: LiquidacionService, private totalLiquidacionService: TotalLiquidacionService, private router: Router) { }
 
   ngOnInit() {
@@ -23,7 +23,8 @@ export class LiquidacionComponent implements OnInit {
   }
 
   Total() {
-    this.totalLiquidacionService.createTotalLiquidacion().subscribe(totalLiquidacion => this.onSaveSuccess()),
+    this.totalLiquidacionService.createTotalLiquidacion(this.liquidacion)
+    .subscribe(totalLiquidacion => this.onSaveSuccess()),
       error => console.error();
   }
 

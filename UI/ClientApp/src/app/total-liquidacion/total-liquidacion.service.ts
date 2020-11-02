@@ -19,7 +19,7 @@ export class TotalLiquidacionService {
     return this.http.get<ITotalLiquidacion>(this.apiURL + '/' + idNomina + idEmpleado);
   }
 
-  createTotalLiquidacion() {
-    return this.http.get(this.apiURL);
+  createTotalLiquidacion(liquidacion: any): Observable<any>{
+    return this.http.post(this.apiURL, liquidacion);
   }
 }

@@ -15,7 +15,10 @@ export class SidebarComponent implements OnDestroy {
     { name: "Gestión de Productos", route: "productos", icon: "perm_contact_calendar" },
     { name: "Gestión de Terceros", route: "terceros", icon: "perm_contact_calendar" },
     { name: "Gestión de Empleados", route: "empleados", icon: "perm_contact_calendar" },
-    { name: "Gestión de Nomina", route: "nominas", icon: "perm_contact_calendar" }
+    { name: "Gestión de Nomina", route: "nominas", icon: "perm_contact_calendar" },
+    { name: "Liquidaciones", route: "liquidaciones", icon: "perm_contact_calendar" },
+    { name: "Total Liquidaciones", route: "total-liquidaciones", icon: "perm_contact_calendar" }
+
   ]
   
 

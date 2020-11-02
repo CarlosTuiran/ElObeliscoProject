@@ -22,7 +22,8 @@ export class NominaComponent implements OnInit {
   }
 
   Pagar(idNomina: string, idEmpleado: number) {
-    let nomina: INominaPago ={'idNomina':idNomina, 'idEmpleado':idEmpleado};
+    let nomina: INominaPago = { 'idNomina': idNomina, 'idEmpleado': idEmpleado };
+    console.table(nomina);
     this.liquidacionService.createLiquidacion(nomina)
         .subscribe(usuario => this.onSaveSuccess(),
           error => console.error(error));

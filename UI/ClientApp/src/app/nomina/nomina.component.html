@@ -24,7 +24,7 @@
         <td>{{nomina.subTransporte}}</td>
         <td>
           <button class="btn btn-primary" [routerLink]='["/nominas-editar/" + nomina.idEmpleado]'>Editar</button>
-          <button class="btn btn-danger" (onClick)="Pagar(nomina.idNomina, nomina.idEmpleado)" >Pagar</button>
+          <button class="btn btn-danger" (click)="Pagar(nomina.idNomina, nomina.idEmpleado)" >Pagar</button>
         </td>
       </tr>
     </tbody>

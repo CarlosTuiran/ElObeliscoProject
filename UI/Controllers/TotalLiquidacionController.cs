@@ -29,9 +29,9 @@ namespace UI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Nomina> GetTotalLiquidaciones()
+        public IEnumerable<TotalLiquidacion> GetTotalLiquidaciones()
         {
-            return _context.Nomina;
+            return _context.TotalLiquidacion;
         }
 
         [HttpGet("{id}")]
@@ -43,17 +43,19 @@ namespace UI.Controllers
             return Ok(totalLiquidacion);
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> CreateTotalLiquidacion()
         {
             _service = new CrearTotalLiquidacionService(_unitOfWork);
-            var rta = _service.Ejecutar();
+            var rta =  _service.Ejecutar();
             if (rta.isOk())
             {
                 await _context.SaveChangesAsync();
                 return Ok();
             }
+
             return BadRequest(rta.Message);
+
         }
     }
 }

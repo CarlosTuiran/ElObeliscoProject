@@ -49,8 +49,6 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Identificacion Empleado vacio");
             if (liquidacion.SueldoOrdinario == 0)
                 errors.Add("Campo Sueldo Ordinario vacio");
-            if (liquidacion.SubTransporte == 0)
-                errors.Add("Campo Subsidio de Transporte vacio");
             if (liquidacion.TotalDeducido == 0)
                 errors.Add("Campo Total Deducido vacio");
             if (liquidacion.TotalDevengado == 0)
@@ -73,8 +71,8 @@ namespace Domain.Models.Entities
             this.IdEmpleado = nomina.IdEmpleado;
             this.Mes = Month;
             this.Anio = Year;
-            this.SueldoOrdinario = nomina.SalarioBase * nomina.DiasTrabajados;
-            this.SubTransporte = nomina.SubTransporte * nomina.DiasTrabajados;
+            this.SueldoOrdinario = nomina.SalarioBase / 30 * nomina.DiasTrabajados;
+            this.SubTransporte = nomina.SubTransporte / 30 * nomina.DiasTrabajados;
             double HE = (((nomina.SalarioBase / 30) / 8) * 1.25) * nomina.HorasExtras;
             this.TotalDevengado = this.SueldoOrdinario + this.SubTransporte + HE;
             this.Salud = (this.TotalDevengado - this.SubTransporte) * 0.04;

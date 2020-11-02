@@ -5,22 +5,20 @@
   <fieldset>
 
     <div class="form-group"
-         [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)}">
+         [ngClass]="{'has-error': ((idEmpleado.touched || idEmpleado.dirty)&& idEmpleado.invalid)}">
       <label class="col-md-2 control-label"
-             for="empleadoId">Identificacion del Empleado</label>
+             for="idEmpleadoId">Identificacion del Empleado</label>
 
       <div class="col-md-8">
         <select class="form-control"
-                id="empleadoId"
+                id="idEmpleadoId"
                 type="text"
                 required
-                formControlName="empleadoId">
+                formControlName="idEmpleado">
           <option *ngFor="let empleado of empleados" [value]="empleado.id">{{empleado.idEmpleado}} -- {{empleado.nombres}}</option>
-
-
         </select>
-        <div class="alert alert-danger" *ngIf="((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)">
-          <span *ngIf="empleadoId.errors.required">
+        <div class="alert alert-danger" *ngIf="((idEmpleado.touched || idEmpleado.dirty)&& idEmpleado.invalid)">
+          <span *ngIf="idEmpleado.errors.required">
             El campo Empleado es requerido
           </span>
         </div>
