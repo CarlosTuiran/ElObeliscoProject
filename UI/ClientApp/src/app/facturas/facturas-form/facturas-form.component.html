@@ -1,7 +1,7 @@
 <h1 *ngIf="modoEdicion">Editar Producto</h1>
 <h1 *ngIf="!modoEdicion">Agregar Factura</h1>
 <mat-divider></mat-divider>
-<br>  
+<br> <p>{{empleados[0].nombres}}</p> 
 <form class="form-horizontal" novalidate
        [formGroup]="formGroup">
   <fieldset>
@@ -10,8 +10,8 @@
         [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)}">
         <label class="col-md-10 control-label"
             for="empleadoId">Identificacion del Empleado</label>
-            <mat-form-field id="empleadoid" [ngClass]="{'has-error': ((estadoFactura.touched || estadoFactura.dirty)&& estadoFactura.invalid)}">
-              <mat-select formControlName="empleadoid" placeholder="Empleado" #empleadoSelect>
+            <mat-form-field id="empleadoId" [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)}">
+              <mat-select formControlName="empleadoId" placeholder="Empleado" #empleadoSelect>
                 <mat-option>
                   <ngx-mat-select-search [formControl]="empleadoFilter"></ngx-mat-select-search>
                 </mat-option>
@@ -383,5 +383,4 @@
       </div>
     </fieldset>
   </form>
-  
   

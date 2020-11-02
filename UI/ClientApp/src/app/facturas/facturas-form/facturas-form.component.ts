@@ -11,7 +11,7 @@ import { TipoMovimientosService } from '../tipo-movimentos/tipo-movimientos.serv
 import {IProducto} from 'src/app/productos/productos.component';
 import { IBodega } from 'src/app/bodegas/bodegas.component';
 import { IPromocion } from 'src/app/promociones/promociones.component';
-import { ReplaySubject, Subject } from 'rxjs';
+import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { MatSelect } from '@angular/material/select';
 import { take, takeUntil } from 'rxjs/operators';
 import { IMFactura } from '../facturas.component';
@@ -31,6 +31,8 @@ export class FacturasFormComponent implements OnInit {
   modoEdicion: boolean = false;
   empleados: IEmpleado[];
   terceros: ITercero[];
+  public tercerosX: ITercero[];
+  //tercerosX: Subscription=null;
   tipoMovimientos: ITipoMovimiento[];
   referencias: IProducto[];
   bodegas: IBodega[];
@@ -49,7 +51,6 @@ export class FacturasFormComponent implements OnInit {
   @ViewChild('empleadoSelect', { static: true }) singleEmpleadoSelect: MatSelect;
   
   
-  
   formGroup = this.fb.group({
     
    empleadoId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
@@ -66,17 +67,22 @@ export class FacturasFormComponent implements OnInit {
    dfacturas:this.fb.array([])
   });
 
+
   ngOnInit() {
     this.tercerosService.getTerceros()
       .subscribe(terceros => this.terceros = terceros,
         error => console.error(error));
     this.empleadosService.getEmpleados()
       .subscribe(empleados=> this.empleados = empleados,
-        error => console.error(error));
-    this.tipoMovimientoService.getTipoMovimientos()
+        error => console.error(error) 
+        ); 
+    /*this.tipoMovimientoService.getTipoMovimientos()
         .subscribe(tipoMovimientos => this.tipoMovimientos = tipoMovimientos,
-          error => console.error(error));
+          error => console.error(error));*/
     // load the initial  list
+    //this.tercerosX=this.tercerosService.getTerceros().subscribe();
+    //console.log(this.tercerosX[0]);
+
     this.filteredEstados.next(this.estados.slice());
     this.filteredEmpleados.next(this.empleados.slice());    
     // listen for search field value changes
@@ -91,13 +97,16 @@ export class FacturasFormComponent implements OnInit {
       this.filterEmpleados();
     });
   }
+  consulta(tercerosX:ITercero[]){
+    //console.log(tercerosX[0]);
+  }
   ngAfterViewInit() {
     this.setInitialValue();
   }
-  ngOnDestroy() {
+  /*ngOnDestroy() {
     this._onDestroy.next();
     this._onDestroy.complete();
-  }
+  }*/
   save() {
     let mfactura: IMFactura = Object.assign({}, this.formGroup.value);
     console.table(mfactura); //ver mfactura por consola
