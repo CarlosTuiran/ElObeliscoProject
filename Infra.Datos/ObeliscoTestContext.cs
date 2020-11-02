@@ -30,17 +30,18 @@ namespace Infra.Datos
             });
             modelBuilder.Entity<Empleado>().HasData(
                 new Empleado(){IdEmpleado= 2699540, Nombres="Raul Hernandez", Apellidos="Ferra Ito", Cargo="Cajero", Celular="31688888",
-                Correo="RHerna@gmail.com", Direccion="Stranger Valley", Estado="Activo", Id=1, NominaId=1
+                Correo="RHerna@gmail.com", Direccion="Stranger Valley", Estado="Activo", Id=1
                 });
             modelBuilder.Entity<Usuario>().HasData(
                 new Usuario(){EmpleadoId= 1, Nombre="RaulH", Password="raulh", Tipo="Admin" ,Id=1
                 });
+            //construir seeds cuando se tenga claro la nomina
             modelBuilder.Entity<Nomina>().HasData(
-                new Nomina(){ IdEmpleado= 2699540, IdNomina=1, SaldoBase=1400000, Seguro=100000, Id=1
+                new Nomina(){ IdEmpleado= 2699540, IdNomina="10de2020",  SalarioBase=1400000,  Id=1
                 });
-            modelBuilder.Entity<Liquidacion>().HasData(
+            /*modelBuilder.Entity<Liquidacion>().HasData(
                 new Liquidacion() { Monto=1500000, FechaPago=DateTime.Now, NominaId=1,Id = 1
-                });
+                });*/
             modelBuilder.Entity<Terceros>().HasData(
                 new Terceros(){Nit="106583", Nombre="Santana Silva", Apellido="Orosco Eter", Descripcion=" Empresa Ferreos y Mas", 
                     Celular="3128288", Direccion= "Stranger Valley", Correo="ferreymas@gmail.com", TipoTercero="Proveedor",
@@ -102,7 +103,7 @@ namespace Infra.Datos
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Liquidacion> Liquidacion { get; set; }
         public DbSet<Tiempo> Tiempo { get; set; }
-
+        public DbSet<TotalLiquidacion> TotalLiquidacion { get; set; }
 
 
     }

@@ -39,6 +39,15 @@ import { BodegasComponent} from './bodegas/bodegas.component';
 import { BodegasService} from './bodegas/bodegas.service';
 import { PromocionesComponent} from './promociones/promociones.component';
 import { PromocionesService} from './promociones/promociones.service';
+import { TercerosFormComponent } from './terceros/terceros-form/terceros-form.component'; 
+import { TercerosService } from './terceros/terceros.service';
+import { NominaComponent } from './nomina/nomina.component';
+import { NominaService } from './nomina/nomina.service';
+import { NominaFormComponent } from './nomina/nomina-form/nomina-form.component';
+import { TotalLiquidacionComponent } from './total-liquidacion/total-liquidacion.component';
+import { TotalLiquidacionService } from './total-liquidacion/total-liquidacion.service';
+import { LiquidacionComponent } from './liquidacion/liquidacion.component';
+import { LiquidacionService } from './liquidacion/liquidacion.service';
 
 import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
 @NgModule({
@@ -51,10 +60,10 @@ import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
     UsuariosComponent,
     UsuariosFormComponent,
     ConfirmEqualValidatorDirective,
-    EmpleadosComponent,
     SidebarComponent,
-    ProductosComponent,
+    EmpleadosComponent,
     EmpleadosFormComponent,
+    ProductosComponent,
     ProductosFormComponent,
     TercerosComponent,
     TercerosFormComponent,
@@ -63,6 +72,10 @@ import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
     TipoMovimentosComponent,
     BodegasComponent,
     PromocionesComponent,
+    NominaComponent,
+    NominaFormComponent,
+    TotalLiquidacionComponent,
+    LiquidacionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -91,6 +104,15 @@ import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
       { path: 'facturas', component: FacturasComponent },
       { path: 'facturas-crear', component: FacturasFormComponent }
 
+      { path: 'terceros-editar/:id', component: TercerosFormComponent },
+      { path: 'empleados', component: EmpleadosComponent },
+      { path: 'empleados-crear', component: EmpleadosFormComponent },
+      { path: 'empleados-editar/:id', component: EmpleadosFormComponent },
+      { path: 'nominas', component: NominaComponent },
+      { path: 'nominas-crear', component: NominaFormComponent },
+      { path: 'nominas-editar/:id', component: NominaFormComponent },
+      { path: 'liquidaciones', component: LiquidacionComponent },
+      { path: 'total-liquidaciones', component: TotalLiquidacionComponent }
 
     ]),
     BrowserAnimationsModule
@@ -98,6 +120,7 @@ import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
   //aca se agregan todos los services
   providers: [UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, 
     BodegasService, PromocionesService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
+  providers: [UsuariosService, EmpleadosService, TercerosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -4,11 +4,10 @@ using System.Text;
 
 namespace Aplicacion.Request
 {
-    public class CrearNominaRequest
+    public class ActualizarLiquidacionRequest
     {
         int Month = DateTime.Now.Month;
         int Year = DateTime.Now.Year;
-
         public string IdNomina { get => Month + " - " + Year; }
         public int IdEmpleado { get; set; }
         public int DiasTrabajados { get; set; }
@@ -16,12 +15,13 @@ namespace Aplicacion.Request
         public double SalarioBase { get; set; }
         public double SubTransporte { get; set; }
     }
-    public class CrearNominaResponse
+
+    public class ActualizarLiquidacionResponse
     {
         public string Message { get; set; }
         public bool isOk()
         {
-            return this.Message.Equals("Empleado en Nomina Creado Exitosamente");
+            return this.Message.Equals("Liquidacion Actualizada Exitosamente");
         }
     }
 }

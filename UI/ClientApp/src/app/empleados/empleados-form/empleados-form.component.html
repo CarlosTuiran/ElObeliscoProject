@@ -1,1 +1,155 @@
-<p>empleados-form works!</p>
+<h1 *ngIf="modoEdicion">Editar Empleado</h1>
+<h1 *ngIf="!modoEdicion">Agregar Empleado</h1>
+<form class="form-horizontal" novalidate
+      (ngSubmit)="save()" [formGroup]="formGroup">
+  <fieldset>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((idEmpleado.touched || idEmpleado.dirty) && idEmpleado.invalid)}">
+      <label class="col-md-2 control-label"
+             for="idEmpleadoId">Identificacion Empleado</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="idEmpleadoId"
+               type="text"
+               formControlName="idEmpleado" />
+        <div class="alert alert-danger" *ngIf="((idEmpleado.touched || idEmpleado.dirty )&& idEmpleado.invalid)">
+          <span *ngIf="idEmpleado.errors.required">
+            El campo Identificacion Empleado es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((nombres.touched || nombres.dirty) && nombres.invalid)}">
+      <label class="col-md-2 control-label"
+             for="nombresId">Nombre del Empleado</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="nombresId"
+               type="text"
+               formControlName="nombres" />
+        <div class="alert alert-danger" *ngIf="((nombres.touched || nombres.dirty ) && nombres.invalid)">
+          <span *ngIf="nombres.errors.required">
+            El campo Nombre es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((apellidos.touched || apellidos.dirty) && apellidos.invalid)}">
+      <label class="col-md-2 control-label"
+             for="apellidosId">Apellido del Empleado</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="apellidosId"
+               type="text"
+               formControlName="apellidos" />
+        <div class="alert alert-danger" *ngIf="((apellidos.touched || apellidos.dirty )&& apellidos.invalid)">
+          <span *ngIf="apellidos.errors.required">
+            El campo Apellido es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((cargo.touched || cargo.dirty) && cargo.invalid)}">
+      <label class="col-md-2 control-label"
+             for="cargoId">Cargo del Empleado</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="cargoId"
+               type="text"
+               formControlName="cargo" />
+        <div class="alert alert-danger" *ngIf="((cargo.touched || cargo.dirty )&& cargo.invalid)">
+          <span *ngIf="cargo.errors.required">
+            El campo Cargo del Empleado es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((celular.touched || celular.dirty) && celular.invalid)}">
+      <label class="col-md-2 control-label"
+             for="celularId">Celular del Tercero</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="celularId"
+               type="text"
+               formControlName="celular" />
+        <div class="alert alert-danger" *ngIf="((celular.touched || celular.dirty ) && celular.invalid)">
+          <span *ngIf="celular.errors.required">
+            El campo Celular es requerido
+          </span>
+          <span *ngIf="celular.errors.pattern">
+            El campo Celular es numerico
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((correo.touched || correo.dirty) && correo.invalid)}">
+      <label class="col-md-2 control-label"
+             for="correoId">Correo del Empleado</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="correoId"
+               type="email"
+               formControlName="correo" />
+        <div class="alert alert-danger" *ngIf="((correo.touched || correo.dirty ) && correo.invalid)">
+          <span *ngIf="correo.errors.required">
+            El campo Correo es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((direccion.touched || direccion.dirty) && direccion.invalid)}">
+      <label class="col-md-2 control-label"
+             for="direccionId">Direccion del Empleado</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="direccionId"
+               type="text"
+               formControlName="direccion" />
+        <div class="alert alert-danger" *ngIf="((direccion.touched || direccion.dirty ) && direccion.invalid)">
+          <span *ngIf="direccion.errors.required">
+            El campo Direccion es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-4 col-md-offset-2">
+        <span>
+          <button class="btn btn-success"
+                  type="submit"
+                  [disabled]="!formGroup.valid">
+            Salvar
+          </button>
+          <button class="btn"
+                  type="button"
+                  [routerLink]='["/empleados"]'>
+            Cancelar
+          </button>
+        </span>
+
+      </div>
+
+    </div>
+  </fieldset>
+</form>

@@ -6,9 +6,14 @@ namespace Aplicacion.Request
 {
     public class PagarEmpleadoRequest
     {
-        public int IdLiquidacion { get; set; }
-        public int NominaId { get; set; }
-        public double Monto { get; set; }
+        int Month = DateTime.Now.Month;
+        int Year = DateTime.Now.Year;
+        public string IdNomina { get => Month + " - " + Year; }
+        public int IdEmpleado { get; set; }
+        public int DiasTrabajados { get; set; }
+        public int HorasExtras { get; set; }
+        public double SalarioBase { get; set; }
+        public double SubTransporte { get; set; }
     }
     public class PagarEmpleadoResponse
     {

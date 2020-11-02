@@ -19,21 +19,21 @@ namespace Aplicacion.Services.ActualizarServices
 
         public ActualizarNominaResponse Ejecutar(ActualizarNominaRequest request)
         {
-            Nomina nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdEmpleado == request.IdEmpleado);
+            Nomina nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina == request.IdNomina || t.IdEmpleado == request.IdEmpleado);
             if (nomina == null)
             {
-                return new ActualizarNominaResponse() { Message = $"Empleado no existe" };
+                return new ActualizarNominaResponse() { Message = $"Empleado en Nomina no existe" };
             }
             else
             {
                 nomina.IdEmpleado = request.IdEmpleado;
-                nomina.SaldoBase = request.SaldoBase;
-                
-                
-                nomina.Seguro = request.Seguro;
+                nomina.DiasTrabajados = request.DiasTrabajados;
+                nomina.HorasExtras = request.HorasExtras;
+                nomina.SalarioBase = request.SalarioBase;
+                nomina.SubTransporte = request.SubTransporte;
                 _unitOfWork.NominaServiceRepository.Edit(nomina);
                 _unitOfWork.Commit();
-                return new ActualizarNominaResponse() { Message = $"Empleado de nomina actualizado Exitosamente" };
+                return new ActualizarNominaResponse() { Message = $"Empleado en nomina Actualizado Exitosamente" };
             }
         }
     }

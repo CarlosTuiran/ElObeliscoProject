@@ -18,6 +18,8 @@ namespace Domain.Models.Contracts
         IUsuarioServiceRepository UsuarioServiceRepository { get; }
         ILiquidacionServiceRepository LiquidacionServiceRepository { get; }
         ITiempoServiceRepository TiempoServiceRepository { get; }
+        ITotalLiquidacionServiceRepository TotalLiquidacionServiceRepository { get; }
+
         int Commit();
     }
 }

@@ -116,6 +116,15 @@ namespace Infra.Datos.Base
             }
         }
 
+        private ITotalLiquidacionServiceRepository _totalLiquidacionServiceRepository;
+        public ITotalLiquidacionServiceRepository TotalLiquidacionServiceRepository
+        {
+            get
+            {
+                return _totalLiquidacionServiceRepository ?? (_totalLiquidacionServiceRepository = new TotalLiquidacionServiceRepository(_dbContext));
+            }
+        }
+
         public int Commit()
         {
             return _dbContext.SaveChanges();

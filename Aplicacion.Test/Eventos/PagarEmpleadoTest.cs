@@ -2,19 +2,19 @@
 using NUnit.Framework;
 using Infra.Datos.Base;
 using Microsoft.EntityFrameworkCore;
-using Aplicacion.Services.CrearServices;
+using Aplicacion.Services.Eventos;
 using System.Collections.Generic;
 using Aplicacion.Request;
 using System;
 
-namespace Aplicacion.Test.CrearTests
+namespace Aplicacion.Test.Eventos
 {
     [TestFixture]
-    public class CrearNominaTest
+    public class PagarEmpleadoTest
     {
         ObeliscoTestContext _context;
         UnitOfWork _unitOfWork;
-        CrearNominaService _Nominaservice;
+        PagarEmpleadoService _PagarEmpleadoservice;
 
         [SetUp]
         public void Setup()
@@ -25,27 +25,27 @@ namespace Aplicacion.Test.CrearTests
             _unitOfWork = new UnitOfWork(_context);
         }
 
-        [TestCaseSource("CreationsNomina")]
-        public void CrearNomina(CrearNominaRequest nominaRequest, string expected)
+        [TestCaseSource("CreationsPagarEmpleado")]
+        public void CrearNomina(PagarEmpleadoRequest nominaRequest, string expected)
         {
-            _Nominaservice = new CrearNominaService(_unitOfWork);
-            var response = _Nominaservice.Ejecutar(nominaRequest);
+            _PagarEmpleadoservice = new PagarEmpleadoService(_unitOfWork);
+            var response = _PagarEmpleadoservice.Ejecutar(nominaRequest);
             Assert.AreEqual(expected, response.Message);
         }
 
-        private static IEnumerable<TestCaseData> CreationsNomina()
+        private static IEnumerable<TestCaseData> CreationsPagarEmpleado()
         {
             yield return new TestCaseData(
-                new CrearNominaRequest
+                new PagarEmpleadoRequest
                 {
-                    IdEmpleado = 2699540,
+                    IdEmpleado = 2699540,                    
                     DiasTrabajados = 1300000,
                     HorasExtras = 4,
                     SalarioBase = 1389000,
                     SubTransporte = 143000
                 },
-                "Empleado en Nomina Creado Exitosamente"
-                ).SetName("Crear Nomina Correctamente");
+                "Empleado Pagado Exitosamente"
+                ).SetName("Pagar Empleado Correctamente");
         }
     }
 }

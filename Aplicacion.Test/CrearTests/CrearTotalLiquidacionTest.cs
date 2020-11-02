@@ -7,14 +7,15 @@ using System.Collections.Generic;
 using Aplicacion.Request;
 using System;
 
+
 namespace Aplicacion.Test.CrearTests
 {
     [TestFixture]
-    public class CrearNominaTest
+    public class CrearTotalLiquidacionTest
     {
         ObeliscoTestContext _context;
         UnitOfWork _unitOfWork;
-        CrearNominaService _Nominaservice;
+        CrearTotalLiquidacionService _CrearTotalLiquidacionservice;
 
         [SetUp]
         public void Setup()
@@ -25,27 +26,25 @@ namespace Aplicacion.Test.CrearTests
             _unitOfWork = new UnitOfWork(_context);
         }
 
-        [TestCaseSource("CreationsNomina")]
-        public void CrearNomina(CrearNominaRequest nominaRequest, string expected)
+        [TestCaseSource("CreationsCrearTotalLiquidacion")]
+        public void CrearNomina(CrearTotalLiquidacionRequest totalLiquidacionRequest, string expected)
         {
-            _Nominaservice = new CrearNominaService(_unitOfWork);
-            var response = _Nominaservice.Ejecutar(nominaRequest);
+            _CrearTotalLiquidacionservice = new CrearTotalLiquidacionService(_unitOfWork);
+            var response = _CrearTotalLiquidacionservice.Ejecutar();
             Assert.AreEqual(expected, response.Message);
         }
 
-        private static IEnumerable<TestCaseData> CreationsNomina()
+        private static IEnumerable<TestCaseData> CreationsCrearTotalLiquidacion()
         {
             yield return new TestCaseData(
-                new CrearNominaRequest
+                new CrearTotalLiquidacionRequest
                 {
-                    IdEmpleado = 2699540,
-                    DiasTrabajados = 1300000,
-                    HorasExtras = 4,
-                    SalarioBase = 1389000,
-                    SubTransporte = 143000
+                    NominaId = "11 - 2020",
+                    Mes = 11,
+                    Anio = 2020
                 },
-                "Empleado en Nomina Creado Exitosamente"
-                ).SetName("Crear Nomina Correctamente");
+                "Total Liquidacion creado Exitosamente"
+                ).SetName("Crear Total Liquidacion Correctamente");
         }
     }
 }

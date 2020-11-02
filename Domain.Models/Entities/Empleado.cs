@@ -5,17 +5,16 @@ using Domain.Models.Base;
 
 namespace Domain.Models.Entities
 {
-    public class Empleado:Entity<int>
+    public class Empleado : Entity<int>
     {
         public int IdEmpleado { get; set; }
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
-        public string  Cargo { get; set; }
+        public string Cargo { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }
         public string Direccion { get; set; }
-        public string Estado { get; set; }
-        public int NominaId { get; set; } //Foranea con Nomina
+        public string Estado {get; set;}
         public List<MFactura> MFacturas { get; set; }
         public Usuario Usuario { get; set; }
         public Empleado()
@@ -36,22 +35,22 @@ namespace Domain.Models.Entities
         public IReadOnlyList<string> CanCrear(Empleado empleado)
         {
             var errors = new List<string>();
-            if (this.IdEmpleado == 0)
+            if (empleado.IdEmpleado == 0)
                 errors.Add("Campo Identificacion empleado vacio");
-            if (string.IsNullOrEmpty(this.Apellidos))
+            if (string.IsNullOrEmpty(empleado.Apellidos))
                 errors.Add("Campo Apellidos vacio");
-            if (string.IsNullOrEmpty(this.Cargo))
+            if (string.IsNullOrEmpty(empleado.Cargo))
                 errors.Add("Campo Cargo vacio");
-            if (string.IsNullOrEmpty(this.Celular))
+            if (string.IsNullOrEmpty(empleado.Celular))
                 errors.Add("Campo Celular vacio");
-            if (string.IsNullOrEmpty(this.Correo))
+            if (string.IsNullOrEmpty(empleado.Correo))
                 errors.Add("Campo Correo vacio");
-            if (string.IsNullOrEmpty(this.Direccion))
+            if (string.IsNullOrEmpty(empleado.Direccion))
                 errors.Add("Campo Direccion vacio");
-            if (string.IsNullOrEmpty(this.Estado))
-                errors.Add("Campo Estado vacio");
-            if (string.IsNullOrEmpty(this.Nombres))
+            if (string.IsNullOrEmpty(empleado.Nombres))
                 errors.Add("Campo Nombres vacio");
+            if (string.IsNullOrEmpty(empleado.Estado))
+                errors.Add("Campo Estado vacio");
             return errors;
         }
     }

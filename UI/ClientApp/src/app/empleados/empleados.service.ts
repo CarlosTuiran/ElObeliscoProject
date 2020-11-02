@@ -8,14 +8,23 @@ import { IEmpleado } from './empleados.component';
 })
 export class EmpleadosService {
 
-  
   apiURL = this.baseUrl + "api/Empleado";
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
   getEmpleados(): Observable<IEmpleado[]> {
     return this.http.get<IEmpleado[]>(this.apiURL);
   }
-  /*getEmpleadosId(): Observable<int[]> {
-    return this.http.get<IEmpleado[]>(this.apiURL);
-  }Una posible forma de solo tomar la lista de id de empleado */
+
+  getEmpleado(empleadoId: number): Observable<IEmpleado> {
+    return this.http.get<IEmpleado>(this.apiURL + '/' + empleadoId);
+  }
+
+  createEmpleado(empleado: IEmpleado): Observable<IEmpleado> {
+    return this.http.post<IEmpleado>(this.apiURL, empleado);
+  }
+
+  updateEmpleado(empleado: IEmpleado): Observable<IEmpleado> {
+    return this.http.put<IEmpleado>(this.apiURL + "/" + empleado.idEmpleado.toString(), empleado);
+  }
+
 }
