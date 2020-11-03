@@ -26,5 +26,5 @@ export class EmpleadosService {
   updateEmpleado(empleado: IEmpleado): Observable<IEmpleado> {
     return this.http.put<IEmpleado>(this.apiURL + "/" + empleado.idEmpleado.toString(), empleado);
   }
-
+  
 }

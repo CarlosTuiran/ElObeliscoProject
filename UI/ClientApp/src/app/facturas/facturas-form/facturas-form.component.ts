@@ -11,9 +11,9 @@ import { TipoMovimientosService } from '../tipo-movimentos/tipo-movimientos.serv
 import {IProducto} from 'src/app/productos/productos.component';
 import { IBodega } from 'src/app/bodegas/bodegas.component';
 import { IPromocion } from 'src/app/promociones/promociones.component';
-import { ReplaySubject, Subject, Subscription } from 'rxjs';
+import { Observable, ReplaySubject, Subject, Subscription } from 'rxjs';
 import { MatSelect } from '@angular/material/select';
-import { take, takeUntil } from 'rxjs/operators';
+import { debounceTime, delay, filter, map, take, takeUntil, tap } from 'rxjs/operators';
 import { IMFactura } from '../facturas.component';
 
 @Component({
@@ -31,8 +31,10 @@ export class FacturasFormComponent implements OnInit {
   modoEdicion: boolean = false;
   empleados: IEmpleado[];
   terceros: ITercero[];
-  public tercerosX: ITercero[];
-  //tercerosX: Subscription=null;
+
+  empleadosX: ReplaySubject<IEmpleado[]>; 
+  currentEmpleado="";
+
   tipoMovimientos: ITipoMovimiento[];
   referencias: IProducto[];
   bodegas: IBodega[];
@@ -49,7 +51,9 @@ export class FacturasFormComponent implements OnInit {
   public empleadoFilter:FormControl= new FormControl();
   public filteredEmpleados: ReplaySubject<IEmpleado[]> = new ReplaySubject<IEmpleado[]>(1);
   @ViewChild('empleadoSelect', { static: true }) singleEmpleadoSelect: MatSelect;
-  
+      /** indicate search operation is in progress */
+   public searching = false;
+
   
   formGroup = this.fb.group({
     
@@ -84,29 +88,66 @@ export class FacturasFormComponent implements OnInit {
     //console.log(this.tercerosX[0]);
 
     this.filteredEstados.next(this.estados.slice());
-    this.filteredEmpleados.next(this.empleados.slice());    
+    //this.filteredEmpleados.next(this.empleados.slice());    
     // listen for search field value changes
     this.estadoFilter.valueChanges
     .pipe(takeUntil(this._onDestroy))
     .subscribe(() => {
       this.filterEstados();
     });
-    this.empleadoFilter.valueChanges
+    /*this.empleadoFilter.valueChanges
     .pipe(takeUntil(this._onDestroy))
     .subscribe(() => {
       this.filterEmpleados();
-    });
+    });*/
+    //FILTRO EMPLEADOS
+    /*this.empleadoFilter.valueChanges
+    .pipe(
+      filter(search => !!search),
+      tap(() => this.searching = true),
+      takeUntil(this._onDestroy),
+      debounceTime(200),
+      map(search => {               
+        if (!this.empleados) {
+          return [];
+        }
+
+        // simulate server fetching and filtering data
+        return this.empleados.filter(empleado => empleado.nombres.toLowerCase().indexOf(search) > -1);
+      }),
+      delay(500),
+      takeUntil(this._onDestroy)
+    )
+    .subscribe(filteredEmpleados => {
+      this.searching = false;
+      this.filteredEmpleados.next(filteredEmpleados);
+    },
+      error => {
+        // no errors in our simulated example
+        console.error(error);
+        this.searching = false;
+        // handle error...
+      });*/
+      this.empleadosService.getEmpleados()
+      .subscribe(empleados=>this.empleadosX.next(empleados));
   }
   consulta(tercerosX:ITercero[]){
     //console.log(tercerosX[0]);
   }
+  dofilterEmpleados(){
+    this.empleadosService.getEmpleados()
+    .subscribe(empleados=>this.empleadosX.next(this.filterEmpleado(empleados, this.currentEmpleado)));
+  }
+  filterEmpleado(values: IEmpleado[], current:string){
+    return values.filter(value=>value.nombres.toLowerCase().includes(current));
+  }
   ngAfterViewInit() {
     this.setInitialValue();
   }
-  /*ngOnDestroy() {
+  ngOnDestroy() {
     this._onDestroy.next();
     this._onDestroy.complete();
-  }*/
+  }
   save() {
     let mfactura: IMFactura = Object.assign({}, this.formGroup.value);
     console.table(mfactura); //ver mfactura por consola
