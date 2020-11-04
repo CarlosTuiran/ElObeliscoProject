@@ -48,6 +48,8 @@ import { LiquidacionComponent } from './liquidacion/liquidacion.component';
 import { LiquidacionService } from './liquidacion/liquidacion.service';
 
 import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
+import { SelectorEmpleadoComponent } from './selector-empleado/selector-empleado.component';
+import { TableUsuariosComponent } from './usuarios/table-usuarios/table-usuarios.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +76,8 @@ import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
     NominaFormComponent,
     TotalLiquidacionComponent,
     LiquidacionComponent,
+    SelectorEmpleadoComponent,
+    TableUsuariosComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

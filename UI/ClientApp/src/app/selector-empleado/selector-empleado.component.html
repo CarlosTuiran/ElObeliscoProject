@@ -1,0 +1,16 @@
+<div class="form">
+    <label >Empleadoid</label>
+    <mat-form-field>
+      <mat-select [formControl]="empleadoCtrl" (selectionChange)="onChange($event)" #empleadoSelect>
+        <mat-option>
+          <ngx-mat-select-search [formControl]="empleadoFilter" 
+          [placeholderLabel]="'Buscar'"
+          [noEntriesFoundLabel]="'Sin Resultados'"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let empleado of filteredEmpleados | async" [value]="empleado.empleadoId">
+          {{empleado.nombres}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+</div>
+  

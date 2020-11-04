@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IEmpleado } from 'src/app/empleados/empleados.component';
@@ -29,10 +29,10 @@ export class FacturasFormComponent implements OnInit {
      private tipoMovimientoService: TipoMovimientosService,) { }
 
   modoEdicion: boolean = false;
-  empleados: IEmpleado[];
-  terceros: ITercero[];
-
-  empleadosX: ReplaySubject<IEmpleado[]>; 
+  empleados: IEmpleado[]=[];
+   terceros: ITercero[];
+   
+  empleadosX: ReplaySubject<IEmpleado[]>=new ReplaySubject<IEmpleado[]>(1); 
   currentEmpleado="";
 
   tipoMovimientos: ITipoMovimiento[];
@@ -54,7 +54,17 @@ export class FacturasFormComponent implements OnInit {
       /** indicate search operation is in progress */
    public searching = false;
 
-  
+  //Otro Intento del select
+/*@Input() set empleados(dataEmpleados:IEmpleado[]){
+  this._data=dataEmpleados;
+  this.filteredEmpleados.next(this.empleados.slice());
+} 
+get dataEmpleados:IEmpleado[]{
+  return this.dataEmpleados;
+}
+private _data:IEmpleado[];*/
+//Fin del intento
+
   formGroup = this.fb.group({
     
    empleadoId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
@@ -129,16 +139,21 @@ export class FacturasFormComponent implements OnInit {
         // handle error...
       });*/
       this.empleadosService.getEmpleados()
-      .subscribe(empleados=>this.empleadosX.next(empleados));
+      .subscribe(empleados=>this.empleadosX.next(empleados), 
+      error =>console.error(error));
   }
   consulta(tercerosX:ITercero[]){
     //console.log(tercerosX[0]);
   }
   dofilterEmpleados(){
+    console.log("doFilter");
     this.empleadosService.getEmpleados()
     .subscribe(empleados=>this.empleadosX.next(this.filterEmpleado(empleados, this.currentEmpleado)));
   }
   filterEmpleado(values: IEmpleado[], current:string){
+    console.log(values);
+    console.log(current);
+
     return values.filter(value=>value.nombres.toLowerCase().includes(current));
   }
   ngAfterViewInit() {
@@ -258,11 +273,7 @@ export class FacturasFormComponent implements OnInit {
         // and after the mat-option elements are available
         this.singleEstadoSelect.compareWith = (a: Estado, b: Estado) => a && b && a.nombre === b.nombre;
       });
-      this.filteredEmpleados
-      .pipe(take(1), takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.singleEmpleadoSelect.compareWith = (a: IEmpleado, b: IEmpleado) => a && b && a.idEmpleado === b.idEmpleado;
-      });
+      
   }
   
   protected filterEstados() {
