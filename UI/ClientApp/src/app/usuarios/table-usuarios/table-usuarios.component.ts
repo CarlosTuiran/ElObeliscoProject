@@ -1,6 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { IUsuario } from '../usuarios.component';
+import { UsuariosService } from '../usuarios.service';
 
 @Component({
   selector: 'app-table-usuarios',
@@ -9,13 +12,18 @@ import { IUsuario } from '../usuarios.component';
 })
 export class TableUsuariosComponent  implements OnInit {
   
-  @Input() usuarios:IUsuario[];
-  const usuariosFalse: IUsuario[]={'nombre':'Carlos', 'empleadoId':2, 'tipo':'Usuario', 'password':'acceso'}
+  //@Input('usuarios') usuarios!:IUsuario[];
+  usuarios!:IUsuario[];
+  //const usuariosFalse: IUsuario[]={'nombre':'Carlos', 'empleadoId':2, 'tipo':'Usuario', 'password':'acceso'}
   displayedColumns: string[] = ['nombre', 'empleadoId', 'tipo'];
-  public dataSource :MatTableDataSource;
+  dataSource =new MatTableDataSource<IUsuario>(this.usuarios);
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  
+  constructor (private usuariosService: UsuariosService){}
   
   applyFilter(event: Event) {
-    this.dataSource = new MatTableDataSource(this.usuarios);
+    //this.dataSource = new MatTableDataSource(this.usuarios);
     
     console.log("Tabla");
     console.log(this.dataSource);
@@ -27,9 +35,17 @@ export class TableUsuariosComponent  implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     console.log("this.dataSource.filter");
     console.log(this.dataSource.filter);
-
+    
+  }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.usuarios);
+    this.usuariosService.getUsuarios()
+    .subscribe(usuarios => this.dataSource.data = usuarios,
+      error => console.error(error));
+
   }
+  
 }

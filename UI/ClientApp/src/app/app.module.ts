@@ -13,6 +13,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuariosService } from './usuarios/usuarios.service';
+import { TableUsuariosComponent } from './usuarios/table-usuarios/table-usuarios.component';
 import { UsuariosFormComponent } from './usuarios/usuarios-form/usuarios-form.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { EmpleadosService } from './empleados/empleados.service';
@@ -49,7 +50,10 @@ import { LiquidacionService } from './liquidacion/liquidacion.service';
 
 import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
 import { SelectorEmpleadoComponent } from './selector-empleado/selector-empleado.component';
-import { TableUsuariosComponent } from './usuarios/table-usuarios/table-usuarios.component';
+
+import { PruebasSinVSComponent } from './pruebas-sin-vs/pruebas-sin-vs.component';
+import { PruebasSinVSService } from './pruebas-sin-vs/pruebas-sin-vs.service';
+import { TablePruebasComponent } from './pruebas-sin-vs/table-pruebas/table-pruebas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +82,8 @@ import { TableUsuariosComponent } from './usuarios/table-usuarios/table-usuarios
     LiquidacionComponent,
     SelectorEmpleadoComponent,
     TableUsuariosComponent,
+    PruebasSinVSComponent,
+    TablePruebasComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -112,14 +118,15 @@ import { TableUsuariosComponent } from './usuarios/table-usuarios/table-usuarios
       { path: 'nominas-crear', component: NominaFormComponent },
       { path: 'nominas-editar/:id', component: NominaFormComponent },
       { path: 'liquidaciones', component: LiquidacionComponent },
-      { path: 'total-liquidaciones', component: TotalLiquidacionComponent }
+      { path: 'total-liquidaciones', component: TotalLiquidacionComponent },
+      { path: 'pruebasSinVS', component: PruebasSinVSComponent },
 
     ]),
     BrowserAnimationsModule
   ],
   //aca se agregan todos los services
   providers: [UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
-    BodegasService, PromocionesService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
+    BodegasService, PromocionesService, PruebasSinVSService,{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
