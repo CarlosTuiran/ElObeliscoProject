@@ -35,7 +35,7 @@ namespace UI.InterfazWeb.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUsuario([FromRoute] int id)
         {
-            Usuario usuario= await _context.Usuario.SingleOrDefaultAsync(t=>t.Id==id);
+            Usuario usuario= await _context.Usuario.SingleOrDefaultAsync(t=>t.EmpleadoId==id);
             if (usuario == null)
                 return NotFound();
             return Ok(usuario);
@@ -70,36 +70,5 @@ namespace UI.InterfazWeb.Controllers
             return Ok(usuario);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario([FromRoute] int id, [FromBody] CrearUsuarioRequest usuario) 
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            if (id != usuario.EmpleadoId)
-            {
-                return BadRequest();
-            }
-            _context.Entry(usuario).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch(DbUpdateConcurrencyException)
-            {
-                /*if (!UsuarioExist(id))
-                {
-
-                }
-                else
-                {
-                    throw;
-                }*/
-            }
-
-            return NoContent();
-        }
     }
 }
