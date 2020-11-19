@@ -1,7 +1,10 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { IPruebaCovidReport } from '../pruebas-sin-vs.component';
 import { PruebasSinVSService } from '../pruebas-sin-vs.service';
 
@@ -16,16 +19,20 @@ export class TablePruebasComponent implements OnInit, AfterViewInit {
   pruebaDataLocal!:IPruebaCovidReport[];
   displayedColumns: string[] = ['country'];
   dataSource=new MatTableDataSource<IPruebaCovidReport>(this.pruebaDataLocal);
+
+  myControl = new FormControl();
+  filteredOptions: Observable<IPruebaCovidReport[]>;
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
   constructor(private service: PruebasSinVSService) { }
   
   ngOnInit() {
-    this.service.pruebaCovidReports()      //puede que sea dataSource.data y no pruebaData
+    this.service.pruebaCovidReports()      
     .subscribe(datos => this.dataSource.data = datos as IPruebaCovidReport[],
-      error => console.error(error))
-      
+      error => console.error(error));
+          
     }
     
     ngAfterViewInit() {
@@ -34,20 +41,9 @@ export class TablePruebasComponent implements OnInit, AfterViewInit {
     }
 
   applyFilter(event: Event) {
-  
-    
-    console.log("Tabla");
-    console.log(this.dataSource);
-    console.log("target");
-    console.log(event.target);    
     const filterValue = (event.target as HTMLInputElement).value;
-    console.log("filterValue");
-    console.log(filterValue);
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log("this.dataSource.filter");
-    console.log(this.dataSource.filter);
-    console.log(this.pruebaDataLocal);
-
+      this.dataSource.filter = filterValue.trim().toLowerCase(); 
   }
+  
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -8,13 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PruebasSinVSComponent implements OnInit {
 
-  
-  constructor() { }
+    
+  constructor(private fb: FormBuilder) { }
+  countryValue: string="";
+  formGroup = this.fb.group({
+    country:[this.countryValue, [Validators.required]]
+  });
 
   ngOnInit() {
     
   }
-
+  receiveMessage($event){
+    this.country.setValue($event);
+  }
+  get country() {
+    return this.formGroup.get('country');
+  }
 }
 
 export interface IPruebaCovidReport{

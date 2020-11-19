@@ -1,1 +1,28 @@
+<app-select-prueba (messageEvent)="receiveMessage($event)"></app-select-prueba>
 <app-table-pruebas></app-table-pruebas>
+<form class="form-horizontal" novalidate
+       [formGroup]="formGroup">
+  <fieldset>
+   
+    <div class="row">
+<div class="form-group col-md-3"
+         [ngClass]="{'has-error': ((country.touched || country.dirty) && country.invalid)}">
+      <label class="col-md-10 control-label"
+             for="countryId">country de la Factura</label>
+
+      <div class="col-md-10">
+        <input class="form-control"
+               id="countryId"
+               type="text"
+               formControlName="country" />
+        <div class="alert alert-danger" *ngIf="((country.touched || country.dirty )&& country.invalid)">
+          <span *ngIf="country.errors.required">
+            El campo country es requerido
+          </span>
+          
+        </div>
+      </div>
+</div>
+</div>
+</fieldset>
+</form>

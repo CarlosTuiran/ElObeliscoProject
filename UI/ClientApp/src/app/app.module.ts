@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { DemoMaterialModule } from './material-module';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete'; 
 import { ProductosComponent } from './productos/productos.component';
 import { EmpleadosFormComponent } from './empleados/empleados-form/empleados-form.component';
 import { ProductosFormComponent } from './productos/productos-form/productos-form.component';
@@ -54,6 +55,7 @@ import { SelectorEmpleadoComponent } from './selector-empleado/selector-empleado
 import { PruebasSinVSComponent } from './pruebas-sin-vs/pruebas-sin-vs.component';
 import { PruebasSinVSService } from './pruebas-sin-vs/pruebas-sin-vs.service';
 import { TablePruebasComponent } from './pruebas-sin-vs/table-pruebas/table-pruebas.component';
+import { SelectPruebaComponent } from './pruebas-sin-vs/select-prueba/select-prueba.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +86,7 @@ import { TablePruebasComponent } from './pruebas-sin-vs/table-pruebas/table-prue
     TableUsuariosComponent,
     PruebasSinVSComponent,
     TablePruebasComponent,
+    SelectPruebaComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -93,6 +96,7 @@ import { TablePruebasComponent } from './pruebas-sin-vs/table-pruebas/table-prue
     BrowserAnimationsModule,
     DemoMaterialModule,
     NgxMatSelectSearchModule,    
+    AutocompleteLibModule,
     CommonModule,
     DataTablesModule,MatDatepickerModule ,MatNativeDateModule,
     //ACA SE REGISTRAN TODOS LOS COMPONENTES
