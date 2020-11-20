@@ -1,5 +1,5 @@
 <div class="container text-center">
-    <h6>Buscar Paises</h6>
+    <h6>Buscar Empleados</h6>
 <div class="ng-autocomplete">
     <ng-autocomplete 
       [data]="data"
@@ -10,7 +10,7 @@
     </ng-autocomplete>
      
     <ng-template #itemTemplate let-item>
-    <a [innerHTML]="item.country"></a>
+    <a [innerHTML]="item.nombres"></a>
     </ng-template>
      
     <ng-template #notFoundTemplate let-notFound>

@@ -26,6 +26,8 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { DemoMaterialModule } from './material-module';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete'; 
+//import { ThemeService, THEME_CONFIG } from '@bcodes/ngx-theme-service';
+import { COMMON_CONSTANTS } from './shared/common.constants';
 import { ProductosComponent } from './productos/productos.component';
 import { EmpleadosFormComponent } from './empleados/empleados-form/empleados-form.component';
 import { ProductosFormComponent } from './productos/productos-form/productos-form.component';
@@ -50,12 +52,15 @@ import { LiquidacionComponent } from './liquidacion/liquidacion.component';
 import { LiquidacionService } from './liquidacion/liquidacion.service';
 
 import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
+import { ChartsModule, ThemeService } from 'ng2-charts';
 import { SelectorEmpleadoComponent } from './selector-empleado/selector-empleado.component';
-
+import { DatePipe } from '@angular/common';
 import { PruebasSinVSComponent } from './pruebas-sin-vs/pruebas-sin-vs.component';
 import { PruebasSinVSService } from './pruebas-sin-vs/pruebas-sin-vs.service';
 import { TablePruebasComponent } from './pruebas-sin-vs/table-pruebas/table-pruebas.component';
 import { SelectPruebaComponent } from './pruebas-sin-vs/select-prueba/select-prueba.component';
+import { PruebapiechartComponent } from './pruebas-sin-vs/pruebapiechart/pruebapiechart.component';
+import { EmpleadoSelectComponent } from './empleados/empleado-select/empleado-select.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,6 +92,8 @@ import { SelectPruebaComponent } from './pruebas-sin-vs/select-prueba/select-pru
     PruebasSinVSComponent,
     TablePruebasComponent,
     SelectPruebaComponent,
+    PruebapiechartComponent,
+    EmpleadoSelectComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -97,6 +104,7 @@ import { SelectPruebaComponent } from './pruebas-sin-vs/select-prueba/select-pru
     DemoMaterialModule,
     NgxMatSelectSearchModule,    
     AutocompleteLibModule,
+    ChartsModule,
     CommonModule,
     DataTablesModule,MatDatepickerModule ,MatNativeDateModule,
     //ACA SE REGISTRAN TODOS LOS COMPONENTES
@@ -129,8 +137,9 @@ import { SelectPruebaComponent } from './pruebas-sin-vs/select-prueba/select-pru
     BrowserAnimationsModule
   ],
   //aca se agregan todos los services
-  providers: [UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
-    BodegasService, PromocionesService, PruebasSinVSService,{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
+  providers: [ThemeService,UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
+    BodegasService, PromocionesService, PruebasSinVSService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

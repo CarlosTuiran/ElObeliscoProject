@@ -31,66 +31,44 @@
 
 -->
 
-<app-selector-empleado [empleados]="empleados" ></app-selector-empleado>
-
-
 <form class="form-horizontal" novalidate
        [formGroup]="formGroup">
   <fieldset>
    <div>
     <div class="row">
-    <!--<div class="form-group col-md-3"
-        [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)}">
-        <label class="col-md-10 control-label"
-            for="empleadoId">Identificacion del Empleado</label>
-            <mat-form-field id="empleadoId" [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)}">
-              <mat-select formControlName="empleadoId" placeholder="Empleado" >
-                <mat-option>
-                  <ngx-mat-select-search [formControl]="empleadoFilter" [searching]="searching"></ngx-mat-select-search>
-                </mat-option>
-                <mat-option *ngFor="let empleado of filteredEmpleados | async" [value]="empleado.idEmpleado">
-                  {{empleado.idEmpleado}}--{{empleado.nombres}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <div class="alert alert-danger" *ngIf="((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)">
-              <span *ngIf="empleadoId.errors.required">
-                  El campo Empleado es requerido
-              </span>
-            </div>-->
-    <!--        <div class="form-group col-md-3"
-        [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)}">
-        <label class="col-md-10 control-label"
-            for="empleadoId">Identificacion del Empleado</label>
-            <mat-form-field id="empleadoId" [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)}">
-              <mat-select formControlName="empleadoId" placeholder="Empleado"  [(ngModel)]="currentEmpleado" 
-               (ngModelChange)="dofilterEmpleados()" >
-                <mat-option>
-                  <ngx-mat-select-search></ngx-mat-select-search>
-                </mat-option>
-                <mat-option *ngFor="let empleado of empleadosX | async" [value]="empleado.idEmpleado">
-                  {{empleado.idEmpleado}}--{{empleado.nombres}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <div class="alert alert-danger" *ngIf="((empleadoId.touched || empleadoId.dirty)&& empleadoId.invalid)">
-              <span *ngIf="empleadoId.errors.required">
-                  El campo Empleado es requerido
-              </span>
-            </div>
-          </div>-->
-         <!--  
-        <div class="col-md-10">
-            <select class="form-control"
-            id="empleadoId"
-            type="text"
-            required
-            formControlName="empleadoId">
-            <option *ngFor="let empleado of empleados" [value]="empleado.idEmpleado">{{empleado.idEmpleado}} -- {{empleado.nombres}}</option>
-            </select>            
-        </div>-->
-    </div>
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Seleccionar Empleado
+            </mat-panel-title>            
+          </mat-expansion-panel-header>
+          
+          <app-empleado-select (messageEvent)="receiveMessage($event)"></app-empleado-select> 
+          <div class="form-group col-md-3"
+                [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty) && empleadoId.invalid)}">
+              <label class="col-md-10 control-label"
+                    for="empleadoIdId">ID del Empleado</label>
+    
+              <div class="col-md-10">
+                <input class="form-control"
+                      id="empleadoIdId"
+                      type="text"
+                      formControlName="empleadoId" />
+                <div class="alert alert-danger" *ngIf="((empleadoId.touched || empleadoId.dirty )&& empleadoId.invalid)">
+                  <span *ngIf="empleadoId.errors.required">
+                    El campo empleadoId es requerido
+                  </span>
+                  
+                </div>
+              </div>
+          </div>            
 
+        </mat-expansion-panel>
+        
+      </mat-accordion>
+      
+      
     <div class="form-group col-md-3"
         [ngClass]="{'has-error': ((tercerosId.touched || tercerosId.dirty)&& tercerosId.invalid)}">
         <label class="col-md-10 control-label"
@@ -434,6 +412,7 @@
   
         </div>
   
+      </div>
       </div>
     </fieldset>
   </form>

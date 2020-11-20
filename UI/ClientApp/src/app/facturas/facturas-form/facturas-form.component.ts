@@ -83,79 +83,29 @@ private _data:IEmpleado[];*/
 
 
   ngOnInit() {
-    this.tercerosService.getTerceros()
+    /*this.tercerosService.getTerceros()
       .subscribe(terceros => this.terceros = terceros,
         error => console.error(error));
     this.empleadosService.getEmpleados()
       .subscribe(empleados=> this.empleados = empleados,
         error => console.error(error) 
         ); 
-    /*this.tipoMovimientoService.getTipoMovimientos()
+    this.tipoMovimientoService.getTipoMovimientos()
         .subscribe(tipoMovimientos => this.tipoMovimientos = tipoMovimientos,
           error => console.error(error));*/
-    // load the initial  list
-    //this.tercerosX=this.tercerosService.getTerceros().subscribe();
-    //console.log(this.tercerosX[0]);
-
+    
     this.filteredEstados.next(this.estados.slice());
-    //this.filteredEmpleados.next(this.empleados.slice());    
+    
     // listen for search field value changes
     this.estadoFilter.valueChanges
     .pipe(takeUntil(this._onDestroy))
     .subscribe(() => {
       this.filterEstados();
     });
-    /*this.empleadoFilter.valueChanges
-    .pipe(takeUntil(this._onDestroy))
-    .subscribe(() => {
-      this.filterEmpleados();
-    });*/
-    //FILTRO EMPLEADOS
-    /*this.empleadoFilter.valueChanges
-    .pipe(
-      filter(search => !!search),
-      tap(() => this.searching = true),
-      takeUntil(this._onDestroy),
-      debounceTime(200),
-      map(search => {               
-        if (!this.empleados) {
-          return [];
-        }
-
-        // simulate server fetching and filtering data
-        return this.empleados.filter(empleado => empleado.nombres.toLowerCase().indexOf(search) > -1);
-      }),
-      delay(500),
-      takeUntil(this._onDestroy)
-    )
-    .subscribe(filteredEmpleados => {
-      this.searching = false;
-      this.filteredEmpleados.next(filteredEmpleados);
-    },
-      error => {
-        // no errors in our simulated example
-        console.error(error);
-        this.searching = false;
-        // handle error...
-      });*/
-      this.empleadosService.getEmpleados()
-      .subscribe(empleados=>this.empleadosX.next(empleados), 
-      error =>console.error(error));
+      
   }
-  consulta(tercerosX:ITercero[]){
-    //console.log(tercerosX[0]);
-  }
-  dofilterEmpleados(){
-    console.log("doFilter");
-    this.empleadosService.getEmpleados()
-    .subscribe(empleados=>this.empleadosX.next(this.filterEmpleado(empleados, this.currentEmpleado)));
-  }
-  filterEmpleado(values: IEmpleado[], current:string){
-    console.log(values);
-    console.log(current);
-
-    return values.filter(value=>value.nombres.toLowerCase().includes(current));
-  }
+  
+  
   ngAfterViewInit() {
     this.setInitialValue();
   }
@@ -293,22 +243,9 @@ private _data:IEmpleado[];*/
       this.estados.filter(estado => estado.nombre.toLowerCase().indexOf(search) > -1)
     );
   }
-  protected filterEmpleados() {
-    if (!this.empleados) {
-      return;
-    }
-    // get the search keyword
-    let search = this.empleadoFilter.value;
-    if (!search) {
-      this.filteredEmpleados.next(this.empleados.slice());
-      return;
-    } else {
-      search = search.toLowerCase();
-    }
-    // filter the empleados
-    this.filteredEmpleados.next(
-      this.empleados.filter(empleado => empleado.nombres.toLowerCase().indexOf(search) > -1)
-    );
+  //Recibe la idEmpleado desde el componente select
+  receiveMessage($event){
+    this.empleadoId.setValue($event.idEmpleado);
   }
 } 
 export class Estado{
