@@ -30,9 +30,9 @@ export class FacturasFormComponent implements OnInit {
 
   modoEdicion: boolean = false;
   empleados: IEmpleado[]=[];
-   terceros: ITercero[];
+  terceros: ITercero[];
    
-  empleadosX: ReplaySubject<IEmpleado[]>=new ReplaySubject<IEmpleado[]>(1); 
+  //nombre empleado selectcionado
   currentEmpleado="";
 
   tipoMovimientos: ITipoMovimiento[];
@@ -244,8 +244,9 @@ private _data:IEmpleado[];*/
     );
   }
   //Recibe la idEmpleado desde el componente select
-  receiveMessage($event){
+  receiveMessageEmpleado($event){
     this.empleadoId.setValue($event.idEmpleado);
+    this.currentEmpleado=$event.nombres;
   }
 } 
 export class Estado{

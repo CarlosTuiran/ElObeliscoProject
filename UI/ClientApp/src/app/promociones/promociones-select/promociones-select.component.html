@@ -1,5 +1,5 @@
 <div class="container">
-    <h6>Buscar Empleados</h6>
+    <h6>Buscar Promociones</h6>
 <div class="ng-autocomplete">
     <ng-autocomplete 
       [data]="data"
@@ -10,7 +10,7 @@
     </ng-autocomplete>
      
     <ng-template #itemTemplate let-item>
-    <a [innerHTML]="item.nombres"></a>
+    <a [innerHTML]="item.nombre"></a>
     </ng-template>
      
     <ng-template #notFoundTemplate let-notFound>
@@ -18,3 +18,4 @@
     </ng-template>
 </div>
 </div>
+

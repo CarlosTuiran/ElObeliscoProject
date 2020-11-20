@@ -42,7 +42,7 @@ namespace Aplicacion.Test.CrearTests
                     Celular = "3024324040",
                     Correo = "raagamez@unicesar.edu.co",
                     Direccion = "Calle 22C #21-61",
-                    Estado = "Activo",
+                    //Estado = "Activo",
                     IdEmpleado = 1000001,
                     Nombres = "Raul Andres"
 

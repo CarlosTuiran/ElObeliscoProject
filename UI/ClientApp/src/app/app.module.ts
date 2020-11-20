@@ -27,7 +27,7 @@ import { DemoMaterialModule } from './material-module';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete'; 
 //import { ThemeService, THEME_CONFIG } from '@bcodes/ngx-theme-service';
-import { COMMON_CONSTANTS } from './shared/common.constants';
+
 import { ProductosComponent } from './productos/productos.component';
 import { EmpleadosFormComponent } from './empleados/empleados-form/empleados-form.component';
 import { ProductosFormComponent } from './productos/productos-form/productos-form.component';
@@ -61,6 +61,10 @@ import { TablePruebasComponent } from './pruebas-sin-vs/table-pruebas/table-prue
 import { SelectPruebaComponent } from './pruebas-sin-vs/select-prueba/select-prueba.component';
 import { PruebapiechartComponent } from './pruebas-sin-vs/pruebapiechart/pruebapiechart.component';
 import { EmpleadoSelectComponent } from './empleados/empleado-select/empleado-select.component';
+import { TercerosSelectComponent } from './terceros/terceros-select/terceros-select.component';
+import { ProductosSelectComponent } from './productos/productos-select/productos-select.component';
+import { PromocionesSelectComponent } from './promociones/promociones-select/promociones-select.component';
+import { TipoMovimientoSelectComponent } from './tipoMovimiento/tipo-movimiento-select/tipo-movimiento-select.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,6 +98,10 @@ import { EmpleadoSelectComponent } from './empleados/empleado-select/empleado-se
     SelectPruebaComponent,
     PruebapiechartComponent,
     EmpleadoSelectComponent,
+    TercerosSelectComponent,
+    ProductosSelectComponent,
+    PromocionesSelectComponent,
+    TipoMovimientoSelectComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

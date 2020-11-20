@@ -36,17 +36,21 @@
   <fieldset>
    <div>
     <div class="row">
+      <div class="form-group col-md-3"
+                [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty) && empleadoId.invalid)}">
       <mat-accordion>
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
               Seleccionar Empleado
             </mat-panel-title>            
+            <mat-panel-description>
+              {{currentEmpleado}}--{{empleadoId.value}}
+            </mat-panel-description>
           </mat-expansion-panel-header>
           
-          <app-empleado-select (messageEvent)="receiveMessage($event)"></app-empleado-select> 
-          <div class="form-group col-md-3"
-                [ngClass]="{'has-error': ((empleadoId.touched || empleadoId.dirty) && empleadoId.invalid)}">
+          <app-empleado-select (messageEvent)="receiveMessageEmpleado($event)"></app-empleado-select> 
+          
               <label class="col-md-10 control-label"
                     for="empleadoIdId">ID del Empleado</label>
     
@@ -62,33 +66,15 @@
                   
                 </div>
               </div>
-          </div>            
+          
 
         </mat-expansion-panel>
         
       </mat-accordion>
+    </div>            
+      <--! Tercero Id-->
       
-      
-    <div class="form-group col-md-3"
-        [ngClass]="{'has-error': ((tercerosId.touched || tercerosId.dirty)&& tercerosId.invalid)}">
-        <label class="col-md-10 control-label"
-            for="terceroId">Identificacion del Tercero</label>
-
-        <div class="col-md-10">
-            <select class="form-control"
-            id="terceroId"
-            type="text"
-            required
-            formControlName="tercerosId">
-            <option *ngFor="let tercero of terceros" [value]="tercero.nit">{{tercero.nit}} -- {{tercero.nombre}}</option>
-            </select>
-            <div class="alert alert-danger" *ngIf="((tercerosId.touched || tercerosId.dirty)&& tercerosId.invalid)">
-                <span *ngIf="tercerosId.errors.required">
-                    El campo tercero es requerido
-                </span>
-            </div>
-        </div>
-    </div>
+    
 
     <div class="form-group col-md-3"
         [ngClass]="{'has-error': ((tipoMovimientoId.touched || tipoMovimientoId.dirty)&& tipoMovimientoId.invalid)}">
