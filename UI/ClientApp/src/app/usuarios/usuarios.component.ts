@@ -19,6 +19,7 @@ export class UsuariosComponent implements OnInit {
   }
 }
 export interface IUsuario {
+   //id: number,
    nombre: string, 
    password: string,
    empleadoId:number, 
