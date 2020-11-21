@@ -12,9 +12,8 @@ import { UsuariosService } from '../usuarios.service';
 })
 export class TableUsuariosComponent  implements OnInit {
   
-  //@Input('usuarios') usuarios!:IUsuario[];
-  usuarios!:IUsuario[];
-  //const usuariosFalse: IUsuario[]={'nombre':'Carlos', 'empleadoId':2, 'tipo':'Usuario', 'password':'acceso'}
+  
+  usuarios!:IUsuario[];  
   displayedColumns: string[] = ['nombre', 'empleadoId', 'tipo', 'options'];
   dataSource =new MatTableDataSource<IUsuario>(this.usuarios);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

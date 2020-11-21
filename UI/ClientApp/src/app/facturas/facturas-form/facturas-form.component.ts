@@ -15,6 +15,7 @@ import { Observable, ReplaySubject, Subject, Subscription } from 'rxjs';
 import { MatSelect } from '@angular/material/select';
 import { debounceTime, delay, filter, map, take, takeUntil, tap } from 'rxjs/operators';
 import { IMFactura } from '../facturas.component';
+import { BodegasService } from 'src/app/bodegas/bodegas.service';
 
 @Component({
   selector: 'app-facturas-form',
@@ -26,14 +27,19 @@ export class FacturasFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private facturasService: FacturasService,
      private router: Router, private activatedRoute: ActivatedRoute, 
      private tercerosService: TercerosService, private empleadosService: EmpleadosService,
-     private tipoMovimientoService: TipoMovimientosService,) { }
+     private tipoMovimientoService: TipoMovimientosService, 
+     private bodegasService: BodegasService) { }
 
   modoEdicion: boolean = false;
   empleados: IEmpleado[]=[];
   terceros: ITercero[];
    
-  //nombre empleado selectcionado
+  //Selecciones escogidas
   currentEmpleado="";
+  currentTerceros="";
+  currentTipoMovimiento="";
+  currentPromocion="";
+  
 
   tipoMovimientos: ITipoMovimiento[];
   referencias: IProducto[];
@@ -102,7 +108,8 @@ private _data:IEmpleado[];*/
     .subscribe(() => {
       this.filterEstados();
     });
-      
+    this.bodegas=this.bodegasService.getBodegas()
+       
   }
   
   
@@ -247,6 +254,22 @@ private _data:IEmpleado[];*/
   receiveMessageEmpleado($event){
     this.empleadoId.setValue($event.idEmpleado);
     this.currentEmpleado=$event.nombres;
+  }
+  receiveMessageTerceros($event){
+    this.tercerosId.setValue($event.nit);
+    this.currentTerceros=$event.nombre;
+  }
+  receiveMessageTipoMovimiento($event){
+    this.tipoMovimientoId.setValue($event.idMovimiento);
+    this.currentTipoMovimiento=$event.nombre;
+  }
+  receiveMessagePromocion($event){
+    this.promocionId.setValue($event.nombre);//pos solo se usara el nombre de la promocion como ID parece
+    this.currentPromocion=$event.nombre;
+  }
+  receiveMessageProducto($event){
+    this.referencia.setValue($event.referencia);
+    //this.currentProducto=$event.descripcion;
   }
 } 
 export class Estado{

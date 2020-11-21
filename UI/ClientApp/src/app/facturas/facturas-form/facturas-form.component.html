@@ -72,34 +72,87 @@
         
       </mat-accordion>
     </div>            
-      <--! Tercero Id-->
+      <!-- Tercero Id-->
       
-    
+      <div class="form-group col-md-3"
+              [ngClass]="{'has-error': ((tercerosId.touched || tercerosId.dirty) && tercerosId.invalid)}">
+        <mat-accordion>
+        <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Seleccionar Tercero
+          </mat-panel-title>            
+          <mat-panel-description>
+            {{currentTerceros}}--{{tercerosId.value}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 
-    <div class="form-group col-md-3"
-        [ngClass]="{'has-error': ((tipoMovimientoId.touched || tipoMovimientoId.dirty)&& tipoMovimientoId.invalid)}">
-        <label class="col-md-10 control-label"
-            for="tipoMovimientoId">Identificacion de Pago</label>
+        <app-terceros-select (messageEvent)="receiveMessageTerceros($event)"></app-terceros-select> 
 
-        <div class="col-md-10">
-            <select class="form-control"
-            id="tipoMovimientoId"
-            type="text"
-            required
-            formControlName="tipoMovimientoId">
-            <option *ngFor="let tipoMovimiento of tipoMovimientos" [value]="tipoMovimiento.idMovimiento">{{tipoMovimiento.idMovimiento}} -- {{tipoMovimiento.nombre}}</option>
-            </select>
-            <div class="alert alert-danger" *ngIf="((tipoMovimientoId.touched || tipoMovimientoId.dirty)&& tipoMovimientoId.invalid)">
-                <span *ngIf="tipoMovimientoId.errors.required">
-                    El campo tipoMovimiento es requerido
+            <label class="col-md-10 control-label"
+                  for="tercerosIdId">ID del terceros</label>
+
+            <div class="col-md-10">
+              <input class="form-control"
+                    id="tercerosIdId"
+                    type="text"
+                    formControlName="tercerosId" />
+              <div class="alert alert-danger" *ngIf="((tercerosId.touched || tercerosId.dirty )&& tercerosId.invalid)">
+                <span *ngIf="tercerosId.errors.required">
+                  El campo tercerosId es requerido
                 </span>
+                
+              </div>
             </div>
-        </div>
-    </div>
+
+
+        </mat-expansion-panel>
+
+        </mat-accordion>
+      </div>
+    <!--Tipo movimiento Id-->
+    <div class="form-group col-md-3"
+              [ngClass]="{'has-error': ((tipoMovimientoId.touched || tipoMovimientoId.dirty) && tipoMovimientoId.invalid)}">
+        <mat-accordion>
+        <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Seleccionar Tipo de Pago
+          </mat-panel-title>            
+          <mat-panel-description>
+            {{currentTipoMovimiento}}--{{tipoMovimientoId.value}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <app-tipo-movimiento-select (messageEvent)="receiveMessageTipoMovimiento($event)"></app-tipo-movimiento-select> 
+
+            <label class="col-md-10 control-label"
+                  for="tipoMovimientoIdId">ID del terceros</label>
+
+            <div class="col-md-10">
+              <input class="form-control"
+                    id="tipoMovimientoIdId"
+                    type="text"
+                    formControlName="tipoMovimientoId" />
+              <div class="alert alert-danger" *ngIf="((tipoMovimientoId.touched || tipoMovimientoId.dirty )&& tipoMovimientoId.invalid)">
+                <span *ngIf="tipoMovimientoId.errors.required">
+                  El campo tipoMovimientoId es requerido
+                </span>
+                
+              </div>
+            </div>
+
+
+        </mat-expansion-panel>
+
+        </mat-accordion>
+      </div>
+    
+    <!--Movimiento compra venta-->
     <div class="form-group col-md-3"
         [ngClass]="{'has-error': ((tipoMovimiento.touched || tipoMovimiento.dirty)&& tipoMovimiento.invalid)}">
         <label class="col-md-10 control-label"
-        for="tipoMovimiento">Identificacion del Movimiento</label>
+        for="tipoMovimiento">Id del Movimiento</label>
 
         <div class="col-md-8">
             <select class="form-control"
@@ -119,6 +172,7 @@
     </div>
   </div>
   <mat-divider></mat-divider>
+  <br>
   <div class="row">
     
     <div class="form-group col-md-3">
@@ -139,7 +193,7 @@
   <div class="form-group col-md-3"
          [ngClass]="{'has-error': ((valorDevolucion.touched || valorDevolucion.dirty) && valorDevolucion.invalid)}">
       <label class="col-md-10 control-label"
-             for="valorDevolucionId">ValorDevolucion de la Factura</label>
+             for="valorDevolucionId">Valor Devolucion</label>
 
       <div class="col-md-10">
         <input class="form-control"
@@ -286,8 +340,45 @@
     let i=index">
       <div [formGroupName]="i">
         <div class="form-group row">
-
+          <!--Referencia de Productos-->
           <div class="form-group col-md-3"
+              [ngClass]="{'has-error': ((referencia.touched || referencia.dirty) && referencia.invalid)}">
+              <mat-accordion>
+              <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Seleccionar Producto
+                </mat-panel-title>            
+                <mat-panel-description>
+                  {{referencia.value}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+
+              <app-productos-select (messageEvent)="receiveMessageProducto($event)"></app-productos-select> 
+
+                  <label class="col-md-10 control-label"
+                        for="referenciaId">Referencia del producto</label>
+
+                  <div class="col-md-10">
+                    <input class="form-control"
+                          id="referenciaId"
+                          type="text"
+                          formControlName="referencia" />
+                    <div class="alert alert-danger" *ngIf="((referencia.touched || referencia.dirty )&& referencia.invalid)">
+                      <span *ngIf="referencia.errors.required">
+                        El campo referencia es requerido
+                      </span>
+                      
+                    </div>
+                  </div>
+
+
+              </mat-expansion-panel>
+
+              </mat-accordion>
+            </div>
+                
+            <!-- <div class="form-group col-md-3"
           [ngClass]="{'has-error': ((referencia.touched || referencia.dirty)&& referencia.invalid)}">
           <label class="col-md-10 control-label"
               for="referencia">Producto</label>
@@ -306,7 +397,7 @@
                   </span>
               </div>
           </div>
-          </div>
+          </div>-->
         
 
         <div class="form-group col-md-3" >

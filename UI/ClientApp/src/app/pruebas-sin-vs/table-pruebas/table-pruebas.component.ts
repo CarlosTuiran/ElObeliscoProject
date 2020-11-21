@@ -17,7 +17,7 @@ export class TablePruebasComponent implements OnInit, AfterViewInit {
 
   
   pruebaDataLocal!:IPruebaCovidReport[];
-  displayedColumns: string[] = ['country'];
+  displayedColumns: string[] = ['country', 'options'];
   dataSource=new MatTableDataSource<IPruebaCovidReport>(this.pruebaDataLocal);
 
   myControl = new FormControl();

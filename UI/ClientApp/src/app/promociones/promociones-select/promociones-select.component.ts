@@ -18,9 +18,10 @@ export class PromocionesSelectComponent implements OnInit {
   constructor(private service: PromocionesService) { }
 
   ngOnInit() {
-    this.service.getPromociones()      
-    .subscribe(datos => this.data = datos as IPromocion[],
-      error => console.error(error));
+    // Pendiente completar el service de promociones
+    // this.service.getPromociones()      
+    // .subscribe(datos => this.data = datos as IPromocion[],
+    //   error => console.error(error));
       
   }
 

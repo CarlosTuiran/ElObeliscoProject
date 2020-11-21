@@ -1,0 +1,93 @@
+<div class="table-responsive">
+    <mat-form-field>
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="TerceroId" #input>
+    </mat-form-field>
+    
+    <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    
+      <!-- empleadoId Column -->
+      <ng-container matColumnDef="empleadoId">
+        <th mat-header-cell *matHeaderCellDef> EmpleadoId </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.empleadoId}} </td>
+      </ng-container>
+      <!-- tercerosId Column -->
+      <ng-container matColumnDef="tercerosId">
+        <th mat-header-cell *matHeaderCellDef> TercerosId </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.tercerosId}} </td>
+      </ng-container>
+      <!-- tipoMovimientoId Column -->
+      <ng-container matColumnDef="tipoMovimientoId">
+        <th mat-header-cell *matHeaderCellDef> TipoMovimiento </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.tipoMovimientoId}} </td>
+      </ng-container>
+      <!-- fechaPago Column -->
+      <ng-container matColumnDef="fechaPago">
+        <th mat-header-cell *matHeaderCellDef> FechaPago </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.fechaPago}} </td>
+      </ng-container>
+      <!-- subTotal Column -->
+      <ng-container matColumnDef="subTotal">
+        <th mat-header-cell *matHeaderCellDef> SubTotal </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.subTotal}} </td>
+      </ng-container>
+      <!-- valorDevolucion Column -->
+      <ng-container matColumnDef="valorDevolucion">
+        <th mat-header-cell *matHeaderCellDef> ValorDevolucion </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.valorDevolucion}} </td>
+      </ng-container>
+      <!-- descuento Column -->
+      <ng-container matColumnDef="descuento">
+        <th mat-header-cell *matHeaderCellDef> Descuento </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.descuento}} </td>
+      </ng-container>
+      <!-- iVA Column -->
+      <ng-container matColumnDef="iVA">
+        <th mat-header-cell *matHeaderCellDef> IVA </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.iVA}} </td>
+      </ng-container>
+      <!-- abono Column -->
+      <ng-container matColumnDef="abono">
+        <th mat-header-cell *matHeaderCellDef> Abono </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.abono}} </td>
+      </ng-container>
+      <!-- estadoFactura Column -->
+      <ng-container matColumnDef="estadoFactura">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.estadoFactura}} </td>
+      </ng-container>
+            
+      <!--Options-->
+      <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef>Opciones</th>
+        <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+        <button mat-icon-button [routerLink]='["/usuarios-editar/" + element.empleadoId]'>
+          <mat-icon>launch</mat-icon></button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="loading">
+        <mat-footer-cell *matFooterCellDef colspan="10">
+            Loading data...
+        </mat-footer-cell>
+      </ng-container>
+      <ng-container matColumnDef="noData">
+        <mat-footer-cell *matFooterCellDef colspan="10">
+            No data.
+        </mat-footer-cell>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+      <!-- Row shown when there is no matching data. -->
+      <tr mat-row  *matNoDataRow>
+        <td mat-cell colspan="4">No encontrado "{{input.value}}"</td>
+      </tr>
+      <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+      <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':dataSource!=null && dataSource.data.length==0}"></mat-footer-row>
+
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>    
+</div>
+  
+

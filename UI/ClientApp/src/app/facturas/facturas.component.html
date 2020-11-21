@@ -1,43 +1,5 @@
 <h1>Facturas</h1>
 <button [routerLink]='["/facturas-crear"]' class="btn btn-primary">Agregar facturas</button>
-<p *ngIf="!(facturas && facturas.length)"> No Existen facturas Registrados</p>
+<app-table-facturas></app-table-facturas>
 
-<div class="table-responsive">
-  <table id="data-tables" class="table table-striped table-bordered" *ngIf="(facturas && facturas.length)">
-    <thead>
-      <tr>
-        <td>EmpleadoId </td>
-        <td>TercerosId </td>
-        <td>TipoMovimientoId </td>
-        <td>TipoMovimiento</td>
-        <td>FechaPago</td>
-        <td>SubTotal </td>
-        <td>ValorDevolucion </td>
-        <td>Descuento </td>
-        <td>IVA</td>
-        <td>Abono </td>
-        <td>EstadoFactura</td>   
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let factura of facturas">
-        <td>{{factura.empleadoId}}</td>
-        <td>{{factura.tercerosId}}</td>
-        <td>{{factura.tipoMovimientoId}}</td>
-        <td>{{factura.fechaPago}}</td>
-        <td>{{factura.subTotal}}</td>
-        <td>{{factura.valorDevolucion}}</td>
-        <td>{{factura.descuento}}</td>
-        <td>{{factura.iVA}}</td>
-        <td>{{factura.abono}}</td>
-        <td>{{factura.estadoFactura}}</td>
-        <td>
-          <button class="btn btn-primary" [routerLink]='["/facturas-editar/" + factura.idMfactura]'>Editar</button>
-          <button class="btn btn-danger">Borrar</button>
-        </td>
-      </tr>
-    </tbody>
-
-  </table>
-</div>
 

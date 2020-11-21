@@ -65,6 +65,13 @@ import { TercerosSelectComponent } from './terceros/terceros-select/terceros-sel
 import { ProductosSelectComponent } from './productos/productos-select/productos-select.component';
 import { PromocionesSelectComponent } from './promociones/promociones-select/promociones-select.component';
 import { TipoMovimientoSelectComponent } from './tipoMovimiento/tipo-movimiento-select/tipo-movimiento-select.component';
+import { TableFacturasComponent } from './facturas/table-facturas/table-facturas.component';
+import { TableProductosComponent } from './productos/table-productos/table-productos.component';
+import { TableTercerosComponent } from './terceros/table-terceros/table-terceros.component';
+import { TableEmpleadosComponent } from './empleados/table-empleados/table-empleados.component';
+import { TableNominaComponent } from './nomina/table-nomina/table-nomina.component';
+import { TableLiquidacionComponent } from './liquidacion/table-liquidacion/table-liquidacion.component';
+import { TablePromocionesComponent } from './promociones/table-promociones/table-promociones.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,6 +109,13 @@ import { TipoMovimientoSelectComponent } from './tipoMovimiento/tipo-movimiento-
     ProductosSelectComponent,
     PromocionesSelectComponent,
     TipoMovimientoSelectComponent,
+    TableFacturasComponent,
+    TableProductosComponent,
+    TableTercerosComponent,
+    TableEmpleadosComponent,
+    TableNominaComponent,
+    TableLiquidacionComponent,
+    TablePromocionesComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
