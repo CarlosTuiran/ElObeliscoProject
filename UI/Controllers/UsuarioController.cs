@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aplicacion.Request;
 using Aplicacion.Services.CrearServices;
+using Aplicacion.Services.ActualizarServices;
 using Domain.Models.Entities;
 using Infra.Datos;
 using Infra.Datos.Base;
@@ -19,6 +20,7 @@ namespace UI.InterfazWeb.Controllers
     {
         private readonly ObeliscoContext _context;
         private CrearUsuarioService _service;
+        private ActualizarUsuarioService _actualizarService;
         private UnitOfWork _unitOfWork;
 
         public UsuarioController(ObeliscoContext context)
@@ -40,11 +42,6 @@ namespace UI.InterfazWeb.Controllers
                 return NotFound();
             return Ok(usuario);
         }
-        /*public async Task<ActionResult<IEnumerable<Usuario>>> getUsuarios()
-        {
-            var data = await _context.Usuario.ToListAsync();
-            return Ok(data);
-        }*/
 
         [HttpPost]
         public async Task<IActionResult> CreateUsuario([FromBody] CrearUsuarioRequest usuario)
@@ -70,5 +67,17 @@ namespace UI.InterfazWeb.Controllers
             return Ok(usuario);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUsuario([FromRoute] int id, [FromBody] ActualizarUsuarioRequest usuario)
+        {
+            _actualizarService = new ActualizarUsuarioService(_unitOfWork);
+            var rta = _actualizarService.Ejecutar(usuario);
+            if (rta.isOk())
+            {
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("GetUsuario", new { id = usuario.EmpleadoId }, usuario);
+            }
+            return BadRequest(rta.Message);
+        }
     }
 }

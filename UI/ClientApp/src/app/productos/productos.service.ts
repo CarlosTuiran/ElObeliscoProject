@@ -26,4 +26,7 @@ export class ProductosService {
   updateProducto(producto: IProducto): Observable<IProducto> {
     return this.http.put<IProducto>(this.apiURL + "/" + producto.referencia, producto);
   }
+  top10Productos(): Observable<any[]>{
+    return this.http.get<any[]>(this.apiURL);
+  }
 }

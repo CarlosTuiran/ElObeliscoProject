@@ -72,6 +72,8 @@ import { TableEmpleadosComponent } from './empleados/table-empleados/table-emple
 import { TableNominaComponent } from './nomina/table-nomina/table-nomina.component';
 import { TableLiquidacionComponent } from './liquidacion/table-liquidacion/table-liquidacion.component';
 import { TablePromocionesComponent } from './promociones/table-promociones/table-promociones.component';
+import { InventarioPieChartComponent } from './reportes/inventario-pie-chart/inventario-pie-chart.component';
+import { ReportesComponent } from './reportes/reportes.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -116,6 +118,8 @@ import { TablePromocionesComponent } from './promociones/table-promociones/table
     TableNominaComponent,
     TableLiquidacionComponent,
     TablePromocionesComponent,
+    InventarioPieChartComponent,
+    ReportesComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -154,6 +158,7 @@ import { TablePromocionesComponent } from './promociones/table-promociones/table
       { path: 'liquidaciones', component: LiquidacionComponent },
       { path: 'total-liquidaciones', component: TotalLiquidacionComponent },
       { path: 'pruebasSinVS', component: PruebasSinVSComponent },
+      { path: 'reportes', component: ReportesComponent },
 
     ]),
     BrowserAnimationsModule

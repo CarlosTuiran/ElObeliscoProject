@@ -24,7 +24,7 @@ export class UsuariosService {
   }
 
   updateUsuario(usuario: IUsuario): Observable<IUsuario> {
-    return this.http.put<IUsuario>(this.apiURL + "/" + usuario.empleadoId.toString(), usuario);
+    return this.http.put<IUsuario>(this.apiURL + "/" + usuario.empleadoId, usuario);
   }
 
 }

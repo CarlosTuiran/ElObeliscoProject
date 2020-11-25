@@ -42,7 +42,7 @@ namespace UI.Controllers
                 return NotFound();
             return Ok(producto);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> CreateProducto([FromBody] CrearProductoRequest producto)
         {
@@ -78,6 +78,51 @@ namespace UI.Controllers
                 return CreatedAtAction("GetProducto", new { id = producto.Referencia }, producto);
             }
             return BadRequest(rta.Message);
+        }
+        
+        [HttpGet]
+        public List<top10Producto> top10Productos()
+        {
+            /*var rta = _context.Producto
+            .FromSqlRaw("select p.Descripcion, i.Cantidad from Producto p inner join Inventario i on i.Referencia = p.Referencia")
+            .ToList();*/
+            
+            /*var query = from p in _context.Set<Producto>()
+            join i in _context.Set<Inventario>()
+                on p.Referencia equals i.Referencia
+            select new { p.Descripcion, i.Cantidad };*/
+
+            var lista=new List<top10Producto>();
+            var productos=  _context.Inventario.Include(i=>i.Productos);
+            foreach (var i in productos)
+            {
+                foreach (var p in i.Productos)
+                {
+                    var item=new top10Producto();
+                    item.descripcion=p.Descripcion;
+                    item.cantidad=i.Cantidad;
+                    lista.Add(item);
+                }
+            }
+            
+            /*foreach (var item in rta)
+            {
+                top10Producto row = new top10Producto
+                {
+                    descripcion = item.descripcion.ToString(),
+                    cantidad = int.Parse(item[1].ToString())
+                };    
+            }*/
+            
+            //return query.ToList();
+            return lista;
+        }
+
+
+        public class top10Producto
+        {
+            public string descripcion;
+            public int cantidad ;
         }
     }
 }
