@@ -80,49 +80,21 @@ namespace UI.Controllers
             return BadRequest(rta.Message);
         }
         
-        [HttpGet]
-        public List<top10Producto> top10Productos()
+        //public IEnumerable<top10Producto> top10Productos()
+        //public async Task<ActionResult<top10Producto>> top10Productos()
+        [HttpGet("Top10Productos")]
+        public object Top10Productos()
         {
-            /*var rta = _context.Producto
-            .FromSqlRaw("select p.Descripcion, i.Cantidad from Producto p inner join Inventario i on i.Referencia = p.Referencia")
-            .ToList();*/
-            
-            /*var query = from p in _context.Set<Producto>()
-            join i in _context.Set<Inventario>()
-                on p.Referencia equals i.Referencia
-            select new { p.Descripcion, i.Cantidad };*/
-
-            var lista=new List<top10Producto>();
-            var productos=  _context.Inventario.Include(i=>i.Productos);
-            foreach (var i in productos)
-            {
-                foreach (var p in i.Productos)
-                {
-                    var item=new top10Producto();
-                    item.descripcion=p.Descripcion;
-                    item.cantidad=i.Cantidad;
-                    lista.Add(item);
-                }
-            }
-            
-            /*foreach (var item in rta)
-            {
-                top10Producto row = new top10Producto
-                {
-                    descripcion = item.descripcion.ToString(),
-                    cantidad = int.Parse(item[1].ToString())
-                };    
-            }*/
-            
-            //return query.ToList();
-            return lista;
-        }
-
-
-        public class top10Producto
-        {
-            public string descripcion;
-            public int cantidad ;
+            var result =  (from p in _context.Set<Producto>() 
+                         join i in  _context.Set<Inventario>() 
+                         on p.Referencia equals i.Referencia 
+                         select new 
+                         { 
+                             Descripcion = p.Descripcion, 
+                             Cantidad = i.Cantidad,
+                         }).OrderByDescending(i => i.Cantidad).Take(10).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
         }
     }
 }

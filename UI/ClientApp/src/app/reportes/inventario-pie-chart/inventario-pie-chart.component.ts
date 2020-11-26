@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
-import { ProductosService } from '../../productos/productos.service';
 import { element } from 'protractor';
+import { ReportesService } from '../reportes.service';
 
 @Component({
   selector: 'app-inventario-pie-chart',
@@ -29,37 +29,32 @@ export class InventarioPieChartComponent implements OnInit {
         'rgba(0,210,0,0.9)',
         'rgba(255,0,0,0.9)',
         'rgba(136,136,136,0.9)',
-        'rgba(200,200,0,0.9)',
-        'rgba(0,210,0,0.9)',
-        'rgba(255,0,0,0.9)',
-        'rgba(136,136,136,0.9)',
-        'rgba(136,136,136,0.9)'
+        'rgba(230,230,0,0.9)',
+        'rgba(100,210,0,0.9)',
+        'rgba(155,0,0,0.9)',
+        'rgba(236,136,136,0.9)',
+        'rgba(236,236,136,0.9)'
       ]
     }
   ];
-  productos:any;
-  producto:any;
-
-  constructor(private service: ProductosService) { }
+  public i =0;
+  constructor(private service: ReportesService) { }
 
   ngOnInit(): void {
-  
+    this.service.Top10Productos().subscribe(
+      data => {
+       
+        for(let item of data){
+          this.pieChartData[this.i] = item.cantidad,
+          this.pieChartLabels[this.i] = item.descripcion;
+          this.i=this.i+1;
+        }
+
+      }, error => console.error(error)
+  );
   }
 
-  loadData(event: any): void {
-        this.service.top10Productos().subscribe(
-        data => {
-         /* //const last = data.pop();
-          data.forEach(i => {
-            this.pieChartData[i] = data[i].cantidad,
-              this.pieChartLabels[i] = data[i].descripcion;
-          });
-          //this.pieChartData[0] = last;*/
-          console.log(data);
-        }, error => console.error(error)
-    );
-    
-  }
+  loadData(event: any): void {}
 
   
 

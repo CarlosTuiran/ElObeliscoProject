@@ -5,12 +5,9 @@
         <div class="input-group-prepend">
           <div class="input-group-text">
             <i class="fas fa-globe"></i>
+            <h3>Top 10 Productos en Inventario</h3>
           </div>
-        </div>
-        <select class="form-control" name="country" [(ngModel)]="country" (change)="loadData($event)">
-          <option [ngValue]="null" selected>Elige un País</option>
-          <option *ngFor="let date of d" [ngValue]="country">{{country.country}}</option>
-        </select>
+        </div>       
 
       </div>
     </div>
