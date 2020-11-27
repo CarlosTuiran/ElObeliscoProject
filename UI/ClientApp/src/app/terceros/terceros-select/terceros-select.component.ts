@@ -9,7 +9,7 @@ import { TercerosService } from '../terceros.service';
 })
 export class TercerosSelectComponent implements OnInit {
 
-  keyword='nombres';
+  keyword='nombre';
   data: ITercero[];
   item:ITercero;
   

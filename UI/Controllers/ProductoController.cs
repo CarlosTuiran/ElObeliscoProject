@@ -96,5 +96,24 @@ namespace UI.Controllers
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
         }
+
+        // Para la lista del costo total de los productos en el momento, se puede colocar los 10 o 20 aunque aja no c decides xD 
+        [HttpGet("CostoTotalProductos")]
+        public object CostoTotalProductos()
+        {
+            var result = (from p in _context.Set<Producto>()
+                          join i in _context.Set<Inventario>()
+                          on p.Referencia equals i.Referencia
+                          select new
+                          {
+                              Descripcion = p.Descripcion,
+                              CostoTotal = i.Cantidad * p.Costo,
+                          }).OrderByDescending(i => i.CostoTotal).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
+        }
+
+
+
     }
 }
