@@ -8,48 +8,48 @@
         
       <!-- referencia Column -->
        <ng-container matColumnDef="referencia">
-         <th mat-header-cell *matHeaderCellDef> referencia </th>
+         <th mat-header-cell *matHeaderCellDef> Referencia </th>
          <td *matCellDef="let element"> {{element.referencia}} </td>
        </ng-container>
        <!-- descripcion Column -->
        <ng-container matColumnDef="descripcion">
-        <th mat-header-cell *matHeaderCellDef> descripcion </th>
+        <th mat-header-cell *matHeaderCellDef> Descripcion </th>
         <td *matCellDef="let element"> {{element.descripcion}} </td>
       </ng-container>
       <!-- marca Column -->
       <ng-container matColumnDef="marca">
-        <th mat-header-cell *matHeaderCellDef> marca </th>
+        <th mat-header-cell *matHeaderCellDef> Marca </th>
         <td *matCellDef="let element"> {{element.marca}} </td>
       </ng-container>
       <!-- fabrica Column -->
       <ng-container matColumnDef="fabrica">
-        <th mat-header-cell *matHeaderCellDef> fabrica </th>
+        <th mat-header-cell *matHeaderCellDef> Fabrica </th>
         <td *matCellDef="let element"> {{element.fabrica}} </td>
       </ng-container>
       <!-- costo Column -->
       <ng-container matColumnDef="costo">
-        <th mat-header-cell *matHeaderCellDef> costo </th>
-        <td *matCellDef="let element"> {{element.costo}} </td>
+        <th mat-header-cell *matHeaderCellDef> Costo </th>
+        <td *matCellDef="let element"> {{element.costo | currency:'USD'}} </td>
       </ng-container>
       <!-- formatoVenta Column -->
       <ng-container matColumnDef="formatoVenta">
-        <th mat-header-cell *matHeaderCellDef> formatoVenta </th>
+        <th mat-header-cell *matHeaderCellDef> FormatoVenta </th>
         <td *matCellDef="let element"> {{element.formatoVenta}} </td>
       </ng-container>
       <!-- precioVenta Column -->
       <ng-container matColumnDef="precioVenta">
-        <th mat-header-cell *matHeaderCellDef> precioVenta </th>
-        <td *matCellDef="let element"> {{element.precioVenta}} </td>
+        <th mat-header-cell *matHeaderCellDef> PrecioVenta </th>
+        <td *matCellDef="let element"> {{element.precioVenta| currency:'USD'}} </td>
       </ng-container>
       <!-- iva Column -->
       <ng-container matColumnDef="iva">
-        <th mat-header-cell *matHeaderCellDef> iva </th>
-        <td *matCellDef="let element"> {{element.iva}} </td>
+        <th mat-header-cell *matHeaderCellDef> IVA </th>
+        <td *matCellDef="let element"> {{element.iva| percent: '2.1-2' }} </td>
       </ng-container>
       <!-- fecharegistro Column -->
       <ng-container matColumnDef="fechaRegistro">
-        <th mat-header-cell *matHeaderCellDef> fechaRegistro </th>
-        <td *matCellDef="let element"> {{element.fechaRegistro}} </td>
+        <th mat-header-cell *matHeaderCellDef> FechaRegistro </th>
+        <td *matCellDef="let element"> {{element.fechaRegistro| date: 'shortDate'}} </td>
       </ng-container>
       <!--Options-->
       <ng-container matColumnDef="options">

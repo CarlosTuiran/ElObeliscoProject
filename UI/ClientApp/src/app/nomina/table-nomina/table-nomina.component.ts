@@ -17,6 +17,7 @@ export class TableNominaComponent implements OnInit {
     'horasExtras',
     'salarioBase',
     'subTransporte'];
+    
     dataSource =new MatTableDataSource<INomina>(this.nominas);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;

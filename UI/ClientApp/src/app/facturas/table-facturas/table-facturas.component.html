@@ -24,32 +24,32 @@
       <!-- fechaPago Column -->
       <ng-container matColumnDef="fechaPago">
         <th mat-header-cell *matHeaderCellDef> FechaPago </th>
-        <td mat-cell mat-cell *matCellDef="let element"> {{element.fechaPago}} </td>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.fechaPago | date: 'shortDate'}} </td>
       </ng-container>
       <!-- subTotal Column -->
       <ng-container matColumnDef="subTotal">
         <th mat-header-cell *matHeaderCellDef> SubTotal </th>
-        <td mat-cell mat-cell *matCellDef="let element"> {{element.subTotal}} </td>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.subTotal | currency: 'USD'}} </td>
       </ng-container>
       <!-- valorDevolucion Column -->
       <ng-container matColumnDef="valorDevolucion">
         <th mat-header-cell *matHeaderCellDef> ValorDevolucion </th>
-        <td mat-cell mat-cell *matCellDef="let element"> {{element.valorDevolucion}} </td>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.valorDevolucion | currency: 'USD'}} </td>
       </ng-container>
       <!-- descuento Column -->
       <ng-container matColumnDef="descuento">
         <th mat-header-cell *matHeaderCellDef> Descuento </th>
-        <td mat-cell mat-cell *matCellDef="let element"> {{element.descuento}} </td>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.descuento | currency: 'USD'}} </td>
       </ng-container>
       <!-- iVA Column -->
       <ng-container matColumnDef="iVA">
         <th mat-header-cell *matHeaderCellDef> IVA </th>
-        <td mat-cell mat-cell *matCellDef="let element"> {{element.iVA}} </td>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.iVA| percent: '2.1-2' }} </td>
       </ng-container>
       <!-- abono Column -->
       <ng-container matColumnDef="abono">
         <th mat-header-cell *matHeaderCellDef> Abono </th>
-        <td mat-cell mat-cell *matCellDef="let element"> {{element.abono}} </td>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.abono| currency: 'USD'}} </td>
       </ng-container>
       <!-- estadoFactura Column -->
       <ng-container matColumnDef="estadoFactura">

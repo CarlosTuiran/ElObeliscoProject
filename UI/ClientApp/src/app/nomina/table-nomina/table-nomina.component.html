@@ -8,28 +8,28 @@
         
       <!-- idEmpleado Column -->
        <ng-container matColumnDef="idEmpleado">
-         <th mat-header-cell *matHeaderCellDef> idEmpleado </th>
+         <th mat-header-cell *matHeaderCellDef> IdEmpleado </th>
          <td *matCellDef="let element"> {{element.idEmpleado}} </td>
        </ng-container>
        <!-- diasTrabajados Column -->
        <ng-container matColumnDef="diasTrabajados">
-        <th mat-header-cell *matHeaderCellDef> diasTrabajados </th>
+        <th mat-header-cell *matHeaderCellDef> DiasTrabajados </th>
         <td *matCellDef="let element"> {{element.diasTrabajados}} </td>
       </ng-container>
       <!-- horasExtras Column -->
       <ng-container matColumnDef="horasExtras">
-        <th mat-header-cell *matHeaderCellDef> horasExtras </th>
+        <th mat-header-cell *matHeaderCellDef> HorasExtras </th>
         <td *matCellDef="let element"> {{element.horasExtras}} </td>
       </ng-container>
       <!-- salarioBase Column -->
       <ng-container matColumnDef="salarioBase">
-        <th mat-header-cell *matHeaderCellDef> salarioBase </th>
-        <td *matCellDef="let element"> {{element.salarioBase}} </td>
+        <th mat-header-cell *matHeaderCellDef> SalarioBase </th>
+        <td *matCellDef="let element"> {{element.salarioBase | currency: 'USD'}} </td>
       </ng-container>
-      <!-- subTrasporte Column -->
-      <ng-container matColumnDef="subTrasporte">
-        <th mat-header-cell *matHeaderCellDef> subTrasporte </th>
-        <td *matCellDef="let element"> {{element.subTrasporte}} </td>
+      <!-- subTransporte Column -->
+      <ng-container matColumnDef="subTransporte">
+        <th mat-header-cell *matHeaderCellDef> SubTransporte </th>
+        <td *matCellDef="let element"> {{element.subTransporte | currency: 'USD'}} </td>
       </ng-container>
        
       <!--Options-->

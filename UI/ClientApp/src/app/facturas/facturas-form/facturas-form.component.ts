@@ -13,9 +13,10 @@ import { IBodega } from 'src/app/bodegas/bodegas.component';
 import { IPromocion } from 'src/app/promociones/promociones.component';
 import { Observable, ReplaySubject, Subject, Subscription } from 'rxjs';
 import { MatSelect } from '@angular/material/select';
-import { debounceTime, delay, filter, map, take, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, delay, filter, map, take, takeUntil, tap, startWith } from 'rxjs/operators';
 import { IMFactura } from '../facturas.component';
 import { BodegasService } from 'src/app/bodegas/bodegas.service';
+import { ProductosService } from '../../productos/productos.service';
 
 @Component({
   selector: 'app-facturas-form',
@@ -23,16 +24,17 @@ import { BodegasService } from 'src/app/bodegas/bodegas.service';
   styleUrls: ['./facturas-form.component.css']
 })
 export class FacturasFormComponent implements OnInit {
-
+  
   constructor(private fb: FormBuilder, private facturasService: FacturasService,
-     private router: Router, private activatedRoute: ActivatedRoute, 
-     private tercerosService: TercerosService, private empleadosService: EmpleadosService,
-     private tipoMovimientoService: TipoMovimientosService, 
-     private bodegasService: BodegasService) { }
-
-  modoEdicion: boolean = false;
-  empleados: IEmpleado[]=[];
-  terceros: ITercero[];
+    private router: Router, private activatedRoute: ActivatedRoute, 
+    private tercerosService: TercerosService, private empleadosService: EmpleadosService,
+    private tipoMovimientoService: TipoMovimientosService, 
+    private bodegasService: BodegasService, private productosService: ProductosService) { }
+    
+    modoEdicion: boolean = false;
+    empleados: IEmpleado[]=[];
+    terceros: ITercero[];
+    productos: IProducto[];
    
   //Selecciones escogidas
   currentEmpleado="";
@@ -59,6 +61,9 @@ export class FacturasFormComponent implements OnInit {
   @ViewChild('empleadoSelect', { static: true }) singleEmpleadoSelect: MatSelect;
       /** indicate search operation is in progress */
    public searching = false;
+  //Filtros selects empleado
+  
+  filteredOptions: Observable<IProducto[]>;
 
   //Otro Intento del select
 /*@Input() set empleados(dataEmpleados:IEmpleado[]){
@@ -79,10 +84,10 @@ private _data:IEmpleado[];*/
    tipoMovimiento:['', [Validators.required]],
    fechaPago:[''],
    //subTotal :['', [Validators.required, Validators.pattern(/^\d+$/)]],
-   valorDevolucion :['', [Validators.required, Validators.pattern(/^\d+$/)]],
-   descuento :['', [Validators.required, Validators.pattern(/^\d+$/)]],
-   iVA :['', [Validators.required, Validators.pattern(/^\d+$/)]],
-   abono :['', [Validators.required, Validators.pattern(/^\d+$/)]],
+   valorDevolucion :['0', [Validators.pattern(/^\d+$/)]],
+   descuento :['0', [Validators.pattern(/^\d+$/)]],
+   iVA :['0', [ Validators.pattern(/^\d+$/)]],
+   abono :['0', [ Validators.pattern(/^\d+$/)]],
    estadoFactura:['', [Validators.required]],
    dfacturas:this.fb.array([])
   });
@@ -90,8 +95,10 @@ private _data:IEmpleado[];*/
 
   ngOnInit() {
     /*this.tercerosService.getTerceros()
-      .subscribe(terceros => this.terceros = terceros,
-        error => console.error(error));
+      .subscribe(terceros => {this.terceros = terceros;
+      console.log(this.terceros); console.log(terceros);},
+        error => console.error(error));*/
+        /*
     this.empleadosService.getEmpleados()
       .subscribe(empleados=> this.empleados = empleados,
         error => console.error(error) 
@@ -99,7 +106,9 @@ private _data:IEmpleado[];*/
     this.tipoMovimientoService.getTipoMovimientos()
         .subscribe(tipoMovimientos => this.tipoMovimientos = tipoMovimientos,
           error => console.error(error));*/
-    
+      
+      
+              
     this.filteredEstados.next(this.estados.slice());
     
     // listen for search field value changes
@@ -111,8 +120,22 @@ private _data:IEmpleado[];*/
     this.bodegas=this.bodegasService.getBodegas()
        
   }
-  
-  
+  //obtiene la lista de productos de forma asincrona
+  getInfo(productos:IProducto[]){
+    this.productos=productos;
+    console.log(this.productos);
+    this.filteredOptions = this.referencia.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.productos.filter(option => option.descripcion.toLowerCase().includes(filterValue));
+  }
+
   ngAfterViewInit() {
     this.setInitialValue();
   }
@@ -188,6 +211,7 @@ private _data:IEmpleado[];*/
   get cantidad() {
     return this.dFacturaFormGroup.get('cantidad');
   }
+  
   agregarDFactura(){
     this.dFacturaFormGroup=this.fb.group({
       referencia :['', [Validators.required]],
@@ -196,6 +220,12 @@ private _data:IEmpleado[];*/
       cantidad:['1', [Validators.required, Validators.pattern(/^\d+$/)]]            
     });
     this.dfacturas.push(this.dFacturaFormGroup);
+    
+      this.productosService.getProductos()
+          .subscribe(productos=>{ this.getInfo(productos)},
+            error => console.error(error) 
+          );
+    
   }
   removerDFactura(indice:number){
     this.dfacturas.removeAt(indice);
