@@ -79,5 +79,9 @@ namespace UI.Controllers
             }
             return BadRequest(rta.Message);
         }
+        [HttpGet]
+        public IEnumerable<any> Top10Productos(){
+            
+        } 
     }
 }
