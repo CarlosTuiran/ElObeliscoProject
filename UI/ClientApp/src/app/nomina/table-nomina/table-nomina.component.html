@@ -1,1 +1,58 @@
-<p>table-nomina works!</p>
+<div class="table-responsive">
+    <mat-form-field>
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="IdEmpleado" #input>
+    </mat-form-field>
+    
+    <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        
+      <!-- idEmpleado Column -->
+       <ng-container matColumnDef="idEmpleado">
+         <th mat-header-cell *matHeaderCellDef> idEmpleado </th>
+         <td *matCellDef="let element"> {{element.idEmpleado}} </td>
+       </ng-container>
+       <!-- diasTrabajados Column -->
+       <ng-container matColumnDef="diasTrabajados">
+        <th mat-header-cell *matHeaderCellDef> diasTrabajados </th>
+        <td *matCellDef="let element"> {{element.diasTrabajados}} </td>
+      </ng-container>
+      <!-- horasExtras Column -->
+      <ng-container matColumnDef="horasExtras">
+        <th mat-header-cell *matHeaderCellDef> horasExtras </th>
+        <td *matCellDef="let element"> {{element.horasExtras}} </td>
+      </ng-container>
+      <!-- salarioBase Column -->
+      <ng-container matColumnDef="salarioBase">
+        <th mat-header-cell *matHeaderCellDef> salarioBase </th>
+        <td *matCellDef="let element"> {{element.salarioBase}} </td>
+      </ng-container>
+      <!-- subTrasporte Column -->
+      <ng-container matColumnDef="subTrasporte">
+        <th mat-header-cell *matHeaderCellDef> subTrasporte </th>
+        <td *matCellDef="let element"> {{element.subTrasporte}} </td>
+      </ng-container>
+       
+      <!--Options-->
+      <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef>Opciones</th>
+        <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+        <button mat-icon-button [routerLink]='["/nomina-editar/" + element.idEmpleado]'>
+          <mat-icon>launch</mat-icon></button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+      <!-- Row shown when there is no matching data. -->
+      <tr mat-row  *matNoDataRow>
+        <td mat-cell colspan="8">No encontrado "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>    
+</div>
+  
+
+
+

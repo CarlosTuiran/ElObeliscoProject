@@ -79,12 +79,6 @@ namespace UI.Controllers
             }
             return BadRequest(rta.Message);
         }
-<<<<<<< HEAD
-        [HttpGet]
-        public IEnumerable<any> Top10Productos(){
-            
-        } 
-=======
         
         //public IEnumerable<top10Producto> top10Productos()
         //public async Task<ActionResult<top10Producto>> top10Productos()
@@ -121,6 +115,5 @@ namespace UI.Controllers
 
 
 
->>>>>>> 6e93d63f08c97edfe3d97d1ed5b9436f3b45ee7a
     }
 }
