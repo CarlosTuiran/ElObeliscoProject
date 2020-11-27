@@ -67,10 +67,10 @@ namespace Infra.Datos
             modelBuilder.Entity<TipoMovimiento>().HasData(
                 new TipoMovimiento{idMovimiento = 5, Nombre = "Devolucion", Id = 5
                 });
-            modelBuilder.Entity<Tiempo>().HasData(
+            /*modelBuilder.Entity<Tiempo>().HasData(
                 new Tiempo{ Id=12, Año=2020, Mes=1, Dia=3, DiaDelAño=3, Fecha=Convert.ToDateTime("03-01-2020"), NombreDia="Lunes",
                 NombreDiaCorto="LUN", NombreMes="Enero", NombreMesCorto="ENE", SemanaDelAño=1, Semestre=1, Trimestre=1
-                });
+                });*/
             modelBuilder.Entity<MFactura>().HasData(
                 new MFactura() {idMfactura=1000, TipoMovimiento="Compra", FechaFactura=12, EstadoFactura="Pagada",
                 EmpleadoId=1, TercerosId=1, FechaPago=12, IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=1, TipoMovimientoId=1

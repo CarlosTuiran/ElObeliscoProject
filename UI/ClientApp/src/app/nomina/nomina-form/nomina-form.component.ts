@@ -33,12 +33,12 @@ export class NominaFormComponent implements OnInit {
         error => console.error(error));
 
     this.activatedRoute.params.subscribe(params => {
-      if (params["id"] == undefined) {
+      if (params["idEmpleado"] == undefined) {
         return;
       }
 
       this.modoEdicion = true;
-      this.empleadoId = params["id"];
+      this.empleadoId = params["idEmpleado"];
       this.nominaService.getNomina(this.empleadoId).subscribe(nomina => this.cargarFormulario(nomina),
         error => console.error(error));
     });
@@ -55,8 +55,6 @@ export class NominaFormComponent implements OnInit {
 
   save() {
     let nomina: INomina = Object.assign({}, this.formGroup.value);
-    console.table(nomina); //ver usuario por consola
-
 
     if (this.modoEdicion) {
       // edita un usuario

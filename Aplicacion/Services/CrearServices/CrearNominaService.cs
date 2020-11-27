@@ -21,7 +21,7 @@ namespace Aplicacion.Services.CrearServices
         public CrearNominaResponse Ejecutar(CrearNominaRequest request)
         {
 
-            var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina == request.IdNomina || t.IdEmpleado == request.IdEmpleado);
+            var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina == request.IdNomina && t.IdEmpleado == request.IdEmpleado);
             if (nomina == null)
             {
                 Nomina newNomina = new Nomina(request.IdNomina, request.IdEmpleado, request.DiasTrabajados, request.HorasExtras,request.SalarioBase, request.SubTransporte);

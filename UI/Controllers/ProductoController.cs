@@ -42,7 +42,7 @@ namespace UI.Controllers
                 return NotFound();
             return Ok(producto);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> CreateProducto([FromBody] CrearProductoRequest producto)
         {
@@ -79,9 +79,48 @@ namespace UI.Controllers
             }
             return BadRequest(rta.Message);
         }
+<<<<<<< HEAD
         [HttpGet]
         public IEnumerable<any> Top10Productos(){
             
         } 
+=======
+        
+        //public IEnumerable<top10Producto> top10Productos()
+        //public async Task<ActionResult<top10Producto>> top10Productos()
+        [HttpGet("Top10Productos")]
+        public object Top10Productos()
+        {
+            var result =  (from p in _context.Set<Producto>() 
+                         join i in  _context.Set<Inventario>() 
+                         on p.Referencia equals i.Referencia 
+                         select new 
+                         { 
+                             Descripcion = p.Descripcion, 
+                             Cantidad = i.Cantidad,
+                         }).OrderByDescending(i => i.Cantidad).Take(10).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
+        }
+
+        // Para la lista del costo total de los productos en el momento, se puede colocar los 10 o 20 aunque aja no c decides xD 
+        [HttpGet("CostoTotalProductos")]
+        public object CostoTotalProductos()
+        {
+            var result = (from p in _context.Set<Producto>()
+                          join i in _context.Set<Inventario>()
+                          on p.Referencia equals i.Referencia
+                          select new
+                          {
+                              Descripcion = p.Descripcion,
+                              CostoTotal = i.Cantidad * p.Costo,
+                          }).OrderByDescending(i => i.CostoTotal).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
+        }
+
+
+
+>>>>>>> 6e93d63f08c97edfe3d97d1ed5b9436f3b45ee7a
     }
 }
