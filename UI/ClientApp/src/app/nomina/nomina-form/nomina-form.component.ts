@@ -18,6 +18,7 @@ export class NominaFormComponent implements OnInit {
 
   modoEdicion: boolean = false;
   empleadoId: number;
+  nominaId: string;
 
   formGroup = this.fb.group({
     idEmpleado: ['', [Validators.required]],
@@ -33,13 +34,14 @@ export class NominaFormComponent implements OnInit {
         error => console.error(error));
 
     this.activatedRoute.params.subscribe(params => {
-      if (params["idEmpleado"] == undefined) {
+      if (params["id"] == undefined) {
         return;
       }
 
       this.modoEdicion = true;
-      this.empleadoId = params["idEmpleado"];
-      this.nominaService.getNomina(this.empleadoId).subscribe(nomina => this.cargarFormulario(nomina),
+      this.empleadoId = params["id"];
+      this.nominaId = params["idN"];
+      this.nominaService.getNomina(this.nominaId, this.empleadoId).subscribe(nomina => this.cargarFormulario(nomina),
         error => console.error(error));
     });
   }

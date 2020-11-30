@@ -1,4 +1,3 @@
-import { DataTablesResponse } from '../tablas/data-tables-response';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UsuariosService } from './usuarios.service';
 import { MatTableDataSource } from '@angular/material/table';

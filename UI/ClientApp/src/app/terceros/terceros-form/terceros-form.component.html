@@ -13,7 +13,14 @@
         <input class="form-control"
                id="nitId"
                type="text"
-               formControlName="nit" />
+               formControlName="nit"
+               *ngIf="!modoEdicion"/>
+        <input class="form-control"
+               id="nitId"
+               type="text"
+               formControlName="nit"
+               *ngIf="modoEdicion"
+               disabled/>
         <div class="alert alert-danger" *ngIf="((nit.touched || nit.dirty )&& nit.invalid)">
           <span *ngIf="nit.errors.required">
             El campo Nit es requerido

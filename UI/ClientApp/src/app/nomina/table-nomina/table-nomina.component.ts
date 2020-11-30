@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { INomina } from '../nomina.component';
+import { INomina, INominaPago } from '../nomina.component';
 import { NominaService } from '../nomina.service';
+import { NominaComponent } from '../nomina.component';
+import { LiquidacionService } from '../../liquidacion/liquidacion.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-nomina',
@@ -16,13 +19,14 @@ export class TableNominaComponent implements OnInit {
     'diasTrabajados',
     'horasExtras',
     'salarioBase',
-    'subTransporte'];
+    'subTransporte',
+    'options'];
     
     dataSource =new MatTableDataSource<INomina>(this.nominas);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
-  constructor (private nominaService: NominaService){}
+  constructor(private nominaService: NominaService, private liquidacionService: LiquidacionService, private router: Router){}
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -37,6 +41,18 @@ export class TableNominaComponent implements OnInit {
     .subscribe(nominas => this.dataSource.data = nominas,
       error => console.error(error));
 
+  }
+
+  Pagar(idNomina: string, idEmpleado: number) {
+    let nomina: INominaPago = { 'idNomina': idNomina, 'idEmpleado': idEmpleado };
+    console.table(nomina);
+    this.liquidacionService.createLiquidacion(nomina)
+      .subscribe(usuario => this.onSaveSuccess(),
+        error => console.error(error));
+  }
+
+  onSaveSuccess() {
+    this.router.navigate(["/liquidaciones"]);
   }
 
 }

@@ -33,7 +33,7 @@ namespace Aplicacion.Services.ActualizarServices
                 nomina.SubTransporte = request.SubTransporte;
                 _unitOfWork.NominaServiceRepository.Edit(nomina);
                 _unitOfWork.Commit();
-                return new ActualizarNominaResponse() { Message = $"Empleado en nomina Actualizado Exitosamente" };
+                return new ActualizarNominaResponse() { Message = $"Empleado en Nomina Actualizado Exitosamente" };
             }
         }
     }

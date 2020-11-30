@@ -14,7 +14,7 @@ export class TableUsuariosComponent  implements OnInit {
   
   
   usuarios!:IUsuario[];  
-  displayedColumns: string[] = ['nombre', 'empleadoId', 'tipo', 'options'];
+  displayedColumns: string[] = ['nombre', 'tipo', 'options'];
   dataSource =new MatTableDataSource<IUsuario>(this.usuarios);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;

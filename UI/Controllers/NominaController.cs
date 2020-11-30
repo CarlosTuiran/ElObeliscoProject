@@ -35,7 +35,7 @@ namespace UI.InterfazWeb.Controllers
             return _context.Nomina;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{idN}/{id}")]
         public async Task<IActionResult> GetNomina([FromRoute] string idN, int id)
         {
             Nomina nomina = await _context.Nomina.SingleOrDefaultAsync(t => t.IdEmpleado == id && t.IdNomina == idN);

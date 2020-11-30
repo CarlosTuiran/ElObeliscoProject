@@ -20,7 +20,8 @@ export class TableTercerosComponent implements OnInit {
     'celular',
     'correo',
     'direccion',
-    'descripcion'];
+    'descripcion',
+    'options'];
   dataSource =new MatTableDataSource<ITercero>(this.terceros);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;

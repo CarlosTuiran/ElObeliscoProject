@@ -53,7 +53,7 @@ namespace Aplicacion.Services.CrearServices
                     {
                         _unitOfWork.TotalLiquidacionServiceRepository.Add(newTotalLiquidacion);
                         _unitOfWork.Commit();
-                        return new CrearTotalLiquidacionResponse() { Message = $"Crear Total Liquidacion Exitosamente" };
+                        return new CrearTotalLiquidacionResponse() { Message = $"Total Liquidacion Creado Exitosamente" };
                     }
                 }
                 

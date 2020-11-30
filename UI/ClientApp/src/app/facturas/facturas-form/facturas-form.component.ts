@@ -124,17 +124,17 @@ private _data:IEmpleado[];*/
   getInfo(productos:IProducto[]){
     this.productos=productos;
     console.log(this.productos);
-    this.filteredOptions = this.referencia.valueChanges
+    /*this.filteredOptions = this.referencia.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filter(value))
-      );
+      );*/
   }
-  private _filter(value: string): string[] {
+  /*private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.productos.filter(option => option.descripcion.toLowerCase().includes(filterValue));
-  }
+    //return this.productos.filter(option => option.descripcion.toLowerCase().includes(filterValue));
+  }*/
 
   ngAfterViewInit() {
     this.setInitialValue();

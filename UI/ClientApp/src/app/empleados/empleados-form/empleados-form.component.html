@@ -13,7 +13,14 @@
         <input class="form-control"
                id="idEmpleadoId"
                type="text"
-               formControlName="idEmpleado" />
+               formControlName="idEmpleado"
+               *ngIf="!modoEdicion" />
+        <input class="form-control"
+               id="idEmpleadoId"
+               type="text"
+               formControlName="idEmpleado"
+               *ngIf="modoEdicion"
+               disabled/>
         <div class="alert alert-danger" *ngIf="((idEmpleado.touched || idEmpleado.dirty )&& idEmpleado.invalid)">
           <span *ngIf="idEmpleado.errors.required">
             El campo Identificacion Empleado es requerido

@@ -13,7 +13,14 @@
         <input class="form-control"
                id="referenciaId"
                type="text"
-               formControlName="referencia" />
+               formControlName="referencia"
+               *ngIf="!modoEdicion" />
+        <input class="form-control"
+               id="referenciaId"
+               type="text"
+               formControlName="referencia"
+               *ngIf="modoEdicion"
+               disabled/>
         <div class="alert alert-danger" *ngIf="((referencia.touched || referencia.dirty )&& referencia.invalid)">
           <span *ngIf="referencia.errors.required">
             El campo Referencia es requerido

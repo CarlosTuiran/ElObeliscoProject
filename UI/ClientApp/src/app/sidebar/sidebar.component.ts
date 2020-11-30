@@ -13,13 +13,13 @@ export class SidebarComponent implements OnDestroy {
     { name: "home", route: "", icon:"home" },
     { name: "Gestión de Usuarios", route: "usuarios", icon:"supervised_user_circle" },
     { name: "Gestión de Productos", route: "productos", icon: "assignment" },
-    { name: "Gestión de Terceros", route: "terceros", icon: "perm_contact_calendar" },
+    { name: "Gestión de Terceros", route: "terceros", icon: "local_shipping" },
     { name: "Facturacion", route: "facturas", icon: "shopping_bag" },
     { name: "Gestión de Empleados", route: "empleados", icon: "perm_contact_calendar" },
-    { name: "Gestión de Nomina", route: "nominas", icon: "perm_contact_calendar" },
-    { name: "Liquidaciones", route: "liquidaciones", icon: "perm_contact_calendar" },
-    { name: "Total Liquidaciones", route: "total-liquidaciones", icon: "perm_contact_calendar" },
-    { name: "Reportes", route: "reportes", icon: "perm_contact_calendar" }
+    { name: "Gestión de Nomina", route: "nominas", icon: "payments" },
+    { name: "Liquidaciones", route: "liquidaciones", icon: "monetization_on" },
+    { name: "Total Liquidaciones", route: "total-liquidaciones", icon: "monetization_on" },
+    { name: "Reportes", route: "reportes", icon: "analytics" }
 
   ]
   

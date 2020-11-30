@@ -35,12 +35,12 @@ export class UsuariosFormComponent implements OnInit {
           error => console.error(error));
 
     this.activatedRoute.params.subscribe(params => {
-      if (params["empleadoId"] == undefined) {
+      if (params["id"] == undefined) {
         return;
       }
 
       this.modoEdicion = true;
-      this.usuarioId = params["empleadoId"];
+      this.usuarioId = params["id"];
       this.usuariosService.getUsuario(this.usuarioId.toString()).subscribe(usuario => this.cargarFormulario(usuario),
         error => console.error(error));
     });

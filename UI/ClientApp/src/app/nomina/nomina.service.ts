@@ -15,8 +15,8 @@ export class NominaService {
     return this.http.get<INomina[]>(this.apiURL);
   }
 
-  getNomina(idEmpleado: number): Observable<INomina> {
-    return this.http.get<INomina>(this.apiURL + '/' + idEmpleado);
+  getNomina(idNomina: string, idEmpleado: number): Observable<INomina> {
+    return this.http.get<INomina>(this.apiURL + '/' + idNomina + '/' + idEmpleado);
   }
 
   createNomina(nomina: INomina): Observable<INomina> {

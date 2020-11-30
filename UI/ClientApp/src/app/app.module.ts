@@ -154,7 +154,7 @@ import { ReportesComponent } from './reportes/reportes.component';
       { path: 'empleados-editar/:id', component: EmpleadosFormComponent },
       { path: 'nominas', component: NominaComponent },
       { path: 'nominas-crear', component: NominaFormComponent },
-      { path: 'nominas-editar/:id', component: NominaFormComponent },
+      { path: 'nominas-editar/:idN/:id', component: NominaFormComponent },
       { path: 'liquidaciones', component: LiquidacionComponent },
       { path: 'total-liquidaciones', component: TotalLiquidacionComponent },
       { path: 'pruebasSinVS', component: PruebasSinVSComponent },

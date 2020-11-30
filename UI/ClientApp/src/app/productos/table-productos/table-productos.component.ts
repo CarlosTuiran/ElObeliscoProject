@@ -20,7 +20,8 @@ export class TableProductosComponent implements OnInit {
     'costo',
     'precioVenta',
     'iva',
-    'fechaRegistro'];
+    'fechaRegistro',
+    'options'];
   dataSource =new MatTableDataSource<IProducto>(this.productos);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;

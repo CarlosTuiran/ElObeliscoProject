@@ -22,7 +22,8 @@ export class TableFacturasComponent implements OnInit {
     'descuento',
     'iVA',
     'abono',
-    'estadoFactura'
+    'estadoFactura',
+    'options'
 ];
   dataSource =new MatTableDataSource<IMFactura>(this.facturas);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
