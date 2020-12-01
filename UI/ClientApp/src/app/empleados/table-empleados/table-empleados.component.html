@@ -1,1 +1,67 @@
-<p>table-empleados works!</p>
+<div class="table-responsive">
+    <mat-form-field>
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Descripcion" #input>
+    </mat-form-field>
+    
+    <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        
+      <!-- idEmpleado Column -->
+       <ng-container matColumnDef="idEmpleado">
+         <th mat-header-cell *matHeaderCellDef> IdEmpleado </th>
+         <td *matCellDef="let element"> {{element.idEmpleado}} </td>
+       </ng-container>
+       <!-- nombres Column -->
+       <ng-container matColumnDef="nombres">
+        <th mat-header-cell *matHeaderCellDef> Nombres </th>
+        <td *matCellDef="let element"> {{element.nombres}} </td>
+      </ng-container>
+      <!-- apellidos Column -->
+      <ng-container matColumnDef="apellidos">
+        <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+        <td *matCellDef="let element"> {{element.apellidos}} </td>
+      </ng-container>
+      <!-- cargo Column -->
+      <ng-container matColumnDef="cargo">
+        <th mat-header-cell *matHeaderCellDef> Cargo </th>
+        <td *matCellDef="let element"> {{element.cargo}} </td>
+      </ng-container>
+      <!-- celular Column -->
+      <ng-container matColumnDef="celular">
+        <th mat-header-cell *matHeaderCellDef> Celular </th>
+        <td *matCellDef="let element"> {{element.celular}} </td>
+      </ng-container>
+      <!-- correo Column -->
+      <ng-container matColumnDef="correo">
+        <th mat-header-cell *matHeaderCellDef> Correo </th>
+        <td *matCellDef="let element"> {{element.correo}} </td>
+      </ng-container>
+      <!-- direccion Column -->
+      <ng-container matColumnDef="direccion">
+        <th mat-header-cell *matHeaderCellDef> Direccion </th>
+        <td *matCellDef="let element"> {{element.direccion}} </td>
+      </ng-container>
+      <!--Options-->
+      <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef>Opciones</th>
+        <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+        <button mat-icon-button [routerLink]='["/empleados-editar/" + element.idEmpleado]'>
+          <mat-icon>launch</mat-icon></button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+      <!-- Row shown when there is no matching data. -->
+      <tr mat-row  *matNoDataRow>
+        <td mat-cell colspan="8">No encontrado "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>    
+</div>
+  
+
+
+

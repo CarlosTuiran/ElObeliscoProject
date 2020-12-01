@@ -1,0 +1,78 @@
+<div class="table-responsive">
+    <mat-form-field>
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Descripcion" #input>
+    </mat-form-field>
+    
+    <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        'mes',
+        'anio',
+        'valorTotalNomina',
+        'sena',
+        'icbf',
+        'comfacesar',
+        'total',
+        'nominaId'        
+      <!-- mes Column -->
+       <ng-container matColumnDef="mes">
+         <th mat-header-cell *matHeaderCellDef> Mes </th>
+         <td *matCellDef="let element"> {{element.mes}} </td>
+       </ng-container>
+       <!-- anio Column -->
+       <ng-container matColumnDef="anio">
+        <th mat-header-cell *matHeaderCellDef> Año </th>
+        <td *matCellDef="let element"> {{element.anio}} </td>
+      </ng-container>
+      <!-- valorTotalNomina Column -->
+      <ng-container matColumnDef="valorTotalNomina">
+        <th mat-header-cell *matHeaderCellDef> ValorTotalNomina </th>
+        <td *matCellDef="let element"> {{element.valorTotalNomina| currency: 'USD'}} </td>
+      </ng-container>
+      <!-- sena Column -->
+      <ng-container matColumnDef="sena">
+        <th mat-header-cell *matHeaderCellDef> SENA </th>
+        <td *matCellDef="let element"> {{element.sena| currency: 'USD'}} </td>
+      </ng-container>
+      <!-- icbf Column -->
+      <ng-container matColumnDef="icbf">
+        <th mat-header-cell *matHeaderCellDef> ICBF </th>
+        <td *matCellDef="let element"> {{element.icbf| currency: 'USD'}} </td>
+      </ng-container>
+      <!-- confacesar Column -->
+      <ng-container matColumnDef="comfacesar">
+        <th mat-header-cell *matHeaderCellDef> ComfaCesar </th>
+        <td *matCellDef="let element"> {{element.comfacesar| currency: 'USD'}} </td>
+      </ng-container>
+      <!-- total Column -->
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef> Total </th>
+        <td *matCellDef="let element"> {{element.total| currency: 'USD'}} </td>
+      </ng-container>
+      <!-- nominaId Column -->
+      <ng-container matColumnDef="nominaId">
+        <th mat-header-cell *matHeaderCellDef> NominaId </th>
+        <td *matCellDef="let element"> {{element.nominaId}} </td>
+      </ng-container>
+      <!--Options-->
+      <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef>Opciones</th>
+        <td mat-cell *matCellDef="let element">
+        
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+      <!-- Row shown when there is no matching data. -->
+      <tr mat-row  *matNoDataRow>
+        <td mat-cell colspan="8">No encontrado "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>    
+</div>
+  
+
+
+
+

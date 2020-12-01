@@ -1,1 +1,89 @@
-<p>table-liquidacion works!</p>
+<div class="table-responsive">
+    <mat-form-field>
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Descripcion" #input>
+    </mat-form-field>
+    
+    <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        
+      <!-- nominaId Column -->
+       <ng-container matColumnDef="nominaId">
+         <th mat-header-cell *matHeaderCellDef> NominaId </th>
+         <td *matCellDef="let element"> {{element.nominaId}} </td>
+       </ng-container>
+       <!-- idEmpleado Column -->
+       <ng-container matColumnDef="idEmpleado">
+        <th mat-header-cell *matHeaderCellDef> IdEmpleado </th>
+        <td *matCellDef="let element"> {{element.idEmpleado}} </td>
+      </ng-container>
+      <!-- mes Column -->
+      <ng-container matColumnDef="mes">
+        <th mat-header-cell *matHeaderCellDef> Mes </th>
+        <td *matCellDef="let element"> {{element.mes}} </td>
+      </ng-container>
+      <!-- anio Column -->
+      <ng-container matColumnDef="anio">
+        <th mat-header-cell *matHeaderCellDef> año </th>
+        <td *matCellDef="let element"> {{element.anio}} </td>
+      </ng-container>
+      <!-- sueldoOrdinario Column -->
+      <ng-container matColumnDef="sueldoOrdinario">
+        <th mat-header-cell *matHeaderCellDef> SueldoOrdinario </th>
+        <td *matCellDef="let element"> {{element.sueldoOrdinario| currency: 'USD'}} </td>
+      </ng-container>
+      <!-- subTransporte Column -->
+      <ng-container matColumnDef="subTransporte">
+        <th mat-header-cell *matHeaderCellDef> SubTransporte </th>
+        <td *matCellDef="let element"> {{element.subTransporte| currency: 'USD'}} </td>
+      </ng-container>
+      <!-- totalDevengado Column -->
+      <ng-container matColumnDef="totalDevengado">
+        <th mat-header-cell *matHeaderCellDef> TotalDevengado </th>
+        <td *matCellDef="let element"> {{element.totalDevengado| currency: 'USD'}} </td>
+      </ng-container>
+      <!-- salud Column -->
+      <ng-container matColumnDef="salud">
+        <th mat-header-cell *matHeaderCellDef> Salud </th>
+        <td *matCellDef="let element"> {{element.salud| currency: 'USD'}} </td>
+      </ng-container>
+      <!-- pension Column -->
+      <ng-container matColumnDef="pension">
+        <th mat-header-cell *matHeaderCellDef> Pension </th>
+        <td *matCellDef="let element"> {{element.pension| currency: 'USD'}} </td>
+      </ng-container>
+      <!-- totalDeducido Column -->
+      <ng-container matColumnDef="totalDeducido">
+        <th mat-header-cell *matHeaderCellDef> TotalDeducido </th>
+        <td *matCellDef="let element"> {{element.totalDeducido| currency: 'USD'}} </td>
+      </ng-container>
+      <!-- totalPagar Column -->
+      <ng-container matColumnDef="totalPagar">
+        <th mat-header-cell *matHeaderCellDef> TotalPagar </th>
+        <td *matCellDef="let element"> {{element.totalPagar| currency: 'USD'}} </td>
+      </ng-container>
+      
+      <!--Options-->
+      <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef>Opciones</th>
+        <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+        <button mat-icon-button [routerLink]='["/liquidacionks-editar/" + element.idEmpleado]'>
+          <mat-icon>launch</mat-icon></button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+      <!-- Row shown when there is no matching data. -->
+      <tr mat-row  *matNoDataRow>
+        <td mat-cell colspan="8">No encontrado "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>    
+</div>
+  
+
+
+
+

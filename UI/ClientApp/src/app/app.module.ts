@@ -74,6 +74,7 @@ import { TableLiquidacionComponent } from './liquidacion/table-liquidacion/table
 import { TablePromocionesComponent } from './promociones/table-promociones/table-promociones.component';
 import { InventarioPieChartComponent } from './reportes/inventario-pie-chart/inventario-pie-chart.component';
 import { ReportesComponent } from './reportes/reportes.component';
+import { TableTotalLiquidacionComponent } from './total-liquidacion/table-total-liquidacion/table-total-liquidacion.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,6 +121,7 @@ import { ReportesComponent } from './reportes/reportes.component';
     TablePromocionesComponent,
     InventarioPieChartComponent,
     ReportesComponent,
+    TableTotalLiquidacionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
