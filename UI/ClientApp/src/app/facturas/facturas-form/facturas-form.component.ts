@@ -41,7 +41,8 @@ export class FacturasFormComponent implements OnInit {
   currentTerceros="";
   currentTipoMovimiento="";
   currentPromocion="";
-  
+  currentProductoDescripcion="";
+  currentProductoReferencia="";
 
   tipoMovimientos: ITipoMovimiento[];
   referencias: IProducto[];
@@ -130,12 +131,7 @@ private _data:IEmpleado[];*/
         map(value => this._filter(value))
       );*/
   }
-  /*private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    //return this.productos.filter(option => option.descripcion.toLowerCase().includes(filterValue));
-  }*/
-
+  
   ngAfterViewInit() {
     this.setInitialValue();
   }
@@ -213,18 +209,18 @@ private _data:IEmpleado[];*/
   }
   
   agregarDFactura(){
+    if(this.currentProductoReferencia==""){
+      //mensaje que debe ingresar seleccionar un producto primero
+    }else{
     this.dFacturaFormGroup=this.fb.group({
-      referencia :['', [Validators.required]],
+      referencia :[this.currentProductoReferencia, [Validators.required]],
       promocionId :[''],
       bodega :['', [Validators.required]],
       cantidad:['1', [Validators.required, Validators.pattern(/^\d+$/)]]            
     });
     this.dfacturas.push(this.dFacturaFormGroup);
-    
-      this.productosService.getProductos()
-          .subscribe(productos=>{ this.getInfo(productos)},
-            error => console.error(error) 
-          );
+  }
+      
     
   }
   removerDFactura(indice:number){
@@ -299,7 +295,8 @@ private _data:IEmpleado[];*/
   }
   receiveMessageProducto($event){
     this.referencia.setValue($event.referencia);
-    //this.currentProducto=$event.descripcion;
+    this.currentProductoDescripcion=$event.descripcion;
+    this.currentProductoReferencia=$event.referencia;
   }
 } 
 export class Estado{

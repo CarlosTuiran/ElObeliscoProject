@@ -329,11 +329,30 @@
   <mat-divider></mat-divider>
   <br>
   <h3>Agregar Nuevo Producto</h3>
-  <div class="form-group example-button-container">
+  <div class="row">
+  <div class="form-group col-md-4 example-button-container">
    <button mat-fab color="primary" aria-label="Agregar Nuevo Producto"
     (click)="agregarDFactura()">
       <mat-icon>add</mat-icon>
     </button>
+  </div>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Seleccionar Producto
+      </mat-panel-title>            
+      <mat-panel-description>
+        {{referencia.value}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <app-productos-select (messageEvent)="receiveMessageProducto($event)"></app-productos-select> 
+
+        
+    </mat-expansion-panel>
+
+    </mat-accordion> 
   </div>
   <div class="scroll_vertical">
     <div formArrayName="dfacturas" *ngFor="let dfactura of dfacturas.controls;
@@ -341,7 +360,23 @@
       <div [formGroupName]="i">
         <div class="form-group row">
           <!--Referencia de Productos-->
-          <div class="form-group col-md-3"
+          <label class="col-md-10 control-label"
+              for="referenciaId">Referencia del producto</label>
+
+        <div class="col-md-10">
+          <input class="form-control"
+                id="referenciaId"
+                type="text"
+                formControlName="referencia" 
+                disabled/>
+          <div class="alert alert-danger" *ngIf="((referencia.touched || referencia.dirty )&& referencia.invalid)">
+            <span *ngIf="referencia.errors.required">
+              El campo referencia es requerido
+            </span>
+            
+          </div>
+        </div>
+          <!-- <div class="form-group col-md-3"
               [ngClass]="{'has-error': ((referencia.touched || referencia.dirty) && referencia.invalid)}">
               
                 <mat-form-field class="example-full-width">
@@ -356,41 +391,9 @@
                       {{option.descripcion}}
                     </mat-option>
                   </mat-autocomplete>
-                </mat-form-field>
+                </mat-form-field> -->
               
-              <!-- <mat-accordion>
-              <mat-expansion-panel hideToggle>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Seleccionar Producto
-                </mat-panel-title>            
-                <mat-panel-description>
-                  {{referencia.value}}
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-
-              <app-productos-select (messageEvent)="receiveMessageProducto($event)"></app-productos-select> 
-
-                  <label class="col-md-10 control-label"
-                        for="referenciaId">Referencia del producto</label>
-
-                  <div class="col-md-10">
-                    <input class="form-control"
-                          id="referenciaId"
-                          type="text"
-                          formControlName="referencia" />
-                    <div class="alert alert-danger" *ngIf="((referencia.touched || referencia.dirty )&& referencia.invalid)">
-                      <span *ngIf="referencia.errors.required">
-                        El campo referencia es requerido
-                      </span>
-                      
-                    </div>
-                  </div>
-
-
-              </mat-expansion-panel>
-
-              </mat-accordion> -->
+              <!-- -->
             </div>
                 
             <!-- <div class="form-group col-md-3"
@@ -505,7 +508,8 @@
         </div>
   
       </div>
-      </div>
+      
+      
     </fieldset>
   </form>
   
