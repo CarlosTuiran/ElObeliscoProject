@@ -73,11 +73,11 @@ namespace Infra.Datos
             //     NombreDiaCorto="LUN", NombreMes="Enero", NombreMesCorto="ENE", SemanaDelAño=1, Semestre=1, Trimestre=1
             //     });
             modelBuilder.Entity<MFactura>().HasData(
-                new MFactura() {idMfactura=1000, TipoMovimiento="Compra", FechaFactura=12, EstadoFactura="Pagada",
-                EmpleadoId=1, TercerosId=1, FechaPago=12, IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=1, TipoMovimientoId=1
+                new MFactura() {idMfactura=1000, TipoMovimiento="Compra", FechaFactura=DateTime.Now, EstadoFactura="Pagada",
+                EmpleadoId=1, TercerosId=1, FechaPago=DateTime.Now, IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=1, TipoMovimientoId=1
                 });
             modelBuilder.Entity<DFactura>().HasData(
-                new DFactura(){MfacturaId=1, idDFactura=10001, Cantidad=5, Bodega="BD1", FechaFactura=12, 
+                new DFactura(){MfacturaId=1, idDFactura=10001, Cantidad=5, Bodega="BD1", FechaFactura=DateTime.Now, 
                     PrecioUnitario=3000,Referencia="1000-01", Id=1
                 });
             //Restringe las llaves foraneas en el parametro OnDelete 

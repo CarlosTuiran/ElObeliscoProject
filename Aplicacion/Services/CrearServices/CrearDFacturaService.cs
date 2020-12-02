@@ -1,5 +1,4 @@
 ﻿using Aplicacion.Request;
-using Aplicacion.Services.ConsultarServices;
 using Domain.Models.Contracts;
 using Domain.Models.Entities;
 using System;
@@ -13,12 +12,10 @@ namespace Aplicacion.Services.CrearServices
     public class CrearDFacturaService
     {
         readonly IUnitOfWork _unitOfWork;
-        public ConsultarFechaService consultarFechaService;
 
         public CrearDFacturaService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            consultarFechaService = new ConsultarFechaService(unitOfWork);
         }
 
         public CrearDFacturaResponse Ejecutar(CrearDFacturaRequest request)
@@ -27,7 +24,7 @@ namespace Aplicacion.Services.CrearServices
             if (dFactura == null)
             {
 
-                DFactura newDFactura = new DFactura(request.idDFactura, request.MfacturaId, request.Referencia, request.PromocionId,request.Bodega, request.Cantidad, request.PrecioUnitario, consultarFechaService.ConsultarFecha(request.FechaFactura));
+                DFactura newDFactura = new DFactura(request.idDFactura, request.MfacturaId, request.Referencia, request.PromocionId,request.Bodega, request.Cantidad, request.PrecioUnitario, request.FechaFactura.Date);
                 IReadOnlyList<string> errors = newDFactura.CanCrear(newDFactura);
                 if (errors.Any())
                 {

@@ -13,13 +13,13 @@ namespace Domain.Models.Entities
         public int TercerosId { get; set; }
         public int TipoMovimientoId { get; set; }
         public string TipoMovimiento { get; set; }
-        public int FechaFactura { get; set; }
-        public int? FechaPago { get; set; }
+        public DateTime FechaFactura { get; set; }
+        public DateTime? FechaPago { get; set; }
         public double SubTotal { get; set; }
         public double ValorDevolucion { get; set; }
         public double Descuento { get; set; }
         public double IVA { get; set; }
-        public double Total { get=> SubTotal-(SubTotal*Descuento)+(SubTotal*IVA); }
+        public double Total { get; set; }
         public double Abono { get; set; }
         public string EstadoFactura { get; set; }
         public List<DFactura> DFacturas { get; set; }
@@ -29,7 +29,7 @@ namespace Domain.Models.Entities
         }
 
 
-        public MFactura(int idMfactura, int idEmpleado, int nit, int idMovimiento, string tipoMovimiento, int fechaFactura,
+        public MFactura(int idMfactura, int idEmpleado, int nit, int idMovimiento, string tipoMovimiento, DateTime fechaFactura,
             double subTotal, double valorDevolucion, double descuento, double iVA, /*double total,*/ double abono, string estadoFactura)
         {
             this.idMfactura = idMfactura;
@@ -42,9 +42,9 @@ namespace Domain.Models.Entities
             ValorDevolucion = valorDevolucion;
             Descuento = descuento;
             IVA = iVA;
-            /*Total = total;*/
             Abono = abono;
             EstadoFactura = estadoFactura;
+            CalcularTotal();
         }
 
         public IReadOnlyList<string> CanCrear(MFactura mFactura)
@@ -81,6 +81,10 @@ namespace Domain.Models.Entities
             return errors;
         }
 
+        public void CalcularTotal() 
+        {
+            this.Total = this.SubTotal - (this.SubTotal * this.Descuento) + (this.SubTotal * this.IVA);
+        }
 
     }
 }

@@ -84,7 +84,7 @@ private _data:IEmpleado[];*/
    tipoMovimientoId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
    tipoMovimiento:['', [Validators.required]],
    fechaPago:[''],
-   //subTotal :['', [Validators.required, Validators.pattern(/^\d+$/)]],
+   subTotal :['1', [Validators.required, Validators.pattern(/^\d+$/)]],
    valorDevolucion :['0', [Validators.pattern(/^\d+$/)]],
    descuento :['0', [Validators.pattern(/^\d+$/)]],
    iVA :['0', [ Validators.pattern(/^\d+$/)]],
@@ -142,7 +142,7 @@ private _data:IEmpleado[];*/
   save() {
     let mfactura: IMFactura = Object.assign({}, this.formGroup.value);
     console.table(mfactura); //ver mfactura por consola
-    
+    console.log(this.fechaPago);
 
     if (this.modoEdicion) {
       /* edita un mfactura
@@ -214,7 +214,7 @@ private _data:IEmpleado[];*/
     }else{
     this.dFacturaFormGroup=this.fb.group({
       referencia :[this.currentProductoReferencia, [Validators.required]],
-      promocionId :[''],
+      promocionId :['0'],
       bodega :['', [Validators.required]],
       cantidad:['1', [Validators.required, Validators.pattern(/^\d+$/)]]            
     });
@@ -294,7 +294,7 @@ private _data:IEmpleado[];*/
     this.currentPromocion=$event.nombre;
   }
   receiveMessageProducto($event){
-    this.referencia.setValue($event.referencia);
+    
     this.currentProductoDescripcion=$event.descripcion;
     this.currentProductoReferencia=$event.referencia;
   }
