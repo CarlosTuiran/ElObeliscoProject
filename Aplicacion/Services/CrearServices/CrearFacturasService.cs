@@ -39,7 +39,7 @@ namespace Aplicacion.Services.CrearServices
                         return new CrearFacturasResponse { Message = rtaDService.Message };
                 }
                 _unitOfWork.Commit();
-                return new CrearFacturasResponse { Message = "Facturas Creadas Exitosamente" };
+                return new CrearFacturasResponse { Message = "Factura Creada Exitosamente" };
             }
             else
             {

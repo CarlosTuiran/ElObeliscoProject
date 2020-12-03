@@ -90,7 +90,7 @@ private _data:IEmpleado[];*/
    iVA :['0', [ Validators.pattern(/^\d+$/)]],
    abono :['0', [ Validators.pattern(/^\d+$/)]],
    estadoFactura:['', [Validators.required]],
-   dfacturas:this.fb.array([])
+   dFacturas:this.fb.array([])
   });
 
 
@@ -192,8 +192,8 @@ private _data:IEmpleado[];*/
   get estadoFactura() {
     return this.formGroup.get('estadoFactura');
   }
-  get dfacturas() {
-    return this.formGroup.get('dfacturas') as FormArray;
+  get dFacturas() {
+    return this.formGroup.get('dFacturas') as FormArray;
   }
   get referencia() {
     return this.dFacturaFormGroup.get('referencia');
@@ -218,13 +218,13 @@ private _data:IEmpleado[];*/
       bodega :['', [Validators.required]],
       cantidad:['1', [Validators.required, Validators.pattern(/^\d+$/)]]            
     });
-    this.dfacturas.push(this.dFacturaFormGroup);
+    this.dFacturas.push(this.dFacturaFormGroup);
   }
       
     
   }
   removerDFactura(indice:number){
-    this.dfacturas.removeAt(indice);
+    this.dFacturas.removeAt(indice);
   }
   refresh(){
     this.formGroup.patchValue({
@@ -240,7 +240,7 @@ private _data:IEmpleado[];*/
       abono :'',
       estadoFactura:''
     });
-    this.dfacturas.controls.splice(0, this.dfacturas.length);
+    this.dFacturas.controls.splice(0, this.dFacturas.length);
   }
     /**
    * Sets the initial value after the filteredBanks are loaded initially
@@ -278,12 +278,12 @@ private _data:IEmpleado[];*/
   }
   //Recibe la idEmpleado desde el componente select
   receiveMessageEmpleado($event){
-    this.empleadoId.setValue($event.idEmpleado);
-    this.currentEmpleado=$event.nombres;
+    this.empleadoId.setValue($event.id);
+    this.currentEmpleado = $event.nombres + " - " + $event.idEmpleado;
   }
   receiveMessageTerceros($event){
-    this.tercerosId.setValue($event.nit);
-    this.currentTerceros=$event.nombre;
+    this.tercerosId.setValue($event.id);
+    this.currentTerceros = $event.nombre +" - "+ $event.nit;
   }
   receiveMessageTipoMovimiento($event){
     this.tipoMovimientoId.setValue($event.idMovimiento);
