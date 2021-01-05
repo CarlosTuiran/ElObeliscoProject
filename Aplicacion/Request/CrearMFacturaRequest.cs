@@ -31,7 +31,7 @@ namespace Aplicacion.Request
         public string Message { get; set; }
         public bool isOk()
         {
-            return this.Message.Equals("Factura Creadas Exitosamente");
+            return this.Message.Equals("Factura Creada Exitosamente");
         }
     }
 }

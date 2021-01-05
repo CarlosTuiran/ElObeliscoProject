@@ -17,13 +17,13 @@ namespace Domain.Models.Entities
         public string Bodega { get; set; }
         public int Cantidad { get; set; }
         public double PrecioUnitario { get; set; }
-        public double PrecioTotal { get=> this.Cantidad * this.PrecioUnitario;}//CUANDO SE DEFINAN LAS PROMOCIONES ACA TOCA AÑADIRLO
-        public int FechaFactura { get; set; }
+        public double PrecioTotal { get; set; }//CUANDO SE DEFINAN LAS PROMOCIONES ACA TOCA AÑADIRLO
+        public DateTime FechaFactura { get; set; }
         public List<ProductoDFactura> ProductoDFacturas { get; set; }
         public List<PromocionesDFactura> PromocionesDFacturas { get; set; }
 
         public DFactura(){}
-        public DFactura(int idDFactura, int idMfactura, string referencia, int idpromocion, string bodega, int cantidad, double precioUnitario, int fechaFactura)
+        public DFactura(int idDFactura, int idMfactura, string referencia, int idpromocion, string bodega, int cantidad, double precioUnitario, DateTime fechaFactura)
         {
             this.idDFactura = idDFactura;
             this.MfacturaId = idMfactura;
@@ -32,8 +32,8 @@ namespace Domain.Models.Entities
             this.Bodega = bodega;
             Cantidad = cantidad;
             PrecioUnitario = precioUnitario;
-           // PrecioTotal = CalcularPrecioTotal();
             FechaFactura = fechaFactura;
+            CalcularPrecioTotal();
         }
 
         public IReadOnlyList<string> CanCrear(DFactura dFactura)
@@ -56,10 +56,10 @@ namespace Domain.Models.Entities
             return errors;
         }
 
-        /*public double CalcularPrecioTotal()
+        public void CalcularPrecioTotal()
         {
-            double precioTotal= this.Cantidad * this.PrecioUnitario; //CUANDO SE DEFINAN LAS PROMOCIONES ACA TOCA AÑADIRLO
-            return precioTotal;
-        }*/
+            this.PrecioTotal = this.Cantidad * this.PrecioUnitario; //CUANDO SE DEFINAN LAS PROMOCIONES ACA TOCA AÑADIRLO
+            
+        }
     }
 }

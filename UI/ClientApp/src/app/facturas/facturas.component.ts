@@ -34,7 +34,7 @@ export interface IMFactura{
    iVA :number,
    abono :number,
    estadoFactura: string,
-   dfacturas: IDFactura[] 
+   dFacturas: IDFactura[] 
 
 }
 export interface IDFactura{

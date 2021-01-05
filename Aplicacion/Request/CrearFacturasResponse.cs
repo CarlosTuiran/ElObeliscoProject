@@ -9,7 +9,7 @@ namespace Aplicacion.Request
         public string Message { get; set; }
         public bool isOk()
         {
-            return this.Message.Equals("Facturas Creadas exitosamente");
+            return this.Message.Equals("Factura Creada Exitosamente");
         }
     }
 }

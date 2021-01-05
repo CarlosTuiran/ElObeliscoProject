@@ -12,7 +12,6 @@ namespace Aplicacion.Test
 
         ObeliscoContext _context;
         UnitOfWork _unitOfWork;
-        ComprarProductoService service;
         [SetUp]
         public void Setup()
         {
@@ -22,11 +21,11 @@ namespace Aplicacion.Test
             _unitOfWork = new UnitOfWork(_context);
         }
 
-
+/*
         [Test]
         public void Test1()
         {
             Assert.Pass();
-        }
+        }*/
     }
 }

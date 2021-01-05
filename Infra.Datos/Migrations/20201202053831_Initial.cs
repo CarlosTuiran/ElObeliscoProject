@@ -8,6 +8,26 @@ namespace Infra.Datos.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Empleado",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdEmpleado = table.Column<int>(nullable: false),
+                    Nombres = table.Column<string>(nullable: true),
+                    Apellidos = table.Column<string>(nullable: true),
+                    Cargo = table.Column<string>(nullable: true),
+                    Celular = table.Column<string>(nullable: true),
+                    Correo = table.Column<string>(nullable: true),
+                    Direccion = table.Column<string>(nullable: true),
+                    Estado = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Empleado", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Inventario",
                 columns: table => new
                 {
@@ -28,10 +48,12 @@ namespace Infra.Datos.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdNomina = table.Column<int>(nullable: false),
+                    IdNomina = table.Column<string>(nullable: true),
                     IdEmpleado = table.Column<int>(nullable: false),
-                    SaldoBase = table.Column<double>(nullable: false),
-                    Seguro = table.Column<double>(nullable: false)
+                    DiasTrabajados = table.Column<int>(nullable: false),
+                    HorasExtras = table.Column<int>(nullable: false),
+                    SalarioBase = table.Column<double>(nullable: false),
+                    SubTransporte = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -64,18 +86,22 @@ namespace Infra.Datos.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IdFecha = table.Column<int>(nullable: false),
                     Fecha = table.Column<DateTime>(nullable: false),
-                    Año = table.Column<int>(nullable: false),
-                    Mes = table.Column<int>(nullable: false),
-                    Dia = table.Column<int>(nullable: false),
-                    DiaDelAño = table.Column<int>(nullable: false),
-                    SemanaDelAño = table.Column<int>(nullable: false),
-                    Trimestre = table.Column<int>(nullable: false),
-                    Semestre = table.Column<int>(nullable: false),
-                    NombreMes = table.Column<string>(nullable: true),
-                    NombreMesCorto = table.Column<string>(nullable: true),
-                    NombreDia = table.Column<string>(nullable: true),
-                    NombreDiaCorto = table.Column<string>(nullable: true)
+                    Dia_Semana = table.Column<int>(nullable: false),
+                    Dia_Mes = table.Column<int>(nullable: false),
+                    Dia_Anio = table.Column<int>(nullable: false),
+                    Semana_Anio = table.Column<int>(nullable: false),
+                    Mes_Anio = table.Column<int>(nullable: false),
+                    Cuatrimestre_Anio = table.Column<int>(nullable: false),
+                    Semestre_Anio = table.Column<int>(nullable: false),
+                    Anio = table.Column<string>(nullable: true),
+                    Anio_Semana = table.Column<string>(nullable: true),
+                    Anio_Mes = table.Column<string>(nullable: true),
+                    Anio_Cuatrimestre = table.Column<string>(nullable: true),
+                    Anio_Semestre = table.Column<string>(nullable: true),
+                    Dia_Semana_Descripcion = table.Column<string>(nullable: true),
+                    Mes_Descripcion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,6 +120,48 @@ namespace Infra.Datos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TipoMovimiento", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TotalLiquidacion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Mes = table.Column<int>(nullable: false),
+                    Anio = table.Column<int>(nullable: false),
+                    ValorTotalNomina = table.Column<double>(nullable: false),
+                    Sena = table.Column<double>(nullable: false),
+                    Icbf = table.Column<double>(nullable: false),
+                    Comfacesar = table.Column<double>(nullable: false),
+                    Total = table.Column<double>(nullable: false),
+                    NominaId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TotalLiquidacion", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    EmpleadoId = table.Column<int>(nullable: false),
+                    Tipo = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuario", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Usuario_Empleado_EmpleadoId",
+                        column: x => x.EmpleadoId,
+                        principalTable: "Empleado",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,55 +193,6 @@ namespace Infra.Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Empleado",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdEmpleado = table.Column<int>(nullable: false),
-                    Nombres = table.Column<string>(nullable: true),
-                    Apellidos = table.Column<string>(nullable: true),
-                    Cargo = table.Column<string>(nullable: true),
-                    Celular = table.Column<string>(nullable: true),
-                    Correo = table.Column<string>(nullable: true),
-                    Direccion = table.Column<string>(nullable: true),
-                    Estado = table.Column<string>(nullable: true),
-                    NominaId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Empleado", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Empleado_Nomina_NominaId",
-                        column: x => x.NominaId,
-                        principalTable: "Nomina",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Liquidacion",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdLiquidacion = table.Column<int>(nullable: false),
-                    NominaId = table.Column<int>(nullable: false),
-                    FechaPago = table.Column<DateTime>(nullable: false),
-                    Monto = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Liquidacion", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Liquidacion_Nomina_NominaId",
-                        column: x => x.NominaId,
-                        principalTable: "Nomina",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "MFactura",
                 columns: table => new
                 {
@@ -184,12 +203,13 @@ namespace Infra.Datos.Migrations
                     TercerosId = table.Column<int>(nullable: false),
                     TipoMovimientoId = table.Column<int>(nullable: false),
                     TipoMovimiento = table.Column<string>(nullable: true),
-                    FechaFactura = table.Column<int>(nullable: false),
-                    FechaPago = table.Column<int>(nullable: true),
+                    FechaFactura = table.Column<DateTime>(nullable: false),
+                    FechaPago = table.Column<DateTime>(nullable: true),
                     SubTotal = table.Column<double>(nullable: false),
                     ValorDevolucion = table.Column<double>(nullable: false),
                     Descuento = table.Column<double>(nullable: false),
                     IVA = table.Column<double>(nullable: false),
+                    Total = table.Column<double>(nullable: false),
                     Abono = table.Column<double>(nullable: false),
                     EstadoFactura = table.Column<string>(nullable: true)
                 },
@@ -201,40 +221,56 @@ namespace Infra.Datos.Migrations
                         column: x => x.EmpleadoId,
                         principalTable: "Empleado",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_MFactura_Terceros_TercerosId",
                         column: x => x.TercerosId,
                         principalTable: "Terceros",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_MFactura_TipoMovimiento_TipoMovimientoId",
                         column: x => x.TipoMovimientoId,
                         principalTable: "TipoMovimiento",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Usuario",
+                name: "Liquidacion",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    EmpleadoId = table.Column<int>(nullable: false)
+                    NominaId = table.Column<string>(nullable: true),
+                    IdEmpleado = table.Column<int>(nullable: false),
+                    Mes = table.Column<int>(nullable: false),
+                    Anio = table.Column<int>(nullable: false),
+                    SueldoOrdinario = table.Column<double>(nullable: false),
+                    SubTransporte = table.Column<double>(nullable: false),
+                    TotalDevengado = table.Column<double>(nullable: false),
+                    Salud = table.Column<double>(nullable: false),
+                    Pension = table.Column<double>(nullable: false),
+                    TotalDeducido = table.Column<double>(nullable: false),
+                    TotalPagar = table.Column<double>(nullable: false),
+                    TotalLiquidacionId = table.Column<int>(nullable: true),
+                    NominaId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuario", x => x.Id);
+                    table.PrimaryKey("PK_Liquidacion", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Usuario_Empleado_EmpleadoId",
-                        column: x => x.EmpleadoId,
-                        principalTable: "Empleado",
+                        name: "FK_Liquidacion_Nomina_NominaId1",
+                        column: x => x.NominaId1,
+                        principalTable: "Nomina",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Liquidacion_TotalLiquidacion_TotalLiquidacionId",
+                        column: x => x.TotalLiquidacionId,
+                        principalTable: "TotalLiquidacion",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -250,7 +286,8 @@ namespace Infra.Datos.Migrations
                     Bodega = table.Column<string>(nullable: true),
                     Cantidad = table.Column<int>(nullable: false),
                     PrecioUnitario = table.Column<double>(nullable: false),
-                    FechaFactura = table.Column<int>(nullable: false)
+                    PrecioTotal = table.Column<double>(nullable: false),
+                    FechaFactura = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -260,7 +297,7 @@ namespace Infra.Datos.Migrations
                         column: x => x.MfacturaId,
                         principalTable: "MFactura",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -280,13 +317,13 @@ namespace Infra.Datos.Migrations
                         column: x => x.DFacturaId,
                         principalTable: "DFactura",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ProductoDFactura_Producto_ProductoId",
                         column: x => x.ProductoId,
                         principalTable: "Producto",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -306,8 +343,13 @@ namespace Infra.Datos.Migrations
                         column: x => x.DFacturaId,
                         principalTable: "DFactura",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Empleado",
+                columns: new[] { "Id", "Apellidos", "Cargo", "Celular", "Correo", "Direccion", "Estado", "IdEmpleado", "Nombres" },
+                values: new object[] { 1, "Ferra Ito", "Cajero", "31688888", "RHerna@gmail.com", "Stranger Valley", "Activo", 2699540, "Raul Hernandez" });
 
             migrationBuilder.InsertData(
                 table: "Inventario",
@@ -315,14 +357,9 @@ namespace Infra.Datos.Migrations
                 values: new object[] { 1, "BD01", 5, "1000-01" });
 
             migrationBuilder.InsertData(
-                table: "Nomina",
-                columns: new[] { "Id", "IdEmpleado", "IdNomina", "SaldoBase", "Seguro" },
-                values: new object[] { 1, 2699540, 1, 1400000.0, 100000.0 });
-
-            migrationBuilder.InsertData(
                 table: "Producto",
                 columns: new[] { "Id", "Costo", "Descripcion", "Fabrica", "FechaRegistro", "FormatoVenta", "IVA", "InventarioId", "Marca", "PrecioVenta", "Referencia" },
-                values: new object[] { 1, 3000.0, "Llave Inglesa", "Ferres SAS", new DateTime(2020, 9, 19, 16, 2, 52, 503, DateTimeKind.Local).AddTicks(2335), "Unidad", 0.29999999999999999, null, "Ferres", 5000.0, "1000-01" });
+                values: new object[] { 1, 3000.0, "Llave Inglesa", "Ferres SAS", new DateTime(2020, 12, 2, 0, 38, 30, 243, DateTimeKind.Local).AddTicks(7321), "Unidad", 0.29999999999999999, null, "Ferres", 5000.0, "1000-01" });
 
             migrationBuilder.InsertData(
                 table: "Terceros",
@@ -332,11 +369,6 @@ namespace Infra.Datos.Migrations
                     { 1, "Orosco Eter", "3128288", "ferreymas@gmail.com", " Empresa Ferreos y Mas", "Stranger Valley", "106583", "Santana Silva", "Proveedor" },
                     { 2, "Joestar", "3443288", "jojo@gmail.com", "Cliente Frecuente", "Stranger Valley", "10653434", "Jose Jose", "Cliente" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Tiempo",
-                columns: new[] { "Id", "Año", "Dia", "DiaDelAño", "Fecha", "Mes", "NombreDia", "NombreDiaCorto", "NombreMes", "NombreMesCorto", "SemanaDelAño", "Semestre", "Trimestre" },
-                values: new object[] { 12, 2020, 3, 3, new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Lunes", "LUN", "Enero", "ENE", 1, 1, 1 });
 
             migrationBuilder.InsertData(
                 table: "TipoMovimiento",
@@ -351,29 +383,19 @@ namespace Infra.Datos.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Empleado",
-                columns: new[] { "Id", "Apellidos", "Cargo", "Celular", "Correo", "Direccion", "Estado", "IdEmpleado", "Nombres", "NominaId" },
-                values: new object[] { 1, "Ferra Ito", "Cajero", "31688888", "RHerna@gmail.com", "Stranger Valley", "Activo", 2699540, "Raul Hernandez", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Liquidacion",
-                columns: new[] { "Id", "FechaPago", "IdLiquidacion", "Monto", "NominaId" },
-                values: new object[] { 1, new DateTime(2020, 9, 19, 16, 2, 52, 513, DateTimeKind.Local).AddTicks(540), 0, 1500000.0, 1 });
-
-            migrationBuilder.InsertData(
                 table: "MFactura",
-                columns: new[] { "Id", "Abono", "Descuento", "EmpleadoId", "EstadoFactura", "FechaFactura", "FechaPago", "IVA", "SubTotal", "TercerosId", "TipoMovimiento", "TipoMovimientoId", "ValorDevolucion", "idMfactura" },
-                values: new object[] { 1, 0.0, 0.0, 1, "Pagada", 12, 12, 0.29999999999999999, 15000.0, 1, "Compra", 1, 0.0, 1000 });
+                columns: new[] { "Id", "Abono", "Descuento", "EmpleadoId", "EstadoFactura", "FechaFactura", "FechaPago", "IVA", "SubTotal", "TercerosId", "TipoMovimiento", "TipoMovimientoId", "Total", "ValorDevolucion", "idMfactura" },
+                values: new object[] { 1, 0.0, 0.0, 1, "Pagada", new DateTime(2020, 12, 2, 0, 38, 30, 250, DateTimeKind.Local).AddTicks(1068), new DateTime(2020, 12, 2, 0, 38, 30, 250, DateTimeKind.Local).AddTicks(3726), 0.29999999999999999, 15000.0, 1, "Compra", 1, 0.0, 0.0, 1000 });
 
             migrationBuilder.InsertData(
                 table: "Usuario",
-                columns: new[] { "Id", "EmpleadoId", "Nombre", "Password" },
-                values: new object[] { 1, 1, "RaulH", "raulh" });
+                columns: new[] { "Id", "EmpleadoId", "Nombre", "Password", "Tipo" },
+                values: new object[] { 1, 1, "RaulH", "raulh", "Admin" });
 
             migrationBuilder.InsertData(
                 table: "DFactura",
-                columns: new[] { "Id", "Bodega", "Cantidad", "FechaFactura", "MfacturaId", "PrecioUnitario", "Referencia", "idDFactura", "idPromocion" },
-                values: new object[] { 1, "BD1", 5, 12, 1, 3000.0, "1000-01", 10001, null });
+                columns: new[] { "Id", "Bodega", "Cantidad", "FechaFactura", "MfacturaId", "PrecioTotal", "PrecioUnitario", "Referencia", "idDFactura", "idPromocion" },
+                values: new object[] { 1, "BD1", 5, new DateTime(2020, 12, 2, 0, 38, 30, 251, DateTimeKind.Local).AddTicks(2776), 1, 0.0, 3000.0, "1000-01", 10001, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_DFactura_MfacturaId",
@@ -381,14 +403,14 @@ namespace Infra.Datos.Migrations
                 column: "MfacturaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Empleado_NominaId",
-                table: "Empleado",
-                column: "NominaId");
+                name: "IX_Liquidacion_NominaId1",
+                table: "Liquidacion",
+                column: "NominaId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Liquidacion_NominaId",
+                name: "IX_Liquidacion_TotalLiquidacionId",
                 table: "Liquidacion",
-                column: "NominaId");
+                column: "TotalLiquidacionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MFactura_EmpleadoId",
@@ -450,6 +472,12 @@ namespace Infra.Datos.Migrations
                 name: "Usuario");
 
             migrationBuilder.DropTable(
+                name: "Nomina");
+
+            migrationBuilder.DropTable(
+                name: "TotalLiquidacion");
+
+            migrationBuilder.DropTable(
                 name: "Producto");
 
             migrationBuilder.DropTable(
@@ -469,9 +497,6 @@ namespace Infra.Datos.Migrations
 
             migrationBuilder.DropTable(
                 name: "TipoMovimiento");
-
-            migrationBuilder.DropTable(
-                name: "Nomina");
         }
     }
 }

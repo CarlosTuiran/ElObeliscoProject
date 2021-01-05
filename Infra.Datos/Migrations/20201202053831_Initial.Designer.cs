@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Datos.Migrations
 {
     [DbContext(typeof(ObeliscoContext))]
-    [Migration("20200919210254_Initial")]
+    [Migration("20201202053831_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.6")
+                .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -34,11 +34,14 @@ namespace Infra.Datos.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("FechaFactura")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("FechaFactura")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("MfacturaId")
                         .HasColumnType("int");
+
+                    b.Property<double>("PrecioTotal")
+                        .HasColumnType("float");
 
                     b.Property<double>("PrecioUnitario")
                         .HasColumnType("float");
@@ -64,8 +67,9 @@ namespace Infra.Datos.Migrations
                             Id = 1,
                             Bodega = "BD1",
                             Cantidad = 5,
-                            FechaFactura = 12,
+                            FechaFactura = new DateTime(2020, 12, 2, 0, 38, 30, 251, DateTimeKind.Local).AddTicks(2776),
                             MfacturaId = 1,
+                            PrecioTotal = 0.0,
                             PrecioUnitario = 3000.0,
                             Referencia = "1000-01",
                             idDFactura = 10001
@@ -103,12 +107,7 @@ namespace Infra.Datos.Migrations
                     b.Property<string>("Nombres")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NominaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("NominaId");
 
                     b.ToTable("Empleado");
 
@@ -123,8 +122,7 @@ namespace Infra.Datos.Migrations
                             Direccion = "Stranger Valley",
                             Estado = "Activo",
                             IdEmpleado = 2699540,
-                            Nombres = "Raul Hernandez",
-                            NominaId = 1
+                            Nombres = "Raul Hernandez"
                         });
                 });
 
@@ -165,33 +163,52 @@ namespace Infra.Datos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("FechaPago")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IdLiquidacion")
+                    b.Property<int>("Anio")
                         .HasColumnType("int");
 
-                    b.Property<double>("Monto")
+                    b.Property<int>("IdEmpleado")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Mes")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NominaId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("NominaId1")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Pension")
                         .HasColumnType("float");
 
-                    b.Property<int>("NominaId")
+                    b.Property<double>("Salud")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SubTransporte")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SueldoOrdinario")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TotalDeducido")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TotalDevengado")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("TotalLiquidacionId")
                         .HasColumnType("int");
+
+                    b.Property<double>("TotalPagar")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NominaId");
+                    b.HasIndex("NominaId1");
+
+                    b.HasIndex("TotalLiquidacionId");
 
                     b.ToTable("Liquidacion");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FechaPago = new DateTime(2020, 9, 19, 16, 2, 52, 513, DateTimeKind.Local).AddTicks(540),
-                            IdLiquidacion = 0,
-                            Monto = 1500000.0,
-                            NominaId = 1
-                        });
                 });
 
             modelBuilder.Entity("Domain.Models.Entities.MFactura", b =>
@@ -213,11 +230,11 @@ namespace Infra.Datos.Migrations
                     b.Property<string>("EstadoFactura")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FechaFactura")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("FechaFactura")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int?>("FechaPago")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("FechaPago")
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("IVA")
                         .HasColumnType("float");
@@ -233,6 +250,9 @@ namespace Infra.Datos.Migrations
 
                     b.Property<int>("TipoMovimientoId")
                         .HasColumnType("int");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
 
                     b.Property<double>("ValorDevolucion")
                         .HasColumnType("float");
@@ -258,13 +278,14 @@ namespace Infra.Datos.Migrations
                             Descuento = 0.0,
                             EmpleadoId = 1,
                             EstadoFactura = "Pagada",
-                            FechaFactura = 12,
-                            FechaPago = 12,
+                            FechaFactura = new DateTime(2020, 12, 2, 0, 38, 30, 250, DateTimeKind.Local).AddTicks(1068),
+                            FechaPago = new DateTime(2020, 12, 2, 0, 38, 30, 250, DateTimeKind.Local).AddTicks(3726),
                             IVA = 0.29999999999999999,
                             SubTotal = 15000.0,
                             TercerosId = 1,
                             TipoMovimiento = "Compra",
                             TipoMovimientoId = 1,
+                            Total = 0.0,
                             ValorDevolucion = 0.0,
                             idMfactura = 1000
                         });
@@ -277,31 +298,27 @@ namespace Infra.Datos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("DiasTrabajados")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HorasExtras")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdEmpleado")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdNomina")
-                        .HasColumnType("int");
+                    b.Property<string>("IdNomina")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("SaldoBase")
+                    b.Property<double>("SalarioBase")
                         .HasColumnType("float");
 
-                    b.Property<double>("Seguro")
+                    b.Property<double>("SubTransporte")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
                     b.ToTable("Nomina");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IdEmpleado = 2699540,
-                            IdNomina = 1,
-                            SaldoBase = 1400000.0,
-                            Seguro = 100000.0
-                        });
                 });
 
             modelBuilder.Entity("Domain.Models.Entities.Operacionales.ProductoDFactura", b =>
@@ -396,7 +413,7 @@ namespace Infra.Datos.Migrations
                             Costo = 3000.0,
                             Descripcion = "Llave Inglesa",
                             Fabrica = "Ferres SAS",
-                            FechaRegistro = new DateTime(2020, 9, 19, 16, 2, 52, 503, DateTimeKind.Local).AddTicks(2335),
+                            FechaRegistro = new DateTime(2020, 12, 2, 0, 38, 30, 243, DateTimeKind.Local).AddTicks(7321),
                             FormatoVenta = "Unidad",
                             IVA = 0.29999999999999999,
                             Marca = "Ferres",
@@ -474,63 +491,57 @@ namespace Infra.Datos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Año")
+                    b.Property<string>("Anio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Anio_Cuatrimestre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Anio_Mes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Anio_Semana")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Anio_Semestre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Cuatrimestre_Anio")
                         .HasColumnType("int");
 
-                    b.Property<int>("Dia")
+                    b.Property<int>("Dia_Anio")
                         .HasColumnType("int");
 
-                    b.Property<int>("DiaDelAño")
+                    b.Property<int>("Dia_Mes")
                         .HasColumnType("int");
+
+                    b.Property<int>("Dia_Semana")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Dia_Semana_Descripcion")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Mes")
+                    b.Property<int>("IdFecha")
                         .HasColumnType("int");
 
-                    b.Property<string>("NombreDia")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreDiaCorto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreMes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreMesCorto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SemanaDelAño")
+                    b.Property<int>("Mes_Anio")
                         .HasColumnType("int");
 
-                    b.Property<int>("Semestre")
+                    b.Property<string>("Mes_Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Semana_Anio")
                         .HasColumnType("int");
 
-                    b.Property<int>("Trimestre")
+                    b.Property<int>("Semestre_Anio")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Tiempo");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 12,
-                            Año = 2020,
-                            Dia = 3,
-                            DiaDelAño = 3,
-                            Fecha = new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Mes = 1,
-                            NombreDia = "Lunes",
-                            NombreDiaCorto = "LUN",
-                            NombreMes = "Enero",
-                            NombreMesCorto = "ENE",
-                            SemanaDelAño = 1,
-                            Semestre = 1,
-                            Trimestre = 1
-                        });
                 });
 
             modelBuilder.Entity("Domain.Models.Entities.TipoMovimiento", b =>
@@ -583,6 +594,42 @@ namespace Infra.Datos.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Domain.Models.Entities.TotalLiquidacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Anio")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Comfacesar")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Icbf")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Mes")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NominaId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Sena")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ValorTotalNomina")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TotalLiquidacion");
+                });
+
             modelBuilder.Entity("Domain.Models.Entities.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -599,6 +646,9 @@ namespace Infra.Datos.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Tipo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EmpleadoId")
@@ -612,7 +662,8 @@ namespace Infra.Datos.Migrations
                             Id = 1,
                             EmpleadoId = 1,
                             Nombre = "RaulH",
-                            Password = "raulh"
+                            Password = "raulh",
+                            Tipo = "Admin"
                         });
                 });
 
@@ -621,26 +672,21 @@ namespace Infra.Datos.Migrations
                     b.HasOne("Domain.Models.Entities.MFactura", null)
                         .WithMany("DFacturas")
                         .HasForeignKey("MfacturaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Models.Entities.Empleado", b =>
-                {
-                    b.HasOne("Domain.Models.Entities.Nomina", null)
-                        .WithMany("Empleado")
-                        .HasForeignKey("NominaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Models.Entities.Liquidacion", b =>
                 {
                     b.HasOne("Domain.Models.Entities.Nomina", null)
-                        .WithMany("Liquidacions")
-                        .HasForeignKey("NominaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Liquidacion")
+                        .HasForeignKey("NominaId1")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Models.Entities.TotalLiquidacion", "TotalLiquidacion")
+                        .WithMany()
+                        .HasForeignKey("TotalLiquidacionId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Domain.Models.Entities.MFactura", b =>
@@ -648,19 +694,19 @@ namespace Infra.Datos.Migrations
                     b.HasOne("Domain.Models.Entities.Empleado", null)
                         .WithMany("MFacturas")
                         .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Domain.Models.Entities.Terceros", null)
                         .WithMany("MFacturas")
                         .HasForeignKey("TercerosId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Domain.Models.Entities.TipoMovimiento", null)
                         .WithMany("MFacturas")
                         .HasForeignKey("TipoMovimientoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -669,13 +715,13 @@ namespace Infra.Datos.Migrations
                     b.HasOne("Domain.Models.Entities.DFactura", null)
                         .WithMany("ProductoDFacturas")
                         .HasForeignKey("DFacturaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Domain.Models.Entities.Producto", null)
                         .WithMany("ProductoDFacturas")
                         .HasForeignKey("ProductoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -684,7 +730,7 @@ namespace Infra.Datos.Migrations
                     b.HasOne("Domain.Models.Entities.DFactura", null)
                         .WithMany("PromocionesDFacturas")
                         .HasForeignKey("DFacturaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -692,7 +738,8 @@ namespace Infra.Datos.Migrations
                 {
                     b.HasOne("Domain.Models.Entities.Inventario", null)
                         .WithMany("Productos")
-                        .HasForeignKey("InventarioId");
+                        .HasForeignKey("InventarioId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Domain.Models.Entities.Usuario", b =>
@@ -700,7 +747,7 @@ namespace Infra.Datos.Migrations
                     b.HasOne("Domain.Models.Entities.Empleado", null)
                         .WithOne("Usuario")
                         .HasForeignKey("Domain.Models.Entities.Usuario", "EmpleadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

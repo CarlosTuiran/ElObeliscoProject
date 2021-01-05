@@ -32,11 +32,14 @@ namespace Infra.Datos.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("FechaFactura")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("FechaFactura")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("MfacturaId")
                         .HasColumnType("int");
+
+                    b.Property<double>("PrecioTotal")
+                        .HasColumnType("float");
 
                     b.Property<double>("PrecioUnitario")
                         .HasColumnType("float");
@@ -62,8 +65,9 @@ namespace Infra.Datos.Migrations
                             Id = 1,
                             Bodega = "BD1",
                             Cantidad = 5,
-                            FechaFactura = 12,
+                            FechaFactura = new DateTime(2020, 12, 2, 0, 38, 30, 251, DateTimeKind.Local).AddTicks(2776),
                             MfacturaId = 1,
+                            PrecioTotal = 0.0,
                             PrecioUnitario = 3000.0,
                             Referencia = "1000-01",
                             idDFactura = 10001
@@ -224,11 +228,11 @@ namespace Infra.Datos.Migrations
                     b.Property<string>("EstadoFactura")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FechaFactura")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("FechaFactura")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int?>("FechaPago")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("FechaPago")
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("IVA")
                         .HasColumnType("float");
@@ -244,6 +248,9 @@ namespace Infra.Datos.Migrations
 
                     b.Property<int>("TipoMovimientoId")
                         .HasColumnType("int");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
 
                     b.Property<double>("ValorDevolucion")
                         .HasColumnType("float");
@@ -269,13 +276,14 @@ namespace Infra.Datos.Migrations
                             Descuento = 0.0,
                             EmpleadoId = 1,
                             EstadoFactura = "Pagada",
-                            FechaFactura = 12,
-                            FechaPago = 12,
+                            FechaFactura = new DateTime(2020, 12, 2, 0, 38, 30, 250, DateTimeKind.Local).AddTicks(1068),
+                            FechaPago = new DateTime(2020, 12, 2, 0, 38, 30, 250, DateTimeKind.Local).AddTicks(3726),
                             IVA = 0.29999999999999999,
                             SubTotal = 15000.0,
                             TercerosId = 1,
                             TipoMovimiento = "Compra",
                             TipoMovimientoId = 1,
+                            Total = 0.0,
                             ValorDevolucion = 0.0,
                             idMfactura = 1000
                         });
@@ -403,7 +411,7 @@ namespace Infra.Datos.Migrations
                             Costo = 3000.0,
                             Descripcion = "Llave Inglesa",
                             Fabrica = "Ferres SAS",
-                            FechaRegistro = new DateTime(2020, 11, 1, 18, 26, 0, 598, DateTimeKind.Local).AddTicks(3685),
+                            FechaRegistro = new DateTime(2020, 12, 2, 0, 38, 30, 243, DateTimeKind.Local).AddTicks(7321),
                             FormatoVenta = "Unidad",
                             IVA = 0.29999999999999999,
                             Marca = "Ferres",
@@ -481,63 +489,57 @@ namespace Infra.Datos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Año")
+                    b.Property<string>("Anio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Anio_Cuatrimestre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Anio_Mes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Anio_Semana")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Anio_Semestre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Cuatrimestre_Anio")
                         .HasColumnType("int");
 
-                    b.Property<int>("Dia")
+                    b.Property<int>("Dia_Anio")
                         .HasColumnType("int");
 
-                    b.Property<int>("DiaDelAño")
+                    b.Property<int>("Dia_Mes")
                         .HasColumnType("int");
+
+                    b.Property<int>("Dia_Semana")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Dia_Semana_Descripcion")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Mes")
+                    b.Property<int>("IdFecha")
                         .HasColumnType("int");
 
-                    b.Property<string>("NombreDia")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreDiaCorto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreMes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreMesCorto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SemanaDelAño")
+                    b.Property<int>("Mes_Anio")
                         .HasColumnType("int");
 
-                    b.Property<int>("Semestre")
+                    b.Property<string>("Mes_Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Semana_Anio")
                         .HasColumnType("int");
 
-                    b.Property<int>("Trimestre")
+                    b.Property<int>("Semestre_Anio")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Tiempo");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 12,
-                            Año = 2020,
-                            Dia = 3,
-                            DiaDelAño = 3,
-                            Fecha = new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Mes = 1,
-                            NombreDia = "Lunes",
-                            NombreDiaCorto = "LUN",
-                            NombreMes = "Enero",
-                            NombreMesCorto = "ENE",
-                            SemanaDelAño = 1,
-                            Semestre = 1,
-                            Trimestre = 1
-                        });
                 });
 
             modelBuilder.Entity("Domain.Models.Entities.TipoMovimiento", b =>

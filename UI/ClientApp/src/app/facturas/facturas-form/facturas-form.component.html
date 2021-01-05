@@ -286,6 +286,7 @@
         <input class="form-control"
                id="subTotalId"
                type="text"
+               formControlName="subTotal"
                disabled />
         
       </div>
@@ -343,7 +344,7 @@
         Seleccionar Producto
       </mat-panel-title>            
       <mat-panel-description>
-        {{referencia.value}}
+        {{currentProductoDescripcion}}
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -355,11 +356,12 @@
     </mat-accordion> 
   </div>
   <div class="scroll_vertical">
-    <div formArrayName="dfacturas" *ngFor="let dfactura of dfacturas.controls;
+    <div formArrayName="dFacturas" *ngFor="let dFactura of dFacturas.controls;
     let i=index">
       <div [formGroupName]="i">
         <div class="form-group row">
           <!--Referencia de Productos-->
+          <div class="form-group col-md-3">
           <label class="col-md-10 control-label"
               for="referenciaId">Referencia del producto</label>
 
@@ -375,6 +377,7 @@
             </span>
             
           </div>
+        </div>
         </div>
           <!-- <div class="form-group col-md-3"
               [ngClass]="{'has-error': ((referencia.touched || referencia.dirty) && referencia.invalid)}">
@@ -394,7 +397,7 @@
                 </mat-form-field> -->
               
               <!-- -->
-            </div>
+            
                 
             <!-- <div class="form-group col-md-3"
           [ngClass]="{'has-error': ((referencia.touched || referencia.dirty)&& referencia.invalid)}">
@@ -490,6 +493,7 @@
           <span>
             <button class="btn btn-success"
                     type="submit"
+                    (click)="save()"
                     [disabled]="!formGroup.valid">
               Salvar
             </button>
@@ -506,10 +510,9 @@
           </span>
   
         </div>
-  
-      </div>
+    </div>
       
-      
+   </div> 
     </fieldset>
   </form>
   
