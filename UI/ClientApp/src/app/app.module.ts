@@ -75,6 +75,9 @@ import { TablePromocionesComponent } from './promociones/table-promociones/table
 import { InventarioPieChartComponent } from './reportes/inventario-pie-chart/inventario-pie-chart.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { TableTotalLiquidacionComponent } from './total-liquidacion/table-total-liquidacion/table-total-liquidacion.component';
+// import alert service and component
+import { AlertComponent } from './notifications/_directives/index';
+import { AlertService } from './notifications/_services/index';
 @NgModule({
   declarations: [
     AppComponent,
@@ -122,6 +125,7 @@ import { TableTotalLiquidacionComponent } from './total-liquidacion/table-total-
     InventarioPieChartComponent,
     ReportesComponent,
     TableTotalLiquidacionComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -167,7 +171,7 @@ import { TableTotalLiquidacionComponent } from './total-liquidacion/table-total-
   ],
   //aca se agregan todos los services
   providers: [ThemeService,UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
-    BodegasService, PromocionesService, PruebasSinVSService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
+    BodegasService, PromocionesService, PruebasSinVSService,AlertService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent],
   bootstrap: [AppComponent, SidebarComponent],

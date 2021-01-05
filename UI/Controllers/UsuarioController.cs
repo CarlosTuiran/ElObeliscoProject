@@ -51,7 +51,7 @@ namespace UI.InterfazWeb.Controllers
             if (rta.isOk())
             {
                 await _context.SaveChangesAsync();
-                return CreatedAtAction("GetUsuario", new { id=usuario.EmpleadoId}, usuario);
+                return CreatedAtAction("GetUsuario", new { id=usuario.EmpleadoId}, usuario);                
             }
             return BadRequest(rta.Message);
         }

@@ -7,6 +7,7 @@ import { IEmpleado } from 'src/app/empleados/empleados.component';
 import { EmpleadosService } from 'src/app/empleados/empleados.service';
 import { param } from 'jquery';
 import { error } from 'protractor';
+import { AlertService } from 'src/app/notifications/_services';
 
 @Component({
   selector: 'app-usuarios-form',
@@ -16,7 +17,8 @@ import { error } from 'protractor';
 export class UsuariosFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private usuariosService: UsuariosService,
-    private empleadoService: EmpleadosService, private router: Router, private activatedRoute: ActivatedRoute) { }
+    private empleadoService: EmpleadosService, private router: Router, 
+    private alertService: AlertService,private activatedRoute: ActivatedRoute) { }
 
   modoEdicion: boolean = false;
   usuarioId: number;
@@ -32,7 +34,7 @@ export class UsuariosFormComponent implements OnInit {
   ngOnInit() {
     this.empleadoService.getEmpleados() //ACA EVENTUALMENTE SOLO DEBE LLAMAR UNA FUNCION QUE RETORNE LAS ID DE LOS EMPLEADOS SIN USUARIOS
         .subscribe(empleados => this.empleados = empleados,
-          error => console.error(error));
+          error =>{console.error(error); this.alertService.error(error.message);});
 
     this.activatedRoute.params.subscribe(params => {
       if (params["id"] == undefined) {
@@ -42,7 +44,7 @@ export class UsuariosFormComponent implements OnInit {
       this.modoEdicion = true;
       this.usuarioId = params["id"];
       this.usuariosService.getUsuario(this.usuarioId.toString()).subscribe(usuario => this.cargarFormulario(usuario),
-        error => console.error(error));
+        error =>this.alertService.error(error.message));
     });
   }
 
@@ -66,16 +68,17 @@ export class UsuariosFormComponent implements OnInit {
       usuario.empleadoId = this.usuarioId;
       this.usuariosService.updateUsuario(usuario)
         .subscribe(usuario => this.onSaveSuccess(),
-          error => console.error(error));
+          error => this.alertService.error(error.message));
     } else {
       // crea un usuario
       this.usuariosService.createUsuario(usuario)
         .subscribe(usuario => this.onSaveSuccess(),
-          error => console.error(error));
+          error => this.alertService.error(error.message));
     }
   }
   onSaveSuccess(){
     this.router.navigate(["/usuarios"]);
+    this.alertService.success("Guardado Exitoso")
   }
   noequal1(){
     if(this.formGroup.controls['password'].value==this.formGroup.controls['passwordRep'].value){
