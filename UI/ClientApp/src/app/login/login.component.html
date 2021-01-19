@@ -1,35 +1,38 @@
 
+
+
+
+
+
+<!--
 <div class="wrapper fadeInDown">
     <div id="formContent">
-      <!-- Tabs Titles -->
-      <!-- Icon -->
-      <div class="fadeIn first">
-          <span class="material-icons">
-              account_circle
-          </span>
-      </div>
-  
-      <!-- Login Form -->
-      <form  #formLogin="ngForm" (ngSubmit)="onLogin(formLogin)">
-        
-        <input type="text" id="user" class="form-control" name="user" placeholder="Usuario" required>
-        
-        <mat-form-field appearance="fill">
-          <mat-label>Ingrese Contraseña</mat-label>
-        <input type="text" id="password" class="form-control" name="password" placeholder="Contraseña" 
-        matInput [type]="hide? 'password':'text'" required>
-          <button mat-icon-button matSuffix (click)="hide=!hide" 
-              [attr.aria-label]="'hide password'" [attr.aria-pressed]="hide" >
-              <mat-icon>{{hide?'visibility_off':'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field>
-        <input type="submit" class="fadeIn fourth" value="Log In">
-      </form>
-  
-      <!-- Remind Passowrd -->
-      <div id="formFooter">
-        <a class="underlineHover" href="#">Forgot Password?</a>
-      </div>
-  
+<div class="fadeIn first">
+  <span class="material-icons">
+    account_circle
+  </span>
+</div>
+
+<form #formLogin="ngForm" (ngSubmit)="onLogin(formLogin)">
+
+  <input type="text" id="user" class="form-control" name="user" placeholder="Usuario" required>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Ingrese Contraseña</mat-label>
+    <input type="text" id="password" class="form-control" name="password" placeholder="Contraseña"
+           matInput [type]="hide? 'password':'text'" required>
+    <button mat-icon-button matSuffix (click)="hide=!hide"
+            [attr.aria-label]="'hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide?'visibility_off':'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <input type="submit" class="fadeIn fourth" value="Log In">
+</form>
+
+<div id="formFooter">
+  <a class="underlineHover" href="#">Forgot Password?</a>
+</div>
+
     </div>
-  </div>
+</div>
+-->

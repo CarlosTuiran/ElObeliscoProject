@@ -8,8 +8,10 @@ import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 
 export class SidebarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
+  isAdmin=false;
 
   fillerNav = [
+    { name: "Es admin", route: "changeRole()", icon: "home" },
     { name: "home", route: "", icon:"home" },
     { name: "Gestión de Usuarios", route: "usuarios", icon:"supervised_user_circle" },
     { name: "Gestión de Productos", route: "productos", icon: "assignment" },
@@ -35,7 +37,9 @@ export class SidebarComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
-
+  changeRole():  void {
+    this.isAdmin=!this.isAdmin;
+  }
   shouldRun = true;
 }
 

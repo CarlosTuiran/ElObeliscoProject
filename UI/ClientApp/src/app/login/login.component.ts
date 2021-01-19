@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms/esm5/src/directives/ng_form';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.zcss']
 })
 export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private location: Location) { }

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tipo-movimentos.component.css']
 })
 export class TipoMovimentosComponent implements OnInit {
-
+  isAdmin = false;
   constructor() { }
 
   ngOnInit() {

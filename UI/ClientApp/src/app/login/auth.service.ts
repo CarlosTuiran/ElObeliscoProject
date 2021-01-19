@@ -17,7 +17,12 @@ export class AuthService {
   headers: HttpHeaders = new HttpHeaders({
     "Content-Type": "application/json"
   });
-
+  login():void{}
+  logout():void{}
+  private readToken():void{}
+  private saveToken():void{}
+  private handlerError():void{}
+/**
   registerUser(name: string, user: string, password: string) {
     //const url_api = "http://localhost:3000/api/Users";
     return this.htttp
@@ -75,4 +80,6 @@ export class AuthService {
     localStorage.removeItem("currentUser");
     return this.htttp.post<UserInterface>(this.apiURL+'/logout?access_token=${accessToken}', { headers: this.headers });
   }
+  */
+
 }
