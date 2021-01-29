@@ -79,6 +79,7 @@ import { TableTotalLiquidacionComponent } from './total-liquidacion/table-total-
 import { AlertComponent } from './notifications/_directives/index';
 import { AlertService } from './notifications/_services/index';
 import { LoginComponent } from './login/login.component';
+import { CheckLoginGuard } from './shared/guards/check-login.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -167,7 +168,7 @@ import { LoginComponent } from './login/login.component';
       { path: 'total-liquidaciones', component: TotalLiquidacionComponent },
       { path: 'pruebasSinVS', component: PruebasSinVSComponent },
       { path: 'reportes', component: ReportesComponent },
-      { path: 'login', component: LoginComponent },
+      { path: 'login', component: LoginComponent, canActivate:[CheckLoginGuard] },
 
     ]),
     BrowserAnimationsModule

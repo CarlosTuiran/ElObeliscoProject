@@ -19,8 +19,8 @@ namespace UI.Controllers
     public class ProductoController : ControllerBase
     {
         private readonly ObeliscoContext _context;
-        private CrearProductoService _service;
         private UnitOfWork _unitOfWork;
+        private CrearProductoService _service;
         private ActualizarProductoService _actualizarService;
         public ProductoController(ObeliscoContext context)
         {

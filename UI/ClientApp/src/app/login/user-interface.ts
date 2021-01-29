@@ -6,6 +6,7 @@
 }*/
 //Nuevo Metodo
 export type Roles='Admin'|'Empleado';
+
 export interface User{
 usuario: string;
 password: string;

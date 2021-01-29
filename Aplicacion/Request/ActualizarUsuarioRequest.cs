@@ -9,7 +9,7 @@ namespace Aplicacion.Request
         public string Nombre { get; set; }
         public string Password { get; set; }
         public int EmpleadoId { get; set; }
-        public string Tipo { get; set; }
+        public string Rol { get; set; }
     }
     public class ActualizarUsuarioResponse
     {

@@ -11,7 +11,7 @@
       <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     </ng-template>
     <h1 class="example-app-name">SI  Ferreteria Obelisco</h1>
-    
+    <!-- <button type="button" class="btn btn-primary" (click)="Logout()" style="">Logout</button> -->
   </mat-toolbar>
 <!-- Menu -->
 
@@ -19,10 +19,10 @@
 [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
 <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-<div>
-        <img style="width: 100%;" src="assets/img/LogoObelisco.png" alt="Logo Empresa Obelisco" />
-      </div>
-      <mat-nav-list>
+  <div>
+    <img style="width: 100%;" src="assets/img/LogoObelisco.png" alt="Logo Empresa Obelisco" />
+  </div>
+    <mat-nav-list>
         <a mat-list-item [routerLink]="nav.route" *ngFor="let nav of fillerNav">
           <mat-icon class="icono">{{nav.icon}}</mat-icon>
           {{nav.name}}</a>

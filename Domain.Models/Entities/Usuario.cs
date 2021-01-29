@@ -10,7 +10,7 @@ namespace Domain.Models.Entities
         public string Nombre { get; set; }
         public string Password { get; set; }
         public int EmpleadoId { get; set; }
-        public string Tipo { get; set; }
+        public string Rol { get; set; }
 
         private const string SharedSecret = "ElObeliescoPass123";
         public Crypto Crypto;
@@ -18,7 +18,7 @@ namespace Domain.Models.Entities
         {
 
         }
-        public Usuario(string nombre, string password, int idEmpleado, string tipo)
+        public Usuario(string nombre, string password, int idEmpleado, string rol)
         {
             this.Nombre = nombre;
             Crypto = new Crypto();
@@ -31,7 +31,19 @@ namespace Domain.Models.Entities
                 this.Password = password;
             }
             this.EmpleadoId = idEmpleado;
-            this.Tipo = tipo;
+            this.Rol = rol;
+        }
+        public Usuario(string nombre, string password){
+            this.Nombre = nombre;
+            Crypto = new Crypto();
+            if (!string.IsNullOrEmpty(password) && !(password.Length < 6))
+            {
+                this.Password = Encriptar(password);
+            }
+            else
+            {
+                this.Password = password;
+            }
         }
         public string Encriptar(string password)
         {
@@ -56,7 +68,7 @@ namespace Domain.Models.Entities
             }
             if (this.EmpleadoId==0)
                 errors.Add("Campo IdEmpleado vacio");
-            if (string.IsNullOrEmpty(this.Tipo))
+            if (string.IsNullOrEmpty(this.Rol))
                 errors.Add("Campo Tipo vacio");
             /*if (this.PrecioTotal == 0)
                 errors.Add("Campo Precio Total vacio");*/
