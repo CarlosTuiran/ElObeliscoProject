@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/login/auth.service';
 import { User } from 'src/app/login/user-interface';
 import { Router } from '@angular/router';
@@ -6,21 +6,24 @@ import { Location } from '@angular/common';
 import { isError } from 'util';
 import { NgForm } from '@angular/forms/esm5/src/directives/ng_form';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { from } from 'rxjs';
+import { from, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm=this.fb.group({
     usuario:['', [Validators.required]],
     password:['', [Validators.required]],
   });
-
+  hide = true;
+  private subscription: Subscription;
   constructor(private authService: AuthService, private router: Router,
-     private location: Location, private fb:FormBuilder) { }
+    private location: Location, private fb: FormBuilder) {
+    this.subscription = new Subscription();
+  }
   
      ngOnInit() {
     const userData:User={
@@ -33,12 +36,19 @@ export class LoginComponent implements OnInit {
    }
    onLogin():void{
      const formValue=this.loginForm.value;
-     this.authService.login(formValue).subscribe((res)=>{
-       if(res){
-         this.router.navigate(['']);
-       }
-     })
+     this.subscription.add(
+      this.authService.login(formValue).subscribe((res)=>{
+        if(res){
+          this.router.navigate(['']);
+        }
+      })  
+     );
+
+     
    }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
   // private user: UserInterface = {
   //   user: '',
   //   password: ''

@@ -80,6 +80,7 @@ import { AlertComponent } from './notifications/_directives/index';
 import { AlertService } from './notifications/_services/index';
 import { LoginComponent } from './login/login.component';
 import { CheckLoginGuard } from './shared/guards/check-login.guard';
+import { PerfilComponent } from './login/perfil/perfil.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -129,6 +130,7 @@ import { CheckLoginGuard } from './shared/guards/check-login.guard';
     TableTotalLiquidacionComponent,
     AlertComponent,
     LoginComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

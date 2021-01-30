@@ -4,10 +4,11 @@ import { Observable } from "rxjs/internal/Observable";
 import { catchError, map } from "rxjs/operators";
 import { isNullOrUndefined } from "util";
 
-import { User, UserResponse } from "src/app/login/user-interface";
+import { Roles, User, UserResponse } from "src/app/login/user-interface";
 import { AlertService } from "../notifications/_services";
 import { BehaviorSubject, throwError } from "rxjs";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { Router } from "@angular/router";
 
 const helper=new JwtHelperService();
 @Injectable({
@@ -17,11 +18,16 @@ const helper=new JwtHelperService();
 export class AuthService {
   apiURL = this.baseUrl + "api/Login";
   private loggedIn=new BehaviorSubject<boolean>(false);
+  private role=new BehaviorSubject<Roles>(null);
+
   get isLogged():Observable<boolean>{
     return this.loggedIn.asObservable();
   }
-  constructor(private htttp: HttpClient, private alertService: AlertService
-    ,@Inject('BASE_URL') private baseUrl: string) {
+  get isAdmin$():Observable<string>{
+    return this.role.asObservable();
+  }
+  constructor(private htttp: HttpClient, private alertService: AlertService, private router: Router,
+    @Inject('BASE_URL') private baseUrl: string) {
       this.checkToken();
     }
   
@@ -32,30 +38,39 @@ export class AuthService {
       .pipe(
         map((user: UserResponse) => {
           console.log('Resp', user);
-          //save token
-          this.saveToken(user.token);
+          this.saveLocalStorage(user);
           this.loggedIn.next(true);
+          this.role.next(user.rol)
           return user;
-          /*this.saveLocalStorage(user);
-          this.user.next(user);
-          return user;*/
+          
         }),
         catchError((err) => this.handlerError(err))
       );
   }
 
   logout():void{
-    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.loggedIn.next(false);
+    this.router.navigate(['/login']);
   }
   private checkToken():void{
-    const userToken=localStorage.getItem('token');
-    const isExpired=helper.isTokenExpired(userToken);//<-el token expiro?
-    isExpired ?this.logout():this.loggedIn.next(true);//si expiro destruir el token 
-    console.log('Expiro el Token->', isExpired);
+    const user= JSON.parse(localStorage.getItem('user')) || null;//<--- si no existe user sera null
+    if(user){
+      const isExpired=helper.isTokenExpired(user.token);//<-el token expiro?
+      //si expiro destruir el token 
+      if(isExpired){
+        this.logout();
+      }else{
+        this.loggedIn.next(true);
+        this.role.next(user.rol)
+      }
+    }
+    //isExpired ?this.logout():this.loggedIn.next(true);
+    //console.log('Expiro el Token->', isExpired);
   }
-  private saveToken(token:string):void{
-    localStorage.setItem('token',token)
+  private saveLocalStorage(user: UserResponse):void{
+    const {message, ...rest}=user;
+    localStorage.setItem('user', JSON.stringify(rest));
   } 
   private handlerError(err):Observable<never>{
     let errorMessage = 'An errror occured retrienving data';
