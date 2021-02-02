@@ -1,15 +1,20 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../login/auth.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
 
-export class SidebarComponent implements OnDestroy {
+export class SidebarComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
+  isAdmin = null;
+  private subscription: Subscription;
 
   fillerNav = [
+    { name: "Es admin", route: "changeRole()", icon: "home" },
     { name: "home", route: "", icon:"home" },
     { name: "Gestión de Usuarios", route: "usuarios", icon:"supervised_user_circle" },
     { name: "Gestión de Productos", route: "productos", icon: "assignment" },
@@ -26,16 +31,24 @@ export class SidebarComponent implements OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private authService: AuthService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    this.subscription = new Subscription();
   }
-
+  ngOnInit() {
+    this.subscription.add(
+      this.authService.isAdmin$.subscribe((res) => (this.isAdmin = res))
+    );
+  }
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.subscription.unsubscribe();
   }
-
+  changeRole():  void {
+    this.isAdmin=!this.isAdmin;
+  }
   shouldRun = true;
 }
 

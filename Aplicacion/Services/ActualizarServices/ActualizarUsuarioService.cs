@@ -27,7 +27,7 @@ namespace Aplicacion.Services.ActualizarServices
             {
                 usuario.Nombre = request.Nombre;
                 usuario.Password = request.Password;
-                usuario.Tipo = request.Tipo;
+                usuario.Rol = request.Rol;
                 _unitOfWork.UsuarioServiceRepository.Edit(usuario);
                 _unitOfWork.Commit();
                 return new ActualizarUsuarioResponse() { Message = $"Usuario Actualizado Exitosamente" };

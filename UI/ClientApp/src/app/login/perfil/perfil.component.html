@@ -1,0 +1,20 @@
+  <button  mat-icon-button [matMenuTriggerFor]="menu" aria-label="Icon Perfil">
+    <mat-icon class="iconoPerfil">account_box</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="login" *ngIf="!isLogged; else viewLogout">
+      <mat-icon>login</mat-icon>
+      <span>Iniciar Sesion</span>
+    </button>
+    <ng-template #viewLogout>
+    <button mat-menu-item (click)="Logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Cerrar Sesion</span>
+    </button>
+    </ng-template>
+    <button mat-menu-item>
+      <mat-icon>notifications_off</mat-icon>
+      <span>Disable alerts</span>
+    </button>
+  </mat-menu>
+

@@ -49,3 +49,7 @@ mat-sidenav-content{
   width: 13%;
   background: #F6EDEB;
 }
+
+.example-spacer {
+  flex: 1 1 auto;
+}

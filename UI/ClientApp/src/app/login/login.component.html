@@ -1,0 +1,103 @@
+
+
+  <div class="login-form">
+    <mat-card>
+      <mat-card-content>
+        <h1>LOGIN</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <mat-form-field class="full-width-input">
+            <input text="text"
+                   formControlName="usuario"
+                   matInput
+                   placeholder="Usuario"
+                   required />
+          </mat-form-field>
+          <mat-form-field class="full-width-input separator">
+            <input [type]="hide ? 'password' : 'text'"
+                   formControlName="password"
+                   matInput
+                   placeholder="Password"
+                   required />
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+            <button type="submit" mat-raised-button color="primary">
+              Login
+            </button>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+<div class="fadeIn first">
+  <span class="material-icons">
+    account_circle
+  </span>
+</div>
+
+<form #formLogin="ngForm" (ngSubmit)="onLogin(formLogin)">
+
+  <input type="text" id="user" class="form-control" name="user" placeholder="Usuario" required>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Ingrese Contraseña</mat-label>
+    <input type="text" id="password" class="form-control" name="password" placeholder="Contraseña"
+           matInput [type]="hide? 'password':'text'" required>
+    <button mat-icon-button matSuffix (click)="hide=!hide"
+            [attr.aria-label]="'hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide?'visibility_off':'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <input type="submit" class="fadeIn fourth" value="Log In">
+</form>
+
+<div id="formFooter">
+  <a class="underlineHover" href="#">Forgot Password?</a>
+</div>
+
+    </div>
+</div>
+-->

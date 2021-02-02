@@ -7,7 +7,7 @@ import {FacturasService} from './facturas.service';
   styleUrls: ['./facturas.component.css']
 })
 export class FacturasComponent implements OnInit {
-
+  isAdmin = false;
   facturas:IMFactura[];
   
   constructor(private facturasService: FacturasService) { }

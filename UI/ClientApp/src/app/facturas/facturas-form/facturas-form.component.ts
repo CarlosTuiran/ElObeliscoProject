@@ -24,7 +24,7 @@ import { ProductosService } from '../../productos/productos.service';
   styleUrls: ['./facturas-form.component.css']
 })
 export class FacturasFormComponent implements OnInit {
-  
+  isAdmin = false;
   constructor(private fb: FormBuilder, private facturasService: FacturasService,
     private router: Router, private activatedRoute: ActivatedRoute, 
     private tercerosService: TercerosService, private empleadosService: EmpleadosService,

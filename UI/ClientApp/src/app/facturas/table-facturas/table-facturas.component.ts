@@ -9,7 +9,7 @@ import { FacturasService } from '../facturas.service';
   styleUrls: ['./table-facturas.component.css']
 })
 export class TableFacturasComponent implements OnInit {
-
+  isAdmin = false;
   constructor(private facturasService: FacturasService) { }
   facturas!:IMFactura[];  
   displayedColumns: string[] = [

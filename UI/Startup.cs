@@ -11,6 +11,9 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using System;
 using System.Linq;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace UI
 {
@@ -26,6 +29,24 @@ namespace UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //autentication
+            var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("SecretKey"));
+             services.AddAuthentication(x =>
+                {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
             //Conneccion con la BD en el archivo appsettins.json
             services.AddDbContext<ObeliscoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
@@ -112,7 +133,7 @@ namespace UI
 
             // AÑADIMOS EL MIDDLEWARE DE AUTENTICACIÓN
             // DE USUARIOS AL PIPELINE DE ASP.NET CORE
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
             // AÑADIMOS EL MIDDLEWARE DE SWAGGER (NSwag)
             //app.UseOpenApi();

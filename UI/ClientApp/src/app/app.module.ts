@@ -78,6 +78,9 @@ import { TableTotalLiquidacionComponent } from './total-liquidacion/table-total-
 // import alert service and component
 import { AlertComponent } from './notifications/_directives/index';
 import { AlertService } from './notifications/_services/index';
+import { LoginComponent } from './login/login.component';
+import { CheckLoginGuard } from './shared/guards/check-login.guard';
+import { PerfilComponent } from './login/perfil/perfil.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -126,6 +129,8 @@ import { AlertService } from './notifications/_services/index';
     ReportesComponent,
     TableTotalLiquidacionComponent,
     AlertComponent,
+    LoginComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -165,6 +170,7 @@ import { AlertService } from './notifications/_services/index';
       { path: 'total-liquidaciones', component: TotalLiquidacionComponent },
       { path: 'pruebasSinVS', component: PruebasSinVSComponent },
       { path: 'reportes', component: ReportesComponent },
+      { path: 'login', component: LoginComponent, canActivate:[CheckLoginGuard] },
 
     ]),
     BrowserAnimationsModule

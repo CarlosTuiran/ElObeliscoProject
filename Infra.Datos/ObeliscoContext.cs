@@ -33,7 +33,7 @@ namespace Infra.Datos
                 Correo="RHerna@gmail.com", Direccion="Stranger Valley", Estado="Activo", Id=1
                 });
             modelBuilder.Entity<Usuario>().HasData(
-                new Usuario(){EmpleadoId= 1, Nombre="RaulH", Password="raulh", Tipo="Admin" ,Id=1
+                new Usuario(){EmpleadoId= 1, Nombre="RaulH", Password="raulh", Rol="Admin" ,Id=1
                 });
             //CREAR SEEDS CUANTO SE TENGA CLARO LA NOMINA
             /*modelBuilder.Entity<Nomina>().HasData(
