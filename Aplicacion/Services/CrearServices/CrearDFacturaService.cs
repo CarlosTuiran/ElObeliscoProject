@@ -39,7 +39,7 @@ namespace Aplicacion.Services.CrearServices
                 {
                     _unitOfWork.DFacturaServiceRepository.Add(newDFactura);
                     _unitOfWork.Commit();
-                    return new CrearDFacturaResponse() { Message = $"Detalle de Facturas Creado Exitosamente" };
+                    return new CrearDFacturaResponse() { Message = $"Detalles de Factura Creado Exitosamente" };
                 }
             }
             else

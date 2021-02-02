@@ -40,11 +40,11 @@ namespace Domain.Models.Entities
         {
             var errors = new List<string>();
             if (this.idDFactura == 0)
-                errors.Add("Campo Cantidad vacio");
+                errors.Add("Código Detalle Factura vacio");
             if (string.IsNullOrEmpty(this.Referencia))
-                errors.Add("Campo Cantidad vacio");
+                errors.Add("Campo Referencia vacio");
             if (string.IsNullOrEmpty(this.Bodega))
-                errors.Add("Campo Cantidad vacio");
+                errors.Add("Campo Bodega vacio");
             if (this.Cantidad == 0)
                 errors.Add("Campo Cantidad vacio");
             if (this.PrecioUnitario == 0)

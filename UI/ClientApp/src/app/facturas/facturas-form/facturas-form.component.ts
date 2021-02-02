@@ -43,6 +43,8 @@ export class FacturasFormComponent implements OnInit {
   currentPromocion="";
   currentProductoDescripcion="";
   currentProductoReferencia="";
+  //Lista de Productos escogidos
+  referenciasEscogidas:string[]=[];  
 
   tipoMovimientos: ITipoMovimiento[];
   referencias: IProducto[];
@@ -212,18 +214,26 @@ private _data:IEmpleado[];*/
     if(this.currentProductoReferencia==""){
       //mensaje que debe ingresar seleccionar un producto primero
     }else{
-    this.dFacturaFormGroup=this.fb.group({
+      let referenciaFinder = this.referenciasEscogidas.find(t => t == this.currentProductoReferencia);//busca si existe tal referencia en la lista dfacturas
+      if(referenciaFinder){
+        //mensage de producto ya seleccionado
+      }else{
+      this.dFacturaFormGroup=this.fb.group({
       referencia :[this.currentProductoReferencia, [Validators.required]],
       promocionId :['0'],
       bodega :['', [Validators.required]],
       cantidad:['1', [Validators.required, Validators.pattern(/^\d+$/)]]            
     });
+    this.referenciasEscogidas.push(this.currentProductoReferencia);
     this.dFacturas.push(this.dFacturaFormGroup);
+  }
   }
       
     
   }
   removerDFactura(indice:number){
+    let referenciaaEliminar=this.dFacturas.controls[indice].value.referencia;
+    this.referenciasEscogidas.splice(referenciaaEliminar);
     this.dFacturas.removeAt(indice);
   }
   refresh(){

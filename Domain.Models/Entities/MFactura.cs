@@ -29,7 +29,7 @@ namespace Domain.Models.Entities
         }
 
 
-        public MFactura(int idMfactura, int idEmpleado, int nit, int idMovimiento, string tipoMovimiento, DateTime fechaFactura,
+        public MFactura(int idMfactura, int idEmpleado, int nit, int idMovimiento, string tipoMovimiento, DateTime fechaFactura, DateTime? fechaPago,
             double subTotal, double valorDevolucion, double descuento, double iVA, /*double total,*/ double abono, string estadoFactura)
         {
             this.idMfactura = idMfactura;
@@ -38,6 +38,7 @@ namespace Domain.Models.Entities
             this.TipoMovimientoId = idMovimiento;
             TipoMovimiento = tipoMovimiento;
             FechaFactura = fechaFactura;
+            this.FechaPago = fechaPago;
             SubTotal = subTotal;
             ValorDevolucion = valorDevolucion;
             Descuento = descuento;
