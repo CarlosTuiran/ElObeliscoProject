@@ -1,6 +1,6 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
   <!-- Barra superior -->
-  <mat-toolbar color="primary" class="example-toolbar">
+  <mat-toolbar color="accent" class="example-toolbar">
     <ng-container *ngIf="isAdmin=='Admin'">
       <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     </ng-container>    
@@ -13,7 +13,7 @@
 <mat-sidenav-container class="example-sidenav-container"
 [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
 <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-[fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+[fixedInViewport]="mobileQuery.matches" fixedTopGap="56" >
   <div>
     <img style="width: 100%;" src="assets/img/LogoObelisco.png" alt="Logo Empresa Obelisco" />
   </div>

@@ -10,9 +10,11 @@ code {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
+  color: #000;
+  /*background-color: #1b6ec2;*/
   border-color: #1861ac;
+  background-image: url("assets/img/BtnBackground.jpg");
+  background-size:100% 100%; 
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html, body { height: 100%; }

@@ -14,7 +14,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   fillerNav = [
-    { name: "Es admin", route: "changeRole()", icon: "home" },
     { name: "home", route: "", icon:"home" },
     { name: "Gestión de Usuarios", route: "usuarios", icon:"supervised_user_circle" },
     { name: "Gestión de Productos", route: "productos", icon: "assignment" },
