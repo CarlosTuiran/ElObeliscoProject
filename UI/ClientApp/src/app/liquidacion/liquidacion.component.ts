@@ -4,6 +4,7 @@ import { LiquidacionService } from './liquidacion.service';
 import { TotalLiquidacionService } from '../total-liquidacion/total-liquidacion.service';
 import { error } from '@angular/compiler/src/util';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService } from '../notifications/_services';
 
 @Component({
   selector: 'app-liquidacion',
@@ -14,22 +15,24 @@ export class LiquidacionComponent implements OnInit {
 
   liquidaciones: ILiquidacion[];
   liquidacion:any;
-  constructor(private liquidacionService: LiquidacionService, private totalLiquidacionService: TotalLiquidacionService, private router: Router) { }
+  constructor(private liquidacionService: LiquidacionService, private totalLiquidacionService: TotalLiquidacionService, private router: Router, 
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.liquidacionService.getLiquidaciones()
       .subscribe(liquidaciones => this.liquidaciones = liquidaciones,
-        error => console.error(error));
+        error => this.alertService.error(error.message));
   }
 
   Total() {
     this.totalLiquidacionService.createTotalLiquidacion(this.liquidacion)
     .subscribe(totalLiquidacion => this.onSaveSuccess()),
-      error => console.error();
+      error => this.alertService.error(error.message);
   }
 
   onSaveSuccess() {
     this.router.navigate(["/total-liquidaciones"]);
+    this.alertService.success("Liquidado Exitoso");
   }
 
 }

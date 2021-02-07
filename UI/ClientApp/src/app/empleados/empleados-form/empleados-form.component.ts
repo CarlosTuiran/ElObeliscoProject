@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { IEmpleado } from '../empleados.component';
 import { EmpleadosService } from '../empleados.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../notifications/_services';
+
+
 @Component({
   selector: 'app-empleados-form',
   templateUrl: './empleados-form.component.html',
@@ -11,7 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class EmpleadosFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private empleadosService: EmpleadosService,
-    private router: Router, private activatedRoute: ActivatedRoute) { }
+    private router: Router, private activatedRoute: ActivatedRoute, private alertService: AlertService) { }
 
   modoEdicion: boolean = false;
   empleadoId: number;
@@ -35,7 +38,7 @@ export class EmpleadosFormComponent implements OnInit {
       this.modoEdicion = true;
       this.empleadoId = params["id"];
       this.empleadosService.getEmpleado(this.empleadoId).subscribe(empleado => this.cargarFormulario(empleado),
-        error => console.error(error));
+        error => this.alertService.error(error.message));
     });
   }
   cargarFormulario(empleado: IEmpleado) {
@@ -58,16 +61,17 @@ export class EmpleadosFormComponent implements OnInit {
       empleado.idEmpleado = this.empleadoId;
       this.empleadosService.updateEmpleado(empleado)
         .subscribe(empleado => this.onSaveSuccess(),
-          error => console.error(error));
+          error => this.alertService.error(error.message));
     } else {
       // crea
       this.empleadosService.createEmpleado(empleado)
         .subscribe(empleado => this.onSaveSuccess(),
-          error => console.error(error));
+          error => this.alertService.error(error.message));
     }
   }
   onSaveSuccess() {
     this.router.navigate(["/empleados"]);
+    this.alertService.success("Guardado Exitoso");
   }
 
   get idEmpleado() {

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { IProducto } from '../productos.component';
 import { ProductosService } from '../productos.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../notifications/_services';
 
 @Component({
   selector: 'app-productos-form',
@@ -12,7 +13,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ProductosFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private productosService: ProductosService,
-    private router: Router, private activatedRoute: ActivatedRoute) { }
+    private router: Router, private activatedRoute: ActivatedRoute, 
+    private alertService: AlertService) { }
 
   modoEdicion: boolean = false;
   productoId: string;
@@ -36,7 +38,7 @@ export class ProductosFormComponent implements OnInit {
       this.modoEdicion = true;
       this.productoId = params["id"];
       this.productosService.getProducto(this.productoId).subscribe(producto => this.cargarFormulario(producto),
-        error => console.error(error));
+        error => this.alertService.error(error.message));
     });
   }
   cargarFormulario(producto: IProducto) {
@@ -59,16 +61,17 @@ export class ProductosFormComponent implements OnInit {
       producto.referencia = this.productoId;
       this.productosService.updateProducto(producto)
         .subscribe(usuario => this.onSaveSuccess(),
-          error => console.error(error));
+          error => this.alertService.error(error.message));
     } else {
       // crea
       this.productosService.createProductos(producto)
         .subscribe(usuario => this.onSaveSuccess(),
-          error => console.error(error));
+          error => this.alertService.error(error.message));
     }
   }
   onSaveSuccess() {
     this.router.navigate(["/productos"]);
+    this.alertService.success("Guardado Exitoso");
   }
 
   get referencia() {

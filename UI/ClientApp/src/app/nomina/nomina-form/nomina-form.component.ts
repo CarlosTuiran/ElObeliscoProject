@@ -5,6 +5,8 @@ import { NominaService } from '../nomina.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IEmpleado } from 'src/app/empleados/empleados.component';
 import { EmpleadosService } from 'src/app/empleados/empleados.service';
+import { AlertService } from '../../notifications/_services';
+
 
 @Component({
   selector: 'app-nomina-form',
@@ -14,7 +16,8 @@ import { EmpleadosService } from 'src/app/empleados/empleados.service';
 export class NominaFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private nominaService: NominaService,
-    private empleadoService: EmpleadosService, private router: Router, private activatedRoute: ActivatedRoute) { }
+    private empleadoService: EmpleadosService, private router: Router, private activatedRoute: ActivatedRoute,
+     private alertService: AlertService) { }
 
   modoEdicion: boolean = false;
   empleadoId: number;
@@ -31,7 +34,7 @@ export class NominaFormComponent implements OnInit {
   ngOnInit() {
     this.empleadoService.getEmpleados() //ACA EVENTUALMENTE SOLO DEBE LLAMAR UNA FUNCION QUE RETORNE LAS ID DE LOS EMPLEADOS SIN USUARIOS
       .subscribe(empleados => this.empleados = empleados,
-        error => console.error(error));
+        error => this.alertService.error(error.message));
 
     this.activatedRoute.params.subscribe(params => {
       if (params["id"] == undefined) {
@@ -42,7 +45,7 @@ export class NominaFormComponent implements OnInit {
       this.empleadoId = params["id"];
       this.nominaId = params["idN"];
       this.nominaService.getNomina(this.nominaId, this.empleadoId).subscribe(nomina => this.cargarFormulario(nomina),
-        error => console.error(error));
+        error => this.alertService.error(error.message));
     });
   }
 
@@ -63,16 +66,17 @@ export class NominaFormComponent implements OnInit {
       nomina.idEmpleado = this.empleadoId;
       this.nominaService.updateNomina(nomina)
         .subscribe(usuario => this.onSaveSuccess(),
-          error => console.error(error));
+          error => this.alertService.error(error.message));
     } else {
       // crea un usuario
       this.nominaService.createNomina(nomina)
         .subscribe(usuario => this.onSaveSuccess(),
-          error => console.error(error));
+          error => this.alertService.error(error.message));
     }
   }
   onSaveSuccess() {
     this.router.navigate(["/nominas"]);
+    this.alertService.success("Guardado Exitoso");
   }
 
   get idEmpleado() {

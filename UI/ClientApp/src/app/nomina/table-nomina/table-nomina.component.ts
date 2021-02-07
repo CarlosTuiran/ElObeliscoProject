@@ -5,6 +5,8 @@ import { NominaService } from '../nomina.service';
 import { NominaComponent } from '../nomina.component';
 import { LiquidacionService } from '../../liquidacion/liquidacion.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../../notifications/_services';
+
 
 @Component({
   selector: 'app-table-nomina',
@@ -26,7 +28,8 @@ export class TableNominaComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
-  constructor(private nominaService: NominaService, private liquidacionService: LiquidacionService, private router: Router){}
+  constructor(private nominaService: NominaService, private liquidacionService: LiquidacionService, private router: Router,
+    private alertService: AlertService){}
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -39,7 +42,7 @@ export class TableNominaComponent implements OnInit {
   ngOnInit() {
     this.nominaService.getNominas()
     .subscribe(nominas => this.dataSource.data = nominas,
-      error => console.error(error));
+      error => this.alertService.error(error.message));
 
   }
 
@@ -48,11 +51,12 @@ export class TableNominaComponent implements OnInit {
     console.table(nomina);
     this.liquidacionService.createLiquidacion(nomina)
       .subscribe(usuario => this.onSaveSuccess(),
-        error => console.error(error));
+        error => this.alertService.error(error.message));
   }
 
   onSaveSuccess() {
     this.router.navigate(["/liquidaciones"]);
+    this.alertService.success("Pagado Exitoso");
   }
 
 }

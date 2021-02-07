@@ -11,6 +11,8 @@ import { AuthService } from '../login/auth.service';
 export class SidebarComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   isAdmin = null;
+  isLogged=false;
+
   private subscription: Subscription;
 
   fillerNav = [
@@ -38,8 +40,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.subscription.add(
-      this.authService.isAdmin$.subscribe((res) => (this.isAdmin = res))
+      this.authService.isAdmin$.subscribe((res) => (this.isAdmin = res))  
     );
+    //this.subscription.add(
+      this.authService.isLogged.subscribe((res) => (this.isLogged = res));
+    //);
   }
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);

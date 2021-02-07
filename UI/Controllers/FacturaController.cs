@@ -27,9 +27,31 @@ namespace UI.Controllers
             _unitOfWork = new UnitOfWork(_context);
         }
         [HttpGet]
-        public IEnumerable<MFactura> GetMFacturas()
+        public Object GetMFacturas()
         {
-            return _context.MFactura;
+            var result = (from f in _context.Set<MFactura>()
+                          join e in _context.Set<Empleado>()
+                          on f.EmpleadoId equals e.Id
+                          join t in _context.Set<Terceros>()
+                          on f.TercerosId equals t.Id
+                          join tp in _context.Set<TipoMovimiento>()
+                          on f.TipoMovimientoId equals tp.Id
+                          select new
+                          {
+                              EmpleadoId = e.Nombres,
+                              TercerosId = t.Nombre,
+                              TipoMovimientoId = tp.Nombre,
+                              FechaPago = f.FechaPago,
+                              SubTotal = f.SubTotal,
+                              ValorDevolucion = f.ValorDevolucion,
+                              Descuento = f.Descuento,
+                              IVA = f.IVA,
+                              Abono = f.Abono,
+                              EstadoFactura = f.EstadoFactura
+
+                          }).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMFactura([FromRoute] int id)

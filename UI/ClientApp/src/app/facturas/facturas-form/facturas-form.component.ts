@@ -17,6 +17,7 @@ import { debounceTime, delay, filter, map, take, takeUntil, tap, startWith } fro
 import { IMFactura } from '../facturas.component';
 import { BodegasService } from 'src/app/bodegas/bodegas.service';
 import { ProductosService } from '../../productos/productos.service';
+import { AlertService } from '../../notifications/_services';
 
 @Component({
   selector: 'app-facturas-form',
@@ -29,7 +30,8 @@ export class FacturasFormComponent implements OnInit {
     private router: Router, private activatedRoute: ActivatedRoute, 
     private tercerosService: TercerosService, private empleadosService: EmpleadosService,
     private tipoMovimientoService: TipoMovimientosService, 
-    private bodegasService: BodegasService, private productosService: ProductosService) { }
+    private bodegasService: BodegasService, private productosService: ProductosService, 
+    private alertService: AlertService) { }
     
     modoEdicion: boolean = false;
     empleados: IEmpleado[]=[];
@@ -156,11 +158,13 @@ private _data:IEmpleado[];*/
       // crea un mfactura
       this.facturasService.createFacturas(mfactura)
         .subscribe(mfactura => this.onSaveSuccess(),
-          error => console.error(error));
+          error => this.alertService.error(error.message)
+        );
     }
   }
   onSaveSuccess(){
     this.router.navigate(["/facturas"]);
+    this.alertService.success("Guardado Exitoso");
   }
 
   get empleadoId() {
@@ -216,7 +220,7 @@ private _data:IEmpleado[];*/
     }else{
       let referenciaFinder = this.referenciasEscogidas.find(t => t == this.currentProductoReferencia);//busca si existe tal referencia en la lista dfacturas
       if(referenciaFinder){
-        //mensage de producto ya seleccionado
+        this.alertService.error("Producto ya Seleccionado")
       }else{
       this.dFacturaFormGroup=this.fb.group({
       referencia :[this.currentProductoReferencia, [Validators.required]],
