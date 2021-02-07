@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from '../notifications/_services';
 import {FacturasService} from './facturas.service';
 
 @Component({
@@ -10,13 +11,13 @@ export class FacturasComponent implements OnInit {
   isAdmin = false;
   facturas:IMFactura[];
   
-  constructor(private facturasService: FacturasService) { }
+  constructor(private facturasService: FacturasService, private alertService: AlertService) { }
 
   ngOnInit() {
     this.facturasService.getFacturas()
       .subscribe(factura => this.facturas = factura,
-        error => console.error(error));
-
+        error =>this.alertService.error(error.message)
+      );
   }
  
 }

@@ -80,7 +80,9 @@ import { AlertComponent } from './notifications/_directives/index';
 import { AlertService } from './notifications/_services/index';
 import { LoginComponent } from './login/login.component';
 import { CheckLoginGuard } from './shared/guards/check-login.guard';
+import { CheckNotloginGuard } from './shared/guards/check-notlogin.guard';
 import { PerfilComponent } from './login/perfil/perfil.component';
+import { InventarioComponent } from './inventario/inventario.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -131,6 +133,7 @@ import { PerfilComponent } from './login/perfil/perfil.component';
     AlertComponent,
     LoginComponent,
     PerfilComponent,
+    InventarioComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -169,7 +172,7 @@ import { PerfilComponent } from './login/perfil/perfil.component';
       { path: 'liquidaciones', component: LiquidacionComponent },
       { path: 'total-liquidaciones', component: TotalLiquidacionComponent },
       { path: 'pruebasSinVS', component: PruebasSinVSComponent },
-      { path: 'reportes', component: ReportesComponent },
+      { path: 'reportes', component: ReportesComponent , canActivate:[CheckNotloginGuard]},
       { path: 'login', component: LoginComponent, canActivate:[CheckLoginGuard] },
 
     ]),

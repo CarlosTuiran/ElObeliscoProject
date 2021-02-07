@@ -13,27 +13,39 @@ namespace Aplicacion.Services.CrearServices
         readonly IUnitOfWork _unitOfWork;
         public CrearMFacturaService crearMFacturaService;
         public CrearDFacturaService crearDFacturaService;
+        private int Incremento = 1;
 
         public CrearFacturasService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             this.crearMFacturaService = new CrearMFacturaService(unitOfWork);
             this.crearDFacturaService = new CrearDFacturaService(unitOfWork);
-
         }
 
         public CrearFacturasResponse Ejecutar(CrearMFacturaRequest requestM)
         {
+            Console.WriteLine(requestM.FechaPago);
             var listMFacturas=_unitOfWork.MFacturaServiceRepository.GetAll();
             var lastMFactura = listMFacturas.TakeLast(1).ToArray();//ultima factura
             requestM.idMfactura = lastMFactura[0].idMfactura + 1;//otorga un nuevo id Mfactura
+            if(requestM.EstadoFactura == "Pendiente"){
+                requestM.FechaPago = null;
+            }
+            
             var rtaMService = crearMFacturaService.Ejecutar(requestM);
+            
             if (rtaMService.isOk())
             {
                 var requestD=requestM.DFacturas;
                 foreach (var item in requestD)
                 {
-                    item.MfacturaId = requestM.idMfactura; //Relaciona cada d factura con la m factura
+                    
+                    var mfactura =_unitOfWork.MFacturaServiceRepository.FindFirstOrDefault(t=>t.idMfactura == requestM.idMfactura); //Relaciona cada d factura con la m factura
+                    item.MfacturaId = mfactura.Id;
+                    item.idDFactura = Convert.ToInt32(item.MfacturaId.ToString() + "0" + Incremento);
+                    Incremento += 1;
+                    var producto = _unitOfWork.ProductoServiceRepository.FindFirstOrDefault(t => t.Referencia == item.Referencia);
+                    item.PrecioUnitario = producto.PrecioVenta;
                     var rtaDService=crearDFacturaService.Ejecutar(item);
                     if(!rtaDService.isOk())
                         return new CrearFacturasResponse { Message = rtaDService.Message };

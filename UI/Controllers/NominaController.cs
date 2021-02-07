@@ -30,9 +30,21 @@ namespace UI.InterfazWeb.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Nomina> GetNominas()
+        public Object GetNominas()
         {
-            return _context.Nomina;
+            var result = (from n in _context.Set<Nomina>()
+                          join e in _context.Set<Empleado>()
+                          on n.IdEmpleado equals e.Id
+                          select new
+                          {
+                              IdEmpleado = e.Nombres,
+                              DiasTrabajados = n.DiasTrabajados,
+                              HorasExtras = n.HorasExtras,
+                              SalarioBase = n.SalarioBase,
+                              SubTransporte = n.SubTransporte
+                          }).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
         }
 
         [HttpGet("{idN}/{id}")]

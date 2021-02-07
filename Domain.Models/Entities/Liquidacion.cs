@@ -67,7 +67,7 @@ namespace Domain.Models.Entities
         {
             int Month = DateTime.Now.Month;
             int Year = DateTime.Now.Year;
-            this.NominaId = nomina.IdNomina;
+            this.NominaId = Month+" - "+Year;
             this.IdEmpleado = nomina.IdEmpleado;
             this.Mes = Month;
             this.Anio = Year;

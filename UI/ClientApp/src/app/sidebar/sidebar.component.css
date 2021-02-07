@@ -32,7 +32,7 @@ h1.example-app-name {
 
 mat-sidenav {
   width: 13%;
-  background: #F6EDEB;
+  background/*-image*/: /*url("/assets/img/Captura.PNG");*/ #F6EDEB;
 }
 
 mat-sidenav-content{

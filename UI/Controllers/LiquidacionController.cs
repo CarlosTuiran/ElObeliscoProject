@@ -30,9 +30,27 @@ namespace UI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Liquidacion> GetLiquidaciones()
+        public Object GetLiquidaciones()
         {
-            return _context.Liquidacion;
+            var result = (from l in _context.Set<Liquidacion>()
+                          join e in _context.Set<Empleado>()
+                          on l.IdEmpleado equals e.Id
+                          select new
+                          {
+                              NominaId = l.NominaId,
+                              IdEmpleado = e.Nombres,
+                              Mes = l.Mes,
+                              Anio = l.Anio,
+                              SueldoOrdinario = l.SueldoOrdinario,
+                              SubTransporte = l.SubTransporte,
+                              TotalDevengado = l.TotalDevengado,
+                              Salud = l.Salud,
+                              Pension = l.Pension,
+                              TotalDeducido = l.TotalDeducido,
+                              TotalPagar = l.TotalPagar,
+                          }).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
         }
 
         [HttpGet("{id}")]

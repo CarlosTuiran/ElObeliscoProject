@@ -19,7 +19,7 @@ namespace Aplicacion.Services.Eventos
         {
 
             var liquidacion = _unitOfWork.LiquidacionServiceRepository.FindFirstOrDefault(t => t.NominaId == request.IdNomina && t.IdEmpleado == request.IdEmpleado);
-            var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina == request.IdNomina && t.IdEmpleado == request.IdEmpleado);
+            var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdEmpleado == request.IdEmpleado);
 
             if (liquidacion == null)
             {
@@ -49,4 +49,4 @@ namespace Aplicacion.Services.Eventos
         }
     }
 }
-    
+ 

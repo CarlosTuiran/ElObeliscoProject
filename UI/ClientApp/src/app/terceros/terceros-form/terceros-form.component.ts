@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { ITercero } from '../terceros.component';
 import { TercerosService } from '../terceros.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../notifications/_services';
 
 @Component({
   selector: 'app-terceros-form',
@@ -12,7 +13,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class TercerosFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private tercerosService: TercerosService,
-    private router: Router, private activatedRoute: ActivatedRoute) { }
+    private router: Router, private activatedRoute: ActivatedRoute, 
+    private alertService: AlertService) { }
 
   modoEdicion: boolean = false;
   terceroId: string;
@@ -37,7 +39,7 @@ export class TercerosFormComponent implements OnInit {
       this.modoEdicion = true;
       this.terceroId = params["id"];
       this.tercerosService.getTercero(this.terceroId).subscribe(tercero => this.cargarFormulario(tercero),
-        error => console.error(error));
+        error => this.alertService.error(error.message));
     });
   }
   cargarFormulario(tercero: ITercero) {
@@ -61,16 +63,17 @@ export class TercerosFormComponent implements OnInit {
       tercero.nit = this.terceroId;
       this.tercerosService.updateTercero(tercero)
         .subscribe(tercero => this.onSaveSuccess(),
-          error => console.error(error));
+          error => this.alertService.error(error.message));
     } else {
       // crea
       this.tercerosService.createTercero(tercero)
         .subscribe(tercero => this.onSaveSuccess(),
-          error => console.error(error));
+          error => this.alertService.error(error.message));
     }
   }
   onSaveSuccess() {
     this.router.navigate(["/terceros"]);
+    this.alertService.success("Guardado Exitoso");
   }
 
   get nit() {
