@@ -8,9 +8,9 @@ using Aplicacion.Services.ActualizarServices;
 using Domain.Models.Entities;
 using Infra.Datos;
 using Infra.Datos.Base;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Aplicacion.Services.EliminarServices;
 
 namespace UI.InterfazWeb.Controllers
 {
@@ -22,6 +22,7 @@ namespace UI.InterfazWeb.Controllers
         private CrearEmpleadoService _service;
         private UnitOfWork _unitOfWork;
         private ActualizarEmpleadoService _actualizarService;
+        private EliminarEmpleadoService _eliminarService;
 
         public EmpleadoController(ObeliscoContext context)
         {
@@ -57,22 +58,27 @@ namespace UI.InterfazWeb.Controllers
             return BadRequest(rta.Message);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmpleado([FromRoute] int id)
-        {
-            Empleado empleado = await _context.Empleado.SingleOrDefaultAsync(t => t.IdEmpleado == id);
-            if (empleado == null)
-                return NotFound();
-            _context.Empleado.Remove(empleado);
-            await _context.SaveChangesAsync();
-            return Ok(empleado);
-        }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmpleado([FromRoute] int id, [FromBody] ActualizarEmpleadoRequest empleado)
         {
             _actualizarService = new ActualizarEmpleadoService(_unitOfWork);
             var rta = _actualizarService.Ejecutar(empleado);
+            if (rta.isOk())
+            {
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("GetEmpleado", new { id = empleado.IdEmpleado }, empleado);
+            }
+            return BadRequest(rta.Message);
+        }
+
+        [HttpPut("DeleteEmpleado/{id}")]
+        public async Task<IActionResult> DeleteEmpleado([FromRoute] int id)
+        {
+            EliminarEmpleadoRequest empleado = new  EliminarEmpleadoRequest();
+            empleado.IdEmpleado = id;
+            _eliminarService = new EliminarEmpleadoService(_unitOfWork);
+            var rta = _eliminarService.Ejecutar(empleado);
             if (rta.isOk())
             {
                 await _context.SaveChangesAsync();

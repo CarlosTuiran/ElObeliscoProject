@@ -1,4 +1,3 @@
-import { DataTablesResponse } from '../tablas/data-tables-response';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { EmpleadosService } from './empleados.service';
 
@@ -31,4 +30,8 @@ export interface IEmpleado{
   celular:string,
   correo:string,
   direccion:string
+}
+
+export interface IDeleteEmpleado {
+  idEmpleado: number
 }

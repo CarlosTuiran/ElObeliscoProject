@@ -34,6 +34,7 @@ namespace Aplicacion.Services.ActualizarServices
                 producto.Marca = request.Marca;
                 producto.PrecioVenta = request.PrecioVenta;
                 producto.Referencia = request.Referencia;
+                producto.CantidadMinima = request.CantidadMinima;
                 _unitOfWork.ProductoServiceRepository.Edit(producto);
                 _unitOfWork.Commit();
                 return new ActualizarProductoResponse() { Message = $"Producto Actualizado Exitosamente" };

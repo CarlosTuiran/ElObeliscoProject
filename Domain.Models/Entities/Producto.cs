@@ -22,8 +22,10 @@ namespace Domain.Models.Entities
         public double Costo { get; set; }
         public double PrecioVenta { get; set; }
         public double IVA { get; set; }
+        public int CantidadMinima { get; set; }
         //public int InventarioId { get; set; } // PENDIENTE: esperando Inclusion al momento de  crear
         public DateTime FechaRegistro { get; set; }
+        public string Estado { get => "Activo"; }
         public List<ProductoDFactura> ProductoDFacturas { get; set; }
 
         public Producto()
@@ -31,7 +33,7 @@ namespace Domain.Models.Entities
 
         }        
         public Producto(string referencia, string descripcion, string formatoventa, string marca ,string fabrica,
-            double costo, double precioventa, double iva)
+            double costo, double precioventa, double iva, int cantidadMinima)
         {
             this.Referencia = referencia;
             this.Descripcion = descripcion;
@@ -41,6 +43,7 @@ namespace Domain.Models.Entities
             this.Costo = costo;
             this.PrecioVenta = precioventa;
             this.IVA = iva;
+            this.CantidadMinima=cantidadMinima;
             this.FechaRegistro = DateTime.Now;
         }
 
@@ -57,6 +60,8 @@ namespace Domain.Models.Entities
                 errors.Add("Campo PrecioVenta negativo");
             if (producto.FechaRegistro == null)
                 errors.Add("Campo FechaRegistro vacio");
+            if (string.IsNullOrEmpty(producto.Estado))
+                errors.Add("Campo Estado vacio");
             return errors;
         }
     }

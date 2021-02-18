@@ -19,6 +19,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { name: "home", route: "", icon:"home" },
     { name: "Gestión de Usuarios", route: "usuarios", icon:"supervised_user_circle" },
     { name: "Gestión de Productos", route: "productos", icon: "assignment" },
+    { name: "Inventario", route: "inventario", icon: "assignment" },
     { name: "Gestión de Terceros", route: "terceros", icon: "local_shipping" },
     { name: "Facturacion", route: "facturas", icon: "shopping_bag" },
     { name: "Gestión de Empleados", route: "empleados", icon: "perm_contact_calendar" },

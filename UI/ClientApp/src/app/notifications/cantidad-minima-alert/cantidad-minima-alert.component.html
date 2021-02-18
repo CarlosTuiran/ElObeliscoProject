@@ -1,0 +1,15 @@
+<button mat-icon-button [matMenuTriggerFor]="notificaciones" aria-label="Icon Perfil">
+  <mat-icon class="iconoNotificacion">notification_important</mat-icon>
+</button>
+<mat-menu #notificaciones="matMenu">
+  <div *ngIf="!isAlertMin else viewCantidadMinAlert" >
+
+  </div>
+  <ng-template #viewCantidadMinAlert>
+    <button mat-menu-item routerLink="inventario">
+      <mat-icon class="colores">warning</mat-icon>
+      <span class="texto">Algunos Productos tienen Stock Bajos</span>
+      
+    </button>
+  </ng-template>  
+</mat-menu>
