@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { InventarioService } from './inventario.service';
+import { error } from '@angular/compiler/src/util';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService } from '../notifications/_services';
 
 @Component({
   selector: 'app-inventario',
@@ -7,14 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventarioComponent implements OnInit {
 
-  constructor() { }
+  inventarios: IInventario[];
+  inventario: any;
+  constructor(private inventarioService: InventarioService, private router: Router,
+    private alertService: AlertService) { }
 
   ngOnInit() {
+    this.inventarioService.getInventarios()
+      .subscribe(inventarios => this.inventarios = inventarios,
+        error => this.alertService.error(error.message));
   }
 
 }
 
-interface IInventario {
+export interface IInventario {
   referencia: string,
   descripcion: string,
   cantidad: number,

@@ -83,6 +83,9 @@ import { CheckLoginGuard } from './shared/guards/check-login.guard';
 import { CheckNotloginGuard } from './shared/guards/check-notlogin.guard';
 import { PerfilComponent } from './login/perfil/perfil.component';
 import { InventarioComponent } from './inventario/inventario.component';
+import { TableInventarioComponent } from './inventario/table-inventario/table-inventario.component';
+import { InventarioService } from './inventario/inventario.service';
+import { CantidadMinimaAlertComponent } from './notifications/cantidad-minima-alert/cantidad-minima-alert.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -134,6 +137,8 @@ import { InventarioComponent } from './inventario/inventario.component';
     LoginComponent,
     PerfilComponent,
     InventarioComponent,
+    TableInventarioComponent,
+    CantidadMinimaAlertComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -173,14 +178,15 @@ import { InventarioComponent } from './inventario/inventario.component';
       { path: 'total-liquidaciones', component: TotalLiquidacionComponent },
       { path: 'pruebasSinVS', component: PruebasSinVSComponent },
       { path: 'reportes', component: ReportesComponent , canActivate:[CheckNotloginGuard]},
-      { path: 'login', component: LoginComponent, canActivate:[CheckLoginGuard] },
+      { path: 'login', component: LoginComponent, canActivate: [CheckLoginGuard] },
+      { path: 'inventario', component: InventarioComponent },
 
     ]),
     BrowserAnimationsModule
   ],
   //aca se agregan todos los services
   providers: [ThemeService,UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
-    BodegasService, PromocionesService, PruebasSinVSService,AlertService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
+    BodegasService, PromocionesService, PruebasSinVSService, InventarioService,AlertService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent],
   bootstrap: [AppComponent, SidebarComponent],

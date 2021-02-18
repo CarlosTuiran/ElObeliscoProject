@@ -4,14 +4,16 @@ using Infra.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infra.Datos.Migrations
 {
     [DbContext(typeof(ObeliscoContext))]
-    partial class ObeliscoContextModelSnapshot : ModelSnapshot
+    [Migration("20210210012232_CantidadMinima")]
+    partial class CantidadMinima
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +67,7 @@ namespace Infra.Datos.Migrations
                             Id = 1,
                             Bodega = "BD1",
                             Cantidad = 5,
-                            FechaFactura = new DateTime(2021, 2, 17, 21, 58, 24, 739, DateTimeKind.Local).AddTicks(182),
+                            FechaFactura = new DateTime(2021, 2, 9, 20, 22, 31, 200, DateTimeKind.Local).AddTicks(1382),
                             MfacturaId = 1,
                             PrecioTotal = 0.0,
                             PrecioUnitario = 3000.0,
@@ -276,8 +278,8 @@ namespace Infra.Datos.Migrations
                             Descuento = 0.0,
                             EmpleadoId = 1,
                             EstadoFactura = "Pagada",
-                            FechaFactura = new DateTime(2021, 2, 17, 21, 58, 24, 738, DateTimeKind.Local).AddTicks(3365),
-                            FechaPago = new DateTime(2021, 2, 17, 21, 58, 24, 738, DateTimeKind.Local).AddTicks(5074),
+                            FechaFactura = new DateTime(2021, 2, 9, 20, 22, 31, 198, DateTimeKind.Local).AddTicks(2679),
+                            FechaPago = new DateTime(2021, 2, 9, 20, 22, 31, 198, DateTimeKind.Local).AddTicks(5556),
                             IVA = 0.29999999999999999,
                             SubTotal = 15000.0,
                             TercerosId = 1,
@@ -415,7 +417,7 @@ namespace Infra.Datos.Migrations
                             Costo = 3000.0,
                             Descripcion = "Llave Inglesa",
                             Fabrica = "Ferres SAS",
-                            FechaRegistro = new DateTime(2021, 2, 17, 21, 58, 24, 734, DateTimeKind.Local).AddTicks(2713),
+                            FechaRegistro = new DateTime(2021, 2, 9, 20, 22, 31, 192, DateTimeKind.Local).AddTicks(5983),
                             FormatoVenta = "Unidad",
                             IVA = 0.29999999999999999,
                             Marca = "Ferres",

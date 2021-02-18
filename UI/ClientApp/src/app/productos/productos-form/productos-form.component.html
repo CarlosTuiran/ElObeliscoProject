@@ -20,7 +20,7 @@
                type="text"
                formControlName="referencia"
                *ngIf="modoEdicion"
-               disabled/>
+               disabled />
         <div class="alert alert-danger" *ngIf="((referencia.touched || referencia.dirty )&& referencia.invalid)">
           <span *ngIf="referencia.errors.required">
             El campo Referencia es requerido
@@ -138,6 +138,27 @@
           </span>
           <span *ngIf="precioVenta.errors.pattern">
             El campo Precio de Venta es numerico
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((cantidadMinima.touched || cantidadMinima.dirty) && cantidadMinima.invalid)}">
+      <label class="col-md-2 control-label"
+             for="cantidadMinimaId">Cantidad Mínima del Producto</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="cantidadMinimaId"
+               type="text"
+               formControlName="cantidadMinima" />
+        <div class="alert alert-danger" *ngIf="((cantidadMinima.touched || cantidadMinima.dirty )&& cantidadMinima.invalid)">
+          <span *ngIf="cantidadMinima.errors.required">
+            El campo Cantidad mínima es requerido
+          </span>
+          <span *ngIf="cantidadMinima.errors.pattern">
+            El campo Cantidad mínima es numerico
           </span>
         </div>
       </div>

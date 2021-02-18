@@ -1,4 +1,5 @@
 using Aplicacion.Request;
+using Aplicacion.Services.Eventos;
 using Domain.Models.Contracts;
 using Domain.Models.Entities;
 using System;
@@ -13,13 +14,17 @@ namespace Aplicacion.Services.CrearServices
         readonly IUnitOfWork _unitOfWork;
         public CrearMFacturaService crearMFacturaService;
         public CrearDFacturaService crearDFacturaService;
+        public ComprarProductoService comprarProductoservice;
+
         private int Incremento = 1;
 
         public CrearFacturasService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            this.crearMFacturaService = new CrearMFacturaService(unitOfWork);
-            this.crearDFacturaService = new CrearDFacturaService(unitOfWork);
+            this.crearMFacturaService = new CrearMFacturaService(_unitOfWork);
+            this.crearDFacturaService = new CrearDFacturaService(_unitOfWork);
+            this.comprarProductoservice=new ComprarProductoService(_unitOfWork);
+
         }
 
         public CrearFacturasResponse Ejecutar(CrearMFacturaRequest requestM)
@@ -49,6 +54,11 @@ namespace Aplicacion.Services.CrearServices
                     var rtaDService=crearDFacturaService.Ejecutar(item);
                     if(!rtaDService.isOk())
                         return new CrearFacturasResponse { Message = rtaDService.Message };
+                    ComprarProductoRequest requestComprar=new ComprarProductoRequest();
+                    requestComprar.idMfactura = mfactura.Id;
+                    var rta =comprarProductoservice.Ejecutar(requestComprar);
+                    if(!rta.isOk())
+                        return new CrearFacturasResponse { Message = rta.Message };
                 }
                 _unitOfWork.Commit();
                 return new CrearFacturasResponse { Message = "Factura Creada Exitosamente" };

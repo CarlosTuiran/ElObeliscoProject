@@ -26,7 +26,8 @@ export class ProductosFormComponent implements OnInit {
     marca: ['', [Validators.required]],
     fabrica: ['', [Validators.required]],
     costo: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-    precioVenta: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
+    precioVenta: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+    cantidadMinima:['', [Validators.required, Validators.pattern(/^\d+$/)]]
   });
  
   ngOnInit() {
@@ -49,7 +50,8 @@ export class ProductosFormComponent implements OnInit {
       fabrica: producto.fabrica,
       marca: producto.marca,
       costo: producto.costo,
-      precioVenta: producto.precioVenta
+      precioVenta: producto.precioVenta,
+      cantidadMinima:producto.cantidadMinima
     });
   }
 
@@ -94,5 +96,8 @@ export class ProductosFormComponent implements OnInit {
   }
   get precioVenta() {
     return this.formGroup.get('precioVenta');
+  }
+  get cantidadMinima() {
+    return this.formGroup.get('cantidadMinima');
   }
 }

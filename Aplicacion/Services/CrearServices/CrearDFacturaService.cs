@@ -12,7 +12,7 @@ namespace Aplicacion.Services.CrearServices
     public class CrearDFacturaService
     {
         readonly IUnitOfWork _unitOfWork;
-
+        
         public CrearDFacturaService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -21,7 +21,7 @@ namespace Aplicacion.Services.CrearServices
         public CrearDFacturaResponse Ejecutar(CrearDFacturaRequest request)
         {
             var dFactura = _unitOfWork.DFacturaServiceRepository.FindFirstOrDefault(t => t.idDFactura == request.idDFactura);
-            if (dFactura == null)
+            if (dFactura == null) 
             {
 
                 DFactura newDFactura = new DFactura(request.idDFactura, request.MfacturaId, request.Referencia, request.PromocionId,request.Bodega, request.Cantidad, request.PrecioUnitario, request.FechaFactura.Date);

@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { IEmpleado } from '../empleados.component';
 import { EmpleadosService } from '../empleados.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../notifications/_services';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-table-empleados',
@@ -24,7 +27,8 @@ export class TableEmpleadosComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
-  constructor (private empleadosService: EmpleadosService){}
+  constructor(private empleadosService: EmpleadosService, private router: Router, private activatedRoute: ActivatedRoute,
+    private alertService: AlertService){}
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -41,5 +45,15 @@ export class TableEmpleadosComponent implements OnInit {
 
   }
 
+  Eliminar(empleadoId: number) {
+    this.empleadosService.deleteEmpleado(empleadoId).
+      subscribe(empleadoId => this.onDeleteSuccess(),
+        error => console.error(error))
+  }
+
+  onDeleteSuccess() {
+    this.router.navigate(["/empleados"]);
+    this.alertService.success("Eliminado exitoso");
+  }
 
 }

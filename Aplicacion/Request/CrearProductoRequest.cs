@@ -14,6 +14,7 @@ namespace Aplicacion.Request
         public double Costo { get; set; }
         public double PrecioVenta { get; set; }
         public double IVA { get; set; }
+        public int CantidadMinima { get; set; }
 
     }
     public class CrearProductoResponse

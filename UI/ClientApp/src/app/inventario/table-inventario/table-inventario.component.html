@@ -1,0 +1,52 @@
+<div class="table-responsive">
+  <mat-form-field>
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Referencia" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+    <!-- referencia Column -->
+    <ng-container matColumnDef="referencia">
+      <th mat-header-cell *matHeaderCellDef> Referencia </th>
+      <td *matCellDef="let element"> {{element.referencia}}
+       <div *ngIf="!checkProductos(element.referencia) else warning" ></div>
+      </td>
+      <ng-template #warning>
+      <mat-icon class="amarillo" title="Este producto requiere Abastecerse">warning</mat-icon>
+      </ng-template>
+    </ng-container>
+    <!-- descripcion Column -->
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef> Descripción </th>
+      <td *matCellDef="let element"> {{element.descripcion}} </td>
+    </ng-container>
+    <!-- cantidad Column -->
+    <ng-container matColumnDef="cantidad">
+      <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+      <td *matCellDef="let element"> {{element.cantidad}} </td>
+    </ng-container>
+    <!-- precioVenta Column -->
+    <ng-container matColumnDef="precioVenta">
+      <th mat-header-cell *matHeaderCellDef> Precio de Venta </th>
+      <td *matCellDef="let element"> {{element.precioVenta}} </td>
+    </ng-container>
+    <!--Options-->
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef>Opciones</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+        <button mat-icon-button><mat-icon>launch</mat-icon></button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr mat-row *matNoDataRow>
+      <td mat-cell colspan="8">No encontrado "{{input.value}}"</td>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

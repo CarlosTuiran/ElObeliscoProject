@@ -16,7 +16,7 @@ namespace Domain.Models.Entities
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string? Descripcion { get; set; }
-        public string Estado = "Activo";
+        public string Estado { get => "Activo"; }
         public List<MFactura> MFacturas { get; set; }
         public Terceros()
         {

@@ -4,10 +4,12 @@
   <mat-toolbar color="accent" class="example-toolbar">
     <ng-container *ngIf="isAdmin=='Admin' && isLogged">
       <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    </ng-container>    
+    </ng-container>
     <h1 class="example-app-name">SI  Ferreteria Obelisco</h1>
     <span class="example-spacer"></span>
+    <app-cantidad-minima-alert></app-cantidad-minima-alert>
     <app-perfil></app-perfil>
+
   </mat-toolbar>
 <!-- Menu -->
 <mat-sidenav-container class="example-sidenav-container"
