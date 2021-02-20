@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IMFactura } from './facturas.component';
+import { IDFactura, IMFactura } from './facturas.component';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,8 @@ export class FacturasService {
     return this.http.get<IMFactura[]>(this.apiURL);
   }
 
-  getFactura(FacturaId: string): Observable<IMFactura> {
-    return this.http.get<IMFactura>(this.apiURL + '/' + FacturaId);
+  getFactura(FacturaId: string): Observable<IDFactura> {
+    return this.http.get<IDFactura>(this.apiURL + '/' + FacturaId);
   }
 
   createFacturas(Factura: IMFactura): Observable<IMFactura> {

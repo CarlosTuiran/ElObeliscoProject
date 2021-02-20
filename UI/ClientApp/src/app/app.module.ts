@@ -86,6 +86,7 @@ import { InventarioComponent } from './inventario/inventario.component';
 import { TableInventarioComponent } from './inventario/table-inventario/table-inventario.component';
 import { InventarioService } from './inventario/inventario.service';
 import { CantidadMinimaAlertComponent } from './notifications/cantidad-minima-alert/cantidad-minima-alert.component';
+import { TableDetallesComponent } from './facturas/table-detalles/table-detalles.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -139,6 +140,7 @@ import { CantidadMinimaAlertComponent } from './notifications/cantidad-minima-al
     InventarioComponent,
     TableInventarioComponent,
     CantidadMinimaAlertComponent,
+    TableDetallesComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

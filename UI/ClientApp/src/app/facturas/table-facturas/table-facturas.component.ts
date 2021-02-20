@@ -20,7 +20,7 @@ export class TableFacturasComponent implements OnInit {
     'subTotal',
     'valorDevolucion',
     'descuento',
-    'iVA',
+    'iva',
     'abono',
     'estadoFactura',
     'options'

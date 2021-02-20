@@ -54,12 +54,29 @@ namespace UI.Controllers
             return result;
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetMFactura([FromRoute] int id)
+        public Object GetDFactura([FromRoute] int id)
         {
-            MFactura factura = await _context.MFactura.SingleOrDefaultAsync(t => t.Id == id);
+            var factura =  _context.MFactura.SingleOrDefault(t => t.Id == id);
             if (factura== null)
                 return NotFound();
-            return Ok(factura);
+            var result = (from mf in _context.Set<MFactura>()
+                          join df in _context.Set<DFactura>()
+                          on mf.Id equals df.MfacturaId
+                          where df.MfacturaId == id
+                          select new
+                          {
+                          EmpleadoId = mf.EmpleadoId,
+                          TercerosId = mf.TercerosId,
+                          Referencia =df.Referencia,
+                          idPromocion =df.idPromocion,
+                          Bodega =df.Bodega,
+                          Cantidad= df.Cantidad,
+                          PrecioUnitario =df.PrecioUnitario,
+                          PrecioTotal =df.PrecioTotal,
+                          FechaFactura =df.FechaFactura
+                        }).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;            
         }
         [HttpPost]
         public async Task<IActionResult> CreateFacturas([FromBody] CrearMFacturaRequest request)

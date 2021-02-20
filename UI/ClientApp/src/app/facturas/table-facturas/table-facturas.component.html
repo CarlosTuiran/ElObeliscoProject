@@ -42,9 +42,9 @@
         <td mat-cell mat-cell *matCellDef="let element"> {{element.descuento | currency: 'USD'}} </td>
       </ng-container>
       <!-- iVA Column -->
-      <ng-container matColumnDef="iVA">
+      <ng-container matColumnDef="iva">
         <th mat-header-cell *matHeaderCellDef> IVA </th>
-        <td mat-cell mat-cell *matCellDef="let element"> {{element.iVA| percent: '2.1-2' }} </td>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.iva| percent: '2.1-2' }} </td>
       </ng-container>
       <!-- abono Column -->
       <ng-container matColumnDef="abono">
