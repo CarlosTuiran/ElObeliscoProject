@@ -2,6 +2,7 @@
 using Aplicacion.Services.ActualizarServices;
 using Aplicacion.Services.CrearServices;
 using Domain.Models.Contracts;
+using Domain.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,9 +26,11 @@ namespace Aplicacion.Services.Eventos
                 //cada producto en detalles de factura 
                 foreach (var dproducto in dFactura)
                 {
-                    var producto = _unitOfWork.ProductoServiceRepository.FindFirstOrDefault(t => t.Referencia == dproducto.Referencia);
-                    if (producto == null)
-                    {
+                    //! problema aca
+                    //var producto = _unitOfWork.ProductoServiceRepository.FindFirstOrDefault(t => t.Referencia == dproducto.Referencia);
+                    //IList<Producto> producto = _unitOfWork.ProductoServiceRepository.FindFirstOrDefault(t => t.Referencia == dproducto.Referencia);
+                    if (false)
+                    { 
                         //si no existe el producto
                         return new ComprarProductoResponse() { Message = $"Error la siguiente referencia a un producto no existe: " + dproducto.Referencia };
                     }
@@ -47,11 +50,10 @@ namespace Aplicacion.Services.Eventos
                         {
                             //Hubo Problemas al actualizar
                             return new ComprarProductoResponse() { Message = $"Error al actualizar " + rtaActualizar.Message };
-
                         }
                     }        
                 }
-                return new ComprarProductoResponse() { Message = $"Compra Realizada Correctamente " };
+                return new ComprarProductoResponse() { Message = $"Compra realizada exitosamente" };
 
             }
             else

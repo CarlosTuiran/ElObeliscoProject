@@ -37,16 +37,16 @@ namespace Aplicacion.Services.ActualizarServices
                 else
                 {
                     _unitOfWork.InventarioServiceRepository.Add(newInventario);
-                    _unitOfWork.Commit();
-                    return new ActualizarInventarioResponse() { Message = $"Producto de inventario Creado Exitosamente" };
+                    //_unitOfWork.Commit();
+                    return new ActualizarInventarioResponse() { Message = $"Inventario actualizado exitosamente" };
                 }
             }
             else
             {
                 inventario.Cantidad += request.Cantidad;
                 _unitOfWork.InventarioServiceRepository.Edit(inventario);
-                _unitOfWork.Commit();
-                return new ActualizarInventarioResponse() { Message = $"Producto actualizado Exitosamente" };
+                //_unitOfWork.Commit();
+                return new ActualizarInventarioResponse() { Message = $"Inventario actualizado exitosamente" };
             }
         }
     }
