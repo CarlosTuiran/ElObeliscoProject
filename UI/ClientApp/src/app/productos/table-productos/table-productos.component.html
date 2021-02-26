@@ -1,7 +1,7 @@
 <div class="table-responsive">
     <mat-form-field>
       <mat-label>Buscar</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Descripcion" #input>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input>
     </mat-form-field>
     
     <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8" matSort>
@@ -55,7 +55,7 @@
       <ng-container matColumnDef="options">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>
         <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="Eliminar(element.referencia)"><mat-icon>delete_outline</mat-icon></button>
         <button mat-icon-button [routerLink]='["/productos-editar/" + element.referencia]'>
           <mat-icon>launch</mat-icon></button>
         </td>

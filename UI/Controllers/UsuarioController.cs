@@ -11,6 +11,7 @@ using Infra.Datos.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Aplicacion.Services.EliminarServices;
 
 namespace UI.InterfazWeb.Controllers
 {
@@ -22,7 +23,7 @@ namespace UI.InterfazWeb.Controllers
         private CrearUsuarioService _service;
         private ActualizarUsuarioService _actualizarService;
         private UnitOfWork _unitOfWork;
-
+        private EliminarUsuarioService _eliminarService;
         public UsuarioController(ObeliscoContext context)
         {
             _context = context;
@@ -57,14 +58,13 @@ namespace UI.InterfazWeb.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuario([FromRoute] int id)
+        public object DeleteUsuario([FromRoute] int id)
         {
-            Usuario usuario = await _context.Usuario.SingleOrDefaultAsync(t => t.Id == id);
-            if (usuario == null)
-                return NotFound();
-            _context.Usuario.Remove(usuario);
-            await _context.SaveChangesAsync();
-            return Ok(usuario);
+            _eliminarService = new EliminarUsuarioService(_unitOfWork);
+            EliminarUsuarioRequest request = new EliminarUsuarioRequest();
+            request.EmpleadoId = id;
+            var rta = _eliminarService.Ejecutar(request);
+            return Ok(rta);
         }
 
         [HttpPut("{id}")]

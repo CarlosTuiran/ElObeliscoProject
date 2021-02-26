@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ITotalLiquidacion } from '../total-liquidacion.component';
 import { TotalLiquidacionService } from '../total-liquidacion.service';
+import { Router } from '@angular/router';
+import { AlertService } from '../../notifications/_services';
 
 @Component({
   selector: 'app-table-total-liquidacion',
@@ -25,7 +27,8 @@ export class TableTotalLiquidacionComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
-  constructor (private totalLiquidacionsService: TotalLiquidacionService){}
+  constructor(private totalLiquidacionsService: TotalLiquidacionService, private router: Router,
+    private alertService: AlertService){}
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -42,5 +45,15 @@ export class TableTotalLiquidacionComponent implements OnInit {
 
   }
 
+  Eliminar(idNomina: string) {
+    this.totalLiquidacionsService.deleteTotalLiquidacion(idNomina).
+      subscribe(idNomina => this.onDeleteSuccess(),
+        error => console.error(error))
+  }
+
+  onDeleteSuccess() {
+    this.router.navigate(["/total-liquidaciones"]);
+    this.alertService.success("Eliminado exitoso");
+  }
 
 }

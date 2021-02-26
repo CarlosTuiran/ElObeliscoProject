@@ -11,6 +11,7 @@ using Infra.Datos.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Aplicacion.Services.EliminarServices;
 
 namespace UI.InterfazWeb.Controllers
 {
@@ -22,7 +23,8 @@ namespace UI.InterfazWeb.Controllers
         private CrearNominaService _service;
         private UnitOfWork _unitOfWork;
         private ActualizarNominaService _actualizarService;
-
+        private EliminarNominaService _eliminarService;
+        
         public NominaController(ObeliscoContext context)
         {
             _context = context;
@@ -37,7 +39,8 @@ namespace UI.InterfazWeb.Controllers
                           on n.IdEmpleado equals e.Id
                           select new
                           {
-                              IdEmpleado = e.Nombres,
+                              IdEmpleado = e.Id,
+                              NombreEmpleado = e.Nombres,
                               DiasTrabajados = n.DiasTrabajados,
                               HorasExtras = n.HorasExtras,
                               SalarioBase = n.SalarioBase,
@@ -69,15 +72,15 @@ namespace UI.InterfazWeb.Controllers
             return BadRequest(rta.Message);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteNomina([FromRoute] string idN, int id)
+        [HttpDelete("{idN}/{id}")]
+        public object DeleteNomina([FromRoute] string idN, int id)
         {
-            Nomina nomina = await _context.Nomina.SingleOrDefaultAsync(t => t.IdEmpleado == id && t.IdNomina == idN);
-            if (nomina == null)
-                return NotFound();
-            _context.Nomina.Remove(nomina);
-            await _context.SaveChangesAsync();
-            return Ok(nomina);
+            _eliminarService=new EliminarNominaService(_unitOfWork);
+            EliminarNominaRequest request=new EliminarNominaRequest();
+            request.IdNomina=idN;
+            request.IdEmpleado = id;
+            var rta = _eliminarService.Ejecutar(request);
+            return Ok(rta);
         }
 
         [HttpPut("{id}")]

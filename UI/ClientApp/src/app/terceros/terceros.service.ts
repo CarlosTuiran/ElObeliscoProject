@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITercero } from './terceros.component';
+import { ITercero, IDeleteTercero } from './terceros.component';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +25,9 @@ export class TercerosService {
 
   updateTercero(tercero: ITercero): Observable<ITercero> {
     return this.http.put<ITercero>(this.apiURL + "/" + tercero.nit, tercero);
+  }
+
+  deleteTerceros(nit: string): Observable<IDeleteTercero> {
+    return this.http.put<IDeleteTercero>(this.apiURL + "/DeleteTercero" + "/" + nit, nit);
   }
 }

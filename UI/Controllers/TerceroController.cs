@@ -11,6 +11,7 @@ using Infra.Datos.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Aplicacion.Services.EliminarServices;
 
 namespace UI.InterfazWeb.Controllers
 {
@@ -22,6 +23,7 @@ namespace UI.InterfazWeb.Controllers
         private CrearTerceroService _service;
         private UnitOfWork _unitOfWork;
         private ActualizarTerceroService _actualizarService;
+        private EliminarTerceroService _eliminarService;
 
         public TerceroController(ObeliscoContext context)
         {
@@ -61,16 +63,6 @@ namespace UI.InterfazWeb.Controllers
             return BadRequest(rta.Message);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTercero([FromRoute] string id)
-        {
-            Terceros terceros = await _context.Terceros.SingleOrDefaultAsync(t => t.Nit == id);
-            if (terceros == null)
-                return NotFound();
-            _context.Terceros.Remove(terceros);
-            await _context.SaveChangesAsync();
-            return Ok(terceros);
-        }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTercero([FromRoute] string id, [FromBody] ActualizarTerceroRequest tercero)
@@ -81,6 +73,21 @@ namespace UI.InterfazWeb.Controllers
             {
                 await _context.SaveChangesAsync();
                 return CreatedAtAction("GetTercero", new { id = tercero.Nit }, tercero);
+            }
+            return BadRequest(rta.Message);
+        }
+
+        [HttpPut("DeleteTercero/{id}")]
+        public async Task<IActionResult> DeleteTercero([FromRoute] string id)
+        {
+            EliminarTerceroRequest terceroRequest = new EliminarTerceroRequest();
+            terceroRequest.Nit = id;
+            _eliminarService = new EliminarTerceroService(_unitOfWork);
+            var rta = _eliminarService.Ejecutar(terceroRequest);
+            if (rta.isOk())
+            {
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("GetEmpleado", new { id = terceroRequest.Nit }, terceroRequest);
             }
             return BadRequest(rta.Message);
         }

@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ITotalLiquidacion } from './total-liquidacion.component';
+import { ITotalLiquidacion, IDTotalLiquidacion } from './total-liquidacion.component';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +21,9 @@ export class TotalLiquidacionService {
 
   createTotalLiquidacion(liquidacion: any): Observable<any>{
     return this.http.post(this.apiURL, liquidacion);
+  }
+
+  deleteTotalLiquidacion(idNomina: string): Observable<IDTotalLiquidacion> {
+    return this.http.delete<IDTotalLiquidacion>(this.apiURL + "/" + idNomina);
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ILiquidacion } from '../liquidacion.component';
 import { LiquidacionService } from '../liquidacion.service';
+import { Router } from '@angular/router';
+import { AlertService } from '../../notifications/_services';
 
 @Component({
   selector: 'app-table-liquidacion',
@@ -13,7 +15,8 @@ export class TableLiquidacionComponent implements OnInit {
   liquidaciones!:ILiquidacion[];  
   displayedColumns: string[] = [
   'nominaId',
-  'idEmpleado',
+    'idEmpleado',
+  'nombreEmpleado',
   'mes',
   'anio',
   'sueldoOrdinario',
@@ -28,7 +31,8 @@ export class TableLiquidacionComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
-  constructor (private liquidacionesService: LiquidacionService){}
+  constructor(private liquidacionesService: LiquidacionService, private router: Router,
+    private alertService: AlertService){}
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -45,5 +49,15 @@ export class TableLiquidacionComponent implements OnInit {
 
   }
 
+  Eliminar(idNomina: string, idEmpleado: number) {
+    this.liquidacionesService.deleteLiquidacion(idNomina, idEmpleado).
+      subscribe(idNomina => this.onDeleteSuccess(),
+        error => console.error(error))
+  }
+
+  onDeleteSuccess() {
+    this.router.navigate(["/liquidaciones"]);
+    this.alertService.success("Eliminado exitoso");
+  }
 
 }

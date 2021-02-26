@@ -1,19 +1,23 @@
 <div class="table-responsive">
     <mat-form-field>
       <mat-label>Buscar</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="IdEmpleado" #input>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input>
     </mat-form-field>
     
-    <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-        
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
       <!-- idEmpleado Column -->
-       <ng-container matColumnDef="idEmpleado">
-         <th mat-header-cell *matHeaderCellDef> IdEmpleado </th>
-         <td *matCellDef="let element"> {{element.idEmpleado}} </td>
-       </ng-container>
-       <!-- diasTrabajados Column -->
-       <ng-container matColumnDef="diasTrabajados">
-        <th mat-header-cell *matHeaderCellDef> DiasTrabajados </th>
+      <ng-container matColumnDef="idEmpleado" hidden>
+        <th mat-header-cell *matHeaderCellDef> Empleado ID </th>
+        <td *matCellDef="let element"> {{element.idEmpleado}} </td>
+      </ng-container>
+      <ng-container matColumnDef="nombreEmpleado">
+        <th mat-header-cell *matHeaderCellDef> Empleado </th>
+        <td *matCellDef="let element"> {{element.nombreEmpleado}} </td>
+      </ng-container>
+      <!-- diasTrabajados Column -->
+      <ng-container matColumnDef="diasTrabajados">
+        <th mat-header-cell *matHeaderCellDef> Dias Trabajados </th>
         <td *matCellDef="let element"> {{element.diasTrabajados}} </td>
       </ng-container>
       <!-- horasExtras Column -->
@@ -30,13 +34,13 @@
       <ng-container matColumnDef="subTransporte">
         <th mat-header-cell *matHeaderCellDef> SubTransporte </th>
         <td *matCellDef="let element"> {{element.subTransporte | currency: 'USD'}} </td>
-      </ng-container> 
-       
+      </ng-container>
+
       <!--Options-->
       <ng-container matColumnDef="options">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="Eliminar(element.idNomina, element.idEmpleado)"><mat-icon>delete_outline</mat-icon></button>
           <button mat-icon-button [routerLink]='["/nominas-editar/" + element.idNomina+ "/" + element.idEmpleado]'>
             <mat-icon>launch</mat-icon>
           </button>
@@ -48,9 +52,9 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
+
       <!-- Row shown when there is no matching data. -->
-      <tr mat-row  *matNoDataRow>
+      <tr mat-row *matNoDataRow>
         <td mat-cell colspan="8">No encontrado "{{input.value}}"</td>
       </tr>
     </table>

@@ -12,6 +12,7 @@ using Infra.Datos.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Aplicacion.Services.EliminarServices;
 
 namespace UI.Controllers
 {
@@ -22,6 +23,7 @@ namespace UI.Controllers
         private readonly ObeliscoContext _context;
         private PagarEmpleadoService _service;
         private UnitOfWork _unitOfWork;
+        private EliminarLiquidaciónService _eliminarService;
 
         public LiquidacionController(ObeliscoContext context)
         {
@@ -38,7 +40,8 @@ namespace UI.Controllers
                           select new
                           {
                               NominaId = l.NominaId,
-                              IdEmpleado = e.Nombres,
+                              IdEmpleado = e.Id,
+                              NombreEmpelado = e.Nombres,
                               Mes = l.Mes,
                               Anio = l.Anio,
                               SueldoOrdinario = l.SueldoOrdinario,
@@ -53,7 +56,7 @@ namespace UI.Controllers
             return result;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{idNomina}/{idEmpleado}")]
         public async Task<IActionResult> GetLiquidacion([FromRoute] string idNomina, int idEmpleado)
         {
             Liquidacion liquidacion = await _context.Liquidacion.SingleOrDefaultAsync(t => t.NominaId == idNomina && t.IdEmpleado == idEmpleado);
@@ -72,7 +75,18 @@ namespace UI.Controllers
                 await _context.SaveChangesAsync();
                 return CreatedAtAction("GetLiquidacion", new { idN = nomina.IdNomina, idL = nomina.IdEmpleado }, nomina);
             }
-            return BadRequest(rta.Message);
+            return BadRequest(rta);
+        }
+
+        [HttpDelete("{idN}/{id}")]
+        public object DeleteLiquidacion([FromRoute] string idN, int id)
+        {
+            _eliminarService = new EliminarLiquidaciónService(_unitOfWork);
+            EliminarlLiquidacionRequest request = new EliminarlLiquidacionRequest();
+            request.NominaId = idN;
+            request.IdEmpleado = id;
+            var rta = _eliminarService.Ejecutar(request);
+            return Ok(rta);
         }
     }
 }

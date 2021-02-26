@@ -179,7 +179,7 @@ import { TableDetallesComponent } from './facturas/table-detalles/table-detalles
       { path: 'liquidaciones', component: LiquidacionComponent },
       { path: 'total-liquidaciones', component: TotalLiquidacionComponent },
       { path: 'pruebasSinVS', component: PruebasSinVSComponent },
-      { path: 'reportes', component: ReportesComponent , canActivate:[CheckNotloginGuard]},
+      { path: 'reportes', component: ReportesComponent }, 
       { path: 'login', component: LoginComponent, canActivate: [CheckLoginGuard] },
       { path: 'inventario', component: InventarioComponent },
 
@@ -190,7 +190,7 @@ import { TableDetallesComponent } from './facturas/table-detalles/table-detalles
   providers: [ThemeService,UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
     BodegasService, PromocionesService, PruebasSinVSService, InventarioService,AlertService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
-  entryComponents: [SidebarComponent],
+  entryComponents: [SidebarComponent, TableDetallesComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

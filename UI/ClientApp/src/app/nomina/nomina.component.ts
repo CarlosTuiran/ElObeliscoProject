@@ -43,3 +43,7 @@ export interface INomina {
 export interface INominaPago{
   idEmpleado: number
 }
+export interface IDeleteNomina {
+  idEmpleado: number,
+  idNomina: string
+}

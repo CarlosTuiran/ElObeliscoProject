@@ -14,6 +14,7 @@ namespace Aplicacion.Request
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string Descripcion { get; set; }
+        public string Estado { get; set; }
     }
     public class ActualizarTerceroResponse
     {

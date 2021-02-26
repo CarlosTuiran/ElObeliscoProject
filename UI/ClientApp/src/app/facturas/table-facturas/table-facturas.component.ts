@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog,  MatDialogRef, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { IMFactura } from '../facturas.component';
 import { FacturasService } from '../facturas.service';
+import { TableDetallesComponent } from '../table-detalles/table-detalles.component';
 
 @Component({
   selector: 'app-table-facturas',
@@ -10,9 +11,11 @@ import { FacturasService } from '../facturas.service';
 })
 export class TableFacturasComponent implements OnInit {
   isAdmin = false;
-  constructor(private facturasService: FacturasService) { }
+  constructor(private facturasService: FacturasService, private dialog: MatDialog 
+    ) { }
   facturas!:IMFactura[];  
   displayedColumns: string[] = [
+    'mFacturaId',
     'empleadoId',
     'tercerosId',
     'tipoMovimientoId',
@@ -45,6 +48,15 @@ export class TableFacturasComponent implements OnInit {
       error => console.error(error));
 
   }
-
+  openDetalles(idMfactura: number){
+      const detallesVista= this.dialog.open(TableDetallesComponent, {
+      disableClose:false,
+      autoFocus:true,
+      width:'60%'
+    });
+    detallesVista.componentInstance.idMfactura=idMfactura;
+    
+  }
+  
 
 }

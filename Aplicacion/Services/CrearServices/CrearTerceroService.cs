@@ -23,7 +23,7 @@ namespace Aplicacion.Services.CrearServices
             var terceros = _unitOfWork.TercerosServiceRepository.FindFirstOrDefault(t => t.Nit == request.Nit);
             if (terceros == null)
             {
-                Terceros newTerceros = new Terceros(request.Nit, request.Nombre, request.Apellido, request.TipoTercero, request.Celular, request.Correo, request.Direccion, request.Descripcion);
+                Terceros newTerceros = new Terceros(request.Nit, request.Nombre, request.Apellido, request.TipoTercero, request.Celular, request.Correo, request.Direccion, request.Descripcion, request.Estado);
                 IReadOnlyList<string> errors = newTerceros.CanCrear(newTerceros);
                 if (errors.Any())
                 {

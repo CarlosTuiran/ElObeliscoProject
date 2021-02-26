@@ -18,6 +18,7 @@ export class TableNominaComponent implements OnInit {
   nominas!:INomina[];  
   displayedColumns: string[] = [
     'idEmpleado',
+    'nombreEmpleado',
     'diasTrabajados',
     'horasExtras',
     'salarioBase',
@@ -48,15 +49,25 @@ export class TableNominaComponent implements OnInit {
 
   Pagar(idNomina: string, idEmpleado: number) {
     let nomina: INominaPago = { 'idEmpleado': idEmpleado };
-    console.table(nomina);
     this.liquidacionService.createLiquidacion(nomina)
       .subscribe(usuario => this.onSaveSuccess(),
-        error => this.alertService.error(error.message));
+        error => this.alertService.error(error.error.message));
   }
 
   onSaveSuccess() {
     this.router.navigate(["/liquidaciones"]);
     this.alertService.success("Pagado Exitoso");
+  }
+
+  Eliminar(idNomina: string, idEmpleado: number) {
+    this.nominaService.deleteNomina(idNomina, idEmpleado).
+      subscribe(idNomina => this.onDeleteSuccess(),
+        error => console.error(error))
+  }
+
+  onDeleteSuccess() {
+    this.router.navigate(["/nominas"]);
+    this.alertService.success("Eliminado exitoso");
   }
 
 }

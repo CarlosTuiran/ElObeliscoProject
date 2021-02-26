@@ -14,6 +14,10 @@ export class FacturasService {
   getFacturas(): Observable<IMFactura[]> {
     return this.http.get<IMFactura[]>(this.apiURL);
   }
+  
+  getDFacturas(FacturaId: number): Observable<IDFactura[]> {
+    return this.http.get<IDFactura[]>(this.apiURL+'/'+FacturaId);
+  }
 
   getFactura(FacturaId: string): Observable<IDFactura> {
     return this.http.get<IDFactura>(this.apiURL + '/' + FacturaId);

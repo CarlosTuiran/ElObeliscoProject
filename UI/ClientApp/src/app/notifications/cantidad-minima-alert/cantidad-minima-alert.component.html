@@ -3,7 +3,7 @@
 </button>
 <mat-menu #notificaciones="matMenu">
   <div *ngIf="!isAlertMin else viewCantidadMinAlert" >
-
+    <span class="texto">Sin Notificaciones</span>
   </div>
   <ng-template #viewCantidadMinAlert>
     <button mat-menu-item routerLink="inventario">

@@ -32,3 +32,7 @@ export interface IProducto {
   fechaRegistro: Date,
   cantidadMinima: number
 }
+
+export interface IDeleteProducto {
+  referencia: string
+}

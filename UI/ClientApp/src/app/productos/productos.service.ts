@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IProducto } from './productos.component';
+import { IProducto, IDeleteProducto } from './productos.component';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +25,9 @@ export class ProductosService {
 
   updateProducto(producto: IProducto): Observable<IProducto> {
     return this.http.put<IProducto>(this.apiURL + "/" + producto.referencia, producto);
+  }
+
+  deleteProducto(referencia: string): Observable<IDeleteProducto> {
+    return this.http.put<IDeleteProducto>(this.apiURL + "/DeleteProducto" + "/" + referencia, referencia);
   }
 }

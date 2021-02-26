@@ -11,6 +11,7 @@ using Infra.Datos.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Aplicacion.Services.EliminarServices;
 
 namespace UI.Controllers
 {
@@ -21,7 +22,7 @@ namespace UI.Controllers
         private readonly ObeliscoContext _context;
         private CrearTotalLiquidacionService _service;
         private UnitOfWork _unitOfWork;
-
+        private EliminarTotalLiquidacionService _eliminarService;
         public TotalLiquidacionController(ObeliscoContext context)
         {
             _context = context;
@@ -56,6 +57,16 @@ namespace UI.Controllers
 
             return BadRequest(rta.Message);
 
+        }
+
+        [HttpDelete("{id}")]
+        public object DeleteUsuario([FromRoute] string id)
+        {
+            _eliminarService = new EliminarTotalLiquidacionService(_unitOfWork);
+            EliminarTotalLiquidacionRequest request = new EliminarTotalLiquidacionRequest();
+            request.NominaId = id;
+            var rta = _eliminarService.Ejecutar(request);
+            return Ok(rta);
         }
     }
 }

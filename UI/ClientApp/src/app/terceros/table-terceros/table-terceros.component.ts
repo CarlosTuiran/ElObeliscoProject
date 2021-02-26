@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ITercero } from '../terceros.component';
 import { TercerosService } from '../terceros.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../notifications/_services';
 
 @Component({
   selector: 'app-table-terceros',
@@ -26,7 +28,8 @@ export class TableTercerosComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
-  constructor (private tercerosService: TercerosService){}
+  constructor(private tercerosService: TercerosService, private router: Router, private activatedRoute: ActivatedRoute,
+    private alertService: AlertService){}
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -43,4 +46,14 @@ export class TableTercerosComponent implements OnInit {
 
   }
 
+  Eliminar(nit: string) {
+    this.tercerosService.deleteTerceros(nit).
+      subscribe(nit => this.onDeleteSuccess(),
+        error => console.error(error))
+  }
+
+  onDeleteSuccess() {
+    this.router.navigate(["/terceros"]);
+    this.alertService.success("Eliminado exitoso");
+  }
 }

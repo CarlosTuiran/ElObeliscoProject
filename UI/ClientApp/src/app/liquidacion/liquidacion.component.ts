@@ -56,4 +56,7 @@ export interface ITotal {
   anio: number
 }
 
-
+export interface IDeleteLiquidacion {
+  idNomina: string,
+  idEmpleado: number
+}

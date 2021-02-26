@@ -1,20 +1,25 @@
 <div class="table-responsive">
     <mat-form-field>
       <mat-label>Buscar</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Descripcion" #input>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input>
     </mat-form-field>
     
-    <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-        
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
       <!-- nominaId Column -->
-       <ng-container matColumnDef="nominaId">
-         <th mat-header-cell *matHeaderCellDef> NominaId </th>
-         <td *matCellDef="let element"> {{element.nominaId}} </td>
-       </ng-container>
-       <!-- idEmpleado Column -->
-       <ng-container matColumnDef="idEmpleado">
-        <th mat-header-cell *matHeaderCellDef> IdEmpleado </th>
+      <ng-container matColumnDef="nominaId">
+        <th mat-header-cell *matHeaderCellDef> NominaId </th>
+        <td *matCellDef="let element"> {{element.nominaId}} </td>
+      </ng-container>
+      <!-- idEmpleado Column -->
+      <ng-container matColumnDef="idEmpleado">
+        <th mat-header-cell *matHeaderCellDef> NIdEmpleado </th>
         <td *matCellDef="let element"> {{element.idEmpleado}} </td>
+      </ng-container>
+      <!-- nombreEmpleado Column -->
+      <ng-container matColumnDef="nombreEmpleado">
+        <th mat-header-cell *matHeaderCellDef> Nombre Empleado </th>
+        <td *matCellDef="let element"> {{element.nombreEmpleado}} </td>
       </ng-container>
       <!-- mes Column -->
       <ng-container matColumnDef="mes">
@@ -61,22 +66,23 @@
         <th mat-header-cell *matHeaderCellDef> TotalPagar </th>
         <td *matCellDef="let element"> {{element.totalPagar| currency: 'USD'}} </td>
       </ng-container>
-      
+
       <!--Options-->
       <ng-container matColumnDef="options">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>
         <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
-        <button mat-icon-button [routerLink]='["/liquidacionks-editar/" + element.idEmpleado]'>
-          <mat-icon>launch</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="Eliminar(element.nominaId, element.idEmpleado)"><mat-icon>delete_outline</mat-icon></button>
+          <button mat-icon-button [routerLink]='["/liquidacionks-editar/" + element.idEmpleado]'>
+            <mat-icon>launch</mat-icon>
+          </button>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
+
       <!-- Row shown when there is no matching data. -->
-      <tr mat-row  *matNoDataRow>
+      <tr mat-row *matNoDataRow>
         <td mat-cell colspan="8">No encontrado "{{input.value}}"</td>
       </tr>
     </table>

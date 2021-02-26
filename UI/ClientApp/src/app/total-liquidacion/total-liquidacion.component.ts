@@ -29,3 +29,7 @@ export interface ITotalLiquidacion {
   total: number,
   nominaId: string
 }
+
+export interface IDTotalLiquidacion {
+  idNomina:string
+}

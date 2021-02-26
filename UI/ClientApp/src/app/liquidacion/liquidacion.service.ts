@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ILiquidacion } from './liquidacion.component';
+import { ILiquidacion, IDeleteLiquidacion } from './liquidacion.component';
 import { INominaPago } from '../nomina/nomina.component';
 
 @Injectable({
@@ -27,4 +27,7 @@ export class LiquidacionService {
  /* updateNomina(nomina: ILiquidacion): Observable<ILiquidacion> {
     return this.http.put<ILiquidacion>(this.apiURL + "/" + nomina.idEmpleado.toString(), nomina);
   }*/
+  deleteLiquidacion(idNomina: string, idEmpleado: number): Observable<IDeleteLiquidacion> {
+    return this.http.delete<IDeleteLiquidacion>(this.apiURL + "/" + idNomina + "/" + idEmpleado.toString());
+  }
 }

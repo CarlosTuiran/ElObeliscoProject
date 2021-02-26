@@ -1,1 +1,76 @@
-<p>table-detalles works!</p>
+<div class="container">
+<mat-dialog-content>
+<div class="table-responsive">
+    <mat-form-field>
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input>
+    </mat-form-field>
+    
+    <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    
+      <!-- empleadoId Column -->
+      <ng-container matColumnDef="empleadoId">
+        <th mat-header-cell *matHeaderCellDef> EmpleadoId </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.empleadoId}} </td>
+      </ng-container>
+      <!-- tercerosId Column -->
+      <ng-container matColumnDef="tercerosId">
+        <th mat-header-cell *matHeaderCellDef> TercerosId </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.tercerosId}} </td>
+      </ng-container>
+      <!-- referencia Column -->
+      <ng-container matColumnDef="referencia">
+        <th mat-header-cell *matHeaderCellDef> Referencia </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.referencia}} </td>
+      </ng-container>
+      <!-- idPromocion Column -->
+      <ng-container matColumnDef="idPromocion">
+        <th mat-header-cell *matHeaderCellDef> Promocion </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.idPromocion }} </td>
+      </ng-container>
+      <!-- bodegaColumn -->
+      <ng-container matColumnDef="bodega">
+        <th mat-header-cell *matHeaderCellDef> Bodega</th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.bodega}} </td>
+      </ng-container>
+      <!-- cantidad Column -->
+      <ng-container matColumnDef="cantidad">
+        <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+      </ng-container>
+      <!-- precioUnitario Column -->
+      <ng-container matColumnDef="precioUnitario">
+        <th mat-header-cell *matHeaderCellDef> PrecioUnitario </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.precioUnitario | currency: 'USD'}} </td>
+      </ng-container>
+      <!-- precioTotal Column -->
+      <ng-container matColumnDef="precioTotal">
+        <th mat-header-cell *matHeaderCellDef> PrecioTotal </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.precioTotal | currency: 'USD'}} </td>
+      </ng-container>
+      <!-- fechaFactura Column -->
+      <ng-container matColumnDef="fechaFactura">
+        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.fechaFactura| date: 'shortDate'}} </td>
+      </ng-container>
+            
+      
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+      <!-- Row shown when there is no matching data. -->
+      <tr mat-row  *matNoDataRow>
+        <td mat-cell colspan="4">No encontrado "{{input.value}}"</td>
+      </tr>    
+      
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>    
+</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="button" class="btn btn-light" (click)="close()">Cerrar</button>
+</mat-dialog-actions> 
+</div>  
+
+

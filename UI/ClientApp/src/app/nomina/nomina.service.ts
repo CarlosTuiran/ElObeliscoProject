@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { INomina } from './nomina.component';
+import { INomina, IDeleteNomina } from './nomina.component';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +25,9 @@ export class NominaService {
 
   updateNomina(nomina: INomina): Observable<INomina> {
     return this.http.put<INomina>(this.apiURL + "/" + nomina.idEmpleado.toString(), nomina);
+  }
+
+  deleteNomina(idNomina: string, idEmpleado: number): Observable<IDeleteNomina> {
+    return this.http.delete<IDeleteNomina>(this.apiURL + "/" + idNomina + "/" + idEmpleado.toString());
   }
 }

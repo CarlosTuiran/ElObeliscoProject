@@ -25,7 +25,7 @@ namespace Domain.Models.Entities
         public int CantidadMinima { get; set; }
         //public int InventarioId { get; set; } // PENDIENTE: esperando Inclusion al momento de  crear
         public DateTime FechaRegistro { get; set; }
-        public string Estado { get => "Activo"; }
+        public string Estado { get; set; }
         public List<ProductoDFactura> ProductoDFacturas { get; set; }
 
         public Producto()
@@ -33,7 +33,7 @@ namespace Domain.Models.Entities
 
         }        
         public Producto(string referencia, string descripcion, string formatoventa, string marca ,string fabrica,
-            double costo, double precioventa, double iva, int cantidadMinima)
+            double costo, double precioventa, double iva, int cantidadMinima, string estado)
         {
             this.Referencia = referencia;
             this.Descripcion = descripcion;
@@ -45,6 +45,7 @@ namespace Domain.Models.Entities
             this.IVA = iva;
             this.CantidadMinima=cantidadMinima;
             this.FechaRegistro = DateTime.Now;
+            this.Estado = estado;
         }
 
         public IReadOnlyList<string> CanCrear(Producto producto)

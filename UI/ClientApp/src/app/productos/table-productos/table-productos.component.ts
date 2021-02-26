@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { IProducto } from '../productos.component';
 import { ProductosService } from '../productos.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../notifications/_services';
 
 @Component({
   selector: 'app-table-productos',
@@ -26,7 +28,8 @@ export class TableProductosComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
-  constructor (private productosService: ProductosService){}
+  constructor(private productosService: ProductosService, private router: Router, private activatedRoute: ActivatedRoute,
+    private alertService: AlertService){}
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -41,5 +44,16 @@ export class TableProductosComponent implements OnInit {
     .subscribe(productos => this.dataSource.data = productos,
       error => console.error(error));
 
+  }
+
+  Eliminar(referencia: string) {
+    this.productosService.deleteProducto(referencia).
+      subscribe(referencia => this.onDeleteSuccess(),
+        error => console.error(error))
+  }
+
+  onDeleteSuccess() {
+    this.router.navigate(["/productos"]);
+    this.alertService.success("Eliminado exitoso");
   }
 }

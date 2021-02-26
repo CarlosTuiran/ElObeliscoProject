@@ -38,6 +38,7 @@ namespace UI.Controllers
                           on f.TipoMovimientoId equals tp.Id
                           select new
                           {
+                              MFacturaId = f.Id,
                               EmpleadoId = e.Nombres,
                               TercerosId = t.Nombre,
                               TipoMovimientoId = tp.Nombre,
@@ -62,18 +63,24 @@ namespace UI.Controllers
             var result = (from mf in _context.Set<MFactura>()
                           join df in _context.Set<DFactura>()
                           on mf.Id equals df.MfacturaId
+                          join p in  _context.Set<Producto>()
+                          on df.Referencia equals p.Referencia
+                          join e in _context.Set<Empleado>()
+                          on mf.EmpleadoId equals e.Id
+                          join t in _context.Set<Terceros>()
+                          on mf.TercerosId equals t.Id
                           where df.MfacturaId == id
                           select new
                           {
-                          EmpleadoId = mf.EmpleadoId,
-                          TercerosId = mf.TercerosId,
-                          Referencia =df.Referencia,
-                          idPromocion =df.idPromocion,
-                          Bodega =df.Bodega,
-                          Cantidad= df.Cantidad,
-                          PrecioUnitario =df.PrecioUnitario,
-                          PrecioTotal =df.PrecioTotal,
-                          FechaFactura =df.FechaFactura
+                              EmpleadoId = e.Nombres,
+                              TercerosId = mf.TercerosId,
+                              Referencia =p.Descripcion,
+                              idPromocion =df.idPromocion, //* Agregar Promocion Nombre
+                              Bodega =df.Bodega, //* Bodega tambien
+                              Cantidad= df.Cantidad,
+                              PrecioUnitario =df.PrecioUnitario,
+                              PrecioTotal =df.PrecioTotal,
+                              FechaFactura =df.FechaFactura
                         }).ToList();
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;            

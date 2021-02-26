@@ -16,13 +16,13 @@ namespace Domain.Models.Entities
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string? Descripcion { get; set; }
-        public string Estado { get => "Activo"; }
+        public string Estado { get; set; }
         public List<MFactura> MFacturas { get; set; }
         public Terceros()
         {
 
         }
-        public Terceros(string nit, string nombre, string apellido, string tipoTercero, string celular, string correo, string direccion, string descripcion)
+        public Terceros(string nit, string nombre, string apellido, string tipoTercero, string celular, string correo, string direccion, string descripcion, string estado)
         {
             Nit = nit;
             Nombre = nombre;
@@ -32,6 +32,7 @@ namespace Domain.Models.Entities
             Correo = correo;
             Direccion = direccion;
             Descripcion = descripcion;
+            Estado = estado;
         }
 
         public IReadOnlyList<string> CanCrear(Terceros terceros)

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Aplicacion.Request;
 using Aplicacion.Services.ActualizarServices;
 using Aplicacion.Services.CrearServices;
+using Aplicacion.Services.EliminarServices;
 using Domain.Models.Entities;
 using Infra.Datos;
 using Infra.Datos.Base;
@@ -22,6 +23,7 @@ namespace UI.Controllers
         private UnitOfWork _unitOfWork;
         private CrearProductoService _service;
         private ActualizarProductoService _actualizarService;
+        private EliminarProductoService _eliminarService;
         public ProductoController(ObeliscoContext context)
         {
             _context = context;
@@ -56,16 +58,6 @@ namespace UI.Controllers
             return BadRequest(rta.Message);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProducto([FromRoute] string referencia)
-        {
-            Producto producto = await _context.Producto.SingleOrDefaultAsync(t => t.Referencia == referencia);
-            if (producto == null)
-                return NotFound();
-            _context.Producto.Remove(producto);
-            await _context.SaveChangesAsync();
-            return Ok(producto);
-        }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProducto([FromRoute] string id, [FromBody] ActualizarProductoRequest producto)
@@ -113,7 +105,20 @@ namespace UI.Controllers
             return result;
         }
 
-
+        [HttpPut("DeleteProducto/{id}")]
+        public async Task<IActionResult> DeleteProducto([FromRoute] string id)
+        {
+            EliminarProductoRequest productoRequest = new EliminarProductoRequest();
+            productoRequest.Referencia = id;
+            _eliminarService = new EliminarProductoService(_unitOfWork);
+            var rta = _eliminarService.Ejecutar(productoRequest);
+            if (rta.isOk())
+            {
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("GetEmpleado", new { id = productoRequest.Referencia }, productoRequest);
+            }
+            return BadRequest(rta.Message);
+        }
 
     }
 }
