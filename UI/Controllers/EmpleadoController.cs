@@ -86,5 +86,23 @@ namespace UI.InterfazWeb.Controllers
             }
             return BadRequest(rta.Message);
         }
+
+        //? Top Empleados que mas venden
+        [HttpGet("TopVentasEmpleados")]
+        public object TopVentasEmpleados()
+        {
+            var result = (from e in _context.Set<Empleado>()
+                          join mf in _context.Set<MFactura>()
+                          on e.Id equals mf.EmpleadoId
+                          where mf.TipoMovimiento == "Venta"
+                          select new
+                          {
+                              EmpleadoId = e.IdEmpleado,
+                              Nombre = e.Nombres + " " + e.Apellidos,
+                              Total = _context.Set<MFactura>().Sum(x => x.Total)
+                          }).OrderByDescending(i => i.Total).Take(10).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
+        }
     }
 }

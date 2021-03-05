@@ -287,6 +287,7 @@
                id="subTotalId"
                type="text"
                formControlName="subTotal"
+               value={{SubTotal}}
                disabled />
         
       </div>
@@ -362,23 +363,23 @@
         <div class="form-group row">
           <!--Referencia de Productos-->
           <div class="form-group col-md-3">
-          <label class="col-md-10 control-label"
-              for="referenciaId">Referencia del producto</label>
+            <label class="col-md-10 control-label"
+                   for="referenciaId">Referencia del producto</label>
 
-        <div class="col-md-10">
-          <input class="form-control"
-                id="referenciaId"
-                type="text"
-                formControlName="referencia" 
-                disabled/>
-          <div class="alert alert-danger" *ngIf="((referencia.touched || referencia.dirty )&& referencia.invalid)">
-            <span *ngIf="referencia.errors.required">
-              El campo referencia es requerido
-            </span>
-            
+            <div class="col-md-10">
+              <input class="form-control"
+                     id="referenciaId"
+                     type="text"
+                     formControlName="referencia"
+                     disabled />
+              <div class="alert alert-danger" *ngIf="((referencia.touched || referencia.dirty )&& referencia.invalid)">
+                <span *ngIf="referencia.errors.required">
+                  El campo referencia es requerido
+                </span>
+
+              </div>
+            </div>
           </div>
-        </div>
-        </div>
           <!-- <div class="form-group col-md-3"
               [ngClass]="{'has-error': ((referencia.touched || referencia.dirty) && referencia.invalid)}">
               
@@ -464,7 +465,8 @@
             <input class="form-control"
                id="cantidadId"
                type="text"
-               formControlName="cantidad" />
+               formControlName="cantidad" 
+               />
             <div class="alert alert-danger" *ngIf="((cantidad.touched || cantidad.dirty )&& cantidad.invalid)">
               <span *ngIf="cantidad.errors.required">
                 El campo cantidad es requerido
@@ -515,4 +517,3 @@
    </div> 
     </fieldset>
   </form>
-  

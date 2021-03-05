@@ -35,6 +35,9 @@ namespace Infra.Datos.Migrations
                     b.Property<DateTime>("FechaFactura")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdProducto")
+                        .HasColumnType("int");
+
                     b.Property<int>("MfacturaId")
                         .HasColumnType("int");
 
@@ -43,9 +46,6 @@ namespace Infra.Datos.Migrations
 
                     b.Property<double>("PrecioUnitario")
                         .HasColumnType("float");
-
-                    b.Property<string>("Referencia")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("idDFactura")
                         .HasColumnType("int");
@@ -65,11 +65,11 @@ namespace Infra.Datos.Migrations
                             Id = 1,
                             Bodega = "BD1",
                             Cantidad = 5,
-                            FechaFactura = new DateTime(2021, 2, 25, 20, 8, 48, 731, DateTimeKind.Local).AddTicks(5975),
+                            FechaFactura = new DateTime(2021, 3, 2, 22, 15, 45, 390, DateTimeKind.Local).AddTicks(9741),
+                            IdProducto = 1,
                             MfacturaId = 1,
                             PrecioTotal = 0.0,
                             PrecioUnitario = 3000.0,
-                            Referencia = "1000-01",
                             idDFactura = 10001
                         });
                 });
@@ -137,8 +137,8 @@ namespace Infra.Datos.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<string>("Referencia")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("IdProducto")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -150,7 +150,7 @@ namespace Infra.Datos.Migrations
                             Id = 1,
                             Bodega = "BD01",
                             Cantidad = 5,
-                            Referencia = "1000-01"
+                            IdProducto = 1
                         });
                 });
 
@@ -276,8 +276,8 @@ namespace Infra.Datos.Migrations
                             Descuento = 0.0,
                             EmpleadoId = 1,
                             EstadoFactura = "Pagada",
-                            FechaFactura = new DateTime(2021, 2, 25, 20, 8, 48, 730, DateTimeKind.Local).AddTicks(8934),
-                            FechaPago = new DateTime(2021, 2, 25, 20, 8, 48, 731, DateTimeKind.Local).AddTicks(711),
+                            FechaFactura = new DateTime(2021, 3, 2, 22, 15, 45, 389, DateTimeKind.Local).AddTicks(8088),
+                            FechaPago = new DateTime(2021, 3, 2, 22, 15, 45, 390, DateTimeKind.Local).AddTicks(1423),
                             IVA = 0.29999999999999999,
                             SubTotal = 15000.0,
                             TercerosId = 1,
@@ -418,7 +418,7 @@ namespace Infra.Datos.Migrations
                             Costo = 3000.0,
                             Descripcion = "Llave Inglesa",
                             Fabrica = "Ferres SAS",
-                            FechaRegistro = new DateTime(2021, 2, 25, 20, 8, 48, 725, DateTimeKind.Local).AddTicks(1047),
+                            FechaRegistro = new DateTime(2021, 3, 2, 22, 15, 45, 381, DateTimeKind.Local).AddTicks(2156),
                             FormatoVenta = "Unidad",
                             IVA = 0.29999999999999999,
                             Marca = "Ferres",

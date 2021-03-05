@@ -44,10 +44,12 @@ export class FacturasFormComponent implements OnInit {
   currentTipoMovimiento="";
   currentPromocion="";
   currentProductoDescripcion="";
-  currentProductoReferencia="";
+  currentProductoReferencia = "";
+  currentProductoPrecio=0;
   //Lista de Productos escogidos
   referenciasEscogidas:string[]=[];  
-
+  //Variable de Subtotal
+  SubTotal=0;
   tipoMovimientos: ITipoMovimiento[];
   referencias: IProducto[];
   bodegas: IBodega[];
@@ -88,7 +90,7 @@ private _data:IEmpleado[];*/
    tipoMovimientoId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
    tipoMovimiento:['', [Validators.required]],
    fechaPago:[''],
-   subTotal :['1', [Validators.required, Validators.pattern(/^\d+$/)]],
+   subTotal :['', [Validators.required, Validators.pattern(/^\d+$/)]],
    valorDevolucion :['0', [Validators.pattern(/^\d+$/)]],
    descuento :['0', [Validators.pattern(/^\d+$/)]],
    iVA :['0', [ Validators.pattern(/^\d+$/)]],
@@ -145,8 +147,9 @@ private _data:IEmpleado[];*/
   }
   save() {
     let mfactura: IMFactura = Object.assign({}, this.formGroup.value);
+    this.calcSubTotal(mfactura);
     console.table(mfactura); //ver mfactura por consola
-    console.log(this.fechaPago);
+    
 
     if (this.modoEdicion) {
       /* edita un mfactura
@@ -156,11 +159,19 @@ private _data:IEmpleado[];*/
           error => console.error(error));*/
     } else {
       // crea un mfactura
-      this.facturasService.createFacturas(mfactura)
-        .subscribe(mfactura => this.onSaveSuccess(),
-          error => {this.alertService.error(error.message); console.log(error)}
-        );
+      // this.facturasService.createFacturas(mfactura)
+      //   .subscribe(mfactura => this.onSaveSuccess(),
+      //     error => {this.alertService.error(error.message); console.log(error)}
+      //   );
     }
+  }
+  //* Binding evento para calcular Subtotal
+  calcSubTotal(mfactura:IMFactura){
+    //llamar a la funcion de prefacturacion
+    this.facturasService.precreateFacturas(mfactura)
+        .subscribe(mfactura => {this.SubTotal=mfactura.subTotal; console.log(mfactura);},
+          error => {this.alertService.error(error.message); console.log(error)}
+        );    
   }
   onSaveSuccess(){
     this.router.navigate(["/facturas"]);
@@ -213,22 +224,22 @@ private _data:IEmpleado[];*/
   get cantidad() {
     return this.dFacturaFormGroup.get('cantidad');
   }
-  
-  agregarDFactura(){
-    if(this.currentProductoReferencia==""){
+
+  agregarDFactura() {
+    if (this.currentProductoReferencia == "") {
       //mensaje que debe ingresar seleccionar un producto primero
-    }else{
+    } else {
       let referenciaFinder = this.referenciasEscogidas.find(t => t == this.currentProductoReferencia);//busca si existe tal referencia en la lista dfacturas
-      if(referenciaFinder){
+      if (referenciaFinder) {
         this.alertService.error("Producto ya Seleccionado")
-      }else{
-      this.dFacturaFormGroup=this.fb.group({
-      referencia :[this.currentProductoReferencia, [Validators.required]],
-      promocionId :['0'],
-      bodega :['', [Validators.required]],
-      cantidad:['1', [Validators.required, Validators.pattern(/^\d+$/)]]            
-    });
-    this.referenciasEscogidas.push(this.currentProductoReferencia);
+      } else {
+        this.dFacturaFormGroup = this.fb.group({
+          referencia: [this.currentProductoReferencia, [Validators.required]],
+          promocionId: ['0'],
+          bodega: ['', [Validators.required]],
+          cantidad: ['1', [Validators.required, Validators.pattern(/^\d+$/)]]
+        });
+        this.referenciasEscogidas.push(this.currentProductoReferencia);
     this.dFacturas.push(this.dFacturaFormGroup);
   }
   }
@@ -256,6 +267,7 @@ private _data:IEmpleado[];*/
     });
     this.dFacturas.controls.splice(0, this.dFacturas.length);
   }
+  
     /**
    * Sets the initial value after the filteredBanks are loaded initially
    */
@@ -308,9 +320,17 @@ private _data:IEmpleado[];*/
     this.currentPromocion=$event.nombre;
   }
   receiveMessageProducto($event){
-    
+    if(this.tipoMovimiento.value == 'Compra' || this.tipoMovimiento.value == 'Venta'){
     this.currentProductoDescripcion=$event.descripcion;
-    this.currentProductoReferencia=$event.referencia;
+      this.currentProductoReferencia = $event.referencia;
+    if(this.tipoMovimiento.value == 'Compra'){
+      this.currentProductoPrecio=$event.costo;
+    }else{
+      this.currentProductoPrecio=$event.precioVenta;
+    }
+  }else{
+    this.alertService.info("Seleccione Tipo de Movimiento antes de Productos")    
+  }
   }
 } 
 export class Estado{

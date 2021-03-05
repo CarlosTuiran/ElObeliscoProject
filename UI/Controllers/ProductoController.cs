@@ -120,5 +120,25 @@ namespace UI.Controllers
             return BadRequest(rta.Message);
         }
 
+        [HttpGet("TopVentaProductos")]
+        public object TopVentaProductos()
+        {
+            var result = (from p in _context.Set<Producto>()
+                          join i in _context.Set<Inventario>()
+                          on p.Referencia equals i.Referencia
+                          join df in _context.Set<DFactura>()
+                          on p.Referencia equals df.Referencia
+                          join mf in _context.Set<MFactura>()
+                          on df.MfacturaId equals mf.idMfactura
+                          where mf.TipoMovimiento == "Venta"
+                          select new
+                          {
+                              Referencia = p.Referencia,
+                              Descripcion = p.Descripcion,
+                              Total = _context.Set<DFactura>().Sum(x => x.Cantidad)
+                          }).OrderByDescending(i => i.Total).Take(10).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace Aplicacion.Request
     public class CrearFacturasResponse
     {
         public string Message { get; set; }
+        public double SubTotal { get; set; }
         public bool isOk()
         {
             return this.Message.Equals("Factura Creada Exitosamente");

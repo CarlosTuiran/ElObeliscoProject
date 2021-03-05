@@ -29,7 +29,7 @@ namespace Aplicacion.Services.CrearServices
 
         public CrearFacturasResponse Ejecutar(CrearMFacturaRequest requestM)
         {
-            Console.WriteLine(requestM.FechaPago);
+            
             var listMFacturas=_unitOfWork.MFacturaServiceRepository.GetAll();
             var lastMFactura = listMFacturas.TakeLast(1).ToArray();//ultima factura
             requestM.idMfactura = lastMFactura[0].idMfactura + 1;//otorga un nuevo id Mfactura
@@ -70,5 +70,17 @@ namespace Aplicacion.Services.CrearServices
   
             
         }
+        public CrearFacturasResponse PreEjecutar(CrearMFacturaRequest requestM){
+            var dfacturas=requestM.DFacturas;
+            double subTotal=0;
+            foreach (var item in dfacturas)
+            {
+                subTotal=subTotal+(item.PrecioUnitario*item.Cantidad);
+            }
+            return new   CrearFacturasResponse
+            { Message = "Subtotal calculado", SubTotal = subTotal };
+        }   
     }
+
 }
+

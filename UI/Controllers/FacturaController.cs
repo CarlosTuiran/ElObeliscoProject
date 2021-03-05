@@ -57,13 +57,13 @@ namespace UI.Controllers
         [HttpGet("{id}")]
         public Object GetDFactura([FromRoute] int id)
         {
-            var factura =  _context.MFactura.SingleOrDefault(t => t.Id == id);
-            if (factura== null)
+            var factura = _context.MFactura.SingleOrDefault(t => t.Id == id);
+            if (factura == null)
                 return NotFound();
             var result = (from mf in _context.Set<MFactura>()
                           join df in _context.Set<DFactura>()
                           on mf.Id equals df.MfacturaId
-                          join p in  _context.Set<Producto>()
+                          join p in _context.Set<Producto>()
                           on df.Referencia equals p.Referencia
                           join e in _context.Set<Empleado>()
                           on mf.EmpleadoId equals e.Id
@@ -74,16 +74,16 @@ namespace UI.Controllers
                           {
                               EmpleadoId = e.Nombres,
                               TercerosId = mf.TercerosId,
-                              Referencia =p.Descripcion,
-                              idPromocion =df.idPromocion, //* Agregar Promocion Nombre
-                              Bodega =df.Bodega, //* Bodega tambien
-                              Cantidad= df.Cantidad,
-                              PrecioUnitario =df.PrecioUnitario,
-                              PrecioTotal =df.PrecioTotal,
-                              FechaFactura =df.FechaFactura
-                        }).ToList();
+                              Referencia = p.Descripcion,
+                              idPromocion = df.idPromocion, //* Agregar Promocion Nombre
+                              Bodega = df.Bodega, //* Bodega tambien
+                              Cantidad = df.Cantidad,
+                              PrecioUnitario = df.PrecioUnitario,
+                              PrecioTotal = df.PrecioTotal,
+                              FechaFactura = df.FechaFactura
+                          }).ToList();
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
-            return result;            
+            return result;
         }
         [HttpPost]
         public async Task<IActionResult> CreateFacturas([FromBody] CrearMFacturaRequest request)
@@ -96,6 +96,14 @@ namespace UI.Controllers
                 return CreatedAtAction("GetFactura", new { id = request.idMfactura }, request);
             }
             return BadRequest(rta.Message);
+        }
+        [HttpPost("preCreateFacturas")]
+        public Object GetDFactura([FromBody] CrearMFacturaRequest request)
+        {
+            _service = new CrearFacturasService(_unitOfWork);
+            var rta = _service.PreEjecutar(request);
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(rta, Newtonsoft.Json.Formatting.Indented);
+            return rta;
         }
     }
 }

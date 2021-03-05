@@ -26,7 +26,10 @@ export class FacturasService {
   createFacturas(Factura: IMFactura): Observable<IMFactura> {
     return this.http.post<IMFactura>(this.apiURL, Factura);
   }
-
+  //para calcular el subtotal en el servidor
+  precreateFacturas(Factura: IMFactura): Observable<IMFactura> {
+    return this.http.post<IMFactura>(this.apiURL, '/preCreateFacturas' + Factura);
+  }
   updateFactura(Factura: IMFactura): Observable<IMFactura> {
     return this.http.put<IMFactura>(this.apiURL + "/" + Factura.idMfactura, Factura);
   }

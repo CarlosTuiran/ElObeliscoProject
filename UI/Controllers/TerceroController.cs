@@ -91,5 +91,38 @@ namespace UI.InterfazWeb.Controllers
             }
             return BadRequest(rta.Message);
         }
+        //? Top 10 Clientes
+        [HttpGet("Top10Clientes")]
+        public object Top10Clientes()
+        {
+            var result =  (from t in _context.Set<Terceros>() 
+                           join mf in _context.Set<MFactura>()
+                           on t.Id equals mf.TercerosId
+                           where mf.TipoMovimiento == "Venta"
+                           select new 
+                         { 
+                             Nit = t.Nit,
+                             Nombre = t.Nombre + " " + t.Apellido,
+                             Total = _context.Set<MFactura>().Sum(x => x.Total)
+                         }).OrderByDescending(i => i.Total).Take(10).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
+        }
+        //? Top 10 Proveedores
+        /*
+        [HttpGet("Top10Proveedores")]
+        public object Top10Proveedores()
+        {
+            var result =  (from t in _context.Set<Terceros>() 
+                         join mf in  _context.Set<MFactura>() 
+                         on t.Id equals mf.TercerosId
+                         where t.TipoTercero == "Proveedor"
+                         select new 
+                         { 
+                             
+                         }).OrderByDescending(i => i.Cantidad).Take(10).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
+        }*/
     }
 }
