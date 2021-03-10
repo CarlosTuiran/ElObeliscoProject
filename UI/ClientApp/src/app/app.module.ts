@@ -22,7 +22,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {ConfirmEqualValidatorDirective} from './usuarios/usuarios-form/confirm-equal-validator.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { DemoMaterialModule } from './material-module';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete'; 
@@ -51,7 +51,7 @@ import { TotalLiquidacionService } from './total-liquidacion/total-liquidacion.s
 import { LiquidacionComponent } from './liquidacion/liquidacion.component';
 import { LiquidacionService } from './liquidacion/liquidacion.service';
 
-import {MatDatepickerModule ,MatNativeDateModule} from '@angular/material';
+import {MatDatepickerModule ,MatInputModule,MatNativeDateModule} from '@angular/material';
 import { ChartsModule, ThemeService } from 'ng2-charts';
 import { SelectorEmpleadoComponent } from './selector-empleado/selector-empleado.component';
 import { DatePipe } from '@angular/common';
@@ -87,6 +87,7 @@ import { TableInventarioComponent } from './inventario/table-inventario/table-in
 import { InventarioService } from './inventario/inventario.service';
 import { CantidadMinimaAlertComponent } from './notifications/cantidad-minima-alert/cantidad-minima-alert.component';
 import { TableDetallesComponent } from './facturas/table-detalles/table-detalles.component';
+import { DialogoCrearFacturaComponent } from './facturas/facturas-form/dialogo-crear-factura/dialogo-crear-factura.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -141,6 +142,7 @@ import { TableDetallesComponent } from './facturas/table-detalles/table-detalles
     TableInventarioComponent,
     CantidadMinimaAlertComponent,
     TableDetallesComponent,
+    DialogoCrearFacturaComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -153,7 +155,10 @@ import { TableDetallesComponent } from './facturas/table-detalles/table-detalles
     AutocompleteLibModule,
     ChartsModule,
     CommonModule,
-    DataTablesModule,MatDatepickerModule ,MatNativeDateModule,
+    DataTablesModule, MatDatepickerModule, MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+
     //ACA SE REGISTRAN TODOS LOS COMPONENTES
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -190,7 +195,7 @@ import { TableDetallesComponent } from './facturas/table-detalles/table-detalles
   providers: [ThemeService,UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
     BodegasService, PromocionesService, PruebasSinVSService, InventarioService,AlertService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
-  entryComponents: [SidebarComponent, TableDetallesComponent],
+  entryComponents: [SidebarComponent, TableDetallesComponent, DialogoCrearFacturaComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -463,10 +463,14 @@
 
           <div class="col-md-10">
             <input class="form-control"
-               id="cantidadId"
-               type="text"
-               formControlName="cantidad" 
-               />
+                   id="cantidadId"
+                   type="text"
+                   formControlName="cantidad" />
+            <input class="form-control"
+                   id="precioUnitario"
+                   type="text"
+                   formControlName="precioUnitario" hidden
+                  />
             <div class="alert alert-danger" *ngIf="((cantidad.touched || cantidad.dirty )&& cantidad.invalid)">
               <span *ngIf="cantidad.errors.required">
                 El campo cantidad es requerido

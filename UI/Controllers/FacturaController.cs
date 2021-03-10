@@ -98,12 +98,17 @@ namespace UI.Controllers
             return BadRequest(rta.Message);
         }
         [HttpPost("preCreateFacturas")]
-        public Object GetDFactura([FromBody] CrearMFacturaRequest request)
+        public async Task<IActionResult> PreCreateFactura([FromBody] CrearMFacturaRequest request)
         {
             _service = new CrearFacturasService(_unitOfWork);
             var rta = _service.PreEjecutar(request);
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(rta, Newtonsoft.Json.Formatting.Indented);
-            return rta;
+            if (rta.isOkSubTotal())
+            {
+                await _context.SaveChangesAsync();
+                return Ok(rta);
+            }
+            return BadRequest(rta.Message);
+            
         }
     }
 }

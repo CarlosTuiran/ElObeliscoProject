@@ -12,5 +12,9 @@ namespace Aplicacion.Request
         {
             return this.Message.Equals("Factura Creada Exitosamente");
         }
+        public bool isOkSubTotal()
+        {
+            return this.Message.Equals("Subtotal calculado");
+        }
     }
 }

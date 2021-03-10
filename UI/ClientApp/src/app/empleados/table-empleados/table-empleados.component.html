@@ -9,12 +9,16 @@
       <!-- idEmpleado Column -->
        <ng-container matColumnDef="idEmpleado">
          <th mat-header-cell *matHeaderCellDef> IdEmpleado </th>
-         <td *matCellDef="let element"> {{element.idEmpleado}} </td>
+         <td *matCellDef="let element">{{element.idEmpleado}}</td>
        </ng-container>
        <!-- nombres Column -->
        <ng-container matColumnDef="nombres">
         <th mat-header-cell *matHeaderCellDef> Nombres </th>
-        <td *matCellDef="let element"> {{element.nombres}} </td>
+        <td *matCellDef="let element">
+          <ul>
+            <li><a [routerLink]='["/empleados-editar/" + element.idEmpleado]'>{{element.nombres}}</a></li>
+          </ul>
+        </td>
       </ng-container>
       <!-- apellidos Column -->
       <ng-container matColumnDef="apellidos">

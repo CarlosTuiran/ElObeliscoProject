@@ -18,6 +18,12 @@ import { IMFactura } from '../facturas.component';
 import { BodegasService } from 'src/app/bodegas/bodegas.service';
 import { ProductosService } from '../../productos/productos.service';
 import { AlertService } from '../../notifications/_services';
+import { DialogoCrearFacturaComponent } from './dialogo-crear-factura/dialogo-crear-factura.component';
+
+
+//import { MatDialog } from '@angular/material/typings';
+import { MatDialog } from '@angular/material/dialog';
+//import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-facturas-form',
@@ -31,7 +37,7 @@ export class FacturasFormComponent implements OnInit {
     private tercerosService: TercerosService, private empleadosService: EmpleadosService,
     private tipoMovimientoService: TipoMovimientosService, 
     private bodegasService: BodegasService, private productosService: ProductosService, 
-    private alertService: AlertService) { }
+      private alertService: AlertService, public dialog: MatDialog) { }
     
     modoEdicion: boolean = false;
     empleados: IEmpleado[]=[];
@@ -49,7 +55,9 @@ export class FacturasFormComponent implements OnInit {
   //Lista de Productos escogidos
   referenciasEscogidas:string[]=[];  
   //Variable de Subtotal
-  SubTotal=0;
+    SubTotal = 0;
+  //dialogRta respuesta a la ventana de dialogo
+    dialogRta="";
   tipoMovimientos: ITipoMovimiento[];
   referencias: IProducto[];
   bodegas: IBodega[];
@@ -90,7 +98,7 @@ private _data:IEmpleado[];*/
    tipoMovimientoId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
    tipoMovimiento:['', [Validators.required]],
    fechaPago:[''],
-   subTotal :['', [Validators.required, Validators.pattern(/^\d+$/)]],
+   subTotal :['1', [Validators.required, Validators.pattern(/^\d+$/)]],
    valorDevolucion :['0', [Validators.pattern(/^\d+$/)]],
    descuento :['0', [Validators.pattern(/^\d+$/)]],
    iVA :['0', [ Validators.pattern(/^\d+$/)]],
@@ -149,30 +157,43 @@ private _data:IEmpleado[];*/
     let mfactura: IMFactura = Object.assign({}, this.formGroup.value);
     this.calcSubTotal(mfactura);
     console.table(mfactura); //ver mfactura por consola
+   
+       
+         
+     
     
-
-    if (this.modoEdicion) {
-      /* edita un mfactura
-      mfactura.empleadoId = this.mfacturaId;
-      this.mfacturasService.updatemfactura(mfactura)
-        .subscribe(mfactura => this.onSaveSuccess(),
-          error => console.error(error));*/
-    } else {
-      // crea un mfactura
-      // this.facturasService.createFacturas(mfactura)
-      //   .subscribe(mfactura => this.onSaveSuccess(),
-      //     error => {this.alertService.error(error.message); console.log(error)}
-      //   );
-    }
   }
-  //* Binding evento para calcular Subtotal
+  //* funcion evento para calcular Subtotal
   calcSubTotal(mfactura:IMFactura){
     //llamar a la funcion de prefacturacion
     this.facturasService.precreateFacturas(mfactura)
-        .subscribe(mfactura => {this.SubTotal=mfactura.subTotal; console.log(mfactura);},
+        .subscribe(mfactura => {this.SubTotal=mfactura.subTotal; 
+          console.log(mfactura);
+          this.openDialog();
+        },
           error => {this.alertService.error(error.message); console.log(error)}
         );    
-  }
+    }
+    //Abrir ventana de dialogo para guardar factura
+    openDialog() {
+        const dialogRef = this.dialog.open(DialogoCrearFacturaComponent, {
+            width: '250px',
+            data: { subTotal: this.SubTotal }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.dialogRta = result;
+            let mfactura: IMFactura = Object.assign({}, this.formGroup.value);
+            if (this.dialogRta) {
+              mfactura.subTotal = this.SubTotal;
+              // crea un mfactura
+              this.facturasService.createFacturas(mfactura)
+                .subscribe(mfactura => this.onSaveSuccess(),
+                  error => {this.alertService.error(error.message); console.log(error)}
+                );
+         }
+        });
+    }
   onSaveSuccess(){
     this.router.navigate(["/facturas"]);
     this.alertService.success("Guardado Exitoso");
@@ -224,7 +245,9 @@ private _data:IEmpleado[];*/
   get cantidad() {
     return this.dFacturaFormGroup.get('cantidad');
   }
-
+  get precioUnitario() {
+    return this.dFacturaFormGroup.get('precioUnitario');
+  }
   agregarDFactura() {
     if (this.currentProductoReferencia == "") {
       //mensaje que debe ingresar seleccionar un producto primero
@@ -233,11 +256,12 @@ private _data:IEmpleado[];*/
       if (referenciaFinder) {
         this.alertService.error("Producto ya Seleccionado")
       } else {
-        this.dFacturaFormGroup = this.fb.group({
-          referencia: [this.currentProductoReferencia, [Validators.required]],
-          promocionId: ['0'],
-          bodega: ['', [Validators.required]],
-          cantidad: ['1', [Validators.required, Validators.pattern(/^\d+$/)]]
+          this.dFacturaFormGroup = this.fb.group({
+              referencia: [this.currentProductoReferencia, [Validators.required]],
+              promocionId: ['0'],
+              bodega: ['', [Validators.required]],
+              precioUnitario: [this.currentProductoPrecio],
+              cantidad: ['1', [Validators.required, Validators.pattern(/^\d+$/)]]
         });
         this.referenciasEscogidas.push(this.currentProductoReferencia);
     this.dFacturas.push(this.dFacturaFormGroup);
