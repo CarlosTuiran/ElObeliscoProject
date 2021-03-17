@@ -35,6 +35,7 @@ export class NominaComponent implements OnInit {
 }
 export interface INomina {
   idEmpleado: number,
+  idNomina: string,
   diasTrabajados: number,
   horasExtras: number,
   salarioBase: number,

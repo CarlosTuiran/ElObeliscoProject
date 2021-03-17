@@ -86,7 +86,11 @@ namespace UI.Controllers
             request.NominaId = idN;
             request.IdEmpleado = id;
             var rta = _eliminarService.Ejecutar(request);
-            return Ok(rta);
+            if (rta.isOk())
+            {
+                return Ok(rta);
+            }
+            return BadRequest(rta);
         }
     }
 }

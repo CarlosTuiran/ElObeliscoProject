@@ -88,6 +88,7 @@ import { InventarioService } from './inventario/inventario.service';
 import { CantidadMinimaAlertComponent } from './notifications/cantidad-minima-alert/cantidad-minima-alert.component';
 import { TableDetallesComponent } from './facturas/table-detalles/table-detalles.component';
 import { DialogoCrearFacturaComponent } from './facturas/facturas-form/dialogo-crear-factura/dialogo-crear-factura.component';
+import { TopVentaProductosPieChartComponent } from './reportes/top-venta-productos-pie-chart/top-venta-productos-pie-chart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -143,6 +144,7 @@ import { DialogoCrearFacturaComponent } from './facturas/facturas-form/dialogo-c
     CantidadMinimaAlertComponent,
     TableDetallesComponent,
     DialogoCrearFacturaComponent,
+    TopVentaProductosPieChartComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -180,7 +182,7 @@ import { DialogoCrearFacturaComponent } from './facturas/facturas-form/dialogo-c
       { path: 'empleados-editar/:id', component: EmpleadosFormComponent },
       { path: 'nominas', component: NominaComponent },
       { path: 'nominas-crear', component: NominaFormComponent },
-      { path: 'nominas-editar/:idN/:id', component: NominaFormComponent },
+      { path: 'nominas-editar/:id/:idN', component: NominaFormComponent },
       { path: 'liquidaciones', component: LiquidacionComponent },
       { path: 'total-liquidaciones', component: TotalLiquidacionComponent },
       { path: 'pruebasSinVS', component: PruebasSinVSComponent },

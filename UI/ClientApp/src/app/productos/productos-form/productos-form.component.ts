@@ -27,6 +27,7 @@ export class ProductosFormComponent implements OnInit {
     fabrica: ['', [Validators.required]],
     costo: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     precioVenta: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+    iVA: ['', [Validators.required]],
     cantidadMinima:['', [Validators.required, Validators.pattern(/^\d+$/)]]
   });
  
@@ -43,6 +44,7 @@ export class ProductosFormComponent implements OnInit {
     });
   }
   cargarFormulario(producto: IProducto) {
+    console.log(producto);
     this.formGroup.patchValue({
       referencia: producto.referencia,
       descripcion: producto.descripcion,
@@ -51,6 +53,7 @@ export class ProductosFormComponent implements OnInit {
       marca: producto.marca,
       costo: producto.costo,
       precioVenta: producto.precioVenta,
+      iVA: producto.iva,
       cantidadMinima:producto.cantidadMinima
     });
   }
@@ -96,6 +99,9 @@ export class ProductosFormComponent implements OnInit {
   }
   get precioVenta() {
     return this.formGroup.get('precioVenta');
+  }
+  get iVA() {
+    return this.formGroup.get('iVA');
   }
   get cantidadMinima() {
     return this.formGroup.get('cantidadMinima');

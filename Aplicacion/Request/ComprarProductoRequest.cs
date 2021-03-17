@@ -7,6 +7,7 @@ namespace Aplicacion.Request
     public class ComprarProductoRequest
     {
         public int idMfactura { get; set; }
+        public string TipoMovimiento { get; set; }
 
     }
     public class ComprarProductoResponse

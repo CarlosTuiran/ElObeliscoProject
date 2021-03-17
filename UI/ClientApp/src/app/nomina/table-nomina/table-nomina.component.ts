@@ -23,6 +23,7 @@ export class TableNominaComponent implements OnInit {
     'horasExtras',
     'salarioBase',
     'subTransporte',
+    'idNomina',
     'options'];
     
     dataSource =new MatTableDataSource<INomina>(this.nominas);
@@ -42,7 +43,7 @@ export class TableNominaComponent implements OnInit {
   }
   ngOnInit() {
     this.nominaService.getNominas()
-    .subscribe(nominas => this.dataSource.data = nominas,
+    .subscribe(nominas =>{ this.dataSource.data = nominas; console.log(nominas);},
       error => this.alertService.error(error.message));
 
   }
@@ -62,7 +63,7 @@ export class TableNominaComponent implements OnInit {
   Eliminar(idNomina: string, idEmpleado: number) {
     this.nominaService.deleteNomina(idNomina, idEmpleado).
       subscribe(idNomina => this.onDeleteSuccess(),
-        error => console.error(error))
+        error => this.alertService.error(error.error.message));
   }
 
   onDeleteSuccess() {

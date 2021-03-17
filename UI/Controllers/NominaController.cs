@@ -44,7 +44,8 @@ namespace UI.InterfazWeb.Controllers
                               DiasTrabajados = n.DiasTrabajados,
                               HorasExtras = n.HorasExtras,
                               SalarioBase = n.SalarioBase,
-                              SubTransporte = n.SubTransporte
+                              SubTransporte = n.SubTransporte,
+                              IdNomina=n.IdNomina
                           }).ToList();
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
@@ -80,7 +81,11 @@ namespace UI.InterfazWeb.Controllers
             request.IdNomina=idN;
             request.IdEmpleado = id;
             var rta = _eliminarService.Ejecutar(request);
-            return Ok(rta);
+            if (rta.isOk())
+            {
+                return Ok(rta);
+            }
+            return BadRequest(rta);
         }
 
         [HttpPut("{id}")]

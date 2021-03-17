@@ -43,7 +43,13 @@ namespace Aplicacion.Services.ActualizarServices
             }
             else
             {
-                inventario.Cantidad += request.Cantidad;
+                if(request.TipoMovimiento=="Compra"){
+                    inventario.Cantidad += request.Cantidad;
+                }else{
+                    inventario.Cantidad -= request.Cantidad;
+                    if(inventario.Cantidad<0)
+                        return new ActualizarInventarioResponse() { Message = $"No hay suficientes existencias de "+request.Referencia };
+                }
                 _unitOfWork.InventarioServiceRepository.Edit(inventario);
                 //_unitOfWork.Commit();
                 return new ActualizarInventarioResponse() { Message = $"Inventario actualizado exitosamente" };

@@ -144,6 +144,27 @@
     </div>
 
     <div class="form-group"
+         [ngClass]="{'has-error': ((iVA.touched || iVA.dirty) && iVA.invalid)}">
+      <label class="col-md-2 control-label"
+             for="iva">IVA del Producto</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="iva"
+               type="number"
+               formControlName="iVA" />
+        <div class="alert alert-danger" *ngIf="((iVA.touched || iVA.dirty )&& iVA.invalid)">
+          <span *ngIf="iVA.errors.required">
+            El IVA es requerido
+          </span>
+          <span *ngIf="iVA.errors.pattern">
+            El campo IVA es numerico
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
          [ngClass]="{'has-error': ((cantidadMinima.touched || cantidadMinima.dirty) && cantidadMinima.invalid)}">
       <label class="col-md-2 control-label"
              for="cantidadMinimaId">Cantidad Mínima del Producto</label>

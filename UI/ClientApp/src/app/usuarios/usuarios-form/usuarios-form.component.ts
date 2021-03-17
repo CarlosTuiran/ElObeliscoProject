@@ -28,7 +28,7 @@ export class UsuariosFormComponent implements OnInit {
     empleadoId: ['', [Validators.required]],
     password: new FormControl('', [Validators.minLength(6), Validators.required]),
     passwordRep: new FormControl(''),
-    tipo: ['', [Validators.required]]
+    rol: ['', [Validators.required]]
   });
   empleados: IEmpleado[];
   ngOnInit() {
@@ -54,7 +54,7 @@ export class UsuariosFormComponent implements OnInit {
       empleadoId: usuario.empleadoId,
       password: usuario.password,
       passwordRep: usuario.password,
-      tipo: usuario.tipo
+     rol: usuario.rol
     });
   }
 
@@ -73,12 +73,13 @@ export class UsuariosFormComponent implements OnInit {
       // crea un usuario
       this.usuariosService.createUsuario(usuario)
         .subscribe(usuario => this.onSaveSuccess(),
-          error => this.alertService.error(error.message));
+          error => { this.alertService.error(error.error); console.log(error);  }
+          )    
     }
   }
   onSaveSuccess(){
     this.router.navigate(["/usuarios"]);
-    this.alertService.success("Guardado Exitoso")
+    this.alertService.success("Guardado Exitoso");
   }
   noequal1(){
     if(this.formGroup.controls['password'].value==this.formGroup.controls['passwordRep'].value){
@@ -107,7 +108,7 @@ export class UsuariosFormComponent implements OnInit {
   get empleadoId(){
     return this.formGroup.get('empleadoId');
   }
-  get tipo(){
-    return this.formGroup.get('tipo');
+  get rol(){
+    return this.formGroup.get('rol');
   }
 }

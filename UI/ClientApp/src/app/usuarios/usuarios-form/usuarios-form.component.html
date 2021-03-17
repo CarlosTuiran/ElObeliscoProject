@@ -33,7 +33,7 @@
                 type="text"
                 required
                 formControlName="empleadoId">
-          <option *ngFor="let empleado of empleados" [value]="empleado.idEmpleado">{{empleado.idEmpleado}} -- {{empleado.nombres}}</option>
+          <option *ngFor="let empleado of empleados" [value]="empleado.id">{{empleado.idEmpleado}} -- {{empleado.nombres}}</option>
 
 
         </select>
@@ -87,23 +87,23 @@
     </div>
 
     <div class="form-group"
-         [ngClass]="{'has-error': ((tipo.touched || tipo.dirty)&& tipo.invalid)}">
+         [ngClass]="{'has-error': ((rol.touched || rol.dirty)&& rol.invalid)}">
       <label class="col-md-2 control-label"
-             for="tipoId">Tipo de Usuario</label>
+             for="rolId">Rol de Usuario</label>
 
       <div class="col-md-8">
         <select class="form-control"
-                id="tipoId"
+                id="rolId"
                 type="text"
                 required
-                formControlName="tipo">
+                formControlName="rol">
           <option value="Admin">Admin</option>
           <option value="Empleado">Empleado</option>
 
         </select>
-        <div class="alert alert-danger" *ngIf="((tipo.touched || tipo.dirty)&& tipo.invalid)">
-          <span *ngIf="tipo.errors.required">
-            El campo Tipo es requerido
+        <div class="alert alert-danger" *ngIf="((rol.touched || rol.dirty)&& rol.invalid)">
+          <span *ngIf="rol.errors.required">
+            El campo rol es requerido
           </span>
         </div>
       </div>

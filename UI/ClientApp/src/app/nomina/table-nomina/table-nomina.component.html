@@ -35,13 +35,17 @@
         <th mat-header-cell *matHeaderCellDef> SubTransporte </th>
         <td *matCellDef="let element"> {{element.subTransporte | currency: 'USD'}} </td>
       </ng-container>
-
+      <!-- idNomina Column -->
+      <ng-container matColumnDef="idNomina">
+        <th mat-header-cell *matHeaderCellDef> idNomina </th>
+        <td *matCellDef="let element"> {{element.idNomina }} </td>
+      </ng-container>
       <!--Options-->
       <ng-container matColumnDef="options">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>
         <td mat-cell *matCellDef="let element">
           <button mat-icon-button color="warn" (click)="Eliminar(element.idNomina, element.idEmpleado)"><mat-icon>delete_outline</mat-icon></button>
-          <button mat-icon-button [routerLink]='["/nominas-editar/" + element.idNomina+ "/" + element.idEmpleado]'>
+          <button mat-icon-button [routerLink]='["/nominas-editar/" + element.idEmpleado+"/"+element.idNomina]'>
             <mat-icon>launch</mat-icon>
           </button>
           <button mat-icon-button color="green" (click)="Pagar(element.idNomina, element.idEmpleado)">

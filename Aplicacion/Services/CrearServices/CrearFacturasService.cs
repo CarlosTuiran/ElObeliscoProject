@@ -56,6 +56,7 @@ namespace Aplicacion.Services.CrearServices
                         return new CrearFacturasResponse { Message = rtaDService.Message };
                     ComprarProductoRequest requestComprar=new ComprarProductoRequest();
                     requestComprar.idMfactura = mfactura.Id;
+                    requestComprar.TipoMovimiento=mfactura.TipoMovimiento;
                     var rta =comprarProductoservice.Ejecutar(requestComprar);
                     if(!rta.isOk())
                         return new CrearFacturasResponse { Message = rta.Message };

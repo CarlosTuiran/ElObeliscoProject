@@ -17,7 +17,7 @@ namespace Aplicacion.Services.EliminarServices
         public EliminarNominaResponse Ejecutar(EliminarNominaRequest request)
         {
             Nomina nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina == request.IdNomina && t.IdEmpleado == request.IdEmpleado);
-            Liquidacion liquidacion = _unitOfWork.LiquidacionServiceRepository.FindFirstOrDefault(t => t.NominaId == request.IdNomina && t.IdEmpleado == request.IdEmpleado);
+            Liquidacion liquidacion = _unitOfWork.LiquidacionServiceRepository.FindFirstOrDefault(t => t.IdEmpleado == request.IdEmpleado);
             if (liquidacion == null)
             {
                 if (nomina == null)

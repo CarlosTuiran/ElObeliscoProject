@@ -20,6 +20,7 @@ namespace Aplicacion.Services.Eventos
         }
         public ComprarProductoResponse Ejecutar(ComprarProductoRequest request)
         {
+            
             var dFactura = _unitOfWork.DFacturaServiceRepository.FindBy(t => t.MfacturaId == request.idMfactura);
             if (dFactura != null)
             {
@@ -41,6 +42,7 @@ namespace Aplicacion.Services.Eventos
                         actualizarInventarioRequest.Referencia = dproducto.Referencia;
                         actualizarInventarioRequest.Cantidad = dproducto.Cantidad;
                         actualizarInventarioRequest.Bodega = dproducto.Bodega;
+                        actualizarInventarioRequest.TipoMovimiento=request.TipoMovimiento;
                         var rtaActualizar = actualizarInventarioService.Ejecutar(actualizarInventarioRequest);
                         if (rtaActualizar.isOk())
                         {

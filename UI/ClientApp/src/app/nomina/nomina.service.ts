@@ -24,7 +24,7 @@ export class NominaService {
   }
 
   updateNomina(nomina: INomina): Observable<INomina> {
-    return this.http.put<INomina>(this.apiURL + "/" + nomina.idEmpleado.toString(), nomina);
+    return this.http.put<INomina>(this.apiURL + "/" + nomina.idEmpleado, nomina);
   }
 
   deleteNomina(idNomina: string, idEmpleado: number): Observable<IDeleteNomina> {

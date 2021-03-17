@@ -52,7 +52,7 @@ export class TableLiquidacionComponent implements OnInit {
   Eliminar(idNomina: string, idEmpleado: number) {
     this.liquidacionesService.deleteLiquidacion(idNomina, idEmpleado).
       subscribe(idNomina => this.onDeleteSuccess(),
-        error => console.error(error))
+        error => this.alertService.error(error.error.message));
   }
 
   onDeleteSuccess() {

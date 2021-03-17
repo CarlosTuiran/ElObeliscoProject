@@ -25,5 +25,5 @@ export interface IUsuario {
    nombre: string, 
    password: string,
    empleadoId:number, 
-   tipo:string
+   rol:string
 }

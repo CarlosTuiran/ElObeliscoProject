@@ -14,13 +14,13 @@
                id="nitId"
                type="text"
                formControlName="nit"
-               *ngIf="!modoEdicion"/>
+               *ngIf="!modoEdicion" />
         <input class="form-control"
                id="nitId"
                type="text"
                formControlName="nit"
                *ngIf="modoEdicion"
-               disabled/>
+               disabled />
         <div class="alert alert-danger" *ngIf="((nit.touched || nit.dirty )&& nit.invalid)">
           <span *ngIf="nit.errors.required">
             El campo Nit es requerido
@@ -65,17 +65,23 @@
       </div>
     </div>
 
+    
+
     <div class="form-group"
-         [ngClass]="{'has-error': ((tipoTercero.touched || tipoTercero.dirty) && tipoTercero.invalid)}">
+         [ngClass]="{'has-error': ((tipoTercero.touched || tipoTercero.dirty)&& tipoTercero.invalid)}">
       <label class="col-md-2 control-label"
              for="tipoTerceroId">Tipo Tercero</label>
 
       <div class="col-md-8">
-        <input class="form-control"
-               id="tipoTerceroId"
-               type="text"
-               formControlName="tipoTercero" />
-        <div class="alert alert-danger" *ngIf="((tipoTercero.touched || tipoTercero.dirty )&& tipoTercero.invalid)">
+        <select class="form-control"
+                id="tipoTerceroId"
+                type="text"
+                required
+                formControlName="tipoTercero">
+          <option value="Cliente">Cliente</option>
+          <option value="Proveedor">Proveedor</option>
+        </select>
+        <div class="alert alert-danger" *ngIf="((tipoTercero.touched || tipoTercero.dirty)&& tipoTercero.invalid)">
           <span *ngIf="tipoTercero.errors.required">
             El campo Tipo Tercero es requerido
           </span>

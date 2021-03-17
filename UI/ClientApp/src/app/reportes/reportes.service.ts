@@ -13,5 +13,8 @@ export class ReportesService {
   Top10Productos(): Observable < any[] > {
     return this.http.get<any[]>(this.apiProductoURL + "/Top10Productos");
   }
+  Top10VentasProductos(): Observable < any[] > {
+    return this.http.get<any[]>(this.apiProductoURL + "/TopVentaProductos");
+  }
 }
 

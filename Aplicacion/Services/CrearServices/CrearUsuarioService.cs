@@ -27,7 +27,7 @@ namespace Aplicacion.Services.CrearServices
                 if (usuarioRep != null)
                     return new CrearUsuarioResponse() { Message = $"Nombre de Usuario ya existe" };
 
-                Usuario newUsuario = new Usuario(request.Nombre,  request.Password, request.EmpleadoId, request.Tipo);
+                Usuario newUsuario = new Usuario(request.Nombre,  request.Password, request.EmpleadoId, request.Rol);
                 IReadOnlyList<string> errors = newUsuario.CanCrear(newUsuario);
                 if (errors.Any())
                 {
@@ -47,7 +47,7 @@ namespace Aplicacion.Services.CrearServices
             }
             else
             {
-                return new CrearUsuarioResponse() { Message = $"Empleado ya tine un Usuario" };
+                return new CrearUsuarioResponse() { Message = $"Empleado ya tiene un Usuario" };
             }
         }
     }
