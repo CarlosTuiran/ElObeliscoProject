@@ -1,0 +1,28 @@
+
+<div>
+    <div class="card">
+      <div class="card-header">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fas fa-globe"></i>
+              <h3>Top 10 Empleados con mas Ventas</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                [plugins]="pieChartPlugins"
+                [legend]="pieChartLegend"
+                [colors]="pieChartColors">
+        </canvas>
+      </div>
+    </div>
+  </div>
+  
+

@@ -95,34 +95,42 @@ namespace UI.InterfazWeb.Controllers
         [HttpGet("Top10Clientes")]
         public object Top10Clientes()
         {
-            var result =  (from t in _context.Set<Terceros>() 
+            var result =  (from t in _context.Set<Terceros>()
                            join mf in _context.Set<MFactura>()
                            on t.Id equals mf.TercerosId
-                           where mf.TipoMovimiento == "Venta"
-                           select new 
-                         { 
-                             Nit = t.Nit,
-                             Nombre = t.Nombre + " " + t.Apellido,
-                             Total = _context.Set<MFactura>().Sum(x => x.Total)
-                         }).OrderByDescending(i => i.Total).Take(10).ToList();
+                           join df in _context.Set<DFactura>()
+                           on mf.Id equals df.MfacturaId
+                           where mf.TipoMovimiento == "Venta" && t.TipoTercero == "Cliente"
+                           group mf by new { t.Nit, t.Nombre, t.Apellido } into newGroup1
+                           select new
+                           {
+                               Nit = newGroup1.Key.Nit,
+                               Nombre = newGroup1.Key.Nombre + " " + newGroup1.Key.Apellido,
+                               Total = newGroup1.Sum(c => c.Total)
+                           }).OrderByDescending(i => i.Total).Take(10).ToList();
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
         }
         //? Top 10 Proveedores
-        /*
+        
         [HttpGet("Top10Proveedores")]
         public object Top10Proveedores()
         {
-            var result =  (from t in _context.Set<Terceros>() 
-                         join mf in  _context.Set<MFactura>() 
-                         on t.Id equals mf.TercerosId
-                         where t.TipoTercero == "Proveedor"
-                         select new 
-                         { 
-                             
-                         }).OrderByDescending(i => i.Cantidad).Take(10).ToList();
+            var result = (from t in _context.Set<Terceros>()
+                          join mf in _context.Set<MFactura>()
+                          on t.Id equals mf.TercerosId
+                          join df in _context.Set<DFactura>()
+                          on mf.Id equals df.MfacturaId
+                          where mf.TipoMovimiento == "Compra" && t.TipoTercero == "Proveedor"
+                          group mf by new { t.Nit, t.Nombre, t.Apellido } into newGroup1
+                          select new
+                          {
+                              Nit = newGroup1.Key.Nit,
+                              Nombre = newGroup1.Key.Nombre + " " + newGroup1.Key.Apellido,
+                              Total = newGroup1.Sum(c => c.Total)
+                          }).OrderByDescending(i => i.Total).Take(10).ToList();
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
-        }*/
+        }
     }
 }

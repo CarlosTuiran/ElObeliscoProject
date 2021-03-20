@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
 export class ReportesService {
 
   apiProductoURL = this.baseUrl + "api/Producto";
+  apiTerceroURL=this.baseUrl + "api/Tercero";
+  apiEmpleadoURL=this.baseUrl + "api/Empleado";
+
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
   Top10Productos(): Observable < any[] > {
@@ -15,6 +18,15 @@ export class ReportesService {
   }
   Top10VentasProductos(): Observable < any[] > {
     return this.http.get<any[]>(this.apiProductoURL + "/TopVentaProductos");
+  }
+  Top10Proveedores(): Observable < any[] > {
+    return this.http.get<any[]>(this.apiTerceroURL + "/Top10Proveedores");
+  }
+  Top10Clientes(): Observable < any[] > {
+    return this.http.get<any[]>(this.apiTerceroURL + "/Top10Clientes");
+  }
+  Top10Empleados(): Observable < any[] > {
+    return this.http.get<any[]>(this.apiEmpleadoURL + "/Top10Empleados");
   }
 }
 

@@ -88,18 +88,21 @@ namespace UI.InterfazWeb.Controllers
         }
 
         //? Top Empleados que mas venden
-        [HttpGet("TopVentasEmpleados")]
-        public object TopVentasEmpleados()
+        [HttpGet("Top10Empleados")]
+        public object Top10Empleados()
         {
             var result = (from e in _context.Set<Empleado>()
                           join mf in _context.Set<MFactura>()
                           on e.Id equals mf.EmpleadoId
+                          join df in _context.Set<DFactura>()
+                          on mf.Id equals df.MfacturaId
                           where mf.TipoMovimiento == "Venta"
+                          group mf by new { e.Nombres, e.Apellidos, e.IdEmpleado } into newGroup1
                           select new
                           {
-                              EmpleadoId = e.IdEmpleado,
-                              Nombre = e.Nombres + " " + e.Apellidos,
-                              Total = _context.Set<MFactura>().Sum(x => x.Total)
+                              IdEmpleado = newGroup1.Key.IdEmpleado,
+                              Nombre = newGroup1.Key.Nombres + " " + newGroup1.Key.Apellidos,
+                              Total = newGroup1.Sum(c => c.Total)
                           }).OrderByDescending(i => i.Total).Take(10).ToList();
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;

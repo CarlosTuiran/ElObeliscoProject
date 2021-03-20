@@ -189,7 +189,7 @@ private _data:IEmpleado[];*/
               // crea un mfactura
               this.facturasService.createFacturas(mfactura)
                 .subscribe(mfactura => this.onSaveSuccess(),
-                  error => {this.alertService.error(error.message); console.log(error)}
+                  error => {this.alertService.error(error.error);}
                 );
          }
         });

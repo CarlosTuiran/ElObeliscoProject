@@ -1,7 +1,6 @@
 <mat-tab-group>
-    <mat-tab label="Inventario"> 
-        <br>
-        <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-tab label="Inventario">
+        <mat-grid-list cols="2" rowHeight="23em">
             <mat-grid-tile>
                 <app-inventario-pie-chart></app-inventario-pie-chart>
             </mat-grid-tile>
@@ -10,10 +9,25 @@
             </mat-grid-tile>    
         </mat-grid-list>
     </mat-tab>
-    <mat-tab label="Ventas"> 
-
+    <mat-tab label="Compras">
+        <mat-grid-list cols="2" rowHeight="26em">
+          <mat-grid-tile>
+            <app-top-proveedores-pie-chart></app-top-proveedores-pie-chart>
+          </mat-grid-tile>
+        </mat-grid-list>
     </mat-tab>
-    <mat-tab label="Empleados"> 
-
+    <mat-tab label="Ventas">
+      <mat-grid-list cols="2" rowHeight="24em">
+        <mat-grid-tile>
+          <app-top-clientes-pie-chart></app-top-clientes-pie-chart>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-tab>
+    <mat-tab label="Empleados">
+        <mat-grid-list cols="2" rowHeight="25em">
+            <mat-grid-tile>
+                <app-top-empleados-pie-chart></app-top-empleados-pie-chart>                
+            </mat-grid-tile>
+        </mat-grid-list>
     </mat-tab>
 </mat-tab-group>

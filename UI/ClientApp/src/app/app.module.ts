@@ -89,6 +89,9 @@ import { CantidadMinimaAlertComponent } from './notifications/cantidad-minima-al
 import { TableDetallesComponent } from './facturas/table-detalles/table-detalles.component';
 import { DialogoCrearFacturaComponent } from './facturas/facturas-form/dialogo-crear-factura/dialogo-crear-factura.component';
 import { TopVentaProductosPieChartComponent } from './reportes/top-venta-productos-pie-chart/top-venta-productos-pie-chart.component';
+import { TopProveedoresPieChartComponent } from './reportes/top-proveedores-pie-chart/top-proveedores-pie-chart.component';
+import { TopClientesPieChartComponent } from './reportes/top-clientes-pie-chart/top-clientes-pie-chart.component';
+import { TopEmpleadosPieChartComponent } from './reportes/top-empleados-pie-chart/top-empleados-pie-chart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -145,6 +148,9 @@ import { TopVentaProductosPieChartComponent } from './reportes/top-venta-product
     TableDetallesComponent,
     DialogoCrearFacturaComponent,
     TopVentaProductosPieChartComponent,
+    TopProveedoresPieChartComponent,
+    TopClientesPieChartComponent,
+    TopEmpleadosPieChartComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
