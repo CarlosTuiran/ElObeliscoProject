@@ -108,7 +108,51 @@ namespace UI.Controllers
                 return Ok(rta);
             }
             return BadRequest(rta.Message);
-            
         }
+
+        [HttpGet("TotalVentas")]
+        public object TotalVentas()
+        {
+            var result = (from mf in _context.Set<MFactura>()
+                          where mf.TipoMovimiento == "Venta"
+                          select new
+                          {
+                              Total = mf.Total
+                          }).ToList();
+            var sum = result.Select(a => a.Total).Sum();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(sum, Newtonsoft.Json.Formatting.Indented);
+            return sum;
+        }
+
+        [HttpGet("TotalFacturasVentas")]
+        public object TotalFacturasVentas()
+        {
+            var result = (from mf in _context.Set<MFactura>()
+                          where mf.TipoMovimiento == "Venta"
+                          select new
+                          {
+                              IdMfactura = mf.Id
+                          }).ToList();
+            var sum = result.Select(a => a.IdMfactura).Count();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(sum, Newtonsoft.Json.Formatting.Indented);
+            return sum;
+        }
+        /*select t.Mes_Descripcion, sum(Total) as Total  from MFactura as mf
+        inner join Tiempo as t
+        on mf.FechaFactura = t.Fecha
+        where TipoMovimiento = 'Venta' and t.Mes_Descripcion = DATENAME (MONTH, DATEADD(MONTH, MONTH(Fecha) - 1, '1900-01-01'))
+        group by t.Mes_Descripcion;
+
+        select t.Mes_Descripcion, count(mf.Id) as Total from MFactura as mf
+        inner join Tiempo as t
+        on mf.FechaFactura = t.Fecha
+        where TipoMovimiento = 'Venta'and t.Mes_Descripcion = DATENAME (MONTH, DATEADD(MONTH, MONTH(Fecha) - 1, '1900-01-01'))
+        group by t.Mes_Descripcion;
+
+        select (Sum(mf.Total)/count(mf.Id)) as Promedio from MFactura as mf
+        inner join Tiempo as t
+        on mf.FechaFactura = t.Fecha
+        where TipoMovimiento = 'Venta'and t.Mes_Descripcion = DATENAME (MONTH, DATEADD(MONTH, MONTH(Fecha) - 1, '1900-01-01'))
+        group by t.Mes_Descripcion;*/
     }
 }

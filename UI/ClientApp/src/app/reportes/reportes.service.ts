@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IInterval } from './reportes.component';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,9 @@ export class ReportesService {
   }
   Top10Clientes(): Observable < any[] > {
     return this.http.get<any[]>(this.apiTerceroURL + "/Top10Clientes");
+  }
+  Top10ClientesInterval(Interval: IInterval): Observable<any[]> {
+    return this.http.get<any[]>(this.apiTerceroURL+ "/Top10ClientesInterval/" +Interval.fechaInicio + "/" + Interval.fechaFin);
   }
   Top10Empleados(): Observable < any[] > {
     return this.http.get<any[]>(this.apiEmpleadoURL + "/Top10Empleados");

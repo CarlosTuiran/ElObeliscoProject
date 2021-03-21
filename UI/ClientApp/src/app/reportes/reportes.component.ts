@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportesComponent implements OnInit {
 
+  
   constructor() { }
+  
 
   ngOnInit() {
   }
-
+ 
+ 
+}
+export interface IInterval{
+  fechaInicio:Date,
+  fechaFin:Date
 }

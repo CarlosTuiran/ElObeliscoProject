@@ -91,7 +91,7 @@ get dataEmpleados:IEmpleado[]{
 private _data:IEmpleado[];*/
 //Fin del intento
 
-  formGroup = this.fb.group({
+  formGroup = this.fb.group({ 
     
    empleadoId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
    tercerosId :['', [Validators.required, Validators.pattern(/^\d+$/)]],

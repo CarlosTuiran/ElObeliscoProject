@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
+import { FormBuilder } from '@angular/forms';
 import { Label, SingleDataSet } from 'ng2-charts';
 import { element } from 'protractor';
 import { ReportesService } from '../reportes.service';
+import { IInterval } from '../reportes.component';
 
 @Component({
   selector: 'app-top-clientes-pie-chart',
@@ -10,6 +12,8 @@ import { ReportesService } from '../reportes.service';
   styleUrls: ['./top-clientes-pie-chart.component.css']
 })
 export class TopClientesPieChartComponent implements OnInit {
+
+ 
 
   //array  que contiene la descripcion de los top 10
   proveedoresLabel: string[]=[];
@@ -38,7 +42,12 @@ export class TopClientesPieChartComponent implements OnInit {
     }
   ];
   public i =0;
-  constructor(private service: ReportesService) { }
+  constructor(private service: ReportesService, private fb: FormBuilder) { }
+
+  formGroup = this.fb.group({
+    fechaInicio:[''],
+    fechaFin:[''],
+  });
 
   ngOnInit(): void {
     this.service.Top10Clientes().subscribe(
@@ -61,6 +70,25 @@ export class TopClientesPieChartComponent implements OnInit {
   clear(): void {
     this.pieChartData = [];
   }
+  dataFilter()
+  {
+    let interval:  IInterval = Object.assign({}, this.formGroup.value);
+    this.service.Top10ClientesInterval(interval).subscribe(
+      data => {
+       
+        for(let item of data){
+          this.pieChartData[this.i] = item.total,
+          this.pieChartLabels[this.i] = item.nombre;
+          this.i=this.i+1;
+        }
 
-
+      }, error => console.error(error)
+      )
+  } 
+  get fechaInicio() {
+    return this.formGroup.get('fechaInicio');
+  }
+  get fechaFin() {
+    return this.formGroup.get('fechaFin');
+  }
 }
