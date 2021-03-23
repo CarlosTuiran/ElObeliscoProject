@@ -25,35 +25,47 @@
     </div>
     <div class="row">
       <form class="form-horizontal" novalidate
-      [formGroup]="formGroup">
-      <div class="form-group col-md-3">
-          <div class="col-md-10">
-              <mat-form-field color="accent" appearance="fill">
-                  <mat-label>FechaInicio</mat-label>
-                  <input 
-                  id="fechaInicioId"
-                  formControlName="fechaInicio" matInput [matDatepicker]="picker1">
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                  <mat-datepicker #picker1></mat-datepicker>
-              </mat-form-field>
+            [formGroup]="formGroup">
+        <div class="form-group ">
+          <mat-form-field appearance="fill">
+            <mat-label>Intervalo</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate matInput id="fechaInicioId"
+                     formControlName="fechaInicio" placeholder="Fechainicio">
+              <input matEndDate matInput id="fechaFinId"
+                     formControlName="fechaFin" placeholder="FechaFin">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
           </div>
+          <!--
+    <div class="form-group col-md-3">
+      <div class="col-md-10">
+        <mat-form-field color="accent" appearance="fill">
+          <mat-label>FechaInicio</mat-label>
+          <input id="fechaInicioId"
+                 formControlName="fechaInicio" matInput [matDatepicker]="picker1">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
       </div>
-      <div class="form-group col-md-3">
-        <div class="col-md-10">
-            <mat-form-field color="accent" appearance="fill">
-                <mat-label>FechaFin</mat-label>
-                <input 
-                id="fechaFinId"
-                formControlName="fechaFin" matInput [matDatepicker]="picker2">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
-            </mat-form-field>
-        </div>
     </div>
-    <div class="col-md-3">
-      <button (click)="dataFilter()">Actualizar</button>
-    </div>
-    </form>
+    <div class="form-group col-md-3">
+      <div class="col-md-10">
+        <mat-form-field color="accent" appearance="fill">
+          <mat-label>FechaFin</mat-label>
+          <input id="fechaFinId"
+                 formControlName="fechaFin" matInput [matDatepicker]="picker2">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>-->
+          <div class="col-md-3">
+            <button (click)="dataFilter()">Actualizar</button>
+          </div>
+      </form>
     </div>
   </div>
   

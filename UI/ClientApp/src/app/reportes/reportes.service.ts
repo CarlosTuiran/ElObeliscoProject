@@ -27,7 +27,7 @@ export class ReportesService {
     return this.http.get<any[]>(this.apiTerceroURL + "/Top10Clientes");
   }
   Top10ClientesInterval(Interval: IInterval): Observable<any[]> {
-    return this.http.get<any[]>(this.apiTerceroURL+ "/Top10ClientesInterval/" +Interval.fechaInicio + "/" + Interval.fechaFin);
+    return this.http.get<any[]>(this.apiTerceroURL + "/Top10ClientesInterval/" + Interval.fechaInicio. toString() + "/" + Interval.fechaFin.toString());
   }
   Top10Empleados(): Observable < any[] > {
     return this.http.get<any[]>(this.apiEmpleadoURL + "/Top10Empleados");

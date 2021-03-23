@@ -5,6 +5,7 @@ import { Label, SingleDataSet } from 'ng2-charts';
 import { element } from 'protractor';
 import { ReportesService } from '../reportes.service';
 import { IInterval } from '../reportes.component';
+//import { MatFormFieldModule, MatInputModule } from '@angular/material';
 
 @Component({
   selector: 'app-top-clientes-pie-chart',

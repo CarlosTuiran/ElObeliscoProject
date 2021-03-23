@@ -112,16 +112,18 @@ namespace UI.InterfazWeb.Controllers
             return result;
         }
         //? Top 10 Clientes por Intervalo
-        [HttpGet("Top10ClientesInterval")]
-        public object Top10ClientesInterval([FromRoute] DateTime fechaInicio,[FromRoute] DateTime fechaFin )
+        [HttpGet("Top10ClientesInterval/{fechaInicio}/{fechaFin}")]
+        public object Top10ClientesInterval([FromRoute] string fechaInicio,[FromRoute] string fechaFin )
         {
+            DateTime FechaInicio = Convert.ToDateTime(fechaInicio);
+            DateTime FechaFin = Convert.ToDateTime(fechaFin);
             var result =  (from t in _context.Set<Terceros>()
                            join mf in _context.Set<MFactura>()
                            on t.Id equals mf.TercerosId
                            join df in _context.Set<DFactura>()
                            on mf.Id equals df.MfacturaId
                            where mf.TipoMovimiento == "Venta" && t.TipoTercero == "Cliente"
-                           && mf.FechaPago >= fechaInicio && mf.FechaPago <= fechaFin
+                           && mf.FechaPago >= FechaInicio && mf.FechaPago <= FechaFin
                            group mf by new { t.Nit, t.Nombre, t.Apellido } into newGroup1
                            select new
                            {
