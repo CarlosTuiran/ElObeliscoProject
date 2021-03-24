@@ -50,7 +50,7 @@ import { TotalLiquidacionComponent } from './total-liquidacion/total-liquidacion
 import { TotalLiquidacionService } from './total-liquidacion/total-liquidacion.service';
 import { LiquidacionComponent } from './liquidacion/liquidacion.component';
 import { LiquidacionService } from './liquidacion/liquidacion.service';
-
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import {MatDatepickerModule ,MatInputModule,MatNativeDateModule} from '@angular/material';
 import { ChartsModule, ThemeService } from 'ng2-charts';
 import { SelectorEmpleadoComponent } from './selector-empleado/selector-empleado.component';
@@ -166,7 +166,7 @@ import { TopEmpleadosPieChartComponent } from './reportes/top-empleados-pie-char
     DataTablesModule, MatDatepickerModule, MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
-
+    NgxMatDatetimePickerModule, NgxMatTimepickerModule,
     //ACA SE REGISTRAN TODOS LOS COMPONENTES
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
