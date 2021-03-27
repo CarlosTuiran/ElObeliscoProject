@@ -7,9 +7,7 @@ using Aplicacion.Services.CrearServices;
 using Domain.Models.Entities;
 using Infra.Datos;
 using Infra.Datos.Base;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace UI.Controllers
 {
@@ -114,14 +112,17 @@ namespace UI.Controllers
         public object TotalVentas()
         {
             var result = (from mf in _context.Set<MFactura>()
+                          join t in _context.Set<Tiempo>()
+                          on mf.FechaFactura equals t.Fecha
                           where mf.TipoMovimiento == "Venta"
+                          group mf by new { t.Mes_Descripcion } into newGroup1
                           select new
                           {
-                              Total = mf.Total
-                          }).ToList();
-            var sum = result.Select(a => a.Total).Sum();
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(sum, Newtonsoft.Json.Formatting.Indented);
-            return sum;
+                              Mes_Descripcion = newGroup1.Key.Mes_Descripcion,
+                              Total = newGroup1.Sum(c => c.Total)
+                          }).OrderByDescending(i => i.Total).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
         }
 
         [HttpGet("TotalFacturasVentas")]
@@ -137,6 +138,7 @@ namespace UI.Controllers
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(sum, Newtonsoft.Json.Formatting.Indented);
             return sum;
         }
+
         /*select t.Mes_Descripcion, sum(Total) as Total  from MFactura as mf
         inner join Tiempo as t
         on mf.FechaFactura = t.Fecha
@@ -154,5 +156,41 @@ namespace UI.Controllers
         on mf.FechaFactura = t.Fecha
         where TipoMovimiento = 'Venta'and t.Mes_Descripcion = DATENAME (MONTH, DATEADD(MONTH, MONTH(Fecha) - 1, '1900-01-01'))
         group by t.Mes_Descripcion;*/
+
+        [HttpGet("TotalOrdenes")]
+        public object TotalOrdenes()
+        {
+            // Realizar consulta count afuera de la consulta principal
+            var result = (from mf in _context.Set<MFactura>()
+                          join t in _context.Set<Tiempo>()
+                          on mf.FechaFactura equals t.Fecha
+                          where mf.TipoMovimiento == "Venta"
+                          group mf by new { t.Mes_Descripcion } into newGroup1
+                          select new
+                          {
+                              Mes_Descripcion = newGroup1.Key.Mes_Descripcion,
+                              Total = newGroup1.Select(c => c.Id).Count()
+                          }).OrderByDescending(i => i.Total).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
+        }
+
+        [HttpGet("PromedioVentas")]
+        public object PromedioVentas()
+        {
+            var result = (from mf in _context.Set<MFactura>()
+                          join t in _context.Set<Tiempo>()
+                          on mf.FechaFactura equals t.Fecha
+                          where mf.TipoMovimiento == "Venta"
+                          group mf by new { t.Mes_Descripcion } into newGroup1
+                          select new
+                          {
+                              Mes_Descripcion = newGroup1.Key.Mes_Descripcion,
+                              Total = newGroup1.Sum(c => c.Total) / newGroup1.Select(c => c.Id).Count()
+                          }).OrderByDescending(i => i.Total).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
+        }
+
     }
 }

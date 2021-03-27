@@ -70,13 +70,15 @@ export class TopClientesPieChartComponent implements OnInit {
 
   clear(): void {
     this.pieChartData = [];
+    this.proveedoresLabel=[];
+    this.i=0;
   }
   dataFilter()
   {
     let interval:  IInterval = Object.assign({}, this.formGroup.value);
     this.service.Top10ClientesInterval(interval).subscribe(
       data => {
-       
+        this.clear();
         for(let item of data){
           this.pieChartData[this.i] = item.total,
           this.pieChartLabels[this.i] = item.nombre;

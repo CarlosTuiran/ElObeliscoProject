@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Aplicacion.Services.EliminarServices;
+using System.Globalization;
 
 namespace UI.InterfazWeb.Controllers
 {
@@ -24,6 +25,7 @@ namespace UI.InterfazWeb.Controllers
         private UnitOfWork _unitOfWork;
         private ActualizarTerceroService _actualizarService;
         private EliminarTerceroService _eliminarService;
+        CultureInfo provider = CultureInfo.InvariantCulture;
 
         public TerceroController(ObeliscoContext context)
         {
@@ -115,7 +117,11 @@ namespace UI.InterfazWeb.Controllers
         [HttpGet("Top10ClientesInterval/{fechaInicio}/{fechaFin}")]
         public object Top10ClientesInterval([FromRoute] string fechaInicio,[FromRoute] string fechaFin )
         {
+            string format="ddd MMM dd yyyy";
+            //Wed Mar 10 2021 00:00:00 GMT-0500 (hora estándar de Colombia)' Thu Mar 25 2021
+            fechaInicio=DateTime.ParseExact(fechaInicio.Substring(0,15), format,provider).ToString();
             DateTime FechaInicio = Convert.ToDateTime(fechaInicio);
+            fechaFin=DateTime.ParseExact(fechaFin.Substring(0,15), format,provider).ToString();
             DateTime FechaFin = Convert.ToDateTime(fechaFin);
             var result =  (from t in _context.Set<Terceros>()
                            join mf in _context.Set<MFactura>()
