@@ -120,7 +120,7 @@ namespace UI.Controllers
                           {
                               Mes_Descripcion = newGroup1.Key.Mes_Descripcion,
                               Total = newGroup1.Sum(c => c.Total)
-                          }).OrderByDescending(i => i.Total).ToList();
+                          }).ToList();
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
         }
@@ -139,24 +139,6 @@ namespace UI.Controllers
             return sum;
         }
 
-        /*select t.Mes_Descripcion, sum(Total) as Total  from MFactura as mf
-        inner join Tiempo as t
-        on mf.FechaFactura = t.Fecha
-        where TipoMovimiento = 'Venta' and t.Mes_Descripcion = DATENAME (MONTH, DATEADD(MONTH, MONTH(Fecha) - 1, '1900-01-01'))
-        group by t.Mes_Descripcion;
-
-        select t.Mes_Descripcion, count(mf.Id) as Total from MFactura as mf
-        inner join Tiempo as t
-        on mf.FechaFactura = t.Fecha
-        where TipoMovimiento = 'Venta'and t.Mes_Descripcion = DATENAME (MONTH, DATEADD(MONTH, MONTH(Fecha) - 1, '1900-01-01'))
-        group by t.Mes_Descripcion;
-
-        select (Sum(mf.Total)/count(mf.Id)) as Promedio from MFactura as mf
-        inner join Tiempo as t
-        on mf.FechaFactura = t.Fecha
-        where TipoMovimiento = 'Venta'and t.Mes_Descripcion = DATENAME (MONTH, DATEADD(MONTH, MONTH(Fecha) - 1, '1900-01-01'))
-        group by t.Mes_Descripcion;*/
-
         [HttpGet("TotalOrdenes")]
         public object TotalOrdenes()
         {
@@ -169,8 +151,8 @@ namespace UI.Controllers
                           select new
                           {
                               Mes_Descripcion = newGroup1.Key.Mes_Descripcion,
-                              Total = newGroup1.Select(c => c.Id).Count()
-                          }).OrderByDescending(i => i.Total).ToList();
+                              Total = newGroup1.Count()
+                          }).ToList();
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
         }
@@ -186,8 +168,8 @@ namespace UI.Controllers
                           select new
                           {
                               Mes_Descripcion = newGroup1.Key.Mes_Descripcion,
-                              Total = newGroup1.Sum(c => c.Total) / newGroup1.Select(c => c.Id).Count()
-                          }).OrderByDescending(i => i.Total).ToList();
+                              Total = newGroup1.Sum(c => c.Total) / newGroup1.Count()
+                          }).ToList();
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
         }

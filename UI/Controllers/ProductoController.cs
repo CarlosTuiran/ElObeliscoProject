@@ -12,6 +12,7 @@ using Infra.Datos.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace UI.Controllers
 {
@@ -24,6 +25,8 @@ namespace UI.Controllers
         private CrearProductoService _service;
         private ActualizarProductoService _actualizarService;
         private EliminarProductoService _eliminarService;
+        CultureInfo provider = CultureInfo.InvariantCulture;
+
         public ProductoController(ObeliscoContext context)
         {
             _context = context;
@@ -120,8 +123,8 @@ namespace UI.Controllers
             return BadRequest(rta.Message);
         }
 
-        [HttpGet("TopVentaProductos")]
-        public object TopVentaProductos()
+        [HttpGet("Top10VentaProductos")]
+        public object Top10VentaProductos()
         {
             var result = (from p in _context.Set<Producto>()
                           join i in _context.Set<Inventario>()
@@ -131,6 +134,34 @@ namespace UI.Controllers
                           join mf in _context.Set<MFactura>()
                           on df.MfacturaId equals mf.Id
                           where mf.TipoMovimiento == "Venta"
+                          group df by new { df.Referencia, p.Descripcion } into newGroup1
+                          select new 
+                          {
+                              Referencia = newGroup1.Key.Referencia,
+                              Descripcion = newGroup1.Key.Descripcion,
+                              Total = newGroup1.Sum(c => c.Cantidad)
+                          }).OrderByDescending(i => i.Total).Take(10).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
+        } 
+        //? TopVentaProductos que mas venden intervalo
+        [HttpGet("Top10VentasProductosInterval/{fechaInicio}/{fechaFin}")]
+        public object Top10VentasProductosInterval([FromRoute] string fechaInicio,[FromRoute] string fechaFin )
+        {
+            string format="ddd MMM dd yyyy";
+            fechaInicio=DateTime.ParseExact(fechaInicio.Substring(0,15), format,provider).ToString();
+            DateTime FechaInicio = Convert.ToDateTime(fechaInicio);
+            fechaFin=DateTime.ParseExact(fechaFin.Substring(0,15), format,provider).ToString();
+            DateTime FechaFin = Convert.ToDateTime(fechaFin);
+            var result = (from p in _context.Set<Producto>()
+                          join i in _context.Set<Inventario>()
+                          on p.Referencia equals i.Referencia
+                          join df in _context.Set<DFactura>()
+                          on p.Referencia equals df.Referencia
+                          join mf in _context.Set<MFactura>()
+                          on df.MfacturaId equals mf.Id
+                          where mf.TipoMovimiento == "Venta"
+                          && mf.FechaPago >= FechaInicio && mf.FechaPago <= FechaFin
                           group df by new { df.Referencia, p.Descripcion } into newGroup1
                           select new 
                           {

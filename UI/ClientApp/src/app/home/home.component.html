@@ -12,3 +12,17 @@
   <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
 </ul>
 <p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+
+
+<div class="row">
+  <div class="col-lg-4">
+    <app-promedio-ventas [icon]="all_out" [title]="Ventas" 
+     [value]="2000" [color]="red" [percentValue]="0.30" [isIncrease]="true"></app-promedio-ventas>
+  </div>
+  <div class="col-lg-4">
+    <app-total-ventas></app-total-ventas>
+  </div>
+  <div class="col-lg-4">
+    <app-total-ordenes></app-total-ordenes>
+  </div>
+</div>

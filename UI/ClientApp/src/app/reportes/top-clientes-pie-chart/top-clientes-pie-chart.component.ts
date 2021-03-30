@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+ import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { FormBuilder } from '@angular/forms';
 import { Label, SingleDataSet } from 'ng2-charts';
@@ -45,10 +45,7 @@ export class TopClientesPieChartComponent implements OnInit {
   public i =0;
   constructor(private service: ReportesService, private fb: FormBuilder) { }
 
-  formGroup = this.fb.group({
-    fechaInicio:[''],
-    fechaFin:[''],
-  });
+  
 
   ngOnInit(): void {
     this.service.Top10Clientes().subscribe(
@@ -73,6 +70,10 @@ export class TopClientesPieChartComponent implements OnInit {
     this.proveedoresLabel=[];
     this.i=0;
   }
+  formGroup = this.fb.group({
+    fechaInicio:[''],
+    fechaFin:[''],
+  });
   dataFilter()
   {
     let interval:  IInterval = Object.assign({}, this.formGroup.value);

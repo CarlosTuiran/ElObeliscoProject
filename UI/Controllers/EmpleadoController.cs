@@ -11,6 +11,7 @@ using Infra.Datos.Base;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Aplicacion.Services.EliminarServices;
+using System.Globalization;
 
 namespace UI.InterfazWeb.Controllers
 {
@@ -23,6 +24,7 @@ namespace UI.InterfazWeb.Controllers
         private UnitOfWork _unitOfWork;
         private ActualizarEmpleadoService _actualizarService;
         private EliminarEmpleadoService _eliminarService;
+        CultureInfo provider = CultureInfo.InvariantCulture;
 
         public EmpleadoController(ObeliscoContext context)
         {
@@ -97,6 +99,32 @@ namespace UI.InterfazWeb.Controllers
                           join df in _context.Set<DFactura>()
                           on mf.Id equals df.MfacturaId
                           where mf.TipoMovimiento == "Venta"
+                          group mf by new { e.Nombres, e.Apellidos, e.IdEmpleado } into newGroup1
+                          select new
+                          {
+                              IdEmpleado = newGroup1.Key.IdEmpleado,
+                              Nombre = newGroup1.Key.Nombres + " " + newGroup1.Key.Apellidos,
+                              Total = newGroup1.Sum(c => c.Total)
+                          }).OrderByDescending(i => i.Total).Take(10).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
+        }
+        //? Empleados que mas venden intervalo
+        [HttpGet("Top10EmpleadosInterval/{fechaInicio}/{fechaFin}")]
+        public object Top10EmpleadosInterval([FromRoute] string fechaInicio,[FromRoute] string fechaFin )
+        {
+            string format="ddd MMM dd yyyy";
+            fechaInicio=DateTime.ParseExact(fechaInicio.Substring(0,15), format,provider).ToString();
+            DateTime FechaInicio = Convert.ToDateTime(fechaInicio);
+            fechaFin=DateTime.ParseExact(fechaFin.Substring(0,15), format,provider).ToString();
+            DateTime FechaFin = Convert.ToDateTime(fechaFin);
+            var result = (from e in _context.Set<Empleado>()
+                          join mf in _context.Set<MFactura>()
+                          on e.Id equals mf.EmpleadoId
+                          join df in _context.Set<DFactura>()
+                          on mf.Id equals df.MfacturaId
+                          where mf.TipoMovimiento == "Venta"
+                          && mf.FechaPago >= FechaInicio && mf.FechaPago <= FechaFin
                           group mf by new { e.Nombres, e.Apellidos, e.IdEmpleado } into newGroup1
                           select new
                           {

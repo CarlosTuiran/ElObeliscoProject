@@ -18,10 +18,16 @@ export class ReportesService {
     return this.http.get<any[]>(this.apiProductoURL + "/Top10Productos");
   }
   Top10VentasProductos(): Observable < any[] > {
-    return this.http.get<any[]>(this.apiProductoURL + "/TopVentaProductos");
+    return this.http.get<any[]>(this.apiProductoURL + "/Top10VentaProductos");
+  }
+  Top10VentasProductosInterval(Interval: IInterval): Observable<any[]> {
+    return this.http.get<any[]>(this.apiProductoURL + "/Top10VentasProductosInterval/" + Interval.fechaInicio. toString() + "/" + Interval.fechaFin.toString());
   }
   Top10Proveedores(): Observable < any[] > {
     return this.http.get<any[]>(this.apiTerceroURL + "/Top10Proveedores");
+  }
+  Top10ProveedoresInterval(Interval: IInterval): Observable<any[]> {
+    return this.http.get<any[]>(this.apiTerceroURL + "/Top10ProveedoresInterval/" + Interval.fechaInicio. toString() + "/" + Interval.fechaFin.toString());
   }
   Top10Clientes(): Observable < any[] > {
     return this.http.get<any[]>(this.apiTerceroURL + "/Top10Clientes");
@@ -31,6 +37,9 @@ export class ReportesService {
   }
   Top10Empleados(): Observable < any[] > {
     return this.http.get<any[]>(this.apiEmpleadoURL + "/Top10Empleados");
+  }
+  Top10EmpleadosInterval(Interval: IInterval): Observable<any[]> {
+    return this.http.get<any[]>(this.apiEmpleadoURL + "/Top10EmpleadosInterval/" + Interval.fechaInicio. toString() + "/" + Interval.fechaFin.toString());
   }
 }
 

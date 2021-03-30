@@ -3,6 +3,8 @@ import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
 import { element } from 'protractor';
 import { ReportesService } from '../reportes.service';
+import { FormBuilder } from '@angular/forms';
+import { IInterval } from '../reportes.component';
 
 @Component({
   selector: 'app-top-venta-productos-pie-chart',
@@ -38,7 +40,7 @@ export class TopVentaProductosPieChartComponent implements OnInit {
     }
   ];
   public i =0;
-  constructor(private service: ReportesService) { }
+  constructor(private service: ReportesService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.service.Top10VentasProductos().subscribe(
@@ -55,12 +57,34 @@ export class TopVentaProductosPieChartComponent implements OnInit {
   }
 
   loadData(event: any): void {}
-
-  
-
   clear(): void {
     this.pieChartData = [];
+    this.productosLabel=[];
+    this.i=0;
   }
-
-
+  formGroup = this.fb.group({
+    fechaInicio:[''],
+    fechaFin:[''],
+  });
+  dataFilter()
+  {
+    let interval:  IInterval = Object.assign({}, this.formGroup.value);
+    this.service.Top10VentasProductosInterval(interval).subscribe(
+      data => {
+        this.clear();
+        for(let item of data){
+          this.pieChartData[this.i] = item.total,
+          this.pieChartLabels[this.i] = item.descripcion;
+          this.i=this.i+1;
+        }
+  
+      }, error => console.error(error)
+      )
+  } 
+  get fechaInicio() {
+    return this.formGroup.get('fechaInicio');
+  }
+  get fechaFin() {
+    return this.formGroup.get('fechaFin');
+  }
 }
