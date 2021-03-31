@@ -107,22 +107,49 @@ namespace UI.Controllers
             }
             return BadRequest(rta.Message);
         }
-
-        [HttpGet("TotalVentas")]
-        public object TotalVentas()
+        //?Card comparacion de ventas de ultimo mes 
+        [HttpGet("VentasMensuales")]
+        public object VentasMensuales()
         {
             var result = (from mf in _context.Set<MFactura>()
                           join t in _context.Set<Tiempo>()
                           on mf.FechaFactura equals t.Fecha
-                          where mf.TipoMovimiento == "Venta"
+                          where mf.TipoMovimiento == "Venta" && 
+                                (t.Anio == DateTime.Now.Year.ToString() && t.Mes_Anio == DateTime.Now.Month) || 
+                                (t.Mes_Anio == DateTime.Now.AddMonths(-1).Month)
                           group mf by new { t.Mes_Descripcion } into newGroup1
                           select new
                           {
                               Mes_Descripcion = newGroup1.Key.Mes_Descripcion,
                               Total = newGroup1.Sum(c => c.Total)
                           }).ToList();
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
-            return result;
+            var TotalPasadoMes =result[0].Total;
+            var TotalPresenteMes =result[1].Total;
+            var percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
+            bool isIncrease=true;
+            if (TotalPasadoMes>TotalPresenteMes) {
+                //Es decremento
+                isIncrease=false;                
+            }            
+            string title = "Ventas";
+            double value=TotalPresenteMes;
+            string color = "purple";
+            bool isCurrency=true;
+            string duration="dede el Anterior Mes";
+            var cardRta = (from r in result
+                           select new
+                           {
+                               title = title,
+                               value = value,
+                               color = color,
+                               isCurrency = isCurrency,
+                               duration = duration,
+                               isIncrease = isIncrease,
+                               percentValue = percentValue
+                           }
+                           ).Take(1).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(cardRta, Newtonsoft.Json.Formatting.Indented);
+            return cardRta;
         }
 
         [HttpGet("TotalFacturasVentas")]

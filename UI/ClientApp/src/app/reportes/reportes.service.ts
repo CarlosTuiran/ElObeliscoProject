@@ -10,7 +10,8 @@ export class ReportesService {
 
   apiProductoURL = this.baseUrl + "api/Producto";
   apiTerceroURL=this.baseUrl + "api/Tercero";
-  apiEmpleadoURL=this.baseUrl + "api/Empleado";
+  apiEmpleadoURL = this.baseUrl + "api/Empleado";
+  apiFacturaURL = this.baseUrl + "api/Factura";
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
@@ -40,6 +41,15 @@ export class ReportesService {
   }
   Top10EmpleadosInterval(Interval: IInterval): Observable<any[]> {
     return this.http.get<any[]>(this.apiEmpleadoURL + "/Top10EmpleadosInterval/" + Interval.fechaInicio. toString() + "/" + Interval.fechaFin.toString());
+  }
+  TotalOrdenes(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiFacturaURL + "/TotalOrdenes");
+  }
+  VentasMensuales(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiFacturaURL + "/VentasMensuales");
+  }
+  PromedioVentas(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiFacturaURL + "/PromedioVentas");
   }
 }
 
