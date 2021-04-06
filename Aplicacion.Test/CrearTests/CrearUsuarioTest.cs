@@ -39,8 +39,7 @@ namespace Aplicacion.Test.CrearTests
                 {
                     EmpleadoId = 1002301,
                     Nombre = "RaulAgamez",
-                    Password="acceso123",
-                    Tipo="Admin"
+                    Password="acceso123"
 
                 },
                 "Usuario Creado Exitosamente"
@@ -50,8 +49,7 @@ namespace Aplicacion.Test.CrearTests
                 {
                     EmpleadoId = 1002301,
                     Nombre = "RaulAgamez",
-                    Password="acceso123",
-                    Tipo="Admin"
+                    Password="acceso123"
 
                 },
                 "Empleado ya tine un Usuario"
@@ -61,8 +59,7 @@ namespace Aplicacion.Test.CrearTests
                 {
                     EmpleadoId = 1003301,
                     Nombre = "RaulAgamez",
-                    Password="acceso123",
-                    Tipo="Admin"
+                    Password="acceso123"
 
                 },
                 "Nombre de Usuario ya existe"
@@ -72,8 +69,7 @@ namespace Aplicacion.Test.CrearTests
                 {
                     
                     Nombre = "RaulAgamez1",
-                    Password="acceso123",
-                    Tipo="Admin"
+                    Password="acceso123"
 
                 },
                 "Errores: Campo IdEmpleado vacio"
@@ -83,8 +79,7 @@ namespace Aplicacion.Test.CrearTests
                 {
                     EmpleadoId = 10033012,
                     
-                    Password="acceso123",
-                    Tipo="Admin"
+                    Password="acceso123"
 
                 },
                 "Errores: Campo Nombre vacio"
@@ -94,8 +89,6 @@ namespace Aplicacion.Test.CrearTests
                 {
                     EmpleadoId = 1003303,
                     Nombre = "RaulAgamez3",
-                    
-                    Tipo="Admin"
 
                 },
                 "Errores: Campo Password vacio"
@@ -116,8 +109,7 @@ namespace Aplicacion.Test.CrearTests
                 {
                     EmpleadoId = 10033015,
                     Nombre = "RaulAgamez5",
-                    Password="ac",
-                    Tipo="Admin"
+                    Password="ac"
 
                 },
                 "Errores: Campo Password debe tener minimo 6 caracteres"

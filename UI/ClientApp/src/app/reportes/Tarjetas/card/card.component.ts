@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-promedio-ventas',
-  templateUrl: './promedio-ventas.component.html',
-  styleUrls: ['./promedio-ventas.component.css']
+  selector: 'app-card',
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.css']
 })
-export class PromedioVentasComponent implements OnInit {
+export class CardComponent implements OnInit {
   @Input() icon: string;
   @Input() title: string;
   @Input() value: number;
@@ -20,4 +20,17 @@ export class PromedioVentasComponent implements OnInit {
   ngOnInit() {
   }
 
+}
+export interface ICard{
+  icon: string;
+  title: string;
+  value: number;
+  color: string;
+  isIncrease: boolean;
+  isCurrency: boolean;
+  duration: string;
+  percentValue: number;
+}
+export interface ICards{
+  card:ICard[]
 }

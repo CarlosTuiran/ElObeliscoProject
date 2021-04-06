@@ -1,27 +1,13 @@
 <div class="row">
-  <div class="col-lg-4">
-    <app-promedio-ventas [icon]="'all_out'" [title]="'Ventas'" 
-     [value]="2000" [color]="'red'" [percentValue]="0.30" 
-     [isIncrease]="true" [duration]="'Ultimo Mes'"
-     [isCurrency]="true"></app-promedio-ventas>
+  <div *ngFor="let card of cards;">
+    <div class="col-lg-12 tamano">
+      <app-card [icon]="card.rest.item1" [title]="card.item1"
+                [value]="card.item2" [color]="card.item3" [percentValue]="card.item7"
+                [isIncrease]="card.item6" [duration]="card.item5"
+                [isCurrency]="card.item4"></app-card>
+    </div>
   </div>
-  <div class="col-lg-4">
-    <app-promedio-ventas [icon]="'all_out'" [title]="'Ventas'"
-                     [value]="2000" [color]="'gold'" [percentValue]="0.30"
-                     [isIncrease]="true"
-                     [isCurrency]="true"></app-promedio-ventas>
-                    </div>
-                    <!--<app-total-ventas></app-total-ventas>-->
-  <div class="col-lg-4">
-    <app-promedio-ventas [icon]="'all_out'" [title]="'Ventas'"
-    [value]="2000" [color]="'purple'" [percentValue]="0.30"
-    [isIncrease]="true"
-    [isCurrency]="true"></app-promedio-ventas>
-  </div>
-  
-  <!--<app-total-ordenes></app-total-ordenes>-->  
 </div>
-
 
 
 

@@ -41,7 +41,7 @@ export class TableProductosComponent implements OnInit {
   }
   ngOnInit() {
     this.productosService.getProductos()
-    .subscribe(productos => this.dataSource.data = productos,
+    .subscribe(productos => {this.dataSource.data = productos; console.log(this.dataSource.data);},
       error => console.error(error));
 
   }

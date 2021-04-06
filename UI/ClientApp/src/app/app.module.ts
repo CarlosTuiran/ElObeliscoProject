@@ -93,9 +93,7 @@ import { TopVentaProductosPieChartComponent } from './reportes/top-venta-product
 import { TopProveedoresPieChartComponent } from './reportes/top-proveedores-pie-chart/top-proveedores-pie-chart.component';
 import { TopClientesPieChartComponent } from './reportes/top-clientes-pie-chart/top-clientes-pie-chart.component';
 import { TopEmpleadosPieChartComponent } from './reportes/top-empleados-pie-chart/top-empleados-pie-chart.component';
-import { TotalVentasComponent } from './reportes/Tarjetas/total-ventas/total-ventas.component';
-import { TotalOrdenesComponent } from './reportes/Tarjetas/total-ordenes/total-ordenes.component';
-import { PromedioVentasComponent } from './reportes/Tarjetas/promedio-ventas/promedio-ventas.component';
+import { CardComponent } from './reportes/Tarjetas/card/card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -155,9 +153,7 @@ import { PromedioVentasComponent } from './reportes/Tarjetas/promedio-ventas/pro
     TopProveedoresPieChartComponent,
     TopClientesPieChartComponent,
     TopEmpleadosPieChartComponent,
-    TotalVentasComponent,
-    TotalOrdenesComponent,
-    PromedioVentasComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

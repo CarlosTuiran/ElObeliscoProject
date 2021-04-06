@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IInterval } from './reportes.component';
+import { ICard } from './Tarjetas/card/card.component';
 
 @Injectable({
   providedIn: 'root'
@@ -42,14 +43,17 @@ export class ReportesService {
   Top10EmpleadosInterval(Interval: IInterval): Observable<any[]> {
     return this.http.get<any[]>(this.apiEmpleadoURL + "/Top10EmpleadosInterval/" + Interval.fechaInicio. toString() + "/" + Interval.fechaFin.toString());
   }
-  TotalOrdenes(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiFacturaURL + "/TotalOrdenes");
+  TotalOrdenes(): Observable<ICard> {
+    return this.http.get<ICard>(this.apiFacturaURL + "/TotalOrdenes");
   }
-  VentasMensuales(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiFacturaURL + "/VentasMensuales");
+  VentasMensuales(): Observable<ICard> {
+    return this.http.get<ICard>(this.apiFacturaURL + "/VentasMensuales");
   }
-  PromedioVentas(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiFacturaURL + "/PromedioVentas");
+  AverageOrderValue(): Observable<ICard> {
+    return this.http.get<ICard>(this.apiFacturaURL + "/AverageOrderValue");
+  }
+  ConsultasCartas():Observable<any[]> {
+    return this.http.get<any[]>(this.apiFacturaURL + "/ConsultasCartas");
   }
 }
 

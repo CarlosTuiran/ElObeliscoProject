@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Aplicacion.Request;
@@ -107,7 +108,7 @@ namespace UI.Controllers
             }
             return BadRequest(rta.Message);
         }
-        //?Card comparacion de ventas de ultimo mes 
+        //?Card comparacion de Total ventas de ultimo mes 
         [HttpGet("VentasMensuales")]
         public object VentasMensuales()
         {
@@ -117,41 +118,44 @@ namespace UI.Controllers
                           where mf.TipoMovimiento == "Venta" && 
                                 (t.Anio == DateTime.Now.Year.ToString() && t.Mes_Anio == DateTime.Now.Month) || 
                                 (t.Mes_Anio == DateTime.Now.AddMonths(-1).Month)
-                          group mf by new { t.Mes_Descripcion } into newGroup1
+                          group mf by new { t.Mes_Descripcion, t.Mes_Anio } into newGroup1
                           select new
                           {
                               Mes_Descripcion = newGroup1.Key.Mes_Descripcion,
-                              Total = newGroup1.Sum(c => c.Total)
-                          }).ToList();
-            var TotalPasadoMes =result[0].Total;
-            var TotalPresenteMes =result[1].Total;
+                              Total = newGroup1.Sum(c => c.Total),
+                              Mes = newGroup1.Key.Mes_Anio
+                          }).OrderBy(x => x.Mes).ToList();
+            var TotalPasadoMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
+            var TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
             var percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
             bool isIncrease=true;
             if (TotalPasadoMes>TotalPresenteMes) {
                 //Es decremento
                 isIncrease=false;                
             }            
-            string title = "Ventas";
+            string title = "Total Ventas";
             double value=TotalPresenteMes;
-            string color = "purple";
+            string color = "red";
             bool isCurrency=true;
-            string duration="dede el Anterior Mes";
-            var cardRta = (from r in result
+            string duration="desde el Anterior Mes";
+            string icon="shopping_cart";
+            /*var cardRta = (from r in result
                            select new
                            {
-                               title = title,
-                               value = value,
-                               color = color,
-                               isCurrency = isCurrency,
-                               duration = duration,
-                               isIncrease = isIncrease,
-                               percentValue = percentValue
+                               title,
+                               value,
+                               color,
+                               isCurrency,
+                               duration,
+                               isIncrease,
+                               percentValue
                            }
-                           ).Take(1).ToList();
+                           ).Take(1).ToList();*/
+            var cardRta = (title, value, color, isCurrency, duration, isIncrease, percentValue,icon);
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(cardRta, Newtonsoft.Json.Formatting.Indented);
             return cardRta;
         }
-
+        //
         [HttpGet("TotalFacturasVentas")]
         public object TotalFacturasVentas()
         {
@@ -166,6 +170,8 @@ namespace UI.Controllers
             return sum;
         }
 
+
+        // Retorna el total de ordenes del mes para la tarjeta
         [HttpGet("TotalOrdenes")]
         public object TotalOrdenes()
         {
@@ -173,33 +179,117 @@ namespace UI.Controllers
             var result = (from mf in _context.Set<MFactura>()
                           join t in _context.Set<Tiempo>()
                           on mf.FechaFactura equals t.Fecha
-                          where mf.TipoMovimiento == "Venta"
-                          group mf by new { t.Mes_Descripcion } into newGroup1
+                          where mf.TipoMovimiento == "Venta" &&
+                                (t.Anio == DateTime.Now.Year.ToString() 
+                                && t.Mes_Anio == DateTime.Now.Month) ||
+                                (t.Mes_Anio == DateTime.Now.AddMonths(-1).Month)
+                          group mf by new { t.Mes_Descripcion, t.Mes_Anio } into newGroup1
                           select new
                           {
                               Mes_Descripcion = newGroup1.Key.Mes_Descripcion,
-                              Total = newGroup1.Count()
-                          }).ToList();
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
-            return result;
+                              Total = newGroup1.Count(),
+                              Mes = newGroup1.Key.Mes_Anio
+                          }).OrderBy(x => x.Mes).ToList();
+
+            double TotalPasadoMes = !result.Any(x=>x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) ) ? 0 : result[0].Total;
+            double TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            var percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
+            bool isIncrease = true;
+            if (TotalPasadoMes > TotalPresenteMes)
+            {
+                //Es decremento
+                isIncrease = false;
+            }
+            string title = "Total Ordenes Mensuales";
+            double value = TotalPresenteMes;
+            string color = "purple";
+            bool isCurrency = false;
+            string duration = "desde el Anterior Mes";
+            string icon="payments";
+
+            /*var cardRta = (from r in result
+                           select new
+                           {
+                               title,
+                               value,
+                               color,
+                               isCurrency,
+                               duration,
+                               isIncrease,
+                               percentValue
+                           }
+                           ).Take(1).ToList();*/
+            var cardRta = (title, value, color, isCurrency, duration, isIncrease, percentValue, icon);
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(cardRta, Newtonsoft.Json.Formatting.Indented);
+            return cardRta;
         }
 
-        [HttpGet("PromedioVentas")]
-        public object PromedioVentas()
+
+
+        // Retorna el promedio de ventas del mes para la tarjeta
+        [HttpGet("AverageOrderValue")]
+        public object AverageOrderValue()
         {
             var result = (from mf in _context.Set<MFactura>()
                           join t in _context.Set<Tiempo>()
                           on mf.FechaFactura equals t.Fecha
-                          where mf.TipoMovimiento == "Venta"
-                          group mf by new { t.Mes_Descripcion } into newGroup1
+                          where mf.TipoMovimiento == "Venta" &&
+                                (t.Anio == DateTime.Now.Year.ToString() && t.Mes_Anio == DateTime.Now.Month) ||
+                                (t.Mes_Anio == DateTime.Now.AddMonths(-1).Month)
+                          group mf by new { t.Mes_Descripcion, t.Mes_Anio } into newGroup1
                           select new
                           {
                               Mes_Descripcion = newGroup1.Key.Mes_Descripcion,
-                              Total = newGroup1.Sum(c => c.Total) / newGroup1.Count()
-                          }).ToList();
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
-            return result;
+                              Total = newGroup1.Average(c => c.Total),
+                              Mes = newGroup1.Key.Mes_Anio
+                          }).OrderBy(x => x.Mes).ToList();
+
+            var TotalPasadoMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
+            var TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            var percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
+            bool isIncrease = true;
+            if (TotalPasadoMes > TotalPresenteMes)
+            {
+                //Es decremento
+                isIncrease = false;
+            }
+            string title = "Promedio de ventas mensuales";
+            double value = TotalPresenteMes;
+            string color = "gold";
+            bool isCurrency = true;
+            string duration = "desde el Anterior Mes";
+            string icon="monetization_on";
+            /*var cardRta = (from r in result
+                           select new
+                           {
+                               title,
+                               value,
+                               color,
+                               isCurrency,
+                               duration,
+                               isIncrease,
+                               percentValue
+                           }
+                           ).Take(1).ToList();*/
+
+            var cardRta = (title,value,color,isCurrency,duration,isIncrease,percentValue, icon);
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(cardRta, Newtonsoft.Json.Formatting.Indented);
+            return cardRta;
         }
 
+        [HttpGet("ConsultasCartas")]
+        public object ConsultasCartas()
+        {
+            object ventasMensuales = VentasMensuales();
+            object totalOrdenes = TotalOrdenes();            
+            object averageOrderValue = AverageOrderValue();
+            List<Object> cards = new List<Object>
+            {
+                totalOrdenes,
+                ventasMensuales,
+                averageOrderValue
+            };
+            return cards;
+        }
     }
 }
