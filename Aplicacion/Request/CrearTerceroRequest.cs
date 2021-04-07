@@ -15,6 +15,8 @@ namespace Aplicacion.Request
         public string Direccion { get; set; }
         public string Descripcion { get; set; }
         public string Estado { get => "Activo"; }
+        public DateTime FechaCumple { get; set; }   
+
     }
     public class CrearTerceroResponse
     {

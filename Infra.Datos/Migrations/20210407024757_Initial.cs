@@ -20,7 +20,8 @@ namespace Infra.Datos.Migrations
                     Celular = table.Column<string>(nullable: true),
                     Correo = table.Column<string>(nullable: true),
                     Direccion = table.Column<string>(nullable: true),
-                    Estado = table.Column<string>(nullable: true)
+                    Estado = table.Column<string>(nullable: true),
+                    FechaIngreso = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,7 +74,9 @@ namespace Infra.Datos.Migrations
                     Celular = table.Column<string>(nullable: true),
                     Correo = table.Column<string>(nullable: true),
                     Direccion = table.Column<string>(nullable: true),
-                    Descripcion = table.Column<string>(nullable: true)
+                    Descripcion = table.Column<string>(nullable: true),
+                    Estado = table.Column<string>(nullable: true),
+                    FechaCumple = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -151,7 +154,7 @@ namespace Infra.Datos.Migrations
                     Nombre = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     EmpleadoId = table.Column<int>(nullable: false),
-                    Tipo = table.Column<string>(nullable: true)
+                    Rol = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -178,7 +181,9 @@ namespace Infra.Datos.Migrations
                     Costo = table.Column<double>(nullable: false),
                     PrecioVenta = table.Column<double>(nullable: false),
                     IVA = table.Column<double>(nullable: false),
+                    CantidadMinima = table.Column<int>(nullable: false),
                     FechaRegistro = table.Column<DateTime>(nullable: false),
+                    Estado = table.Column<string>(nullable: true),
                     InventarioId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -348,8 +353,8 @@ namespace Infra.Datos.Migrations
 
             migrationBuilder.InsertData(
                 table: "Empleado",
-                columns: new[] { "Id", "Apellidos", "Cargo", "Celular", "Correo", "Direccion", "Estado", "IdEmpleado", "Nombres" },
-                values: new object[] { 1, "Ferra Ito", "Cajero", "31688888", "RHerna@gmail.com", "Stranger Valley", "Activo", 2699540, "Raul Hernandez" });
+                columns: new[] { "Id", "Apellidos", "Cargo", "Celular", "Correo", "Direccion", "Estado", "FechaIngreso", "IdEmpleado", "Nombres" },
+                values: new object[] { 1, "Ferra Ito", "Cajero", "31688888", "RHerna@gmail.com", "Stranger Valley", "Activo", new DateTime(2021, 4, 6, 21, 47, 56, 712, DateTimeKind.Local).AddTicks(557), 2699540, "Raul Hernandez" });
 
             migrationBuilder.InsertData(
                 table: "Inventario",
@@ -358,16 +363,16 @@ namespace Infra.Datos.Migrations
 
             migrationBuilder.InsertData(
                 table: "Producto",
-                columns: new[] { "Id", "Costo", "Descripcion", "Fabrica", "FechaRegistro", "FormatoVenta", "IVA", "InventarioId", "Marca", "PrecioVenta", "Referencia" },
-                values: new object[] { 1, 3000.0, "Llave Inglesa", "Ferres SAS", new DateTime(2020, 12, 2, 0, 38, 30, 243, DateTimeKind.Local).AddTicks(7321), "Unidad", 0.29999999999999999, null, "Ferres", 5000.0, "1000-01" });
+                columns: new[] { "Id", "CantidadMinima", "Costo", "Descripcion", "Estado", "Fabrica", "FechaRegistro", "FormatoVenta", "IVA", "InventarioId", "Marca", "PrecioVenta", "Referencia" },
+                values: new object[] { 1, 0, 3000.0, "Llave Inglesa", null, "Ferres SAS", new DateTime(2021, 4, 6, 21, 47, 56, 709, DateTimeKind.Local).AddTicks(1399), "Unidad", 0.29999999999999999, null, "Ferres", 5000.0, "1000-01" });
 
             migrationBuilder.InsertData(
                 table: "Terceros",
-                columns: new[] { "Id", "Apellido", "Celular", "Correo", "Descripcion", "Direccion", "Nit", "Nombre", "TipoTercero" },
+                columns: new[] { "Id", "Apellido", "Celular", "Correo", "Descripcion", "Direccion", "Estado", "FechaCumple", "Nit", "Nombre", "TipoTercero" },
                 values: new object[,]
                 {
-                    { 1, "Orosco Eter", "3128288", "ferreymas@gmail.com", " Empresa Ferreos y Mas", "Stranger Valley", "106583", "Santana Silva", "Proveedor" },
-                    { 2, "Joestar", "3443288", "jojo@gmail.com", "Cliente Frecuente", "Stranger Valley", "10653434", "Jose Jose", "Cliente" }
+                    { 1, "Orosco Eter", "3128288", "ferreymas@gmail.com", " Empresa Ferreos y Mas", "Stranger Valley", null, new DateTime(2021, 4, 6, 21, 47, 56, 712, DateTimeKind.Local).AddTicks(7104), "106583", "Santana Silva", "Proveedor" },
+                    { 2, "Joestar", "3443288", "jojo@gmail.com", "Cliente Frecuente", "Stranger Valley", null, new DateTime(2021, 4, 6, 21, 47, 56, 712, DateTimeKind.Local).AddTicks(7770), "10653434", "Jose Jose", "Cliente" }
                 });
 
             migrationBuilder.InsertData(
@@ -385,17 +390,17 @@ namespace Infra.Datos.Migrations
             migrationBuilder.InsertData(
                 table: "MFactura",
                 columns: new[] { "Id", "Abono", "Descuento", "EmpleadoId", "EstadoFactura", "FechaFactura", "FechaPago", "IVA", "SubTotal", "TercerosId", "TipoMovimiento", "TipoMovimientoId", "Total", "ValorDevolucion", "idMfactura" },
-                values: new object[] { 1, 0.0, 0.0, 1, "Pagada", new DateTime(2020, 12, 2, 0, 38, 30, 250, DateTimeKind.Local).AddTicks(1068), new DateTime(2020, 12, 2, 0, 38, 30, 250, DateTimeKind.Local).AddTicks(3726), 0.29999999999999999, 15000.0, 1, "Compra", 1, 0.0, 0.0, 1000 });
+                values: new object[] { 1, 0.0, 0.0, 1, "Pagada", new DateTime(2021, 4, 6, 21, 47, 56, 713, DateTimeKind.Local).AddTicks(864), new DateTime(2021, 4, 6, 21, 47, 56, 713, DateTimeKind.Local).AddTicks(2625), 0.29999999999999999, 15000.0, 1, "Compra", 1, 0.0, 0.0, 1000 });
 
             migrationBuilder.InsertData(
                 table: "Usuario",
-                columns: new[] { "Id", "EmpleadoId", "Nombre", "Password", "Tipo" },
+                columns: new[] { "Id", "EmpleadoId", "Nombre", "Password", "Rol" },
                 values: new object[] { 1, 1, "RaulH", "raulh", "Admin" });
 
             migrationBuilder.InsertData(
                 table: "DFactura",
                 columns: new[] { "Id", "Bodega", "Cantidad", "FechaFactura", "MfacturaId", "PrecioTotal", "PrecioUnitario", "Referencia", "idDFactura", "idPromocion" },
-                values: new object[] { 1, "BD1", 5, new DateTime(2020, 12, 2, 0, 38, 30, 251, DateTimeKind.Local).AddTicks(2776), 1, 0.0, 3000.0, "1000-01", 10001, null });
+                values: new object[] { 1, "BD1", 5, new DateTime(2021, 4, 6, 21, 47, 56, 713, DateTimeKind.Local).AddTicks(8006), 1, 0.0, 3000.0, "1000-01", 10001, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_DFactura_MfacturaId",

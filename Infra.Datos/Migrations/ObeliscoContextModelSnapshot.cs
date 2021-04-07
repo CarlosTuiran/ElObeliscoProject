@@ -35,9 +35,6 @@ namespace Infra.Datos.Migrations
                     b.Property<DateTime>("FechaFactura")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdProducto")
-                        .HasColumnType("int");
-
                     b.Property<int>("MfacturaId")
                         .HasColumnType("int");
 
@@ -46,6 +43,9 @@ namespace Infra.Datos.Migrations
 
                     b.Property<double>("PrecioUnitario")
                         .HasColumnType("float");
+
+                    b.Property<string>("Referencia")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("idDFactura")
                         .HasColumnType("int");
@@ -65,11 +65,11 @@ namespace Infra.Datos.Migrations
                             Id = 1,
                             Bodega = "BD1",
                             Cantidad = 5,
-                            FechaFactura = new DateTime(2021, 3, 2, 22, 15, 45, 390, DateTimeKind.Local).AddTicks(9741),
-                            IdProducto = 1,
+                            FechaFactura = new DateTime(2021, 4, 6, 22, 7, 16, 515, DateTimeKind.Local).AddTicks(2013),
                             MfacturaId = 1,
                             PrecioTotal = 0.0,
                             PrecioUnitario = 3000.0,
+                            Referencia = "1000-01",
                             idDFactura = 10001
                         });
                 });
@@ -99,6 +99,9 @@ namespace Infra.Datos.Migrations
                     b.Property<string>("Estado")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("FechaIngreso")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("IdEmpleado")
                         .HasColumnType("int");
 
@@ -119,6 +122,7 @@ namespace Infra.Datos.Migrations
                             Correo = "RHerna@gmail.com",
                             Direccion = "Stranger Valley",
                             Estado = "Activo",
+                            FechaIngreso = new DateTime(2021, 4, 6, 22, 7, 16, 511, DateTimeKind.Local).AddTicks(7197),
                             IdEmpleado = 2699540,
                             Nombres = "Raul Hernandez"
                         });
@@ -137,8 +141,8 @@ namespace Infra.Datos.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdProducto")
-                        .HasColumnType("int");
+                    b.Property<string>("Referencia")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -150,7 +154,7 @@ namespace Infra.Datos.Migrations
                             Id = 1,
                             Bodega = "BD01",
                             Cantidad = 5,
-                            IdProducto = 1
+                            Referencia = "1000-01"
                         });
                 });
 
@@ -276,8 +280,8 @@ namespace Infra.Datos.Migrations
                             Descuento = 0.0,
                             EmpleadoId = 1,
                             EstadoFactura = "Pagada",
-                            FechaFactura = new DateTime(2021, 3, 2, 22, 15, 45, 389, DateTimeKind.Local).AddTicks(8088),
-                            FechaPago = new DateTime(2021, 3, 2, 22, 15, 45, 390, DateTimeKind.Local).AddTicks(1423),
+                            FechaFactura = new DateTime(2021, 4, 6, 22, 7, 16, 514, DateTimeKind.Local).AddTicks(300),
+                            FechaPago = new DateTime(2021, 4, 6, 22, 7, 16, 514, DateTimeKind.Local).AddTicks(2872),
                             IVA = 0.29999999999999999,
                             SubTotal = 15000.0,
                             TercerosId = 1,
@@ -418,7 +422,7 @@ namespace Infra.Datos.Migrations
                             Costo = 3000.0,
                             Descripcion = "Llave Inglesa",
                             Fabrica = "Ferres SAS",
-                            FechaRegistro = new DateTime(2021, 3, 2, 22, 15, 45, 381, DateTimeKind.Local).AddTicks(2156),
+                            FechaRegistro = new DateTime(2021, 4, 6, 22, 7, 16, 505, DateTimeKind.Local).AddTicks(6748),
                             FormatoVenta = "Unidad",
                             IVA = 0.29999999999999999,
                             Marca = "Ferres",
@@ -452,6 +456,9 @@ namespace Infra.Datos.Migrations
                     b.Property<string>("Estado")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("FechaCumple")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Nit")
                         .HasColumnType("nvarchar(max)");
 
@@ -474,6 +481,7 @@ namespace Infra.Datos.Migrations
                             Correo = "ferreymas@gmail.com",
                             Descripcion = " Empresa Ferreos y Mas",
                             Direccion = "Stranger Valley",
+                            FechaCumple = new DateTime(2021, 4, 6, 22, 7, 16, 513, DateTimeKind.Local).AddTicks(2498),
                             Nit = "106583",
                             Nombre = "Santana Silva",
                             TipoTercero = "Proveedor"
@@ -486,6 +494,7 @@ namespace Infra.Datos.Migrations
                             Correo = "jojo@gmail.com",
                             Descripcion = "Cliente Frecuente",
                             Direccion = "Stranger Valley",
+                            FechaCumple = new DateTime(2021, 4, 6, 22, 7, 16, 513, DateTimeKind.Local).AddTicks(4177),
                             Nit = "10653434",
                             Nombre = "Jose Jose",
                             TipoTercero = "Cliente"
@@ -670,7 +679,7 @@ namespace Infra.Datos.Migrations
                             Id = 1,
                             EmpleadoId = 1,
                             Nombre = "RaulH",
-                            Password = "raulh",
+                            Password = "EAAAAHDlgUkazfaO5QNj7D / gFmseTKDUliA11ginT5ElAN + V",
                             Rol = "Admin"
                         });
                 });

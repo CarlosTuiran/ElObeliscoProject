@@ -22,6 +22,7 @@ export class TableEmpleadosComponent implements OnInit {
     'celular',
     'correo',
     'direccion',
+    'fechaIngreso',
     'options'];
   dataSource =new MatTableDataSource<IEmpleado>(this.empleados);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

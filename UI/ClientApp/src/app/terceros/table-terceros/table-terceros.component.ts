@@ -23,6 +23,7 @@ export class TableTercerosComponent implements OnInit {
     'correo',
     'direccion',
     'descripcion',
+    'fechaCumple',
     'options'];
   dataSource =new MatTableDataSource<ITercero>(this.terceros);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

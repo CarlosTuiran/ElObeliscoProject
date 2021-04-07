@@ -27,7 +27,8 @@ export class TercerosFormComponent implements OnInit {
     celular: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     correo: ['', [Validators.required]],
     direccion: ['', [Validators.required]],
-    descripcion: ['', [Validators.required]]
+    descripcion: ['', [Validators.required]],
+    fechaCumple: ['', [Validators.required]]
   });
 
   ngOnInit() {
@@ -51,7 +52,8 @@ export class TercerosFormComponent implements OnInit {
       celular: tercero.celular,
       correo: tercero.correo,
       direccion: tercero.direccion,
-      descripcion: tercero.descripcion
+      descripcion: tercero.descripcion,
+      fechaCumple: tercero.fechaCumple
     });
   }
 
@@ -99,5 +101,8 @@ export class TercerosFormComponent implements OnInit {
   }
   get descripcion() {
     return this.formGroup.get('descripcion');
+  }
+  get fechaCumple() {
+    return this.formGroup.get('fechaCumple');
   }
 }

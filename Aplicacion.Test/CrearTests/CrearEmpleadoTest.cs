@@ -44,8 +44,8 @@ namespace Aplicacion.Test.CrearTests
                     Direccion = "Calle 22C #21-61",
                     //Estado = "Activo",
                     IdEmpleado = 1000001,
-                    Nombres = "Raul Andres"
-
+                    Nombres = "Raul Andres",
+                    FechaIngreso=DateTime.Now
                 },
                 "Empleado Creado Exitosamente"
                 ).SetName("Crear Empleado Correctamente");

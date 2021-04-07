@@ -15,13 +15,14 @@ namespace Domain.Models.Entities
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string Estado { get; set; }
+        public DateTime FechaIngreso { get; set; }   
         public List<MFactura> MFacturas { get; set; }
         public Usuario Usuario { get; set; }
         public Empleado()
         {
 
         }
-        public Empleado(int idEmpleado, string nombres, string apellidos, string cargo, string celular, string correo, string direccion, string estado)
+        public Empleado(int idEmpleado, string nombres, string apellidos, string cargo, string celular, string correo, string direccion, string estado, DateTime fechaIngreso)
         {
             IdEmpleado = idEmpleado;
             Nombres = nombres;
@@ -31,6 +32,7 @@ namespace Domain.Models.Entities
             Correo = correo;
             Direccion = direccion;
             Estado = estado;
+            FechaIngreso=fechaIngreso;
         }
         public IReadOnlyList<string> CanCrear(Empleado empleado)
         {

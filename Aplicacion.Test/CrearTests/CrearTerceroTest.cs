@@ -44,7 +44,8 @@ namespace Aplicacion.Test.CrearTests
                     Direccion = "Calle 22C #21-61",
                     Nit = "32154968413",
                     Nombre = "Raul Andres",
-                    TipoTercero = "Proveedor"
+                    TipoTercero = "Proveedor",
+                    FechaCumple=DateTime.Now
                 },
                 "Tercero Creado Exitosamente"
                 ).SetName("Crear Tercero Correctamente");

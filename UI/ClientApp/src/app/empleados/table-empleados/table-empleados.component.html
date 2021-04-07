@@ -45,6 +45,11 @@
         <th mat-header-cell *matHeaderCellDef> Direccion </th>
         <td *matCellDef="let element"> {{element.direccion}} </td>
       </ng-container>
+      <!-- fechaIngreso Column -->
+      <ng-container matColumnDef="fechaIngreso">
+        <th mat-header-cell *matHeaderCellDef> fechaIngreso </th>
+        <td *matCellDef="let element"> {{element.fechaIngreso | date: 'shortDate'}} </td>
+      </ng-container>
       <!--Options-->
       <ng-container matColumnDef="options">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>

@@ -30,7 +30,8 @@ export interface ITercero {
   celular: string,
   correo: string,
   direccion: string,
-  descripcion: string
+  descripcion: string,
+  fechaCumple: Date
 }
 export interface IDeleteTercero {
   nit: string

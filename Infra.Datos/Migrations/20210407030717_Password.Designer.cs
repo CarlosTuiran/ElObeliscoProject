@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Datos.Migrations
 {
     [DbContext(typeof(ObeliscoContext))]
-    [Migration("20210210012232_CantidadMinima")]
-    partial class CantidadMinima
+    [Migration("20210407030717_Password")]
+    partial class Password
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,7 +67,7 @@ namespace Infra.Datos.Migrations
                             Id = 1,
                             Bodega = "BD1",
                             Cantidad = 5,
-                            FechaFactura = new DateTime(2021, 2, 9, 20, 22, 31, 200, DateTimeKind.Local).AddTicks(1382),
+                            FechaFactura = new DateTime(2021, 4, 6, 22, 7, 16, 515, DateTimeKind.Local).AddTicks(2013),
                             MfacturaId = 1,
                             PrecioTotal = 0.0,
                             PrecioUnitario = 3000.0,
@@ -101,6 +101,9 @@ namespace Infra.Datos.Migrations
                     b.Property<string>("Estado")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("FechaIngreso")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("IdEmpleado")
                         .HasColumnType("int");
 
@@ -121,6 +124,7 @@ namespace Infra.Datos.Migrations
                             Correo = "RHerna@gmail.com",
                             Direccion = "Stranger Valley",
                             Estado = "Activo",
+                            FechaIngreso = new DateTime(2021, 4, 6, 22, 7, 16, 511, DateTimeKind.Local).AddTicks(7197),
                             IdEmpleado = 2699540,
                             Nombres = "Raul Hernandez"
                         });
@@ -278,8 +282,8 @@ namespace Infra.Datos.Migrations
                             Descuento = 0.0,
                             EmpleadoId = 1,
                             EstadoFactura = "Pagada",
-                            FechaFactura = new DateTime(2021, 2, 9, 20, 22, 31, 198, DateTimeKind.Local).AddTicks(2679),
-                            FechaPago = new DateTime(2021, 2, 9, 20, 22, 31, 198, DateTimeKind.Local).AddTicks(5556),
+                            FechaFactura = new DateTime(2021, 4, 6, 22, 7, 16, 514, DateTimeKind.Local).AddTicks(300),
+                            FechaPago = new DateTime(2021, 4, 6, 22, 7, 16, 514, DateTimeKind.Local).AddTicks(2872),
                             IVA = 0.29999999999999999,
                             SubTotal = 15000.0,
                             TercerosId = 1,
@@ -379,6 +383,9 @@ namespace Infra.Datos.Migrations
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Fabrica")
                         .HasColumnType("nvarchar(max)");
 
@@ -417,7 +424,7 @@ namespace Infra.Datos.Migrations
                             Costo = 3000.0,
                             Descripcion = "Llave Inglesa",
                             Fabrica = "Ferres SAS",
-                            FechaRegistro = new DateTime(2021, 2, 9, 20, 22, 31, 192, DateTimeKind.Local).AddTicks(5983),
+                            FechaRegistro = new DateTime(2021, 4, 6, 22, 7, 16, 505, DateTimeKind.Local).AddTicks(6748),
                             FormatoVenta = "Unidad",
                             IVA = 0.29999999999999999,
                             Marca = "Ferres",
@@ -448,6 +455,12 @@ namespace Infra.Datos.Migrations
                     b.Property<string>("Direccion")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaCumple")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Nit")
                         .HasColumnType("nvarchar(max)");
 
@@ -470,6 +483,7 @@ namespace Infra.Datos.Migrations
                             Correo = "ferreymas@gmail.com",
                             Descripcion = " Empresa Ferreos y Mas",
                             Direccion = "Stranger Valley",
+                            FechaCumple = new DateTime(2021, 4, 6, 22, 7, 16, 513, DateTimeKind.Local).AddTicks(2498),
                             Nit = "106583",
                             Nombre = "Santana Silva",
                             TipoTercero = "Proveedor"
@@ -482,6 +496,7 @@ namespace Infra.Datos.Migrations
                             Correo = "jojo@gmail.com",
                             Descripcion = "Cliente Frecuente",
                             Direccion = "Stranger Valley",
+                            FechaCumple = new DateTime(2021, 4, 6, 22, 7, 16, 513, DateTimeKind.Local).AddTicks(4177),
                             Nit = "10653434",
                             Nombre = "Jose Jose",
                             TipoTercero = "Cliente"
@@ -666,7 +681,7 @@ namespace Infra.Datos.Migrations
                             Id = 1,
                             EmpleadoId = 1,
                             Nombre = "RaulH",
-                            Password = "raulh",
+                            Password = "EAAAAHDlgUkazfaO5QNj7D / gFmseTKDUliA11ginT5ElAN + V",
                             Rol = "Admin"
                         });
                 });

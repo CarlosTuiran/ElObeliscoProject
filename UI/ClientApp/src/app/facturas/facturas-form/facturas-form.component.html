@@ -174,23 +174,22 @@
   <mat-divider></mat-divider>
   <br>
   <div class="row">
-    
+
     <div class="form-group col-md-3">
-        <div class="col-md-10">
-            <mat-form-field color="accent" appearance="fill">
-                <mat-label>FechaPago</mat-label>
-                <input 
-                id="fechaPagoId"
-                formControlName="fechaPago" matInput [matDatepicker]="picker1">
-                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
-            </mat-form-field>
-        </div>
+      <div class="col-md-10">
+        <mat-form-field color="accent" appearance="fill">
+          <mat-label>FechaPago</mat-label>
+          <input id="fechaPagoId"
+                 formControlName="fechaPago" matInput [matDatepicker]="picker1">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
     </div>
-        
-    
-  
-  <div class="form-group col-md-3"
+
+
+
+    <div class="form-group col-md-3"
          [ngClass]="{'has-error': ((valorDevolucion.touched || valorDevolucion.dirty) && valorDevolucion.invalid)}">
       <label class="col-md-10 control-label"
              for="valorDevolucionId">Valor Devolucion</label>
@@ -232,29 +231,34 @@
       </div>
     </div>
 
-    <div class="form-group col-md-3"
-         [ngClass]="{'has-error': ((iVA.touched || iVA.dirty) && iVA.invalid)}">
-      <label class="col-md-10 control-label"
-             for="iVAId">IVA de la Factura</label>
+    <input class="form-control"
+           id="iVAId"
+           type="text"
+           formControlName="iVA" hidden/>
 
-      <div class="col-md-8">
-        <input class="form-control"
-               id="iVAId"
-               type="text"
-               formControlName="iVA" />
-        <div class="alert alert-danger" *ngIf="((iVA.touched || iVA.dirty )&& iVA.invalid)">
-          <span *ngIf="iVA.errors.required">
-            El campo IVA es requerido
-          </span>
-          <span *ngIf="iVA.errors.pattern">
-            El campo IVA es numerico
-          </span>
-        </div>
+    <!--<div class="form-group col-md-3"
+       [ngClass]="{'has-error': ((iVA.touched || iVA.dirty) && iVA.invalid)}">
+    <label class="col-md-10 control-label"
+           for="iVAId">IVA de la Factura</label>
+
+    <div class="col-md-8">
+      <input class="form-control"
+             id="iVAId"
+             type="text"
+             formControlName="iVA" />
+      <div class="alert alert-danger" *ngIf="((iVA.touched || iVA.dirty )&& iVA.invalid)">
+        <span *ngIf="iVA.errors.required">
+          El campo IVA es requerido
+        </span>
+        <span *ngIf="iVA.errors.pattern">
+          El campo IVA es numerico
+        </span>
       </div>
     </div>
+  </div>-->
   </div>
   <mat-divider></mat-divider>
-  <br>  
+  <br>
   <div class="row">
     <div class="form-group col-md-4"
          [ngClass]="{'has-error': ((abono.touched || abono.dirty) && abono.invalid)}">
@@ -289,7 +293,7 @@
                formControlName="subTotal"
                value={{SubTotal}}
                disabled />
-        
+
       </div>
     </div>
 
@@ -313,7 +317,7 @@
             required
             formControlName="estadoFactura">
             <option value="Pagado">Pagado</option>
-            <option value="Pendiente">Pendiente</option>            
+            <option value="Pendiente">Pendiente</option>
             </select>
             <div class="alert alert-danger" *ngIf="((estadoFactura.touched || estadoFactura.dirty)&& estadoFactura.invalid)">
                 <span *ngIf="estadoFactura.errors.required">
@@ -321,12 +325,12 @@
                 </span>
             </div>
         </div>-->
-        <div class="alert alert-danger" *ngIf="((estadoFactura.touched || estadoFactura.dirty)&& estadoFactura.invalid)">
-          <span *ngIf="estadoFactura.errors.required">
-              El campo estadoFactura es requerido
-          </span>
-      </div>
+    <div class="alert alert-danger" *ngIf="((estadoFactura.touched || estadoFactura.dirty)&& estadoFactura.invalid)">
+      <span *ngIf="estadoFactura.errors.required">
+        El campo estadoFactura es requerido
+      </span>
     </div>
+  </div>
   </div>
   <mat-divider></mat-divider>
   <br>

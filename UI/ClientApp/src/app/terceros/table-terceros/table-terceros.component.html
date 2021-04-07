@@ -46,6 +46,11 @@
         <th mat-header-cell *matHeaderCellDef> Descripcion </th>
         <td *matCellDef="let element"> {{element.descripcion}} </td>
       </ng-container>
+       <!-- fechaCumple Column -->
+       <ng-container matColumnDef="fechaCumple">
+        <th mat-header-cell *matHeaderCellDef> fechaCumple </th>
+        <td *matCellDef="let element"> {{element.fechaCumple | date: 'shortDate'}} </td>
+      </ng-container>
       <!--Options-->
       <ng-container matColumnDef="options">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>

@@ -26,7 +26,8 @@ export class EmpleadosFormComponent implements OnInit {
     cargo: ['', [Validators.required]],
     celular: ['', [Validators.required]],
     correo: ['', [Validators.required]],
-    direccion: ['', [Validators.required]]
+    direccion: ['', [Validators.required]],
+    fechaIngreso: ['', [Validators.required]]
   });
 
   ngOnInit() {
@@ -49,7 +50,8 @@ export class EmpleadosFormComponent implements OnInit {
       cargo: empleado.cargo,
       celular: empleado.celular,
       correo: empleado.correo,
-      direccion: empleado.direccion
+      direccion: empleado.direccion,
+      fechaIngreso: empleado.fechaIngreso
     });
   }
 
@@ -95,4 +97,8 @@ export class EmpleadosFormComponent implements OnInit {
   get direccion() {
     return this.formGroup.get('direccion');
   }
+  get fechaIngreso() {
+    return this.formGroup.get('fechaIngreso');
+  }
+  
 }

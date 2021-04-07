@@ -17,12 +17,13 @@ namespace Domain.Models.Entities
         public string Direccion { get; set; }
         public string? Descripcion { get; set; }
         public string Estado { get; set; }
+        public DateTime FechaCumple { get; set; }
         public List<MFactura> MFacturas { get; set; }
         public Terceros()
         {
 
         }
-        public Terceros(string nit, string nombre, string apellido, string tipoTercero, string celular, string correo, string direccion, string descripcion, string estado)
+        public Terceros(string nit, string nombre, string apellido, string tipoTercero, string celular, string correo, string direccion, string descripcion, string estado, DateTime fechaCumple)
         {
             Nit = nit;
             Nombre = nombre;
@@ -33,6 +34,7 @@ namespace Domain.Models.Entities
             Direccion = direccion;
             Descripcion = descripcion;
             Estado = estado;
+            FechaCumple=fechaCumple;
         }
 
         public IReadOnlyList<string> CanCrear(Terceros terceros)

@@ -94,6 +94,7 @@ import { TopProveedoresPieChartComponent } from './reportes/top-proveedores-pie-
 import { TopClientesPieChartComponent } from './reportes/top-clientes-pie-chart/top-clientes-pie-chart.component';
 import { TopEmpleadosPieChartComponent } from './reportes/top-empleados-pie-chart/top-empleados-pie-chart.component';
 import { CardComponent } from './reportes/Tarjetas/card/card.component';
+import { BirthdayAlertComponent } from './notifications/birthday-alert/birthday-alert.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -154,6 +155,7 @@ import { CardComponent } from './reportes/Tarjetas/card/card.component';
     TopClientesPieChartComponent,
     TopEmpleadosPieChartComponent,
     CardComponent,
+    BirthdayAlertComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

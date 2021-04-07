@@ -15,11 +15,10 @@ export class EmpleadosComponent implements OnInit {
   constructor(private empleadosService: EmpleadosService) { }
 
   ngOnInit() {
-    this.empleadosService.getEmpleados()
+      this.empleadosService.getEmpleados()
       //los usuarios que vengan desde el web service añadelos a la lista de usuarios de esta clase
       .subscribe(empleados => this.empleados = empleados,
         error => console.error(error));
-
   }
 }
 export interface IEmpleado{
@@ -29,7 +28,8 @@ export interface IEmpleado{
   cargo:string,
   celular:string,
   correo:string,
-  direccion:string
+  direccion: string,
+  fechaIngreso: Date  
 }
 
 export interface IDeleteEmpleado {

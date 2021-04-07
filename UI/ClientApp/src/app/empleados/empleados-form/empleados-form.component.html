@@ -139,7 +139,25 @@
         </div>
       </div>
     </div>
-
+    <div class="form-group" 
+    [ngClass]="{'has-error': ((fechaIngreso.touched || fechaIngreso.dirty) && fechaIngreso.invalid)}">
+      <div class="col-md-10">
+          <mat-form-field color="accent" appearance="fill">
+              <mat-label>Fecha de Ingreso</mat-label>
+              <input 
+              id="fechaIngresoId"
+              formControlName="fechaIngreso" matInput [matDatepicker]="picker1"/>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+              <div class="alert alert-danger" *ngIf="((fechaIngreso.touched || fechaIngreso.dirty ) && fechaIngreso.invalid)">
+                <span *ngIf="fechaIngreso.errors.required">
+                  El campo Fecha de Ingreso es requerido
+                </span>
+              </div>
+          </mat-form-field>
+      </div>
+    </div>
+    
     <div class="form-group">
       <div class="col-md-4 col-md-offset-2">
         <span>

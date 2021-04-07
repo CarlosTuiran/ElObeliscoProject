@@ -101,7 +101,7 @@ private _data:IEmpleado[];*/
    subTotal :['1', [Validators.required, Validators.pattern(/^\d+$/)]],
    valorDevolucion :['0', [Validators.pattern(/^\d+$/)]],
    descuento :['0', [Validators.pattern(/^\d+$/)]],
-   iVA :['0', [ Validators.pattern(/^\d+$/)]],
+   iVA :['0.19', [ Validators.pattern(/^\d+$/)]],
    abono :['0', [ Validators.pattern(/^\d+$/)]],
    estadoFactura:['', [Validators.required]],
    dFacturas:this.fb.array([])
@@ -157,11 +157,6 @@ private _data:IEmpleado[];*/
     let mfactura: IMFactura = Object.assign({}, this.formGroup.value);
     this.calcSubTotal(mfactura);
     console.table(mfactura); //ver mfactura por consola
-   
-       
-         
-     
-    
   }
   //* funcion evento para calcular Subtotal
   calcSubTotal(mfactura:IMFactura){

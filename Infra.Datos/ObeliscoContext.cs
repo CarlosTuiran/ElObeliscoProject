@@ -28,12 +28,12 @@ namespace Infra.Datos
                 new Inventario() { Referencia= "1000-01", Bodega="BD01", Cantidad=5, Id=1
                     
             });
-            modelBuilder.Entity<Empleado>().HasData(
+             modelBuilder.Entity<Empleado>().HasData(
                 new Empleado(){IdEmpleado= 2699540, Nombres="Raul Hernandez", Apellidos="Ferra Ito", Cargo="Cajero", Celular="31688888",
-                Correo="RHerna@gmail.com", Direccion="Stranger Valley", Estado="Activo", Id=1
-                });
+                Correo="RHerna@gmail.com", Direccion="Stranger Valley", Estado="Activo", FechaIngreso=DateTime.Now,Id=1
+                }); 
             modelBuilder.Entity<Usuario>().HasData(
-                new Usuario(){EmpleadoId= 1, Nombre="RaulH", Password="raulh", Rol="Admin" ,Id=1
+                new Usuario(){EmpleadoId= 1, Nombre="RaulH", Password= "EAAAAHDlgUkazfaO5QNj7D / gFmseTKDUliA11ginT5ElAN + V", Rol="Admin" ,Id=1
                 });
             //CREAR SEEDS CUANTO SE TENGA CLARO LA NOMINA
             /*modelBuilder.Entity<Nomina>().HasData(
@@ -45,14 +45,14 @@ namespace Infra.Datos
                 });*/
             modelBuilder.Entity<Terceros>().HasData(
                 new Terceros(){Nit="106583", Nombre="Santana Silva", Apellido="Orosco Eter", Descripcion=" Empresa Ferreos y Mas", 
-                    Celular="3128288", Direccion= "Stranger Valley", Correo="ferreymas@gmail.com", TipoTercero="Proveedor",
+                    Celular="3128288", Direccion= "Stranger Valley", Correo="ferreymas@gmail.com", TipoTercero="Proveedor", FechaCumple=DateTime.Now,
                     Id = 1
                 });
             modelBuilder.Entity<Terceros>().HasData(
                 new Terceros(){Nit = "10653434", Nombre = "Jose Jose", Apellido = "Joestar",  Descripcion = "Cliente Frecuente",
-                    Celular = "3443288",  Direccion = "Stranger Valley",  Correo = "jojo@gmail.com", TipoTercero = "Cliente",
+                    Celular = "3443288",  Direccion = "Stranger Valley",  Correo = "jojo@gmail.com", TipoTercero = "Cliente",FechaCumple=DateTime.Now,
                     Id = 2
-                });
+                }); 
             modelBuilder.Entity<TipoMovimiento>().HasData(
                 new TipoMovimiento{ idMovimiento=1, Nombre="Efectivo", Id=1
                 });
