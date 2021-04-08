@@ -87,7 +87,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <app-terceros-select (messageEvent)="receiveMessageTerceros($event)"></app-terceros-select> 
+        <app-terceros-select [TipoMov]="TipoMov" (messageEvent)="receiveMessageTerceros($event)"></app-terceros-select> 
 
             <label class="col-md-10 control-label"
                   for="tercerosIdId">ID del terceros</label>

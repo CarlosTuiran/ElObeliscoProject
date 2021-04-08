@@ -15,6 +15,10 @@ export class TercerosService {
     return this.http.get<ITercero[]>(this.apiURL);
   }
 
+  getTercerostipoTercero(tipoTercero: string): Observable<ITercero[]> {
+    return this.http.get<ITercero[]>(this.apiURL + 'TipoMovimiento/' + tipoTercero);
+  }
+
   getTercero(terceroId: string): Observable<ITercero> {
     return this.http.get<ITercero>(this.apiURL + '/' + terceroId);
   }

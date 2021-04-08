@@ -95,6 +95,8 @@ import { TopClientesPieChartComponent } from './reportes/top-clientes-pie-chart/
 import { TopEmpleadosPieChartComponent } from './reportes/top-empleados-pie-chart/top-empleados-pie-chart.component';
 import { CardComponent } from './reportes/Tarjetas/card/card.component';
 import { BirthdayAlertComponent } from './notifications/birthday-alert/birthday-alert.component';
+import { BirthdayAlertService } from './notifications/birthday-alert/birthday-alert.service';
+import { DialogoTipoTerceroComponent } from './facturas/table-facturas/dialogo-tipo-tercero/dialogo-tipo-tercero.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -156,6 +158,7 @@ import { BirthdayAlertComponent } from './notifications/birthday-alert/birthday-
     TopEmpleadosPieChartComponent,
     CardComponent,
     BirthdayAlertComponent,
+    DialogoTipoTerceroComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -187,7 +190,7 @@ import { BirthdayAlertComponent } from './notifications/birthday-alert/birthday-
       { path: 'terceros-crear', component: TercerosFormComponent },
       { path: 'terceros-editar/:id', component: TercerosFormComponent },
       { path: 'facturas', component: FacturasComponent },
-      { path: 'facturas-crear', component: FacturasFormComponent },
+      { path: 'facturas-crear/:tipoMov', component: FacturasFormComponent },
       { path: 'empleados', component: EmpleadosComponent },
       { path: 'empleados-crear', component: EmpleadosFormComponent },
       { path: 'empleados-editar/:id', component: EmpleadosFormComponent },
@@ -205,7 +208,8 @@ import { BirthdayAlertComponent } from './notifications/birthday-alert/birthday-
     BrowserAnimationsModule
   ],
   //aca se agregan todos los services
-  providers: [ThemeService,UsuariosService, EmpleadosService, FacturasService, TercerosService, TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
+  providers: [ThemeService, UsuariosService, EmpleadosService, FacturasService, TercerosService, BirthdayAlertService,
+    TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
     BodegasService, PromocionesService, PruebasSinVSService, InventarioService,AlertService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent, TableDetallesComponent, DialogoCrearFacturaComponent],

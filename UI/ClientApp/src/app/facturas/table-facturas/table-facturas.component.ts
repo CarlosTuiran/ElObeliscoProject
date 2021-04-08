@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog,  MatDialogRef, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
 import { IMFactura } from '../facturas.component';
 import { FacturasService } from '../facturas.service';
 import { TableDetallesComponent } from '../table-detalles/table-detalles.component';
+import { DialogoTipoTerceroComponent } from './dialogo-tipo-tercero/dialogo-tipo-tercero.component';
 
 @Component({
   selector: 'app-table-facturas',
@@ -11,7 +13,9 @@ import { TableDetallesComponent } from '../table-detalles/table-detalles.compone
 })
 export class TableFacturasComponent implements OnInit {
   isAdmin = false;
-  constructor(private facturasService: FacturasService, private dialog: MatDialog 
+  dialogRta = "";
+  constructor(private facturasService: FacturasService, private dialog: MatDialog,
+    private router: Router
     ) { }
   facturas!:IMFactura[];  
   displayedColumns: string[] = [
@@ -58,5 +62,15 @@ export class TableFacturasComponent implements OnInit {
     
   }
   
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogoTipoTerceroComponent, {
+      width: '250px'
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      this.dialogRta = result;
+      this.router.navigate(["/facturas-crear/"+result]);
+      }
+    );
+  }
 }

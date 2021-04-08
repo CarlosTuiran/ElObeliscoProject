@@ -37,7 +37,7 @@ export class FacturasFormComponent implements OnInit {
     private tercerosService: TercerosService, private empleadosService: EmpleadosService,
     private tipoMovimientoService: TipoMovimientosService, 
     private bodegasService: BodegasService, private productosService: ProductosService, 
-      private alertService: AlertService, public dialog: MatDialog) { }
+    private alertService: AlertService, public dialog: MatDialog) { }
     
     modoEdicion: boolean = false;
     empleados: IEmpleado[]=[];
@@ -51,13 +51,19 @@ export class FacturasFormComponent implements OnInit {
   currentPromocion="";
   currentProductoDescripcion="";
   currentProductoReferencia = "";
-  currentProductoPrecio=0;
+  currentProductoPrecio = 0;
+
   //Lista de Productos escogidos
-  referenciasEscogidas:string[]=[];  
+  referenciasEscogidas: string[] = [];
+
   //Variable de Subtotal
-    SubTotal = 0;
+  SubTotal = 0;
+
   //dialogRta respuesta a la ventana de dialogo
-    dialogRta="";
+  dialogRta = "";
+  //* Tipo Movimiento Compra/Venta 
+  TipoMov = "Compra";
+
   tipoMovimientos: ITipoMovimiento[];
   referencias: IProducto[];
   bodegas: IBodega[];
@@ -66,15 +72,18 @@ export class FacturasFormComponent implements OnInit {
   usuarioId: number;
   dFacturaFormGroup;
   protected _onDestroy = new Subject<void>();
+
   //Filtros de select estado
   public estadoFilter:FormControl= new FormControl();
   public filteredEstados: ReplaySubject<Estado[]> = new ReplaySubject<Estado[]>(1);
   @ViewChild('estadoSelect', { static: true }) singleEstadoSelect: MatSelect;
+
   //Filtros de select empleado
   public empleadoFilter:FormControl= new FormControl();
   public filteredEmpleados: ReplaySubject<IEmpleado[]> = new ReplaySubject<IEmpleado[]>(1);
   @ViewChild('empleadoSelect', { static: true }) singleEmpleadoSelect: MatSelect;
-      /** indicate search operation is in progress */
+/** indicate search operation is in progress */
+
    public searching = false;
   //Filtros selects empleado
   
@@ -121,8 +130,10 @@ private _data:IEmpleado[];*/
     this.tipoMovimientoService.getTipoMovimientos()
         .subscribe(tipoMovimientos => this.tipoMovimientos = tipoMovimientos,
           error => console.error(error));*/
-      
-      
+    //* Tipo Movimiento Compra/Venta
+    this.activatedRoute.params.subscribe(params => {
+      this.TipoMov = params["tipoMov"]; 
+    })
               
     this.filteredEstados.next(this.estados.slice());
     

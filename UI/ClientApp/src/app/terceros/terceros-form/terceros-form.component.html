@@ -168,7 +168,7 @@
     [ngClass]="{'has-error': ((fechaCumple.touched || fechaCumple.dirty) && fechaCumple.invalid)}">
       <div class="col-md-10">
           <mat-form-field color="accent" appearance="fill">
-              <mat-label>Fecha de Cumpleaños</mat-label>
+              <mat-label>Fecha de <pre lang="html4strict" lineno="1">Cumpleaños</pre></mat-label>
               <input 
               id="fechaCumpleId"
               formControlName="fechaCumple" matInput [matDatepicker]="picker1"/>

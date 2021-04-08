@@ -38,6 +38,15 @@ namespace UI.InterfazWeb.Controllers
         {
             return _context.Terceros;
         }
+
+        [HttpGet("TipoMovimiento/{tipoMov}")]
+        public IEnumerable<Terceros> GetTercerostipoTercero([FromRoute] string tipoMov)
+        {
+            string tipoTercero = tipoMov == "Venta" ? "Cliente" : "Proveedor";
+            List<Terceros> terceros = _context.Terceros.Where(t => t.TipoTercero == tipoTercero).ToList();
+            return terceros;
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTercero([FromRoute] string id)
         {
@@ -46,6 +55,8 @@ namespace UI.InterfazWeb.Controllers
                 return NotFound();
             return Ok(terceros);
         }
+
+        
         /*public async Task<ActionResult<IEnumerable<Usuario>>> getUsuarios()
         {
             var data = await _context.Usuario.ToListAsync();

@@ -1,1 +1,17 @@
-<p>birthday-alert works!</p>
+<button mat-icon-button [matMenuTriggerFor]="notificaciones" aria-label="Icon Perfil">
+    <mat-icon class="iconoNotificacion">notification_important</mat-icon>
+  </button>
+  <mat-menu #notificaciones="matMenu">
+    <div *ngIf="!isAlertMin else viewCantidadMinAlert" >
+      <span class="texto">Sin Notificaciones</span>
+    </div>
+    <ng-template #viewCantidadMinAlert>
+      <button mat-menu-item routerLink="inventario">
+        <mat-icon class="colores">warning</mat-icon>
+        <span class="texto">Un Cliente esta cumpliendo <pre lang="html4strict" lineno="1">años</pre> </span>
+        <div *ngFor="let item of nombresTerceros">
+            <span>{{item}}</span>
+        </div>
+      </button>
+    </ng-template>  
+  </mat-menu>
