@@ -32,6 +32,7 @@ namespace Aplicacion.Services.ActualizarServices
                 terceros.Direccion = request.Direccion;
                 terceros.Nit = request.Nit;
                 terceros.Nombre = request.Nombre;
+                terceros.FechaCumple=request.FechaCumple;
                 terceros.TipoTercero = request.TipoTercero;
                 _unitOfWork.TercerosServiceRepository.Edit(terceros);
                 _unitOfWork.Commit();

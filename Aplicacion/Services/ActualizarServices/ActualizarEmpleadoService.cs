@@ -32,6 +32,7 @@ namespace Aplicacion.Services.ActualizarServices
                 empleado.Celular = request.Celular;
                 empleado.Correo = request.Correo;
                 empleado.Direccion = request.Direccion;
+                empleado.FechaIngreso=request.FechaIngreso;
                 empleado.Estado = request.Estado;
                 _unitOfWork.EmpleadoServiceRepository.Edit(empleado);
                 _unitOfWork.Commit();

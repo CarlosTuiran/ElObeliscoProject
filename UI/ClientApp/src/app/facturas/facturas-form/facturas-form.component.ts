@@ -62,7 +62,7 @@ export class FacturasFormComponent implements OnInit {
   //dialogRta respuesta a la ventana de dialogo
   dialogRta = "";
   //* Tipo Movimiento Compra/Venta 
-  TipoMov = "Compra";
+  TipoMov :string;
 
   tipoMovimientos: ITipoMovimiento[];
   referencias: IProducto[];

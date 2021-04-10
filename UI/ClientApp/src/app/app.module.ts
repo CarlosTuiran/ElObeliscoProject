@@ -212,7 +212,7 @@ import { DialogoTipoTerceroComponent } from './facturas/table-facturas/dialogo-t
     TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
     BodegasService, PromocionesService, PruebasSinVSService, InventarioService,AlertService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
-  entryComponents: [SidebarComponent, TableDetallesComponent, DialogoCrearFacturaComponent],
+  entryComponents: [SidebarComponent, TableDetallesComponent, DialogoCrearFacturaComponent, DialogoTipoTerceroComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

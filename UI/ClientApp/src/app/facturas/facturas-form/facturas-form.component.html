@@ -138,13 +138,9 @@
                 <span *ngIf="tipoMovimientoId.errors.required">
                   El campo tipoMovimientoId es requerido
                 </span>
-                
               </div>
             </div>
-
-
         </mat-expansion-panel>
-
         </mat-accordion>
       </div>
     
@@ -155,14 +151,13 @@
         for="tipoMovimiento">Id del Movimiento</label>
 
         <div class="col-md-8">
-            <select class="form-control"
+            <input class="form-control"
             id="tipoMovimientoid"
             type="text"
             required
-            formControlName="tipoMovimiento">
-            <option value="Compra">Compra</option>
-            <option value="Venta">Venta</option>            
-            </select>
+            disabled
+            formControlName="tipoMovimiento"
+            value="{{TipoMov}}"/>
             <div class="alert alert-danger" *ngIf="((tipoMovimiento.touched || tipoMovimiento.dirty)&& tipoMovimiento.invalid)">
                 <span *ngIf="tipoMovimiento.errors.required">
                     El campo tipoMovimiento es requerido

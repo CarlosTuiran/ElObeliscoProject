@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-dialogo-tipo-tercero',
@@ -8,7 +8,8 @@ import { MatDialogRef } from '@angular/material';
 })
 export class DialogoTipoTerceroComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<DialogoTipoTerceroComponent>) { }
+  constructor( public dialogRef: MatDialogRef<DialogoTipoTerceroComponent>,
+    @Inject(MAT_DIALOG_DATA) data) { }
 
   ngOnInit() {
   }

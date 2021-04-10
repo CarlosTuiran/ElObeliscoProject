@@ -13,6 +13,7 @@ namespace Aplicacion.Request
         public string Celular { get; set; }
         public string Correo { get; set; }
         public string Direccion { get; set; }
+        public DateTime FechaIngreso { get; set; }   
         public string Estado { get; set; }
     }
     public class ActualizarEmpleadoResponse

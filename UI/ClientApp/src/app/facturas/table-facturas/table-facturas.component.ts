@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { IMFactura } from '../facturas.component';
 import { FacturasService } from '../facturas.service';
 import { TableDetallesComponent } from '../table-detalles/table-detalles.component';
-import { DialogoTipoTerceroComponent } from './dialogo-tipo-tercero/dialogo-tipo-tercero.component';
 
 @Component({
   selector: 'app-table-facturas',
@@ -13,9 +12,8 @@ import { DialogoTipoTerceroComponent } from './dialogo-tipo-tercero/dialogo-tipo
 })
 export class TableFacturasComponent implements OnInit {
   isAdmin = false;
-  dialogRta = "";
-  constructor(private facturasService: FacturasService, private dialog: MatDialog,
-    private router: Router
+  constructor(private facturasService: FacturasService,
+    private router: Router, private dialog: MatDialog
     ) { }
   facturas!:IMFactura[];  
   displayedColumns: string[] = [
@@ -60,17 +58,5 @@ export class TableFacturasComponent implements OnInit {
     });
     detallesVista.componentInstance.idMfactura=idMfactura;
     
-  }
-  
-  openDialog() {
-    const dialogRef = this.dialog.open(DialogoTipoTerceroComponent, {
-      width: '250px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.dialogRta = result;
-      this.router.navigate(["/facturas-crear/"+result]);
-      }
-    );
   }
 }

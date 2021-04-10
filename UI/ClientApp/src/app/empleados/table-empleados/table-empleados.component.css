@@ -27,14 +27,15 @@ li:last-child a {
 }
 
 a:link, a:visited, a:focus {
-  background: yellow;
+    width: auto;
+    padding-top: 5%;
 }
 
 a:hover {
-  background: orange;
+  background: #EEEEEE;
 }
 
 a:active {
-  background: red;
+  background: #808080;
   color: white;
 }

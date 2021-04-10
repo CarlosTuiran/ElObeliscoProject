@@ -49,14 +49,14 @@
        <!-- fechaCumple Column -->
        <ng-container matColumnDef="fechaCumple">
         <th mat-header-cell *matHeaderCellDef> fechaCumple </th>
-        <td *matCellDef="let element"> {{element.fechaCumple | date: 'shortDate'}} </td>
+        <td *matCellDef="let element"> {{element.fechaCumple | date: 'shortDate'}} </td>        
       </ng-container>
       <!--Options-->
       <ng-container matColumnDef="options">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>
         <td mat-cell *matCellDef="let element">
           <button mat-icon-button color="warn" (click)="Eliminar(element.nit)"><mat-icon>delete_outline</mat-icon></button>
-        <button mat-icon-button [routerLink]='["/terceros-editar/" + element.nit]'>
+          <button mat-icon-button [routerLink]='["/terceros-editar/" + element.nit]'>
           <mat-icon>launch</mat-icon></button>
         </td>
       </ng-container>

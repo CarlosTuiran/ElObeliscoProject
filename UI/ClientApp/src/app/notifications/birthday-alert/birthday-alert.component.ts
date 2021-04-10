@@ -21,10 +21,8 @@ export class BirthdayAlertComponent implements OnInit {
           this.isAlertMin = false;          
         } else {
           this.isAlertMin = true;
-          for(let item of terceros){
-            this.nombresTerceros.push(item.nombre+ " "+ item.apellido);
-          };
-          console.log(this.nombresTerceros);          
+          this.terceros=terceros;         
+          console.log(this.terceros);          
         }
       }, error => console.error(error));
   }
