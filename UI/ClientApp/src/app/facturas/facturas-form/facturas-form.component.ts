@@ -104,13 +104,13 @@ private _data:IEmpleado[];*/
     
    empleadoId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
    tercerosId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
-   tipoMovimientoId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
-   tipoMovimiento:['', [Validators.required]],
+   tipoMovimientoId: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+   //tipoMovimiento:[''],
    fechaPago:[''],
    subTotal :['1', [Validators.required, Validators.pattern(/^\d+$/)]],
    valorDevolucion :['0', [Validators.pattern(/^\d+$/)]],
    descuento :['0', [Validators.pattern(/^\d+$/)]],
-   iVA :['0.19', [ Validators.pattern(/^\d+$/)]],
+   iVA :['0.19'],
    abono :['0', [ Validators.pattern(/^\d+$/)]],
    estadoFactura:['', [Validators.required]],
    dFacturas:this.fb.array([])
@@ -190,6 +190,7 @@ private _data:IEmpleado[];*/
         dialogRef.afterClosed().subscribe(result => {
             this.dialogRta = result;
             let mfactura: IMFactura = Object.assign({}, this.formGroup.value);
+            mfactura.tipoMovimiento=this.TipoMov;
             if (this.dialogRta) {
               mfactura.subTotal = this.SubTotal;
               // crea un mfactura
@@ -214,9 +215,9 @@ private _data:IEmpleado[];*/
   get tipoMovimientoId () {
     return this.formGroup.get('tipoMovimientoId');
   }
-  get tipoMovimiento() {
+ /* get tipoMovimiento() {
     return this.formGroup.get('tipoMovimiento');
-  }
+  }*/
   get fechaPago() {
     return this.formGroup.get('fechaPago');
   }
@@ -286,7 +287,7 @@ private _data:IEmpleado[];*/
       empleadoId :'',
       tercerosId :'',
       tipoMovimientoId :'',
-      tipoMovimiento:'',
+      //tipoMovimiento:'',
       fechaPago:[''],
       //subTotal :['', [Validators.required, Validators.pattern(/^\d+$/)]],
       valorDevolucion :'',
@@ -350,17 +351,15 @@ private _data:IEmpleado[];*/
     this.currentPromocion=$event.nombre;
   }
   receiveMessageProducto($event){
-    if(this.tipoMovimiento.value == 'Compra' || this.tipoMovimiento.value == 'Venta'){
-    this.currentProductoDescripcion=$event.descripcion;
+
+      this.currentProductoDescripcion=$event.descripcion;
       this.currentProductoReferencia = $event.referencia;
-    if(this.tipoMovimiento.value == 'Compra'){
+    if(this.TipoMov == 'Compra'){
       this.currentProductoPrecio=$event.costo;
     }else{
       this.currentProductoPrecio=$event.precioVenta;
     }
-  }else{
-    this.alertService.info("Seleccione Tipo de Movimiento antes de Productos")    
-  }
+ 
   }
 } 
 export class Estado{

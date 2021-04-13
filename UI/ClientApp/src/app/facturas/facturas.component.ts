@@ -27,14 +27,16 @@ export class FacturasComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogoTipoTerceroComponent, {
-      width: '25%',
-      height: '15%'
+      width: 'auto',
+      height: 'auto'
       
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.dialogRta = result; console.log(result);
-      this.router.navigate(["/facturas-crear/" + result]);
+      this.dialogRta = result;
+      if (result != undefined) {
+        this.router.navigate(["/facturas-crear/" + result]);
+      }      
     }
     );
   }

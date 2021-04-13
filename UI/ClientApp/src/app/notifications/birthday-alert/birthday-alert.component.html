@@ -6,13 +6,12 @@
       <span class="texto">Sin Notificaciones</span>
     </div>
     <ng-template #viewCantidadMinAlert>
-      <div *ngFor="let tercero for terceros">
+      <div *ngFor="let tercero of terceros">
         <button mat-menu-item routerLink="terceros-editar/{{tercero.nit}}">
           <mat-icon class="colores">sentiment_very_satisfied</mat-icon>
           <span class="texto">Un Cliente esta cumpliendo a&ntilde;os </span>    
           {{tercero.nombre}}{{tercero.apellido}} 
         </button>
-      </div>
-      
+      </div>      
     </ng-template>  
   </mat-menu>

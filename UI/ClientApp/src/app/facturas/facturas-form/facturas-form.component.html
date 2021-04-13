@@ -127,7 +127,7 @@
         <app-tipo-movimiento-select (messageEvent)="receiveMessageTipoMovimiento($event)"></app-tipo-movimiento-select> 
 
             <label class="col-md-10 control-label"
-                  for="tipoMovimientoIdId">ID del Movimiento</label>
+                  for="tipoMovimientoId">ID del Movimiento</label>
 
             <div class="col-md-10">
               <input class="form-control"
@@ -143,28 +143,21 @@
         </mat-expansion-panel>
         </mat-accordion>
       </div>
+     <!--Movimiento compra venta
+        <div class="form-group col-md-3">
+            <label class="col-md-10 control-label"
+            for="tipoMovimiento">Id del Movimiento</label>
     
-    <!--Movimiento compra venta-->
-    <div class="form-group col-md-3"
-        [ngClass]="{'has-error': ((tipoMovimiento.touched || tipoMovimiento.dirty)&& tipoMovimiento.invalid)}">
-        <label class="col-md-10 control-label"
-        for="tipoMovimiento">Id del Movimiento</label>
-
-        <div class="col-md-8">
-            <input class="form-control"
-            id="tipoMovimientoid"
-            type="text"
-            required
-            disabled
-            formControlName="tipoMovimiento"
-            value="{{TipoMov}}"/>
-            <div class="alert alert-danger" *ngIf="((tipoMovimiento.touched || tipoMovimiento.dirty)&& tipoMovimiento.invalid)">
-                <span *ngIf="tipoMovimiento.errors.required">
-                    El campo tipoMovimiento es requerido
-                </span>
+            <div class="col-md-8">
+                <input class="form-control"
+                id="tipoMovimientoid"
+                type="text"
+                
+                disabled
+                value="{{TipoMov}}"/>
             </div>
-        </div>
-    </div>
+        </div>-->
+   
   </div>
   <mat-divider></mat-divider>
   <br>

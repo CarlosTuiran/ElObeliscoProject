@@ -97,6 +97,7 @@ import { CardComponent } from './reportes/Tarjetas/card/card.component';
 import { BirthdayAlertComponent } from './notifications/birthday-alert/birthday-alert.component';
 import { BirthdayAlertService } from './notifications/birthday-alert/birthday-alert.service';
 import { DialogoTipoTerceroComponent } from './facturas/table-facturas/dialogo-tipo-tercero/dialogo-tipo-tercero.component';
+import { FlujoVentasLineChartComponent } from './reportes/flujo-ventas-line-chart/flujo-ventas-line-chart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -159,6 +160,7 @@ import { DialogoTipoTerceroComponent } from './facturas/table-facturas/dialogo-t
     CardComponent,
     BirthdayAlertComponent,
     DialogoTipoTerceroComponent,
+    FlujoVentasLineChartComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

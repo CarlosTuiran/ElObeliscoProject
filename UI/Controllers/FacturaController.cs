@@ -14,17 +14,21 @@ namespace UI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FacturaController : ControllerBase
+    public  class FacturaController : ControllerBase
     {
         private readonly ObeliscoContext _context;
         private CrearFacturasService _service;
         private UnitOfWork _unitOfWork;
+        CultureInfo provider = CultureInfo.InvariantCulture;
 
         public FacturaController(ObeliscoContext context)
         {
             _context = context;
             _unitOfWork = new UnitOfWork(_context);
         }
+        #region: Funcionales
+
+
         [HttpGet]
         public Object GetMFacturas()
         {
@@ -108,6 +112,10 @@ namespace UI.Controllers
             }
             return BadRequest(rta.Message);
         }
+        #endregion
+
+        #region: Reportes Tarjetas
+
         //?Card comparacion de Total ventas de ultimo mes 
         [HttpGet("VentasMensuales")]
         public object VentasMensuales()
@@ -125,9 +133,13 @@ namespace UI.Controllers
                               Total = newGroup1.Sum(c => c.Total),
                               Mes = newGroup1.Key.Mes_Anio
                           }).OrderBy(x => x.Mes).ToList();
-            var TotalPasadoMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
-            var TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
-            var percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
+            double TotalPasadoMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
+            double TotalPresenteMes = result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            double percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
+            if (Double.IsNaN(percentValue))
+            {
+                percentValue = 0;
+            }
             bool isIncrease=true;
             if (TotalPasadoMes>TotalPresenteMes) {
                 //Es decremento
@@ -193,7 +205,12 @@ namespace UI.Controllers
 
             double TotalPasadoMes = !result.Any(x=>x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) ) ? 0 : result[0].Total;
             double TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
-            var percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
+            double percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
+           
+            if (Double.IsNaN(percentValue))
+            {
+                percentValue = 0;
+            }
             bool isIncrease = true;
             if (TotalPasadoMes > TotalPresenteMes)
             {
@@ -244,9 +261,13 @@ namespace UI.Controllers
                               Mes = newGroup1.Key.Mes_Anio
                           }).OrderBy(x => x.Mes).ToList();
 
-            var TotalPasadoMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
-            var TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
-            var percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
+            double TotalPasadoMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
+            double TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            double percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
+            if (Double.IsNaN(percentValue))
+            {
+                percentValue = 0;
+            }
             bool isIncrease = true;
             if (TotalPasadoMes > TotalPresenteMes)
             {
@@ -291,5 +312,32 @@ namespace UI.Controllers
             };
             return cards;
         }
+        #endregion
+        #region: Reportes Linea
+        [HttpGet("FlujoVentasMensuales/{fechaInicio}/{fechaFin}")]
+        public object FlujoVentasMensuales([FromRoute] string fechaInicio, [FromRoute] string fechaFin)
+        {
+            string format = "ddd MMM dd yyyy";
+            //Wed Mar 10 2021 00:00:00 GMT-0500 (hora estándar de Colombia)' Thu Mar 25 2021
+            fechaInicio = DateTime.ParseExact(fechaInicio.Substring(0, 15), format, provider).ToString();
+            DateTime FechaInicio = Convert.ToDateTime(fechaInicio);
+            fechaFin = DateTime.ParseExact(fechaFin.Substring(0, 15), format, provider).ToString();
+            DateTime FechaFin = Convert.ToDateTime(fechaFin);
+            var result = (from mf in _context.Set<MFactura>()
+                          join t in _context.Set<Tiempo>()
+                          on mf.FechaFactura equals t.Fecha
+                          where mf.TipoMovimiento == "Venta" &&
+                                (mf.FechaPago >= FechaInicio && mf.FechaPago <= FechaFin)
+                          group mf by new { t.Mes_Descripcion, t.Mes_Anio } into newGroup1
+                          select new
+                          {
+                              Mes_Descripcion = newGroup1.Key.Mes_Descripcion,
+                              Total = newGroup1.Sum(c => c.Total),
+                              Mes = newGroup1.Key.Mes_Anio
+                          }).OrderBy(x => x.Mes).ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return result;
+        }
+        #endregion
     }
 }

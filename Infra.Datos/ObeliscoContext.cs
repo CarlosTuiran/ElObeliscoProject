@@ -80,6 +80,22 @@ namespace Infra.Datos
                 new DFactura(){MfacturaId=1, idDFactura=10001, Cantidad=5, Bodega="BD1", FechaFactura=DateTime.Now, 
                     PrecioUnitario=3000,Referencia="1000-01", Id=1
                 });
+            modelBuilder.Entity<MFactura>().HasData(
+                new MFactura() {idMfactura=1001, TipoMovimiento="Venta", FechaFactura=DateTime.Now, EstadoFactura="Pagada",
+                EmpleadoId=1, TercerosId=2, FechaPago=DateTime.Now.AddMonths(-1), IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=2, TipoMovimientoId=1
+                });
+            modelBuilder.Entity<DFactura>().HasData(
+                new DFactura(){MfacturaId=2, idDFactura=10003, Cantidad=5, Bodega="BD1", FechaFactura=DateTime.Now.AddMonths(-1), 
+                    PrecioUnitario=3000,Referencia="1000-01", Id=2
+                });
+            modelBuilder.Entity<MFactura>().HasData(
+                new MFactura() {idMfactura=1003, TipoMovimiento="Venta", FechaFactura=DateTime.Now, EstadoFactura="Pagada",
+                EmpleadoId=1, TercerosId=2, FechaPago=DateTime.Now, IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=3, TipoMovimientoId=1
+                });
+            modelBuilder.Entity<DFactura>().HasData(
+                new DFactura(){MfacturaId=3, idDFactura=10002, Cantidad=5, Bodega="BD1", FechaFactura=DateTime.Now, 
+                    PrecioUnitario=3000,Referencia="1000-01", Id=3 
+                });
             //Restringe las llaves foraneas en el parametro OnDelete 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
            {

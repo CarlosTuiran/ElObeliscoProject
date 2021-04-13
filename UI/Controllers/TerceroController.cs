@@ -134,6 +134,7 @@ namespace UI.InterfazWeb.Controllers
             DateTime FechaInicio = Convert.ToDateTime(fechaInicio);
             fechaFin=DateTime.ParseExact(fechaFin.Substring(0,15), format,provider).ToString();
             DateTime FechaFin = Convert.ToDateTime(fechaFin);
+
             var result =  (from t in _context.Set<Terceros>()
                            join mf in _context.Set<MFactura>()
                            on t.Id equals mf.TercerosId
