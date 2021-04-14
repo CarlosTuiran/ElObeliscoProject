@@ -55,5 +55,17 @@ export class ReportesService {
   ConsultasCartas():Observable<any[]> {
     return this.http.get<any[]>(this.apiFacturaURL + "/ConsultasCartas");
   }
+  FlujoVentasMensuales(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiFacturaURL + "/FlujoVentasMensuales");
+  }
+  FlujoVentasMensualesInterval(Interval: IInterval): Observable<any[]> {
+    return this.http.get<any[]>(this.apiFacturaURL + "/FlujoVentasMensualesInterval/" + Interval.fechaInicio.toString() + "/" + Interval.fechaFin.toString());
+  }
+  FlujoComprasMensuales(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiFacturaURL + "/FlujoComprasMensuales");
+  }
+  FlujoComprasMensualesInterval(Interval: IInterval): Observable<any[]> {
+    return this.http.get<any[]>(this.apiFacturaURL + "/FlujoComprasMensualesInterval/" + Interval.fechaInicio.toString() + "/" + Interval.fechaFin.toString());
+  }
 }
 

@@ -29,11 +29,19 @@ h1.example-app-name {
      `<body>` to be our scrolling element for mobile layouts. */
   flex: 1 0 auto;
 }
-
-mat-sidenav {
-  width: 13%;
-  background/*-image*/: /*url("/assets/img/Captura.PNG");*/ #F6EDEB;
+@media (max-width: 800px) { 
+  mat-sidenav {
+    width: auto;
+    background/*-image*/: /*url("/assets/img/Captura.PNG");*/ #F6EDEB;
+  }
+ }
+@media (min-width: 900px) {
+  mat-sidenav {
+    width: 13%;
+    background /*-image*/: /*url("/assets/img/Captura.PNG");*/ #F6EDEB;
+  }
 }
+
 
 mat-sidenav-content{
   

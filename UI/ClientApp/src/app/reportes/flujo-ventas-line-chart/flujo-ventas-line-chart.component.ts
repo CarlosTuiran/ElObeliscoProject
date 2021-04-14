@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective, Color, Label } from 'ng2-charts';
-
+import { IInterval } from '../reportes.component';
+import { ReportesService } from '../reportes.service';
 
 @Component({
   selector: 'app-flujo-ventas-line-chart',
@@ -10,12 +12,9 @@ import { BaseChartDirective, Color, Label } from 'ng2-charts';
 })
 export class FlujoVentasLineChartComponent implements OnInit {
 
-  public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Compras' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Ventas' }    
-  ];
-  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChartOptions: (ChartOptions & { annotation: any }) = {
+  public lineChartData: ChartDataSets[];
+  public lineChartLabels: Label[] = [];
+  public lineChartOptions: (ChartOptions) = {
     responsive: true,
     scales: {
       // We use this empty structure as a placeholder for dynamic theming.
@@ -24,36 +23,9 @@ export class FlujoVentasLineChartComponent implements OnInit {
         {
           id: 'y-axis-0',
           position: 'left',
-        },
-        {
-          id: 'y-axis-1',
-          position: 'right',
-          gridLines: {
-            color: 'rgba(255,0,0,0.3)',
-          },
-          ticks: {
-            fontColor: 'red',
-          }
         }
       ]
-    },
-    annotation: {
-      annotations: [
-        {
-          type: 'line',
-          mode: 'vertical',
-          scaleID: 'x-axis-0',
-          value: 'March',
-          borderColor: 'orange',
-          borderWidth: 2,
-          label: {
-            enabled: true,
-            fontColor: 'orange',
-            content: 'LineAnno'
-          }
-        },
-      ],
-    },
+    }   
   };
   public lineChartColors: Color[] = [
     { // grey
@@ -63,14 +35,6 @@ export class FlujoVentasLineChartComponent implements OnInit {
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
     },
     { // red
       backgroundColor: 'rgba(255,0,0,0.3)',
@@ -83,57 +47,85 @@ export class FlujoVentasLineChartComponent implements OnInit {
   ];
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
- 
+  //dateInitial="Wed Mar 10 2021 00:00:00 GMT-0500"; 
+  //dateFinal:Date= new Date();
+  lineChartDataCompra: number[]=[];
+  lineChartDataVenta: number[]=[];
+  chartReady=false;
+
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
-  constructor() { }
+  constructor(private service: ReportesService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.service.FlujoVentasMensuales().subscribe(
+      data => {
+       
+        for(let item of data){
+          this.lineChartDataVenta.push(item.total);
+          this.lineChartLabels.push(item.mes_Descripcion);          
+        }
+        this.service.FlujoComprasMensuales().subscribe(
+          data => {
+            for(let item of data){
+              this.lineChartDataCompra.push(item.total);                     
+            }  
+            this.lineChartData= [
+              { data:this.lineChartDataCompra , label: 'Compra' },
+              { data:this.lineChartDataVenta , label: 'Venta' },          
+            ];
+            console.log(this.lineChartData); 
+            this.chartReady=true;
+          }, 
+          error=> console.error(error));
+        
+      }, error => console.error(error)
+  );
   }
 
-  public randomize(): void {
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        this.lineChartData[i].data[j] = this.generateNumber(i);
-      }
-    }
-    this.chart.update();
+  clear(): void {
+    this.lineChartData = [];
+    this.lineChartDataCompra=[];
+    this.lineChartDataVenta=[];
+    this.lineChartLabels=[];
+    this.chartReady=false;
+  }
+  formGroup = this.fb.group({
+    fechaInicio:[''],
+    fechaFin:[''],
+  });
+  dataFilter()
+  {
+    this.clear();       
+    let interval:  IInterval = Object.assign({}, this.formGroup.value);
+    this.service.FlujoVentasMensualesInterval(interval).subscribe(
+      data => {
+        for(let item of data){
+          this.lineChartDataVenta.push(item.total);
+          this.lineChartLabels.push(item.mes_Descripcion);          
+        }
+        this.service.FlujoComprasMensualesInterval(interval).subscribe(
+          data => {
+            for(let item of data){
+              this.lineChartDataCompra.push(item.total);                     
+            }  
+            this.lineChartData= [
+              { data:this.lineChartDataCompra , label: 'Compra' },
+              { data:this.lineChartDataVenta , label: 'Venta' },          
+            ];
+            this.chartReady=true;
+          }, 
+          error=> console.error(error));
+        
+      }, error => console.error(error)
+    );
+  } 
+  get fechaInicio() {
+    return this.formGroup.get('fechaInicio');
+  }
+  get fechaFin() {
+    return this.formGroup.get('fechaFin');
   }
 
-  private generateNumber(i: number): number {
-    return Math.floor((Math.random() * (i < 2 ? 100 : 1000)) + 1);
-  }
-
-  // events
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
-
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
-
-  public hideOne(): void {
-    const isHidden = this.chart.isDatasetHidden(1);
-    this.chart.hideDataset(1, !isHidden);
-  }
-
-  public pushOne(): void {
-    this.lineChartData.forEach((x, i) => {
-      const num = this.generateNumber(i);
-      const data: number[] = x.data as number[];
-      data.push(num);
-    });
-    this.lineChartLabels.push(`Label ${this.lineChartLabels.length}`);
-  }
-
-  public changeColor(): void {
-    this.lineChartColors[2].borderColor = 'green';
-    this.lineChartColors[2].backgroundColor = `rgba(0, 255, 0, 0.3)`;
-  }
-
-  public changeLabel(): void {
-    this.lineChartLabels[2] = ['1st Line', '2nd Line'];
-  }
 
 }

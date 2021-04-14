@@ -272,10 +272,8 @@ private _data:IEmpleado[];*/
         });
         this.referenciasEscogidas.push(this.currentProductoReferencia);
     this.dFacturas.push(this.dFacturaFormGroup);
-  }
-  }
-      
-    
+      }
+    }
   }
   removerDFactura(indice:number){
     let referenciaaEliminar=this.dFacturas.controls[indice].value.referencia;
