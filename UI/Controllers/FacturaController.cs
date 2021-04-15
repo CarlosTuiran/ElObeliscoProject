@@ -151,18 +151,7 @@ namespace UI.Controllers
             bool isCurrency=true;
             string duration="desde el Anterior Mes";
             string icon="shopping_cart";
-            /*var cardRta = (from r in result
-                           select new
-                           {
-                               title,
-                               value,
-                               color,
-                               isCurrency,
-                               duration,
-                               isIncrease,
-                               percentValue
-                           }
-                           ).Take(1).ToList();*/
+
             var cardRta = (title, value, color, isCurrency, duration, isIncrease, percentValue,icon);
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(cardRta, Newtonsoft.Json.Formatting.Indented);
             return cardRta;
@@ -224,18 +213,6 @@ namespace UI.Controllers
             string duration = "desde el Anterior Mes";
             string icon="payments";
 
-            /*var cardRta = (from r in result
-                           select new
-                           {
-                               title,
-                               value,
-                               color,
-                               isCurrency,
-                               duration,
-                               isIncrease,
-                               percentValue
-                           }
-                           ).Take(1).ToList();*/
             var cardRta = (title, value, color, isCurrency, duration, isIncrease, percentValue, icon);
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(cardRta, Newtonsoft.Json.Formatting.Indented);
             return cardRta;
@@ -280,23 +257,57 @@ namespace UI.Controllers
             bool isCurrency = true;
             string duration = "desde el Anterior Mes";
             string icon="monetization_on";
-            /*var cardRta = (from r in result
-                           select new
-                           {
-                               title,
-                               value,
-                               color,
-                               isCurrency,
-                               duration,
-                               isIncrease,
-                               percentValue
-                           }
-                           ).Take(1).ToList();*/
 
             var cardRta = (title,value,color,isCurrency,duration,isIncrease,percentValue, icon);
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(cardRta, Newtonsoft.Json.Formatting.Indented);
             return cardRta;
         }
+
+
+
+        // Retorna el promedio de ventas del mes para la tarjeta
+        [HttpGet("CostosMes")]
+        public object CostosMes()
+        {
+            var result = (from mf in _context.Set<MFactura>()
+                          join t in _context.Set<Tiempo>()
+                          on mf.FechaFactura equals t.Fecha
+                          where mf.TipoMovimiento == "Compra" &&
+                                (t.Anio == DateTime.Now.Year.ToString() && t.Mes_Anio == DateTime.Now.Month) ||
+                                (t.Mes_Anio == DateTime.Now.AddMonths(-1).Month)
+                          group mf by new { t.Mes_Descripcion, t.Mes_Anio } into newGroup1
+                          select new
+                          {
+                              Mes_Descripcion = newGroup1.Key.Mes_Descripcion,
+                              Total = newGroup1.Average(c => c.Total),
+                              Mes = newGroup1.Key.Mes_Anio
+                          }).OrderBy(x => x.Mes).ToList();
+
+            double TotalPasadoMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
+            double TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            double percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
+            if (Double.IsNaN(percentValue))
+            {
+                percentValue = 0;
+            }
+            bool isIncrease = true;
+            if (TotalPasadoMes > TotalPresenteMes)
+            {
+                //Es decremento
+                isIncrease = false;
+            }
+            string title = "Compras del mes";
+            double value = TotalPresenteMes;
+            string color = "gold";
+            bool isCurrency = true;
+            string duration = "desde el Anterior Mes";
+            string icon = "monetization_on";
+
+            var cardRta = (title, value, color, isCurrency, duration, isIncrease, percentValue, icon);
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(cardRta, Newtonsoft.Json.Formatting.Indented);
+            return cardRta;
+        }
+
 
         [HttpGet("ConsultasCartas")]
         public object ConsultasCartas()
@@ -304,11 +315,13 @@ namespace UI.Controllers
             object ventasMensuales = VentasMensuales();
             object totalOrdenes = TotalOrdenes();            
             object averageOrderValue = AverageOrderValue();
+            object costosMes = CostosMes();
             List<Object> cards = new List<Object>
             {
                 totalOrdenes,
                 ventasMensuales,
-                averageOrderValue
+                averageOrderValue,
+                costosMes
             };
             return cards;
         }

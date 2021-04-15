@@ -1,25 +1,13 @@
-
-<div>
-    <div class="card">
-      <div class="card-header">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <i class="fas fa-globe"></i>
-              <h3>Top 10 Proveedores con mas Compras</h3>
-            </div>
-          </div>  
-        </div>
-      </div>
-      <div class="card-body">
+<div class="flex" *ngIf="chartReady">
+    <div class="flex-item">
+      <div style="display: block">
         <canvas baseChart
-                [data]="pieChartData"
-                [labels]="pieChartLabels"
-                [chartType]="pieChartType"
-                [options]="pieChartOptions"
-                [plugins]="pieChartPlugins"
-                [legend]="pieChartLegend"
-                [colors]="pieChartColors">
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
         </canvas>
       </div>
     </div>
@@ -47,9 +35,8 @@
         
       </div>
       <div class="col-md-2">
-        <button mat-button mat-raised-button color="primary" (click)="dataFilter()">Actualizar</button>
+            <button mat-button mat-raised-button color="primary" (click)="dataFilter()">Actualizar</button>            
       </div>
     </div>
   </form>
-  </div>
-  
+</div>

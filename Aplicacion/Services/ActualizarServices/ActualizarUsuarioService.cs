@@ -26,7 +26,7 @@ namespace Aplicacion.Services.ActualizarServices
             else
             {
                 usuario.Nombre = request.Nombre;
-                usuario.Password = request.Password;
+                usuario.Password = usuario.Encriptar(request.Password);
                 usuario.Rol = request.Rol;
                 _unitOfWork.UsuarioServiceRepository.Edit(usuario);
                 _unitOfWork.Commit();

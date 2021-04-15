@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
 
-  fillerNav = [
+  fillerNavAdmin = [
     { name: "home", route: "", icon:"home" },
     { name: "Gestión de Usuarios", route: "usuarios", icon:"supervised_user_circle" },
     { name: "Gestión de Productos", route: "productos", icon: "assignment" },
@@ -27,7 +27,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { name: "Liquidaciones", route: "liquidaciones", icon: "monetization_on" },
     { name: "Total Liquidaciones", route: "total-liquidaciones", icon: "monetization_on" },
     { name: "Reportes", route: "reportes", icon: "analytics" }
+  ]
 
+  fillerNavEmpleado = [
+    { name: "home", route: "", icon: "home" },
+    { name: "Gestión de Productos", route: "productos", icon: "assignment" },
+    { name: "Inventario", route: "inventario", icon: "assignment" },
+    { name: "Gestión de Terceros", route: "terceros", icon: "local_shipping" },
+    { name: "Facturacion", route: "facturas", icon: "shopping_bag" }
   ]
   
 

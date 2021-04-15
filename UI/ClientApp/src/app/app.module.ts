@@ -9,8 +9,6 @@ import { DataTablesModule } from 'angular-datatables';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuariosService } from './usuarios/usuarios.service';
 import { TableUsuariosComponent } from './usuarios/table-usuarios/table-usuarios.component';
@@ -98,13 +96,13 @@ import { BirthdayAlertComponent } from './notifications/birthday-alert/birthday-
 import { BirthdayAlertService } from './notifications/birthday-alert/birthday-alert.service';
 import { DialogoTipoTerceroComponent } from './facturas/table-facturas/dialogo-tipo-tercero/dialogo-tipo-tercero.component';
 import { FlujoVentasLineChartComponent } from './reportes/flujo-ventas-line-chart/flujo-ventas-line-chart.component';
+import { FlujoVentasBarraChartComponent } from './reportes/flujo-ventas-barra-chart/flujo-ventas-barra-chart.component';
+import { IsAdminGuard } from './shared/guards/is-admin.guard';
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     UsuariosComponent,
     UsuariosFormComponent,
     ConfirmEqualValidatorDirective,
@@ -161,6 +159,7 @@ import { FlujoVentasLineChartComponent } from './reportes/flujo-ventas-line-char
     BirthdayAlertComponent,
     DialogoTipoTerceroComponent,
     FlujoVentasLineChartComponent,
+    FlujoVentasBarraChartComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -179,32 +178,30 @@ import { FlujoVentasLineChartComponent } from './reportes/flujo-ventas-line-char
     NgxMatDatetimePickerModule, NgxMatTimepickerModule,
     //ACA SE REGISTRAN TODOS LOS COMPONENTES
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'usuarios', component: UsuariosComponent },
-      { path: 'usuarios-crear', component: UsuariosFormComponent },
-      { path: 'usuarios-editar/:id', component: UsuariosFormComponent },
-      { path: 'productos', component: ProductosComponent },
-      { path: 'productos-crear', component: ProductosFormComponent },
-      { path: 'productos-editar/:id', component: ProductosFormComponent },
-      { path: 'terceros', component: TercerosComponent },
-      { path: 'terceros-crear', component: TercerosFormComponent },
-      { path: 'terceros-editar/:id', component: TercerosFormComponent },
-      { path: 'facturas', component: FacturasComponent },
-      { path: 'facturas-crear/:tipoMov', component: FacturasFormComponent },
-      { path: 'empleados', component: EmpleadosComponent },
-      { path: 'empleados-crear', component: EmpleadosFormComponent },
-      { path: 'empleados-editar/:id', component: EmpleadosFormComponent },
-      { path: 'nominas', component: NominaComponent },
-      { path: 'nominas-crear', component: NominaFormComponent },
-      { path: 'nominas-editar/:id/:idN', component: NominaFormComponent },
-      { path: 'liquidaciones', component: LiquidacionComponent },
-      { path: 'total-liquidaciones', component: TotalLiquidacionComponent },
-      { path: 'pruebasSinVS', component: PruebasSinVSComponent },
-      { path: 'reportes', component: ReportesComponent }, 
+      { path: '', component: HomeComponent, pathMatch: 'full', canActivate:[CheckNotloginGuard] },
+      { path: 'usuarios', component: UsuariosComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'usuarios-crear', component: UsuariosFormComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'usuarios-editar/:id', component: UsuariosFormComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'productos', component: ProductosComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'productos-crear', component: ProductosFormComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'productos-editar/:id', component: ProductosFormComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'terceros', component: TercerosComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'terceros-crear', component: TercerosFormComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'terceros-editar/:id', component: TercerosFormComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'facturas', component: FacturasComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'facturas-crear/:tipoMov', component: FacturasFormComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'empleados', component: EmpleadosComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'empleados-crear', component: EmpleadosFormComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'empleados-editar/:id', component: EmpleadosFormComponent, canActivate: [IsAdminGuard] },
+      { path: 'nominas', component: NominaComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'nominas-crear', component: NominaFormComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'nominas-editar/:id/:idN', component: NominaFormComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'liquidaciones', component: LiquidacionComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'total-liquidaciones', component: TotalLiquidacionComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'pruebasSinVS', component: PruebasSinVSComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'reportes', component: ReportesComponent, canActivate: [IsAdminGuard, CheckNotloginGuard] }, 
       { path: 'login', component: LoginComponent, canActivate: [CheckLoginGuard] },
-      { path: 'inventario', component: InventarioComponent },
+      { path: 'inventario', component: InventarioComponent, canActivate: [CheckNotloginGuard]},
 
     ]),
     BrowserAnimationsModule

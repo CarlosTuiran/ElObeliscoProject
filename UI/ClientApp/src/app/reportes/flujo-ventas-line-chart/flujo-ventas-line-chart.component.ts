@@ -47,8 +47,7 @@ export class FlujoVentasLineChartComponent implements OnInit {
   ];
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
-  //dateInitial="Wed Mar 10 2021 00:00:00 GMT-0500"; 
-  //dateFinal:Date= new Date();
+  
   lineChartDataCompra: number[]=[];
   lineChartDataVenta: number[]=[];
   chartReady=false;

@@ -8,13 +8,16 @@ import { take, map } from 'rxjs/operators';
 })
 export class CheckNotloginGuard implements CanActivate {
   constructor(private authService: AuthService,  private router: Router) { }
+  isLogged:boolean;
 
-  canActivate(): Observable<boolean> {
-    this.router.navigate(['login']);
-    return this.authService.isLogged.pipe(
-      take(1),
-      map((isLogged: boolean) => isLogged)
-    );
+  canActivate():boolean {
+    this.authService.isLogged.subscribe(
+      isLogged=>this.isLogged=isLogged, 
+      error=>console.log(error));
+      if(!this.isLogged){
+        this.router.navigate(['login']);        
+      }        
+      return this.isLogged;
   }
 }
 
