@@ -1,5 +1,7 @@
-<h1>Facturas</h1>
-<button (click)='openDialog()'  class="btn btn-primary">Agregar facturas</button>
+<h1 *ngIf="TipoMov == 'Venta'">Facturas Ventas</h1>
+<h1 *ngIf="TipoMov == 'Compra'">Facturas Compras</h1>
+<button *ngIf="TipoMov == 'Venta'" [routerLink]='["/facturas-crearVenta"]' class="btn btn-primary">Agregar facturas de Venta</button>
+<button *ngIf="TipoMov == 'Compra'" [routerLink]='["/facturas-crearCompra"]' class="btn btn-primary">Agregar facturas de Compra</button>
 <app-table-facturas></app-table-facturas>
 
 

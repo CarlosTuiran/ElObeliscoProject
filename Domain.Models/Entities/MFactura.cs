@@ -30,7 +30,7 @@ namespace Domain.Models.Entities
 
 
         public MFactura(int idMfactura, int idEmpleado, int nit, int idMovimiento, string tipoMovimiento, DateTime fechaFactura, DateTime? fechaPago,
-            double subTotal, double valorDevolucion, double descuento, double iVA, /*double total,*/ double abono, string estadoFactura)
+            double subTotal, double valorDevolucion, double descuento, double iVA, /*double total,*/ double abono)
         {
             this.idMfactura = idMfactura;
             this.EmpleadoId = idEmpleado;
@@ -44,7 +44,7 @@ namespace Domain.Models.Entities
             Descuento = descuento;
             IVA = iVA;
             Abono = abono;
-            EstadoFactura = estadoFactura;
+            EstadoFactura = this.FechaPago==null?"Pendiente":"Pagado";
             CalcularTotal();
         }
 
@@ -77,8 +77,7 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Valor Devolucion Erroneo");
             if (this.Abono < 0)
                 errors.Add("Campo Abonor Erroneo");
-            if (string.IsNullOrEmpty(this.EstadoFactura))
-                errors.Add("Campo Estado Factura vacio");
+          
             return errors;
         }
 

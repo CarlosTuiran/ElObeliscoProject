@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { IEmpleado } from 'src/app/empleados/empleados.component';
 import { EmpleadosService } from 'src/app/empleados/empleados.service';
 import { ITercero } from 'src/app/terceros/terceros.component';
@@ -38,12 +38,13 @@ export class FacturasFormComponent implements OnInit {
     private tipoMovimientoService: TipoMovimientosService, 
     private bodegasService: BodegasService, private productosService: ProductosService, 
     private alertService: AlertService, public dialog: MatDialog) { }
-    
-    modoEdicion: boolean = false;
-    empleados: IEmpleado[]=[];
-    terceros: ITercero[];
-    productos: IProducto[];
-   
+
+
+  modoEdicion: boolean = false;
+  empleados: IEmpleado[] = [];
+  terceros: ITercero[];
+  productos: IProducto[];
+
   //Selecciones escogidas
   currentEmpleado="";
   currentTerceros="";
@@ -112,39 +113,32 @@ private _data:IEmpleado[];*/
    descuento :['0', [Validators.pattern(/^\d+$/)]],
    iVA :['0.19'],
    abono :['0', [ Validators.pattern(/^\d+$/)]],
-   estadoFactura:['', [Validators.required]],
+   //estadoFactura:['', [Validators.required]],
    dFacturas:this.fb.array([])
   });
 
 
   ngOnInit() {
-    /*this.tercerosService.getTerceros()
-      .subscribe(terceros => {this.terceros = terceros;
-      console.log(this.terceros); console.log(terceros);},
-        error => console.error(error));*/
-        /*
-    this.empleadosService.getEmpleados()
-      .subscribe(empleados=> this.empleados = empleados,
-        error => console.error(error) 
-        ); 
-    this.tipoMovimientoService.getTipoMovimientos()
-        .subscribe(tipoMovimientos => this.tipoMovimientos = tipoMovimientos,
-          error => console.error(error));*/
-    //* Tipo Movimiento Compra/Venta
-    this.activatedRoute.params.subscribe(params => {
-      this.TipoMov = params["tipoMov"]; 
-    })
+    const segments: UrlSegment[] = this.activatedRoute.snapshot.url;
+    if (segments[0].toString() == 'facturas-crearVenta') {
+      this.TipoMov = "Venta";
+    } else {
+      this.TipoMov = "Compra";
+    }
               
-    this.filteredEstados.next(this.estados.slice());
+    //this.filteredEstados.next(this.estados.slice());
     
     // listen for search field value changes
-    this.estadoFilter.valueChanges
+    /*this.estadoFilter.valueChanges
     .pipe(takeUntil(this._onDestroy))
     .subscribe(() => {
       this.filterEstados();
-    });
+    });*/
+    this.tipoMovimientoService.getTipoMovimientos()      
+    .subscribe(datos =>{ this.tipoMovimientos = datos as ITipoMovimiento[]},
+      error => console.error(error));
+
     this.bodegas=this.bodegasService.getBodegas()
-       
   }
   //obtiene la lista de productos de forma asincrona
   getInfo(productos:IProducto[]){
@@ -271,9 +265,21 @@ private _data:IEmpleado[];*/
               cantidad: ['1', [Validators.required, Validators.pattern(/^\d+$/)]]
         });
         this.referenciasEscogidas.push(this.currentProductoReferencia);
-    this.dFacturas.push(this.dFacturaFormGroup);
+        this.dFacturas.push(this.dFacturaFormGroup);
+        this.cantidadCapture();
       }
     }
+  }
+  //calculo del subtotal dinamico
+  cantidadCapture(){
+    this.SubTotal=0;
+    for (let index = 0; index < this.referenciasEscogidas.length; index++) {
+      var cantidad=this.dFacturas.controls[index].value.cantidad;
+      var precio=this.dFacturas.controls[index].value.precioUnitario;
+      console.log(cantidad *precio);
+      this.SubTotal=this.SubTotal+(cantidad *precio);
+    }
+    
   }
   removerDFactura(indice:number){
     let referenciaaEliminar=this.dFacturas.controls[indice].value.referencia;

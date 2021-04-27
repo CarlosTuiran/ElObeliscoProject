@@ -33,10 +33,7 @@ namespace Aplicacion.Services.CrearServices
             var listMFacturas=_unitOfWork.MFacturaServiceRepository.GetAll();
             var lastMFactura = listMFacturas.TakeLast(1).ToArray();//ultima factura
             requestM.idMfactura = lastMFactura[0].idMfactura + 1;//otorga un nuevo id Mfactura
-            if(requestM.EstadoFactura == "Pendiente"){
-                requestM.FechaPago = null;
-            }
-            
+                                                                 //
             var rtaMService = crearMFacturaService.Ejecutar(requestM);
             
             if (rtaMService.isOk())

@@ -29,8 +29,8 @@ namespace UI.Controllers
         #region: Funcionales
 
 
-        [HttpGet]
-        public Object GetMFacturas()
+        [HttpGet("Facturas/{tipoMov}")]
+        public Object GetMFacturas([FromRoute] string tipoMov)
         {
             var result = (from f in _context.Set<MFactura>()
                           join e in _context.Set<Empleado>()
@@ -39,6 +39,7 @@ namespace UI.Controllers
                           on f.TercerosId equals t.Id
                           join tp in _context.Set<TipoMovimiento>()
                           on f.TipoMovimientoId equals tp.Id
+                          where f.TipoMovimiento == tipoMov
                           select new
                           {
                               MFacturaId = f.Id,

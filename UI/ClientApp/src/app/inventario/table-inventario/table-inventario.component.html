@@ -31,12 +31,10 @@
       <th mat-header-cell *matHeaderCellDef> Precio de Venta </th>
       <td *matCellDef="let element"> {{element.precioVenta}} </td>
     </ng-container>
-    <!--Options-->
-    <ng-container matColumnDef="options">
-      <th mat-header-cell *matHeaderCellDef>Opciones</th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
-        <button mat-icon-button><mat-icon>launch</mat-icon></button>
+    <!--Options--> 
+    <ng-container matColumnDef="options" hidden>
+      <th mat-header-cell *matHeaderCellDef hidden>Opciones</th>
+      <td mat-cell *matCellDef="let element" hidden>
       </td>
     </ng-container>
 

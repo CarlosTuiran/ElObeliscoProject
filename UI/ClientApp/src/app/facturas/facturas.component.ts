@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { AlertService } from '../notifications/_services';
 import {FacturasService} from './facturas.service';
 import { DialogoTipoTerceroComponent } from './table-facturas/dialogo-tipo-tercero/dialogo-tipo-tercero.component';
@@ -14,17 +14,26 @@ export class FacturasComponent implements OnInit {
   isAdmin = false;
   facturas:IMFactura[];
   dialogRta = "";
+    TipoMov: string;
   constructor(private facturasService: FacturasService,
-     private alertService: AlertService,  private dialog: MatDialog, private router: Router) { }
+    private alertService: AlertService, private dialog: MatDialog, private router: Router,
+    private activatedRoute: ActivatedRoute  ) { }
 
   ngOnInit() {
-    this.facturasService.getFacturas()
+    const segments: UrlSegment[] = this.activatedRoute.snapshot.url;
+    if (segments[0].toString() == 'facturasVenta') {
+      this.TipoMov = "Venta";
+    } else {
+      this.TipoMov = "Compra";
+    }
+
+    /*this.facturasService.getFacturas()
       .subscribe(factura => this.facturas = factura,
         error =>this.alertService.error(error.message)
-      );
+      );*/
   }
 
-
+  /*
   openDialog() {
     const dialogRef = this.dialog.open(DialogoTipoTerceroComponent, {
       width: 'auto',
@@ -39,7 +48,7 @@ export class FacturasComponent implements OnInit {
       }      
     }
     );
-  }
+  }*/
 }
 
 export interface IMFactura{
