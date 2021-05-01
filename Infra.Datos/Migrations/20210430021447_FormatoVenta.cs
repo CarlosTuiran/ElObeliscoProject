@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infra.Datos.Migrations
 {
-    public partial class Initial : Migration
+    public partial class FormatoVenta : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,6 +26,22 @@ namespace Infra.Datos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Empleado", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FormatoVenta",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(nullable: true),
+                    Abreviacion = table.Column<string>(nullable: true),
+                    Metrica = table.Column<string>(nullable: true),
+                    FactorConversion = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FormatoVenta", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -354,7 +370,7 @@ namespace Infra.Datos.Migrations
             migrationBuilder.InsertData(
                 table: "Empleado",
                 columns: new[] { "Id", "Apellidos", "Cargo", "Celular", "Correo", "Direccion", "Estado", "FechaIngreso", "IdEmpleado", "Nombres" },
-                values: new object[] { 1, "Ferra Ito", "Cajero", "31688888", "RHerna@gmail.com", "Stranger Valley", "Activo", new DateTime(2021, 4, 6, 21, 47, 56, 712, DateTimeKind.Local).AddTicks(557), 2699540, "Raul Hernandez" });
+                values: new object[] { 1, "Ferra Ito", "Cajero", "31688888", "RHerna@gmail.com", "Stranger Valley", "Activo", new DateTime(2021, 4, 29, 21, 14, 46, 953, DateTimeKind.Local).AddTicks(1289), 2699540, "Raul Hernandez" });
 
             migrationBuilder.InsertData(
                 table: "Inventario",
@@ -364,15 +380,15 @@ namespace Infra.Datos.Migrations
             migrationBuilder.InsertData(
                 table: "Producto",
                 columns: new[] { "Id", "CantidadMinima", "Costo", "Descripcion", "Estado", "Fabrica", "FechaRegistro", "FormatoVenta", "IVA", "InventarioId", "Marca", "PrecioVenta", "Referencia" },
-                values: new object[] { 1, 0, 3000.0, "Llave Inglesa", null, "Ferres SAS", new DateTime(2021, 4, 6, 21, 47, 56, 709, DateTimeKind.Local).AddTicks(1399), "Unidad", 0.29999999999999999, null, "Ferres", 5000.0, "1000-01" });
+                values: new object[] { 1, 0, 3000.0, "Llave Inglesa", null, "Ferres SAS", new DateTime(2021, 4, 29, 21, 14, 46, 948, DateTimeKind.Local).AddTicks(4655), "Unidad", 0.29999999999999999, null, "Ferres", 5000.0, "1000-01" });
 
             migrationBuilder.InsertData(
                 table: "Terceros",
                 columns: new[] { "Id", "Apellido", "Celular", "Correo", "Descripcion", "Direccion", "Estado", "FechaCumple", "Nit", "Nombre", "TipoTercero" },
                 values: new object[,]
                 {
-                    { 1, "Orosco Eter", "3128288", "ferreymas@gmail.com", " Empresa Ferreos y Mas", "Stranger Valley", null, new DateTime(2021, 4, 6, 21, 47, 56, 712, DateTimeKind.Local).AddTicks(7104), "106583", "Santana Silva", "Proveedor" },
-                    { 2, "Joestar", "3443288", "jojo@gmail.com", "Cliente Frecuente", "Stranger Valley", null, new DateTime(2021, 4, 6, 21, 47, 56, 712, DateTimeKind.Local).AddTicks(7770), "10653434", "Jose Jose", "Cliente" }
+                    { 1, "Orosco Eter", "3128288", "ferreymas@gmail.com", " Empresa Ferreos y Mas", "Stranger Valley", null, new DateTime(2021, 4, 29, 21, 14, 46, 954, DateTimeKind.Local).AddTicks(427), "106583", "Santana Silva", "Proveedor" },
+                    { 2, "Joestar", "3443288", "jojo@gmail.com", "Cliente Frecuente", "Stranger Valley", null, new DateTime(2021, 4, 29, 21, 14, 46, 954, DateTimeKind.Local).AddTicks(1543), "10653434", "Jose Jose", "Cliente" }
                 });
 
             migrationBuilder.InsertData(
@@ -388,19 +404,9 @@ namespace Infra.Datos.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "MFactura",
-                columns: new[] { "Id", "Abono", "Descuento", "EmpleadoId", "EstadoFactura", "FechaFactura", "FechaPago", "IVA", "SubTotal", "TercerosId", "TipoMovimiento", "TipoMovimientoId", "Total", "ValorDevolucion", "idMfactura" },
-                values: new object[] { 1, 0.0, 0.0, 1, "Pagada", new DateTime(2021, 4, 6, 21, 47, 56, 713, DateTimeKind.Local).AddTicks(864), new DateTime(2021, 4, 6, 21, 47, 56, 713, DateTimeKind.Local).AddTicks(2625), 0.29999999999999999, 15000.0, 1, "Compra", 1, 0.0, 0.0, 1000 });
-
-            migrationBuilder.InsertData(
                 table: "Usuario",
                 columns: new[] { "Id", "EmpleadoId", "Nombre", "Password", "Rol" },
-                values: new object[] { 1, 1, "RaulH", "raulh", "Admin" });
-
-            migrationBuilder.InsertData(
-                table: "DFactura",
-                columns: new[] { "Id", "Bodega", "Cantidad", "FechaFactura", "MfacturaId", "PrecioTotal", "PrecioUnitario", "Referencia", "idDFactura", "idPromocion" },
-                values: new object[] { 1, "BD1", 5, new DateTime(2021, 4, 6, 21, 47, 56, 713, DateTimeKind.Local).AddTicks(8006), 1, 0.0, 3000.0, "1000-01", 10001, null });
+                values: new object[] { 1, 1, "RaulH", "EAAAAHDlgUkazfaO5QNj7D / gFmseTKDUliA11ginT5ElAN + V", "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_DFactura_MfacturaId",
@@ -461,6 +467,9 @@ namespace Infra.Datos.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "FormatoVenta");
+
             migrationBuilder.DropTable(
                 name: "Liquidacion");
 

@@ -51,8 +51,7 @@ namespace Aplicacion.Test
                     ValorDevolucion = 0,
                     Descuento = 0,
                     IVA = 0.03,
-                    Abono = 0,
-                    EstadoFactura = "Pendiente"
+                    Abono = 0
                 },
                 "Factura Creada Exitosamente"
                 ).SetName("Crear M Factura Correctamente");

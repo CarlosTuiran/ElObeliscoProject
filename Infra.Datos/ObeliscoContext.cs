@@ -16,8 +16,10 @@ namespace Infra.Datos
             //optionsBuilder.UseSqlServer("Server=localhost/SQLEXPRESS;Database=master;Trusted_Connection=True;");
             optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=ObeliescoDB; Integrated Security=True; MultipleActiveResultSets=True");
         }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             //modelBuilder.Entity<EstudianteCuerso>().HasKey(x => new { x.CursoId, x.EstudianteId });//llave compuesta 
             //modelBuilder.Entity<EstudianteCuerso>().HasQueryFilter(x=> x.Estado=="Activo");//Filtro por tipo que siempre se activa
             //        puede ignorarse con IgnoreQueryFliters
@@ -72,8 +74,9 @@ namespace Infra.Datos
             //     new Tiempo{ Id=12, Año=2020, Mes=1, Dia=3, DiaDelAño=3, Fecha=Convert.ToDateTime("03-01-2020"), NombreDia="Lunes",
             //     NombreDiaCorto="LUN", NombreMes="Enero", NombreMesCorto="ENE", SemanaDelAño=1, Semestre=1, Trimestre=1
             //     });
+            /*
             modelBuilder.Entity<MFactura>().HasData(
-                new MFactura() {idMfactura=1000, TipoMovimiento="Compra", FechaFactura=DateTime.Now, EstadoFactura="Pagada",
+                new MFactura() {idMfactura=1000, TipoMovimiento="Compra", FechaFactura= DateTime.Now.Date, EstadoFactura="Pagada",
                 EmpleadoId=1, TercerosId=1, FechaPago=DateTime.Now, IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=1, TipoMovimientoId=1
                 });
             modelBuilder.Entity<DFactura>().HasData(
@@ -81,7 +84,7 @@ namespace Infra.Datos
                     PrecioUnitario=3000,Referencia="1000-01", Id=1
                 });
             modelBuilder.Entity<MFactura>().HasData(
-                new MFactura() {idMfactura=1001, TipoMovimiento="Venta", FechaFactura=DateTime.Now, EstadoFactura="Pagada",
+                new MFactura() {idMfactura=1001, TipoMovimiento="Venta", FechaFactura= DateTime.Now.Date, EstadoFactura="Pagada",
                 EmpleadoId=1, TercerosId=2, FechaPago=DateTime.Now.AddMonths(-1), IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=2, TipoMovimientoId=1
                 });
             modelBuilder.Entity<DFactura>().HasData(
@@ -89,13 +92,13 @@ namespace Infra.Datos
                     PrecioUnitario=3000,Referencia="1000-01", Id=2
                 });
             modelBuilder.Entity<MFactura>().HasData(
-                new MFactura() {idMfactura=1003, TipoMovimiento="Venta", FechaFactura=DateTime.Now, EstadoFactura="Pagada",
+                new MFactura() {idMfactura=1003, TipoMovimiento="Venta", FechaFactura=DateTime.Now.Date, EstadoFactura="Pagada",
                 EmpleadoId=1, TercerosId=2, FechaPago=DateTime.Now, IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=3, TipoMovimientoId=1
                 });
             modelBuilder.Entity<DFactura>().HasData(
                 new DFactura(){MfacturaId=3, idDFactura=10002, Cantidad=5, Bodega="BD1", FechaFactura=DateTime.Now, 
                     PrecioUnitario=3000,Referencia="1000-01", Id=3 
-                });
+                });*/
             //Restringe las llaves foraneas en el parametro OnDelete 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
            {
@@ -121,6 +124,7 @@ namespace Infra.Datos
         public DbSet<Liquidacion> Liquidacion { get; set; }
         public DbSet<Tiempo> Tiempo { get; set; }
         public DbSet<TotalLiquidacion> TotalLiquidacion { get; set; }
+        public DbSet<FormatoVenta> FormatoVenta { get; set; }
 
 
     }

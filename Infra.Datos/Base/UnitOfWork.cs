@@ -125,6 +125,15 @@ namespace Infra.Datos.Base
             }
         }
 
+        private IFormatoVentaServiceRepository _formatoVentaServiceRepository;
+        public IFormatoVentaServiceRepository FormatoVentaServiceRepository
+        {
+            get
+            {
+                return _formatoVentaServiceRepository ?? (_formatoVentaServiceRepository = new FormatoVentaServiceRepository(_dbContext));
+            }
+        }
+
         public int Commit()
         {
             return _dbContext.SaveChanges();

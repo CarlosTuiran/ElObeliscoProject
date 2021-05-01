@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Datos.Migrations
 {
     [DbContext(typeof(ObeliscoContext))]
-    [Migration("20210407030717_Password")]
-    partial class Password
+    [Migration("20210430021447_FormatoVenta")]
+    partial class FormatoVenta
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,20 +60,6 @@ namespace Infra.Datos.Migrations
                     b.HasIndex("MfacturaId");
 
                     b.ToTable("DFactura");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Bodega = "BD1",
-                            Cantidad = 5,
-                            FechaFactura = new DateTime(2021, 4, 6, 22, 7, 16, 515, DateTimeKind.Local).AddTicks(2013),
-                            MfacturaId = 1,
-                            PrecioTotal = 0.0,
-                            PrecioUnitario = 3000.0,
-                            Referencia = "1000-01",
-                            idDFactura = 10001
-                        });
                 });
 
             modelBuilder.Entity("Domain.Models.Entities.Empleado", b =>
@@ -124,10 +110,34 @@ namespace Infra.Datos.Migrations
                             Correo = "RHerna@gmail.com",
                             Direccion = "Stranger Valley",
                             Estado = "Activo",
-                            FechaIngreso = new DateTime(2021, 4, 6, 22, 7, 16, 511, DateTimeKind.Local).AddTicks(7197),
+                            FechaIngreso = new DateTime(2021, 4, 29, 21, 14, 46, 953, DateTimeKind.Local).AddTicks(1289),
                             IdEmpleado = 2699540,
                             Nombres = "Raul Hernandez"
                         });
+                });
+
+            modelBuilder.Entity("Domain.Models.Entities.FormatoVenta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Abreviacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("FactorConversion")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Metrica")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FormatoVenta");
                 });
 
             modelBuilder.Entity("Domain.Models.Entities.Inventario", b =>
@@ -273,26 +283,6 @@ namespace Infra.Datos.Migrations
                     b.HasIndex("TipoMovimientoId");
 
                     b.ToTable("MFactura");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Abono = 0.0,
-                            Descuento = 0.0,
-                            EmpleadoId = 1,
-                            EstadoFactura = "Pagada",
-                            FechaFactura = new DateTime(2021, 4, 6, 22, 7, 16, 514, DateTimeKind.Local).AddTicks(300),
-                            FechaPago = new DateTime(2021, 4, 6, 22, 7, 16, 514, DateTimeKind.Local).AddTicks(2872),
-                            IVA = 0.29999999999999999,
-                            SubTotal = 15000.0,
-                            TercerosId = 1,
-                            TipoMovimiento = "Compra",
-                            TipoMovimientoId = 1,
-                            Total = 0.0,
-                            ValorDevolucion = 0.0,
-                            idMfactura = 1000
-                        });
                 });
 
             modelBuilder.Entity("Domain.Models.Entities.Nomina", b =>
@@ -424,7 +414,7 @@ namespace Infra.Datos.Migrations
                             Costo = 3000.0,
                             Descripcion = "Llave Inglesa",
                             Fabrica = "Ferres SAS",
-                            FechaRegistro = new DateTime(2021, 4, 6, 22, 7, 16, 505, DateTimeKind.Local).AddTicks(6748),
+                            FechaRegistro = new DateTime(2021, 4, 29, 21, 14, 46, 948, DateTimeKind.Local).AddTicks(4655),
                             FormatoVenta = "Unidad",
                             IVA = 0.29999999999999999,
                             Marca = "Ferres",
@@ -483,7 +473,7 @@ namespace Infra.Datos.Migrations
                             Correo = "ferreymas@gmail.com",
                             Descripcion = " Empresa Ferreos y Mas",
                             Direccion = "Stranger Valley",
-                            FechaCumple = new DateTime(2021, 4, 6, 22, 7, 16, 513, DateTimeKind.Local).AddTicks(2498),
+                            FechaCumple = new DateTime(2021, 4, 29, 21, 14, 46, 954, DateTimeKind.Local).AddTicks(427),
                             Nit = "106583",
                             Nombre = "Santana Silva",
                             TipoTercero = "Proveedor"
@@ -496,7 +486,7 @@ namespace Infra.Datos.Migrations
                             Correo = "jojo@gmail.com",
                             Descripcion = "Cliente Frecuente",
                             Direccion = "Stranger Valley",
-                            FechaCumple = new DateTime(2021, 4, 6, 22, 7, 16, 513, DateTimeKind.Local).AddTicks(4177),
+                            FechaCumple = new DateTime(2021, 4, 29, 21, 14, 46, 954, DateTimeKind.Local).AddTicks(1543),
                             Nit = "10653434",
                             Nombre = "Jose Jose",
                             TipoTercero = "Cliente"

@@ -98,6 +98,11 @@ import { DialogoTipoTerceroComponent } from './facturas/table-facturas/dialogo-t
 import { FlujoVentasLineChartComponent } from './reportes/flujo-ventas-line-chart/flujo-ventas-line-chart.component';
 import { FlujoVentasBarraChartComponent } from './reportes/flujo-ventas-barra-chart/flujo-ventas-barra-chart.component';
 import { IsAdminGuard } from './shared/guards/is-admin.guard';
+import { FormatoVentaComponent } from './formato-venta/formato-venta.component';
+import { FormFormatoVentaComponent } from './formato-venta/form-formato-venta/form-formato-venta.component';
+import { TableFormatoVentaComponent } from './formato-venta/table-formato-venta/table-formato-venta.component';
+import { ContabilidadComponent } from './contabilidad/contabilidad.component';
+import { ConfiguracionesComponent } from './configuraciones/configuraciones.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -160,6 +165,11 @@ import { IsAdminGuard } from './shared/guards/is-admin.guard';
     DialogoTipoTerceroComponent,
     FlujoVentasLineChartComponent,
     FlujoVentasBarraChartComponent,
+    FormatoVentaComponent,
+    FormFormatoVentaComponent,
+    TableFormatoVentaComponent,
+    ContabilidadComponent,
+    ConfiguracionesComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -203,7 +213,10 @@ import { IsAdminGuard } from './shared/guards/is-admin.guard';
       { path: 'pruebasSinVS', component: PruebasSinVSComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
       { path: 'reportes', component: ReportesComponent, canActivate: [IsAdminGuard, CheckNotloginGuard] }, 
       { path: 'login', component: LoginComponent, canActivate: [CheckLoginGuard] },
-      { path: 'inventario', component: InventarioComponent, canActivate: [CheckNotloginGuard]},
+      { path: 'inventario', component: InventarioComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'formatoVenta', component: FormatoVentaComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'formatoVenta-crear', component: FormFormatoVentaComponent, canActivate: [CheckNotloginGuard] },
+
 
     ]),
     BrowserAnimationsModule

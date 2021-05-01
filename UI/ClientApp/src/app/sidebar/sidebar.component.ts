@@ -19,6 +19,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { name: "home", route: "", icon:"home" },
     { name: "Gestión de Usuarios", route: "usuarios", icon:"supervised_user_circle" },
     { name: "Gestión de Productos", route: "productos", icon: "assignment" },
+    { name: "Formatos de Venta", route: "formatoVenta", icon: "shopping_bag" },
     { name: "Inventario", route: "inventario", icon: "assignment" },
     { name: "Gestión de Terceros", route: "terceros", icon: "local_shipping" },
     { name: "Facturacion Venta", route: "facturasVenta", icon: "shopping_bag" },
@@ -27,7 +28,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { name: "Gestión de Nomina", route: "nominas", icon: "payments" },
     { name: "Liquidaciones", route: "liquidaciones", icon: "monetization_on" },
     { name: "Total Liquidaciones", route: "total-liquidaciones", icon: "monetization_on" },
-    { name: "Reportes", route: "reportes", icon: "analytics" }
+    { name: "Reportes", route: "reportes", icon: "analytics" },
+    { name: "Configuracion", route: "configuraciones", icon: "build" }
   ]
 
   fillerNavEmpleado = [
