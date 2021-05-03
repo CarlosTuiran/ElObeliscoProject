@@ -32,7 +32,13 @@ namespace UI.Controllers
         {
             return _context.FormatoVenta;
         }
-
+        [HttpGet("GetFormatos/{id}")]
+        public async Task<IEnumerable<FormatoVenta>> GetFormatos([FromRoute] string id)
+        {
+            Producto producto = await _context.Producto.SingleOrDefaultAsync(t => t.Referencia == id);
+            FormatoVenta formatoVenta = await _context.FormatoVenta.SingleOrDefaultAsync(t => t.Nombre == producto.FormatoVenta);
+            return _context.FormatoVenta.Where(t => t.Metrica == formatoVenta.Metrica);
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetFormatoVenta([FromRoute] int id)
         {

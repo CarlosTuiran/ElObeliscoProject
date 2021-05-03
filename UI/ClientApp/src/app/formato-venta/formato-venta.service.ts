@@ -14,11 +14,13 @@ export class FormatoVentaService {
   getFormatosVenta(): Observable<IFormatoVenta[]> {
     return this.http.get<IFormatoVenta[]>(this.apiURL);
   }
-
   getFormatoVenta(id: number): Observable<IFormatoVenta> {
     return this.http.get<IFormatoVenta>(this.apiURL + '/' + id);
   }
-
+  //obtener los formatos de un producto especifico
+  getFormatos(id: string): Observable<IFormatoVenta[]> {
+    return this.http.get<IFormatoVenta[]>(this.apiURL + '/GetFormatos/' + id);
+  }
   createFormatoVenta(formatVenta: IFormatoVenta): Observable<IFormatoVenta> {
     return this.http.post<IFormatoVenta>(this.apiURL, formatVenta);
   }

@@ -50,13 +50,13 @@
     <div class="form-group"
          [ngClass]="{'has-error': ((formatoVenta.touched || formatoVenta.dirty) && formatoVenta.invalid)}">
       <label class="col-md-2 control-label"
-             for="formatoVentaId">Formato Venta del Producto</label>
-
-      <div class="col-md-8">
-        <input class="form-control"
-               id="formatoVentaId"
-               type="text"
-               formControlName="formatoVenta" />
+             for="formatoVenta">Formato Venta del Producto</label>
+      <div class="col-md-8"> 
+        <mat-select formControlName="formatoVenta" placeholder="Elija una opción" #formatoVentaIdSelect>
+          <mat-option *ngFor="let tipo of formatosVenta" [value]="tipo.nombre" >
+            {{tipo.nombre}}
+          </mat-option>
+        </mat-select>        
         <div class="alert alert-danger" *ngIf="((formatoVenta.touched || formatoVenta.dirty )&& formatoVenta.invalid)">
           <span *ngIf="formatoVenta.errors.required">
             El campo Formato Venta es requerido
@@ -146,7 +146,7 @@
     <div class="form-group"
          [ngClass]="{'has-error': ((iVA.touched || iVA.dirty) && iVA.invalid)}">
       <label class="col-md-2 control-label"
-             for="iva">IVA del Producto</label>
+             for="iva">IVA del Producto <i>Dejar en 0 si no lleva iva</i></label>
 
       <div class="col-md-8">
         <input class="form-control"

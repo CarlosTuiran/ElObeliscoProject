@@ -71,13 +71,16 @@ namespace Aplicacion.Services.CrearServices
         public CrearFacturasResponse PreEjecutar(CrearMFacturaRequest requestM){
             var dfacturas=requestM.DFacturas;
             double subTotal=0;
+            double iva = 0;
             foreach (var item in dfacturas)
             {
-                subTotal=subTotal+(item.PrecioUnitario*item.Cantidad);
+                Producto producto = _unitOfWork.ProductoServiceRepository.FindFirstOrDefault(t => t.Referencia == item.Referencia);
+                iva += ((item.PrecioUnitario * item.Cantidad) * (producto.IVA/100));
+                subTotal = subTotal+(item.PrecioUnitario*item.Cantidad);
             }
             return new   CrearFacturasResponse
-            { Message = "Subtotal calculado", SubTotal = subTotal };
-        }   
+            { Message = "Subtotal calculado", SubTotal = subTotal, IVA = iva };
+        }
     }
 
 }

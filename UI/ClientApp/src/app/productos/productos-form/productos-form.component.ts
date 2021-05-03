@@ -4,6 +4,8 @@ import { IProducto } from '../productos.component';
 import { ProductosService } from '../productos.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../notifications/_services';
+import { IFormatoVenta } from '../../formato-venta/formato-venta.component';
+import { FormatoVentaService } from '../../formato-venta/formato-venta.service';
 
 @Component({
   selector: 'app-productos-form',
@@ -13,12 +15,12 @@ import { AlertService } from '../../notifications/_services';
 export class ProductosFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private productosService: ProductosService,
-    private router: Router, private activatedRoute: ActivatedRoute, 
+    private router: Router, private formatoVentaService: FormatoVentaService,private activatedRoute: ActivatedRoute, 
     private alertService: AlertService) { }
 
   modoEdicion: boolean = false;
   productoId: string;
-
+  formatosVenta:IFormatoVenta[];
   formGroup = this.fb.group({
     referencia: ['', [Validators.required]],
     descripcion: ['', [Validators.required]],
@@ -27,7 +29,7 @@ export class ProductosFormComponent implements OnInit {
     fabrica: ['', [Validators.required]],
     costo: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     precioVenta: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-    iVA: ['', [Validators.required]],
+    iVA: ['0', [Validators.required]],
     cantidadMinima:['', [Validators.required, Validators.pattern(/^\d+$/)]]
   });
  
@@ -42,6 +44,10 @@ export class ProductosFormComponent implements OnInit {
       this.productosService.getProducto(this.productoId).subscribe(producto => this.cargarFormulario(producto),
         error => this.alertService.error(error.message));
     });
+    this.formatoVentaService.getFormatosVenta().subscribe(
+      formatos=>this.formatosVenta=formatos,
+      error=>this.alertService.error(error.message)
+    );
   }
   cargarFormulario(producto: IProducto) {
     console.log(producto);

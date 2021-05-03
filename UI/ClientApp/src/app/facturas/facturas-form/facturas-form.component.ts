@@ -23,6 +23,8 @@ import { DialogoCrearFacturaComponent } from './dialogo-crear-factura/dialogo-cr
 
 //import { MatDialog } from '@angular/material/typings';
 import { MatDialog } from '@angular/material/dialog';
+import { IFormatoVenta } from '../../formato-venta/formato-venta.component';
+import { FormatoVentaService } from '../../formato-venta/formato-venta.service';
 //import { MatDialog } from '@angular/material';
 
 @Component({
@@ -37,13 +39,15 @@ export class FacturasFormComponent implements OnInit {
     private tercerosService: TercerosService, private empleadosService: EmpleadosService,
     private tipoMovimientoService: TipoMovimientosService, 
     private bodegasService: BodegasService, private productosService: ProductosService, 
-    private alertService: AlertService, public dialog: MatDialog) { }
+    private alertService: AlertService, public dialog: MatDialog,
+    private formatoVentaService: FormatoVentaService) { }
 
 
   modoEdicion: boolean = false;
   empleados: IEmpleado[] = [];
   terceros: ITercero[];
   productos: IProducto[];
+  formatosVenta: IFormatoVenta[];
 
   //Selecciones escogidas
   currentEmpleado="";
@@ -53,12 +57,14 @@ export class FacturasFormComponent implements OnInit {
   currentProductoDescripcion="";
   currentProductoReferencia = "";
   currentProductoPrecio = 0;
-
+  currentProductoIva = 0;
+  currentProductoFormato = "";
   //Lista de Productos escogidos
   referenciasEscogidas: string[] = [];
 
   //Variable de Subtotal
   SubTotal = 0;
+  Calculoiva = 0;
 
   //dialogRta respuesta a la ventana de dialogo
   dialogRta = "";
@@ -71,6 +77,7 @@ export class FacturasFormComponent implements OnInit {
   promociones: IPromocion[];
   estados:Estado[]= [{'nombre':'Pagada'}, {'nombre':'Pendiente'}];
   usuarioId: number;
+  Formatos:IFormatoVenta[];
   dFacturaFormGroup;
   protected _onDestroy = new Subject<void>();
 
@@ -111,8 +118,8 @@ private _data:IEmpleado[];*/
    subTotal :['1', [Validators.required, Validators.pattern(/^\d+$/)]],
    valorDevolucion :['0', [Validators.pattern(/^\d+$/)]],
    descuento :['0', [Validators.pattern(/^\d+$/)]],
-   iVA :['0.19'],
-   abono :['0', [ Validators.pattern(/^\d+$/)]],
+    abono: ['0', [Validators.pattern(/^\d+$/)]],
+    ivaTotal: ['0', [Validators.pattern(/^\d+$/)]],
    //estadoFactura:['', [Validators.required]],
    dFacturas:this.fb.array([])
   });
@@ -125,19 +132,14 @@ private _data:IEmpleado[];*/
     } else {
       this.TipoMov = "Compra";
     }
-              
-    //this.filteredEstados.next(this.estados.slice());
-    
-    // listen for search field value changes
-    /*this.estadoFilter.valueChanges
-    .pipe(takeUntil(this._onDestroy))
-    .subscribe(() => {
-      this.filterEstados();
-    });*/
+
+    this.formatoVentaService.getFormatosVenta().subscribe(
+      formatos => this.Formatos = formatos,
+      error => this.alertService.error(error));
+
     this.tipoMovimientoService.getTipoMovimientos()      
     .subscribe(datos =>{ this.tipoMovimientos = datos as ITipoMovimiento[]},
       error => console.error(error));
-
     this.bodegas=this.bodegasService.getBodegas()
   }
   //obtiene la lista de productos de forma asincrona
@@ -167,7 +169,8 @@ private _data:IEmpleado[];*/
   calcSubTotal(mfactura:IMFactura){
     //llamar a la funcion de prefacturacion
     this.facturasService.precreateFacturas(mfactura)
-        .subscribe(mfactura => {this.SubTotal=mfactura.subTotal; 
+      .subscribe(mfactura => {
+        this.SubTotal = mfactura.subTotal; 
           console.log(mfactura);
           this.openDialog();
         },
@@ -222,9 +225,6 @@ private _data:IEmpleado[];*/
   get descuento() {
     return this.formGroup.get('descuento');
   }
-  get iVA() {
-    return this.formGroup.get('iVA');
-  }
   get abono() {
     return this.formGroup.get('abono');
   }
@@ -243,11 +243,20 @@ private _data:IEmpleado[];*/
   get bodega() {
     return this.dFacturaFormGroup.get('bodega');
   }
+  get iva() {
+    return this.dFacturaFormGroup.get('iva');
+  }
+  get formatoVenta(){
+    return this.dFacturaFormGroup.get('formatoVenta');
+  }
   get cantidad() {
     return this.dFacturaFormGroup.get('cantidad');
   }
   get precioUnitario() {
     return this.dFacturaFormGroup.get('precioUnitario');
+  }
+  get descripcion() {
+    return this.dFacturaFormGroup.get('descripcion');
   }
   agregarDFactura() {
     if (this.currentProductoReferencia == "") {
@@ -259,9 +268,12 @@ private _data:IEmpleado[];*/
       } else {
           this.dFacturaFormGroup = this.fb.group({
               referencia: [this.currentProductoReferencia, [Validators.required]],
+              descripcion:[this.currentProductoDescripcion],
               promocionId: ['0'],
               bodega: ['', [Validators.required]],
+              formatoVenta:['',[Validators.required] ],
               precioUnitario: [this.currentProductoPrecio],
+              iva: [this.currentProductoIva, [Validators.required]],
               cantidad: ['1', [Validators.required, Validators.pattern(/^\d+$/)]]
         });
         this.referenciasEscogidas.push(this.currentProductoReferencia);
@@ -272,12 +284,16 @@ private _data:IEmpleado[];*/
   }
   //calculo del subtotal dinamico
   cantidadCapture(){
-    this.SubTotal=0;
+    this.SubTotal = 0;
+    this.Calculoiva =0;
     for (let index = 0; index < this.referenciasEscogidas.length; index++) {
-      var cantidad=this.dFacturas.controls[index].value.cantidad;
+      var cantidad = this.dFacturas.controls[index].value.cantidad;
+      var iva = this.dFacturas.controls[index].value.iva;
+      var formatoProducto=this.dFacturas.controls[index].value.formatoVenta; console.log("R1:"+formatoProducto);
       var precio=this.dFacturas.controls[index].value.precioUnitario;
-      console.log(cantidad *precio);
-      this.SubTotal=this.SubTotal+(cantidad *precio);
+      var formatoConvert=this.Formatos.filter(x=>x.nombre==formatoProducto); console.log("R2:"+formatoConvert[0].factorConversion);
+      this.SubTotal = this.SubTotal + (cantidad * (precio/formatoConvert[0].factorConversion));
+      this.Calculoiva = this.Calculoiva + ((cantidad * precio) * (iva / 100));
     }
     
   }
@@ -355,9 +371,14 @@ private _data:IEmpleado[];*/
     this.currentPromocion=$event.nombre;
   }
   receiveMessageProducto($event){
-
-      this.currentProductoDescripcion=$event.descripcion;
-      this.currentProductoReferencia = $event.referencia;
+      
+    this.currentProductoDescripcion=$event.descripcion;
+    this.currentProductoReferencia = $event.referencia;
+    this.formatoVentaService.getFormatos($event.referencia).subscribe(
+      formatos => this.formatosVenta = formatos,
+      error =>  this.alertService.error(error.error.message));
+    this.currentProductoFormato=$event.formatoVenta;
+    this.currentProductoIva = $event.iva;
     if(this.TipoMov == 'Compra'){
       this.currentProductoPrecio=$event.costo;
     }else{

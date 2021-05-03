@@ -29,7 +29,7 @@
     <div class="form-group"
          [ngClass]="{'has-error': ((abreviacion.touched || abreviacion.dirty) && abreviacion.invalid)}">
       <label class="col-md-2 control-label"
-             for="abreviacionId">Abreviacion del Empleado</label>
+             for="abreviacionId">Abreviacion</label>
 
       <div class="col-md-8">
         <input class="form-control"
@@ -51,18 +51,10 @@
 
       <div class="col-md-8">
         <mat-select formControlName="metrica" placeholder="Elija una opción" #metricaSelect>            
-            <mat-option [value]="Peso">
-                Peso
-            </mat-option>
-            <mat-option [value]="Volumen">
-                Volumen
-            </mat-option>
-            <mat-option [value]="Unidad">
-                Unidad
-            </mat-option>
-            <mat-option [value]="Otra">
-                Otra
-            </mat-option>
+            <mat-option value="Peso">Peso</mat-option>
+            <mat-option value="Volumen">Volumen</mat-option>
+            <mat-option value="Unidad">Unidad</mat-option>
+            <mat-option value="Otra">Otra</mat-option>
           </mat-select>        
         <div class="alert alert-danger" *ngIf="((metrica.touched || metrica.dirty )&& metrica.invalid)">
           <span *ngIf="metrica.errors.required">

@@ -138,13 +138,12 @@
     <div formArrayName="dFacturas" *ngFor="let dFactura of dFacturas.controls;
     let i=index">
       <div [formGroupName]="i">
-        <div class="form-group row">
+        <div class="form-group row" >
           <!--Referencia de Productos-->
-          <div class="form-group col-md-3">
-            <label class="col-md-10 control-label"
-                   for="referenciaId">Referencia del producto</label>
-
-            <div class="col-md-10">
+          <div class="form-group col-md-1" style="width: 14%">
+            <label class="control-label"
+                   for="referenciaId">Referencia</label>
+            <div>
               <input class="form-control"
                      id="referenciaId"
                      type="text"
@@ -158,13 +157,28 @@
               </div>
             </div>
           </div>
-          
+          <!--Descripcion de Productos-->
+          <div class="form-group col-md-2">
+            <label class="control-label"
+                   for="descripcion">Descripcion</label>
+            <div>
+              <input class="form-control"
+                     id="descripcion"
+                     type="text"
+                     formControlName="descripcion"
+                     disabled />
+              <div class="alert alert-danger" *ngIf="((descripcion.touched || descripcion.dirty )&& descripcion.invalid)">
+                <span *ngIf="descripcion.errors.required">
+                  El campo descripcion es requerido
+                </span>
+              </div>
+            </div>
+          </div>
 
-
-          <div class="form-group col-md-3">
-            <label class="col-md-10 control-label"
+          <div class="form-group col-md-auto">
+            <label class="control-label"
                    for="promocionId">Promocion</label>
-            <div class="col-md-10">
+            <div>
               <select class="form-control"
                       id="promocionId"
                       type="text"
@@ -174,12 +188,12 @@
             </div>
           </div>
 
-          <div class="form-group col-md-2"
+          <div class="form-group col-md-auto"
                [ngClass]="{'has-error': ((bodega.touched || bodega.dirty)&& bodega.invalid)}">
-            <label class="col-md-10 control-label"
+            <label class="control-label"
                    for="bodegaId">Bodega</label>
 
-            <div class="col-md-10">
+            <div>
               <select class="form-control"
                       id="bodegaId"
                       type="text"
@@ -195,20 +209,73 @@
             </div>
           </div>
 
-          <div class="form-group col-md-2"
-               [ngClass]="{'has-error': ((cantidad.touched || cantidad.dirty) && cantidad.invalid)}">
-            <label class="col-md-10 control-label"
-                   for="cantidadId">Cantidad </label>
+          <div class="form-group col-md-1">
+            <label class="control-label"
+                   for="ivaId">IVA</label>
 
-            <div class="col-md-10">
+            <div>
               <input class="form-control"
-                     id="cantidadId"                     
+                     id="ivaId"
                      type="number"
-                     formControlName="cantidad" (change)="cantidadCapture()" />
+                     formControlName="iva"
+                     disabled />
+              <div class="alert alert-danger" *ngIf="((iva.touched || iva.dirty )&& iva.invalid)">
+                <span *ngIf="iva.errors.required">
+                  El campo IVA es requerido
+                </span>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-auto">
+            <label class="control-label"
+                   for="formatoVentaId">Formato</label>
+
+            <div>
+              <mat-select [(ngModel)]="currentProductoFormato" formControlName="formatoVenta" placeholder="Elija una opción" #formatoVentaIdSelect (selectionChange)="cantidadCapture()">
+                <mat-option *ngFor="let tipo of formatosVenta" [value]="tipo.nombre">
+                  {{tipo.nombre}}
+                </mat-option>
+              </mat-select>
+              <div class="alert alert-danger" *ngIf="((formatoVenta.touched || formatoVenta.dirty )&& formatoVenta.invalid)">
+                <span *ngIf="formatoVenta.errors.required">
+                  El campo formatoVenta es requerido
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-1" style="width: 50%"
+               [ngClass]="{'has-error': ((precioUnitario.touched || precioUnitario.dirty) && precioUnitario.invalid)}">
+            <label class="control-label"
+                   for="precioUnitario">Precio U</label>
+            <div>
               <input class="form-control"
                      id="precioUnitario"
-                     type="text"
-                     formControlName="precioUnitario" hidden />
+                     type="number"
+                     formControlName="precioUnitario" disabled />
+              <div class="alert alert-danger" *ngIf="((precioUnitario.touched || precioUnitario.dirty )&& precioUnitario.invalid)">
+                <span *ngIf="precioUnitario.errors.required">
+                  El campo precioUnitario es requerido
+                </span>
+                <span *ngIf="precioUnitario.errors.pattern">
+                  El campo precioUnitario es numerico
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-1"
+               [ngClass]="{'has-error': ((cantidad.touched || cantidad.dirty) && cantidad.invalid)}">
+            <label class="control-label"
+                   for="cantidadId">Cantidad </label>
+
+            <div>
+              <input class="form-control"
+                     id="cantidadId"
+                     type="number"
+                     formControlName="cantidad" (change)="cantidadCapture()" />
               <div class="alert alert-danger" *ngIf="((cantidad.touched || cantidad.dirty )&& cantidad.invalid)">
                 <span *ngIf="cantidad.errors.required">
                   El campo cantidad es requerido
@@ -219,7 +286,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-2 example-button-container">
+          <div class="col-md-1 example-button-container">
             <button mat-fab color="warn" aria-label="Eliminar"
                     (click)="removerDFactura(i)">
               <mat-icon>delete</mat-icon>
@@ -234,12 +301,12 @@
 
 <!-- Totales de la factura -->
 <div class="row divtotalesfactura">
-  <div class="form-group col-md-3"
+  <div class="form-group col-md-2"
        [ngClass]="{'has-error': ((valorDevolucion.touched || valorDevolucion.dirty) && valorDevolucion.invalid)}">
-    <label class="col-md-10 control-label"
+    <label class="control-label"
            for="valorDevolucionId">Valor Devolucion</label>
 
-    <div class="col-md-10">
+    <div>
       <input class="form-control"
              id="valorDevolucionId"
              type="text"
@@ -255,12 +322,12 @@
     </div>
   </div>
 
-  <div class="form-group col-md-3"
+  <div class="form-group col-md-2"
        [ngClass]="{'has-error': ((descuento.touched || descuento.dirty) && descuento.invalid)}">
-    <label class="col-md-10 control-label"
+    <label class="control-label"
            for="descuentoId">Descuento de la Factura</label>
 
-    <div class="col-md-10">
+    <div>
       <input class="form-control"
              id="descuentoId"
              type="text"
@@ -275,66 +342,52 @@
       </div>
     </div>
   </div>
+  <div class="form-group col-md-2"
+       [ngClass]="{'has-error': ((abono.touched || abono.dirty) && abono.invalid)}">
+    <label class="control-label"
+           for="abonoId">Abono de la Factura</label>
 
-  <input class="form-control"
-         id="iVAId"
-         type="text"
-         formControlName="iVA" hidden />
-  <!--<div class="form-group col-md-3"
-             [ngClass]="{'has-error': ((iVA.touched || iVA.dirty) && iVA.invalid)}">
-          <label class="col-md-10 control-label"
-                 for="iVAId">IVA de la Factura</label>
-
-          <div class="col-md-8">
-            <input class="form-control"
-                   id="iVAId"
-                   type="text"
-                   formControlName="iVA" />
-            <div class="alert alert-danger" *ngIf="((iVA.touched || iVA.dirty )&& iVA.invalid)">
-              <span *ngIf="iVA.errors.required">
-                El campo IVA es requerido
-              </span>
-              <span *ngIf="iVA.errors.pattern">
-                El campo IVA es numerico
-              </span>
-            </div>
-          </div>
-        </div>-->
-    <div class="form-group col-md-3"
-         [ngClass]="{'has-error': ((abono.touched || abono.dirty) && abono.invalid)}">
-      <label class="col-md-10 control-label"
-             for="abonoId">Abono de la Factura</label>
-
-      <div class="col-md-10">
-        <input class="form-control"
-               id="abonoId"
-               type="text"
-               formControlName="abono" />
-        <div class="alert alert-danger" *ngIf="((abono.touched || abono.dirty )&& abono.invalid)">
-          <span *ngIf="abono.errors.required">
-            El campo abono es requerido
-          </span>
-          <span *ngIf="abono.errors.pattern">
-            El campo abono es numerico
-          </span>
-        </div>
+    <div>
+      <input class="form-control"
+             id="abonoId"
+             type="text"
+             formControlName="abono" />
+      <div class="alert alert-danger" *ngIf="((abono.touched || abono.dirty )&& abono.invalid)">
+        <span *ngIf="abono.errors.required">
+          El campo abono es requerido
+        </span>
+        <span *ngIf="abono.errors.pattern">
+          El campo abono es numerico
+        </span>
       </div>
     </div>
+  </div>
 
-    <div class="form-group col-md-3">
-      <label class="col-md-10 control-label"
-             for="subTotalId">SubTotal de la Factura</label>
-
-      <div class="col-md-10">
-        <input class="form-control"
-               id="subTotalId"
-               type="text"
-               formControlName="subTotal"
-               value={{SubTotal}}
-               disabled />
-
-      </div>
+  <div class="form-group col-md-2">
+    <label class="control-label"
+           for="subTotalId">SubTotal de la Factura</label>
+    <div>
+      <input class="form-control"
+             id="subTotalId"
+             type="text"
+             formControlName="subTotal"
+             value={{SubTotal}}
+             disabled />
     </div>
+  </div>
+
+  <div class="form-group col-md-2">
+    <label class="control-label"
+           for="ivaTotalId">Iva total</label>
+    <div>
+      <input class="form-control"
+             id="ivaTotalId"
+             type="number"
+             formControlName="ivaTotal"
+             value={{Calculoiva}}
+             disabled />
+    </div>
+  </div>
 </div>
 
   <div class="form-group">

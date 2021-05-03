@@ -70,7 +70,8 @@ export interface IMFactura{
 export interface IDFactura{
   idDfactura:number,
   mfacturaId:number,
-  referencia :string,
+  referencia: string,
+  iVA:number,
   promocionId :number,
   bodega :string,
   cantidad:number,

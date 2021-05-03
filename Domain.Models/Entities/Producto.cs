@@ -59,7 +59,7 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Costo negativo");
             if (producto.PrecioVenta < 0)
                 errors.Add("Campo PrecioVenta negativo");
-            if (producto.FechaRegistro == null)
+            if (string.IsNullOrEmpty(producto.FechaRegistro.ToString()))
                 errors.Add("Campo FechaRegistro vacio");
             if (string.IsNullOrEmpty(producto.Estado))
                 errors.Add("Campo Estado vacio");

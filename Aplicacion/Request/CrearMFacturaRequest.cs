@@ -19,7 +19,7 @@ namespace Aplicacion.Request
         public double ValorDevolucion { get; set; }
         public double Descuento { get; set; }
         public double IVA { get; set; }
-        //public double Total { get; set; }
+        public double Total { get; set; }
         public double Abono { get; set; }
         public List<CrearDFacturaRequest> DFacturas { get; set; }
         

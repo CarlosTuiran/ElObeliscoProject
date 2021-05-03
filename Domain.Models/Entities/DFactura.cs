@@ -17,6 +17,7 @@ namespace Domain.Models.Entities
         public string Bodega { get; set; }
         public int Cantidad { get; set; }
         public double PrecioUnitario { get; set; }
+        public double Iva { get; set; }    
         public double PrecioTotal { get; set; }//CUANDO SE DEFINAN LAS PROMOCIONES ACA TOCA AÑADIRLO
         public DateTime FechaFactura { get; set; }
         public List<ProductoDFactura> ProductoDFacturas { get; set; }
