@@ -32,16 +32,22 @@ namespace Aplicacion.Services.CrearServices
             
             var listMFacturas=_unitOfWork.MFacturaServiceRepository.GetAll();
             var lastMFactura = listMFacturas.TakeLast(1).ToArray();//ultima factura
-            requestM.idMfactura = lastMFactura[0].idMfactura + 1;//otorga un nuevo id Mfactura
-                                                                 //
-            var rtaMService = crearMFacturaService.Ejecutar(requestM);
+            try
+            {
+                requestM.idMfactura = lastMFactura[0].idMfactura + 1;//otorga un nuevo id Mfactura
+            }
+            catch (Exception)
+            {
+                requestM.idMfactura=1000;
+            }
+            
+             var rtaMService = crearMFacturaService.Ejecutar(requestM);
             
             if (rtaMService.isOk())
             {
                 var requestD=requestM.DFacturas;
                 foreach (var item in requestD)
-                {
-                    
+                {                    
                     var mfactura =_unitOfWork.MFacturaServiceRepository.FindFirstOrDefault(t=>t.idMfactura == requestM.idMfactura); //Relaciona cada d factura con la m factura
                     item.MfacturaId = mfactura.Id;
                     item.idDFactura = Convert.ToInt32(item.MfacturaId.ToString() + "0" + Incremento);

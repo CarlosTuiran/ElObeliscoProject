@@ -10,15 +10,14 @@ namespace Domain.Models.Entities
 {
     public class DFactura : Entity<int>
     {
-        public int idDFactura { get; set; }
         public int MfacturaId { get; set; }
         public string Referencia { get; set; }
         public int? idPromocion { get; set; }
         public string Bodega { get; set; }
         public int Cantidad { get; set; }
         public double PrecioUnitario { get; set; }
-        public double Iva { get; set; }    
-        public double PrecioTotal { get; set; }//CUANDO SE DEFINAN LAS PROMOCIONES ACA TOCA AÑADIRLO
+        public double IVA { get; set; }
+        public double PrecioTotal { get; set; }
         public DateTime FechaFactura { get; set; }
         public List<ProductoDFactura> ProductoDFacturas { get; set; }
         public List<PromocionesDFactura> PromocionesDFacturas { get; set; }
@@ -26,7 +25,6 @@ namespace Domain.Models.Entities
         public DFactura(){}
         public DFactura(int idDFactura, int idMfactura, string referencia, int idpromocion, string bodega, int cantidad, double precioUnitario, DateTime fechaFactura)
         {
-            this.idDFactura = idDFactura;
             this.MfacturaId = idMfactura;
             Referencia = referencia;
             idPromocion = idpromocion;
@@ -40,8 +38,6 @@ namespace Domain.Models.Entities
         public IReadOnlyList<string> CanCrear(DFactura dFactura)
         {
             var errors = new List<string>();
-            if (this.idDFactura == 0)
-                errors.Add("Código Detalle Factura vacio");
             if (string.IsNullOrEmpty(this.Referencia))
                 errors.Add("Campo Referencia vacio");
             if (string.IsNullOrEmpty(this.Bodega))

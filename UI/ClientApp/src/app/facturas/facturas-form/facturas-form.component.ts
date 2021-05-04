@@ -115,11 +115,11 @@ private _data:IEmpleado[];*/
    tipoMovimientoId: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
    //tipoMovimiento:[''],
    fechaPago:[''],
-   subTotal :['1', [Validators.required, Validators.pattern(/^\d+$/)]],
+   subTotal :[],
    valorDevolucion :['0', [Validators.pattern(/^\d+$/)]],
    descuento :['0', [Validators.pattern(/^\d+$/)]],
     abono: ['0', [Validators.pattern(/^\d+$/)]],
-    ivaTotal: ['0', [Validators.pattern(/^\d+$/)]],
+    iVA: [],
    //estadoFactura:['', [Validators.required]],
    dFacturas:this.fb.array([])
   });
@@ -161,45 +161,24 @@ private _data:IEmpleado[];*/
     this._onDestroy.complete();
   }
   save() {
+    this.cantidadCapture();
     let mfactura: IMFactura = Object.assign({}, this.formGroup.value);
-    this.calcSubTotal(mfactura);
-    console.table(mfactura); //ver mfactura por consola
-  }
-  //* funcion evento para calcular Subtotal
-  calcSubTotal(mfactura:IMFactura){
-    //llamar a la funcion de prefacturacion
-    this.facturasService.precreateFacturas(mfactura)
-      .subscribe(mfactura => {
-        this.SubTotal = mfactura.subTotal; 
-          console.log(mfactura);
-          this.openDialog();
-        },
-          error => {this.alertService.error(error.message); console.log(error)}
-        );    
-    }
-    //Abrir ventana de dialogo para guardar factura
-    openDialog() {
-        const dialogRef = this.dialog.open(DialogoCrearFacturaComponent, {
-            width: '250px',
-            data: { subTotal: this.SubTotal }
-        });
+    mfactura.subTotal = this.SubTotal;
+    mfactura.iVA = this.Calculoiva;
+    mfactura.tipoMovimiento = this.TipoMov;
+    console.log(mfactura);
+    this.facturasService.createFacturas(mfactura)
+      .subscribe(mfactura => this.onSaveSuccess(),
+        error => this.alertService.error(error.error)
 
-        dialogRef.afterClosed().subscribe(result => {
-            this.dialogRta = result;
-            let mfactura: IMFactura = Object.assign({}, this.formGroup.value);
-            mfactura.tipoMovimiento=this.TipoMov;
-            if (this.dialogRta) {
-              mfactura.subTotal = this.SubTotal;
-              // crea un mfactura
-              this.facturasService.createFacturas(mfactura)
-                .subscribe(mfactura => this.onSaveSuccess(),
-                  error => {this.alertService.error(error.error);}
-                );
-         }
-        });
-    }
+    );
+  }
   onSaveSuccess(){
-    this.router.navigate(["/facturas"]);
+    if (this.TipoMov=="Compra"){
+      this.router.navigate(["/facturasCompra"]);
+    }else{
+      this.router.navigate(["/facturasVenta"]);
+    }
     this.alertService.success("Guardado Exitoso");
   }
 
@@ -225,6 +204,9 @@ private _data:IEmpleado[];*/
   get descuento() {
     return this.formGroup.get('descuento');
   }
+  get iVAM() {
+    return this.formGroup.get('iVA');
+  }
   get abono() {
     return this.formGroup.get('abono');
   }
@@ -245,6 +227,9 @@ private _data:IEmpleado[];*/
   }
   get iva() {
     return this.dFacturaFormGroup.get('iva');
+  }
+  get iVA() {
+    return this.dFacturaFormGroup.get('iVA');
   }
   get formatoVenta(){
     return this.dFacturaFormGroup.get('formatoVenta');
@@ -271,9 +256,12 @@ private _data:IEmpleado[];*/
               descripcion:[this.currentProductoDescripcion],
               promocionId: ['0'],
               bodega: ['', [Validators.required]],
-              formatoVenta:['',[Validators.required] ],
+              formatoVenta:[this.currentProductoFormato,[Validators.required] ],
+              formatoVentaOriginal:[this.currentProductoFormato],
               precioUnitario: [this.currentProductoPrecio],
-              iva: [this.currentProductoIva, [Validators.required]],
+              precioTotal:[],
+              ivaProducto: [this.currentProductoIva],
+              iVA:[],
               cantidad: ['1', [Validators.required, Validators.pattern(/^\d+$/)]]
         });
         this.referenciasEscogidas.push(this.currentProductoReferencia);
@@ -288,12 +276,18 @@ private _data:IEmpleado[];*/
     this.Calculoiva =0;
     for (let index = 0; index < this.referenciasEscogidas.length; index++) {
       var cantidad = this.dFacturas.controls[index].value.cantidad;
-      var iva = this.dFacturas.controls[index].value.iva;
-      var formatoProducto=this.dFacturas.controls[index].value.formatoVenta; console.log("R1:"+formatoProducto);
+      var iva = this.dFacturas.controls[index].value.ivaProducto;
+      var formatoProducto=this.dFacturas.controls[index].value.formatoVenta; 
+      var formatoVentaOriginal=this.dFacturas.controls[index].value.formatoVentaOriginal;
       var precio=this.dFacturas.controls[index].value.precioUnitario;
-      var formatoConvert=this.Formatos.filter(x=>x.nombre==formatoProducto); console.log("R2:"+formatoConvert[0].factorConversion);
-      this.SubTotal = this.SubTotal + (cantidad * (precio/formatoConvert[0].factorConversion));
-      this.Calculoiva = this.Calculoiva + ((cantidad * precio) * (iva / 100));
+      var formatoConvert=this.Formatos.filter(x=>x.nombre==formatoProducto);
+      var formatoConvertOriginal=this.Formatos.filter(x=>x.nombre==formatoVentaOriginal);
+      var totalProducto=((cantidad * formatoConvert[0].factorConversion)*(precio/formatoConvertOriginal[0].factorConversion));
+      var ivaProducto = totalProducto * (iva / 100);
+      this.SubTotal = this.SubTotal + totalProducto;
+      this.Calculoiva = this.Calculoiva + ivaProducto;
+      this.dFacturas.controls[index].value.precioTotal = totalProducto + ivaProducto;
+      this.dFacturas.controls[index].value.iVA = ivaProducto;
     }
     
   }

@@ -75,5 +75,6 @@ export interface IDFactura{
   promocionId :number,
   bodega :string,
   cantidad:number,
-  precioUnitario:number
+  precioUnitario:number,
+  precioTotal:number
 }

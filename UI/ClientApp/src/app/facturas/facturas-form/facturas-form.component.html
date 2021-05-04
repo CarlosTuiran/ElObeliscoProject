@@ -217,14 +217,9 @@
               <input class="form-control"
                      id="ivaId"
                      type="number"
-                     formControlName="iva"
+                     formControlName="ivaProducto"
                      disabled />
-              <div class="alert alert-danger" *ngIf="((iva.touched || iva.dirty )&& iva.invalid)">
-                <span *ngIf="iva.errors.required">
-                  El campo IVA es requerido
-                </span>
-
-              </div>
+                     <input type="hidden" formControlName="iVA"/>
             </div>
           </div>
 
@@ -233,7 +228,8 @@
                    for="formatoVentaId">Formato</label>
 
             <div>
-              <mat-select [(ngModel)]="currentProductoFormato" formControlName="formatoVenta" placeholder="Elija una opción" #formatoVentaIdSelect (selectionChange)="cantidadCapture()">
+              <input type="hidden" class="form-control" formControlName="formatoVentaOriginal">
+              <mat-select  formControlName="formatoVenta" placeholder="Elija una opción" #formatoVentaIdSelect (selectionChange)="cantidadCapture()">
                 <mat-option *ngFor="let tipo of formatosVenta" [value]="tipo.nombre">
                   {{tipo.nombre}}
                 </mat-option>
@@ -255,6 +251,7 @@
                      id="precioUnitario"
                      type="number"
                      formControlName="precioUnitario" disabled />
+                     <input type="hidden" formControlName="precioTotal" />
               <div class="alert alert-danger" *ngIf="((precioUnitario.touched || precioUnitario.dirty )&& precioUnitario.invalid)">
                 <span *ngIf="precioUnitario.errors.required">
                   El campo precioUnitario es requerido
@@ -325,7 +322,7 @@
   <div class="form-group col-md-2"
        [ngClass]="{'has-error': ((descuento.touched || descuento.dirty) && descuento.invalid)}">
     <label class="control-label"
-           for="descuentoId">Descuento de la Factura</label>
+           for="descuentoId">Descuento</label>
 
     <div>
       <input class="form-control"
@@ -345,7 +342,7 @@
   <div class="form-group col-md-2"
        [ngClass]="{'has-error': ((abono.touched || abono.dirty) && abono.invalid)}">
     <label class="control-label"
-           for="abonoId">Abono de la Factura</label>
+           for="abonoId">Abono</label>
 
     <div>
       <input class="form-control"
@@ -365,7 +362,7 @@
 
   <div class="form-group col-md-2">
     <label class="control-label"
-           for="subTotalId">SubTotal de la Factura</label>
+           for="subTotalId">SubTotal</label>
     <div>
       <input class="form-control"
              id="subTotalId"
@@ -383,7 +380,7 @@
       <input class="form-control"
              id="ivaTotalId"
              type="number"
-             formControlName="ivaTotal"
+             formControlName="iVA"
              value={{Calculoiva}}
              disabled />
     </div>
@@ -406,7 +403,7 @@
         </button>
         <button class="btn"
                 type="button"
-                [routerLink]='["/productos"]'>
+                [routerLink]='["/facturas"]'>
           Cancelar
         </button>
       </span>
