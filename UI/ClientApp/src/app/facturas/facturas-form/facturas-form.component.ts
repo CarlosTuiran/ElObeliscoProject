@@ -65,6 +65,7 @@ export class FacturasFormComponent implements OnInit {
   //Variable de Subtotal
   SubTotal = 0;
   Calculoiva = 0;
+  Total = 0;
 
   //dialogRta respuesta a la ventana de dialogo
   dialogRta = "";
@@ -108,20 +109,18 @@ get dataEmpleados:IEmpleado[]{
 private _data:IEmpleado[];*/
 //Fin del intento
 
-  formGroup = this.fb.group({ 
-    
-   empleadoId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
-   tercerosId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
-   tipoMovimientoId: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-   //tipoMovimiento:[''],
-   fechaPago:[''],
-   subTotal :[],
-   valorDevolucion :['0', [Validators.pattern(/^\d+$/)]],
-   descuento :['0', [Validators.pattern(/^\d+$/)]],
+  formGroup = this.fb.group({     
+    empleadoId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
+    tercerosId :['', [Validators.required, Validators.pattern(/^\d+$/)]],
+    tipoMovimientoId: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+    fechaPago:[''],
+    subTotal :[],
+    valorDevolucion :['0', [Validators.pattern(/^\d+$/)]],
+    descuento :['0', [Validators.pattern(/^\d+$/)]],
     abono: ['0', [Validators.pattern(/^\d+$/)]],
     iVA: [],
-   //estadoFactura:['', [Validators.required]],
-   dFacturas:this.fb.array([])
+    total:[],
+    dFacturas:this.fb.array([])
   });
 
 
@@ -166,11 +165,10 @@ private _data:IEmpleado[];*/
     mfactura.subTotal = this.SubTotal;
     mfactura.iVA = this.Calculoiva;
     mfactura.tipoMovimiento = this.TipoMov;
-    console.log(mfactura);
+    mfactura.total = this.Total;
     this.facturasService.createFacturas(mfactura)
       .subscribe(mfactura => this.onSaveSuccess(),
         error => this.alertService.error(error.error)
-
     );
   }
   onSaveSuccess(){
@@ -180,6 +178,14 @@ private _data:IEmpleado[];*/
       this.router.navigate(["/facturasVenta"]);
     }
     this.alertService.success("Guardado Exitoso");
+  }
+
+  cancelar() {
+    if (this.TipoMov == "Compra") {
+      this.router.navigate(["/facturasCompra"]);
+    } else {
+      this.router.navigate(["/facturasVenta"]);
+    }
   }
 
   get empleadoId() {
@@ -197,7 +203,9 @@ private _data:IEmpleado[];*/
   get fechaPago() {
     return this.formGroup.get('fechaPago');
   }
-  
+  get total() {
+    return this.formGroup.get('total');
+  }
   get valorDevolucion() {
     return this.formGroup.get('valorDevolucion');
   }
@@ -274,6 +282,7 @@ private _data:IEmpleado[];*/
   cantidadCapture(){
     this.SubTotal = 0;
     this.Calculoiva =0;
+    this.Total=0;
     for (let index = 0; index < this.referenciasEscogidas.length; index++) {
       var cantidad = this.dFacturas.controls[index].value.cantidad;
       var iva = this.dFacturas.controls[index].value.ivaProducto;
@@ -282,19 +291,25 @@ private _data:IEmpleado[];*/
       var precio=this.dFacturas.controls[index].value.precioUnitario;
       var formatoConvert=this.Formatos.filter(x=>x.nombre==formatoProducto);
       var formatoConvertOriginal=this.Formatos.filter(x=>x.nombre==formatoVentaOriginal);
-      var totalProducto=((cantidad * formatoConvert[0].factorConversion)*(precio/formatoConvertOriginal[0].factorConversion));
+      var totalProducto = ((cantidad * formatoConvert[0].factorConversion) * (precio / formatoConvertOriginal[0].factorConversion));
       var ivaProducto = totalProducto * (iva / 100);
       this.SubTotal = this.SubTotal + totalProducto;
-      this.Calculoiva = this.Calculoiva + ivaProducto;
+      var calculoCantidad = totalProducto / precio;
+      this.Calculoiva = this.Calculoiva + ivaProducto;     
       this.dFacturas.controls[index].value.precioTotal = totalProducto + ivaProducto;
       this.dFacturas.controls[index].value.iVA = ivaProducto;
     }
-    
+    console.log(this.referenciasEscogidas);
+    this.Total = this.SubTotal + this.Calculoiva;
   }
   removerDFactura(indice:number){
     let referenciaaEliminar=this.dFacturas.controls[indice].value.referencia;
-    this.referenciasEscogidas.splice(referenciaaEliminar);
+    this.SubTotal=this.SubTotal- (this.dFacturas.controls[indice].value.precioTotal - this.dFacturas.controls[indice].value.iVA); 
+    this.Calculoiva =this.Calculoiva-this.dFacturas.controls[indice].value.iVA;
+    this.Total=this.SubTotal+this.Calculoiva;
+    this.referenciasEscogidas.splice(this.referenciasEscogidas.indexOf(referenciaaEliminar), 1);
     this.dFacturas.removeAt(indice);
+    this.cantidadCapture();
   }
   refresh(){
     this.formGroup.patchValue({

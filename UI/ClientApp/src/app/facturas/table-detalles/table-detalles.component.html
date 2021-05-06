@@ -43,6 +43,11 @@
         <th mat-header-cell *matHeaderCellDef> PrecioUnitario </th>
         <td mat-cell mat-cell *matCellDef="let element"> {{element.precioUnitario | currency: 'USD'}} </td>
       </ng-container>
+      <!-- iva Column -->
+      <ng-container matColumnDef="iva">
+        <th mat-header-cell *matHeaderCellDef> Iva </th>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.iva | currency: 'USD'}} </td>
+      </ng-container>
       <!-- precioTotal Column -->
       <ng-container matColumnDef="precioTotal">
         <th mat-header-cell *matHeaderCellDef> PrecioTotal </th>

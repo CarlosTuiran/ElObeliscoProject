@@ -23,16 +23,20 @@ namespace Domain.Models.Entities
         public List<PromocionesDFactura> PromocionesDFacturas { get; set; }
 
         public DFactura(){}
-        public DFactura(int idDFactura, int idMfactura, string referencia, int idpromocion, string bodega, int cantidad, double precioUnitario, DateTime fechaFactura)
+
+        public DFactura(int mfacturaId, string referencia, int? idPromocion, string bodega, 
+                        int cantidad, double precioUnitario, double iVA, double precioTotal, 
+                        DateTime fechaFactura)
         {
-            this.MfacturaId = idMfactura;
+            MfacturaId = mfacturaId;
             Referencia = referencia;
-            idPromocion = idpromocion;
-            this.Bodega = bodega;
+            this.idPromocion = idPromocion;
+            Bodega = bodega;
             Cantidad = cantidad;
             PrecioUnitario = precioUnitario;
+            IVA = iVA;
+            PrecioTotal = precioTotal;
             FechaFactura = fechaFactura;
-            CalcularPrecioTotal();
         }
 
         public IReadOnlyList<string> CanCrear(DFactura dFactura)
@@ -48,15 +52,9 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Precio Unitario vacio");
             //if (!this.FechaFactura.HasValue) Nunca sera vacio el Default es 0
             //    errors.Add("Campo Fecha Factura vacio");
-            /*if (this.PrecioTotal == 0)
-                errors.Add("Campo Precio Total vacio");*/
+            if (this.PrecioTotal == 0)
+                errors.Add("Campo Precio Total vacio");
             return errors;
-        }
-
-        public void CalcularPrecioTotal()
-        {
-            this.PrecioTotal = this.Cantidad * this.PrecioUnitario; //CUANDO SE DEFINAN LAS PROMOCIONES ACA TOCA AÑADIRLO
-            
         }
     }
 }

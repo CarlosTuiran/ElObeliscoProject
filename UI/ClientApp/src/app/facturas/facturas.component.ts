@@ -63,6 +63,7 @@ export interface IMFactura{
    descuento :number,
    iVA :number,
    abono :number,
+   total:number,
    estadoFactura: string,
    dFacturas: IDFactura[] 
 

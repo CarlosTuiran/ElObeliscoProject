@@ -21,6 +21,7 @@ export class TableDetallesComponent implements OnInit {
     'bodega',
     'cantidad',
     'precioUnitario',
+    'iva',
     'precioTotal',
     'fechaFactura'
   ];

@@ -52,7 +52,8 @@ namespace UI.Controllers
                               Descuento = f.Descuento,
                               IVA = f.IVA,
                               Abono = f.Abono,
-                              EstadoFactura = f.EstadoFactura
+                              EstadoFactura = f.EstadoFactura,
+                              Total = f.Total
 
                           }).ToList();
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
@@ -77,14 +78,15 @@ namespace UI.Controllers
                           select new
                           {
                               EmpleadoId = e.Nombres,
-                              TercerosId = mf.TercerosId,
+                              TercerosId = t.Nombre + " " + t.Apellido,
                               Referencia = p.Descripcion,
                               idPromocion = df.idPromocion, //* Agregar Promocion Nombre
-                              Bodega = df.Bodega, //* Bodega tambien
+                              Bodega = "BD-1", //df.Bodega, //* Bodega tambien
                               Cantidad = df.Cantidad,
                               PrecioUnitario = df.PrecioUnitario,
                               PrecioTotal = df.PrecioTotal,
-                              FechaFactura = df.FechaFactura
+                              FechaFactura = df.FechaFactura,
+                              IVA = df.IVA
                           }).ToList();
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;

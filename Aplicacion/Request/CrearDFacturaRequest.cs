@@ -6,7 +6,7 @@ namespace Aplicacion.Request
 {
     public class CrearDFacturaRequest
     {
-        public int idDFactura { get; set; }
+        public int Id { get; set; }
         public int MfacturaId { get; set; }
         public string Referencia { get; set; }
         public int PromocionId { get; set; }
@@ -16,9 +16,6 @@ namespace Aplicacion.Request
         public double PrecioUnitario { get; set; }
         public DateTime FechaFactura { get => DateTime.Now.Date; }
         public double PrecioTotal { get; set; }
-
-
-
     }
     public class CrearDFacturaResponse
     {

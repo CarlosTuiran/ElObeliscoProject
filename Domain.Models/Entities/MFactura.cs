@@ -45,7 +45,7 @@ namespace Domain.Models.Entities
             IVA = iVA;
             Abono = abono;
             EstadoFactura = this.FechaPago==null?"Pendiente":"Pagado";
-            CalcularTotal();
+            Total = total;
         }
 
         public IReadOnlyList<string> CanCrear(MFactura mFactura)
@@ -82,11 +82,5 @@ namespace Domain.Models.Entities
 
             return errors;
         }
-
-        public void CalcularTotal() 
-        {
-            this.Total = this.SubTotal - (this.SubTotal * this.Descuento) + (this.SubTotal * this.IVA);
-        }
-
     }
 }
