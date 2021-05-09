@@ -26,7 +26,7 @@
       <!-- idPromocion Column -->
       <ng-container matColumnDef="idPromocion">
         <th mat-header-cell *matHeaderCellDef> Promocion </th>
-        <td mat-cell mat-cell *matCellDef="let element"> {{element.idPromocion }} </td>
+        <td mat-cell *matCellDef="let element"> {{element.idPromocion }} </td>
       </ng-container>
       <!-- bodegaColumn -->
       <ng-container matColumnDef="bodega">
@@ -34,10 +34,10 @@
         <td mat-cell mat-cell *matCellDef="let element"> {{element.bodega}} </td>
       </ng-container>
       <!-- cantidad Column -->
-      <ng-container matColumnDef="cantidad">
+      <ng-container matColumnDef="cantidadDigitada">
         <th mat-header-cell *matHeaderCellDef> Cantidad </th>
-        <td mat-cell mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
-      </ng-container>
+        <td mat-cell mat-cell *matCellDef="let element"> {{element.cantidadDigitada}} </td>
+      </ng-container>      
       <!-- precioUnitario Column -->
       <ng-container matColumnDef="precioUnitario">
         <th mat-header-cell *matHeaderCellDef> PrecioUnitario </th>

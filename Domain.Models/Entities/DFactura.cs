@@ -15,6 +15,8 @@ namespace Domain.Models.Entities
         public int? idPromocion { get; set; }
         public string Bodega { get; set; }
         public int Cantidad { get; set; }
+        public int CantidadDigitada { get; set; }
+        public string FormatoProducto { get; set; }
         public double PrecioUnitario { get; set; }
         public double IVA { get; set; }
         public double PrecioTotal { get; set; }
@@ -24,15 +26,17 @@ namespace Domain.Models.Entities
 
         public DFactura(){}
 
-        public DFactura(int mfacturaId, string referencia, int? idPromocion, string bodega, 
-                        int cantidad, double precioUnitario, double iVA, double precioTotal, 
+        public DFactura(int mfacturaId, string referencia, int? idPromocion, string bodega, string formatoProducto,
+                        int cantidad, int cantidadDigitada, double precioUnitario, double iVA, double precioTotal, 
                         DateTime fechaFactura)
         {
             MfacturaId = mfacturaId;
             Referencia = referencia;
             this.idPromocion = idPromocion;
             Bodega = bodega;
+            FormatoProducto = formatoProducto;
             Cantidad = cantidad;
+            CantidadDigitada = cantidadDigitada;
             PrecioUnitario = precioUnitario;
             IVA = iVA;
             PrecioTotal = precioTotal;
@@ -42,17 +46,19 @@ namespace Domain.Models.Entities
         public IReadOnlyList<string> CanCrear(DFactura dFactura)
         {
             var errors = new List<string>();
-            if (string.IsNullOrEmpty(this.Referencia))
+            if (string.IsNullOrEmpty(dFactura.Referencia))
                 errors.Add("Campo Referencia vacio");
-            if (string.IsNullOrEmpty(this.Bodega))
+            if (string.IsNullOrEmpty(dFactura.Bodega))
                 errors.Add("Campo Bodega vacio");
-            if (this.Cantidad == 0)
+            if (dFactura.Cantidad == 0)
                 errors.Add("Campo Cantidad vacio");
-            if (this.PrecioUnitario == 0)
+            if (dFactura.CantidadDigitada == 0)
+                errors.Add("Campo Cantidad Digitada vacio");
+            if (dFactura.PrecioUnitario == 0)
                 errors.Add("Campo Precio Unitario vacio");
             //if (!this.FechaFactura.HasValue) Nunca sera vacio el Default es 0
             //    errors.Add("Campo Fecha Factura vacio");
-            if (this.PrecioTotal == 0)
+            if (dFactura.PrecioTotal == 0)
                 errors.Add("Campo Precio Total vacio");
             return errors;
         }

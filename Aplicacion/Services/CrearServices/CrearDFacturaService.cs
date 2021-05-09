@@ -23,7 +23,7 @@ namespace Aplicacion.Services.CrearServices
             var dFactura = _unitOfWork.DFacturaServiceRepository.FindFirstOrDefault(t => t.MfacturaId == request.MfacturaId && t.Referencia == request.Referencia);
             if (dFactura == null) 
             {
-                DFactura newDFactura = new DFactura(request.MfacturaId, request.Referencia,request.PromocionId, request.Bodega, request.Cantidad, request.PrecioUnitario,
+                DFactura newDFactura = new DFactura(request.MfacturaId, request.Referencia,request.PromocionId, request.Bodega, request.FormatoProducto, request.Cantidad, request.CantidadDigitada, request.PrecioUnitario,
                     request.IVA, request.PrecioTotal, request.FechaFactura.Date);
                 IReadOnlyList<string> errors = newDFactura.CanCrear(newDFactura);
                 if (errors.Any())

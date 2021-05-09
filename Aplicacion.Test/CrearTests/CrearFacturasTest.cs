@@ -74,7 +74,6 @@ namespace Aplicacion.Test
                 new List<CrearDFacturaRequest> {
                 new CrearDFacturaRequest {
                     MfacturaId= 100000001,
-                    idDFactura=1000001,
                     Referencia="9900-3333-2222",
                     Cantidad=2,
                     PrecioUnitario=2500,
@@ -84,7 +83,6 @@ namespace Aplicacion.Test
                 new CrearDFacturaRequest
                 {
                     MfacturaId = 100000001,
-                    idDFactura = 1000002,
                     Referencia = "7966-3333-2222",
                     Cantidad = 1,
                     PrecioUnitario = 5000,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
+import { IFormatoVenta } from '../formato-venta/formato-venta.component';
 import { AlertService } from '../notifications/_services';
 import {FacturasService} from './facturas.service';
 import { DialogoTipoTerceroComponent } from './table-facturas/dialogo-tipo-tercero/dialogo-tipo-tercero.component';
@@ -76,6 +77,8 @@ export interface IDFactura{
   promocionId :number,
   bodega :string,
   cantidad:number,
+  cantidadDigitada:number,
+  formatoProducto:string,
   precioUnitario:number,
-  precioTotal:number
+  precioTotal: number
 }

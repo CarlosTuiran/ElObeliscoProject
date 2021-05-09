@@ -80,15 +80,15 @@ namespace UI.Controllers
                               EmpleadoId = e.Nombres,
                               TercerosId = t.Nombre + " " + t.Apellido,
                               Referencia = p.Descripcion,
-                              idPromocion = df.idPromocion, //* Agregar Promocion Nombre
+                              df.idPromocion, //* Agregar Promocion Nombre
                               Bodega = "BD-1", //df.Bodega, //* Bodega tambien
-                              Cantidad = df.Cantidad,
-                              PrecioUnitario = df.PrecioUnitario,
-                              PrecioTotal = df.PrecioTotal,
-                              FechaFactura = df.FechaFactura,
-                              IVA = df.IVA
+                              df.Cantidad,
+                              CantidadDigitada = df.CantidadDigitada.ToString() + " " + df.FormatoProducto,
+                              df.PrecioUnitario,
+                              df.PrecioTotal,
+                              df.FechaFactura,
+                              df.IVA
                           }).ToList();
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
         }
         [HttpPost]

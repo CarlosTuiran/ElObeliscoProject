@@ -103,6 +103,7 @@ import { FormFormatoVentaComponent } from './formato-venta/form-formato-venta/fo
 import { TableFormatoVentaComponent } from './formato-venta/table-formato-venta/table-formato-venta.component';
 import { ContabilidadComponent } from './contabilidad/contabilidad.component';
 import { ConfiguracionesComponent } from './configuraciones/configuraciones.component';
+import { CardFormatoVentaComponent } from './formato-venta/card-formato-venta/card-formato-venta.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -170,6 +171,7 @@ import { ConfiguracionesComponent } from './configuraciones/configuraciones.comp
     TableFormatoVentaComponent,
     ContabilidadComponent,
     ConfiguracionesComponent,
+    CardFormatoVentaComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -216,6 +218,7 @@ import { ConfiguracionesComponent } from './configuraciones/configuraciones.comp
       { path: 'inventario', component: InventarioComponent, canActivate: [CheckNotloginGuard] },
       { path: 'formatoVenta', component: FormatoVentaComponent, canActivate: [CheckNotloginGuard] },
       { path: 'formatoVenta-crear', component: FormFormatoVentaComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'configuraciones', component: ConfiguracionesComponent, canActivate: [CheckNotloginGuard] },
 
 
     ]),

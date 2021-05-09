@@ -19,7 +19,7 @@ export class TableDetallesComponent implements OnInit {
     'referencia' ,
     'idPromocion' ,
     'bodega',
-    'cantidad',
+    'cantidadDigitada',
     'precioUnitario',
     'iva',
     'precioTotal',

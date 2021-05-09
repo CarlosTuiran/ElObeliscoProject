@@ -4,14 +4,16 @@ using Infra.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infra.Datos.Migrations
 {
     [DbContext(typeof(ObeliscoContext))]
-    partial class ObeliscoContextModelSnapshot : ModelSnapshot
+    [Migration("20210507010350_CantidadDigitada-DFactura")]
+    partial class CantidadDigitadaDFactura
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,9 +39,6 @@ namespace Infra.Datos.Migrations
 
                     b.Property<DateTime>("FechaFactura")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("FormatoProducto")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("IVA")
                         .HasColumnType("float");
@@ -114,7 +113,7 @@ namespace Infra.Datos.Migrations
                             Correo = "RHerna@gmail.com",
                             Direccion = "Stranger Valley",
                             Estado = "Activo",
-                            FechaIngreso = new DateTime(2021, 5, 6, 20, 20, 4, 772, DateTimeKind.Local).AddTicks(9991),
+                            FechaIngreso = new DateTime(2021, 5, 6, 20, 3, 49, 209, DateTimeKind.Local).AddTicks(6394),
                             IdEmpleado = 2699540,
                             Nombres = "Raul Hernandez"
                         });
@@ -418,7 +417,7 @@ namespace Infra.Datos.Migrations
                             Costo = 3000.0,
                             Descripcion = "Llave Inglesa",
                             Fabrica = "Ferres SAS",
-                            FechaRegistro = new DateTime(2021, 5, 6, 20, 20, 4, 769, DateTimeKind.Local).AddTicks(6380),
+                            FechaRegistro = new DateTime(2021, 5, 6, 20, 3, 49, 203, DateTimeKind.Local).AddTicks(2611),
                             FormatoVenta = "Unidad",
                             IVA = 0.29999999999999999,
                             Marca = "Ferres",
@@ -477,7 +476,7 @@ namespace Infra.Datos.Migrations
                             Correo = "ferreymas@gmail.com",
                             Descripcion = " Empresa Ferreos y Mas",
                             Direccion = "Stranger Valley",
-                            FechaCumple = new DateTime(2021, 5, 6, 20, 20, 4, 773, DateTimeKind.Local).AddTicks(7941),
+                            FechaCumple = new DateTime(2021, 5, 6, 20, 3, 49, 210, DateTimeKind.Local).AddTicks(7916),
                             Nit = "106583",
                             Nombre = "Santana Silva",
                             TipoTercero = "Proveedor"
@@ -490,7 +489,7 @@ namespace Infra.Datos.Migrations
                             Correo = "jojo@gmail.com",
                             Descripcion = "Cliente Frecuente",
                             Direccion = "Stranger Valley",
-                            FechaCumple = new DateTime(2021, 5, 6, 20, 20, 4, 773, DateTimeKind.Local).AddTicks(8754),
+                            FechaCumple = new DateTime(2021, 5, 6, 20, 3, 49, 210, DateTimeKind.Local).AddTicks(9539),
                             Nit = "10653434",
                             Nombre = "Jose Jose",
                             TipoTercero = "Cliente"

@@ -47,8 +47,6 @@ export class FacturasFormComponent implements OnInit {
   empleados: IEmpleado[] = [];
   terceros: ITercero[];
   productos: IProducto[];
-  formatosVenta: IFormatoVenta[];
-
   //Selecciones escogidas
   currentEmpleado="";
   currentTerceros="";
@@ -81,6 +79,12 @@ export class FacturasFormComponent implements OnInit {
   Formatos:IFormatoVenta[];
   dFacturaFormGroup;
   protected _onDestroy = new Subject<void>();
+  
+  //Los put@s select
+  metricaPeso:string[]= [];
+  metricaVolumen:string[]=[];  
+  metricaUnidad:string[]=[];
+  FormatosbyProductos:string[]=[];  
 
   //Filtros de select estado
   public estadoFilter:FormControl= new FormControl();
@@ -133,7 +137,12 @@ private _data:IEmpleado[];*/
     }
 
     this.formatoVentaService.getFormatosVenta().subscribe(
-      formatos => this.Formatos = formatos,
+      formatos => {
+        this.Formatos = formatos;
+        this.metricaPeso = formatos.filter(x => x.metrica == "Peso").map(z => z.nombre);
+        this.metricaVolumen = formatos.filter(x => x.metrica == "Volumen").map(z => z.nombre);  
+        this.metricaUnidad = formatos.filter(x => x.metrica == "Unidad").map(z => z.nombre);
+      },
       error => this.alertService.error(error));
 
     this.tipoMovimientoService.getTipoMovimientos()      
@@ -239,11 +248,11 @@ private _data:IEmpleado[];*/
   get iVA() {
     return this.dFacturaFormGroup.get('iVA');
   }
-  get formatoVenta(){
-    return this.dFacturaFormGroup.get('formatoVenta');
+  get formatoProducto(){
+    return this.dFacturaFormGroup.get('formatoProducto');
   }
-  get cantidad() {
-    return this.dFacturaFormGroup.get('cantidad');
+  get cantidadDigitada() {
+    return this.dFacturaFormGroup.get('cantidadDigitada');
   }
   get precioUnitario() {
     return this.dFacturaFormGroup.get('precioUnitario');
@@ -251,30 +260,40 @@ private _data:IEmpleado[];*/
   get descripcion() {
     return this.dFacturaFormGroup.get('descripcion');
   }
+  get cantidad() {
+    return this.dFacturaFormGroup.get('cantidad');
+  }
   agregarDFactura() {
     if (this.currentProductoReferencia == "") {
-      //mensaje que debe ingresar seleccionar un producto primero
+      this.alertService.error("Seleccione un producto primero");
     } else {
       let referenciaFinder = this.referenciasEscogidas.find(t => t == this.currentProductoReferencia);//busca si existe tal referencia en la lista dfacturas
       if (referenciaFinder) {
         this.alertService.error("Producto ya Seleccionado")
-      } else {
-          this.dFacturaFormGroup = this.fb.group({
-              referencia: [this.currentProductoReferencia, [Validators.required]],
-              descripcion:[this.currentProductoDescripcion],
-              promocionId: ['0'],
-              bodega: ['', [Validators.required]],
-              formatoVenta:[this.currentProductoFormato,[Validators.required] ],
-              formatoVentaOriginal:[this.currentProductoFormato],
-              precioUnitario: [this.currentProductoPrecio],
-              precioTotal:[],
-              ivaProducto: [this.currentProductoIva],
-              iVA:[],
-              cantidad: ['1', [Validators.required, Validators.pattern(/^\d+$/)]]
+      } else { 
+        this.dFacturaFormGroup = this.fb.group({
+          referencia: [this.currentProductoReferencia, [Validators.required]],
+          descripcion:[this.currentProductoDescripcion],
+          promocionId: ['0'],
+          bodega: ['', [Validators.required]],
+          formatoProducto:[this.currentProductoFormato,[Validators.required] ],
+          formatoVentaOriginal:[this.currentProductoFormato],
+          precioUnitario: [this.currentProductoPrecio],
+          precioTotal:[],
+          ivaProducto: [this.currentProductoIva],
+          iVA: [],
+          cantidad:[],
+          cantidadDigitada: ['1', [Validators.required, Validators.pattern(/^\d+$/)]]
         });
         this.referenciasEscogidas.push(this.currentProductoReferencia);
-        this.dFacturas.push(this.dFacturaFormGroup);
-        this.cantidadCapture();
+        this.formatoVentaService.getFormatos(this.currentProductoReferencia).subscribe(
+          formatos => {
+            this.FormatosbyProductos.push(formatos[0].metrica);
+            this.dFacturas.push(this.dFacturaFormGroup);
+            this.cantidadCapture();
+          },
+          error => this.alertService.error(error.error.message));
+        
       }
     }
   }
@@ -284,17 +303,18 @@ private _data:IEmpleado[];*/
     this.Calculoiva =0;
     this.Total=0;
     for (let index = 0; index < this.referenciasEscogidas.length; index++) {
-      var cantidad = this.dFacturas.controls[index].value.cantidad;
+      var cantidad = this.dFacturas.controls[index].value.cantidadDigitada;
       var iva = this.dFacturas.controls[index].value.ivaProducto;
-      var formatoProducto=this.dFacturas.controls[index].value.formatoVenta; 
+      var formatoProducto=this.dFacturas.controls[index].value.formatoProducto; 
       var formatoVentaOriginal=this.dFacturas.controls[index].value.formatoVentaOriginal;
-      var precio=this.dFacturas.controls[index].value.precioUnitario;
+      var precio=this.dFacturas.controls[index].value.precioUnitario; console.log(formatoProducto);
       var formatoConvert=this.Formatos.filter(x=>x.nombre==formatoProducto);
       var formatoConvertOriginal=this.Formatos.filter(x=>x.nombre==formatoVentaOriginal);
       var totalProducto = ((cantidad * formatoConvert[0].factorConversion) * (precio / formatoConvertOriginal[0].factorConversion));
       var ivaProducto = totalProducto * (iva / 100);
       this.SubTotal = this.SubTotal + totalProducto;
       var calculoCantidad = totalProducto / precio;
+      this.dFacturas.controls[index].value.cantidad=calculoCantidad;
       this.Calculoiva = this.Calculoiva + ivaProducto;     
       this.dFacturas.controls[index].value.precioTotal = totalProducto + ivaProducto;
       this.dFacturas.controls[index].value.iVA = ivaProducto;
@@ -307,7 +327,9 @@ private _data:IEmpleado[];*/
     this.SubTotal=this.SubTotal- (this.dFacturas.controls[indice].value.precioTotal - this.dFacturas.controls[indice].value.iVA); 
     this.Calculoiva =this.Calculoiva-this.dFacturas.controls[indice].value.iVA;
     this.Total=this.SubTotal+this.Calculoiva;
+    this.FormatosbyProductos.splice(this.referenciasEscogidas.indexOf(referenciaaEliminar), 1);
     this.referenciasEscogidas.splice(this.referenciasEscogidas.indexOf(referenciaaEliminar), 1);
+
     this.dFacturas.removeAt(indice);
     this.cantidadCapture();
   }
@@ -383,9 +405,6 @@ private _data:IEmpleado[];*/
       
     this.currentProductoDescripcion=$event.descripcion;
     this.currentProductoReferencia = $event.referencia;
-    this.formatoVentaService.getFormatos($event.referencia).subscribe(
-      formatos => this.formatosVenta = formatos,
-      error =>  this.alertService.error(error.error.message));
     this.currentProductoFormato=$event.formatoVenta;
     this.currentProductoIva = $event.iva;
     if(this.TipoMov == 'Compra'){
@@ -398,4 +417,7 @@ private _data:IEmpleado[];*/
 } 
 export class Estado{
   nombre:string
+}
+export interface ISuperFormato{
+  formatosVenta: IFormatoVenta[];
 }

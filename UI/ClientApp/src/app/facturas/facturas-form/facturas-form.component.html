@@ -229,13 +229,25 @@
 
             <div>
               <input type="hidden" class="form-control" formControlName="formatoVentaOriginal">
-              <mat-select  formControlName="formatoVenta" placeholder="Elija una opción" #formatoVentaIdSelect (selectionChange)="cantidadCapture()">
-                <mat-option *ngFor="let tipo of formatosVenta" [value]="tipo.nombre">
-                  {{tipo.nombre}}
-                </mat-option>
+              <mat-select  formControlName="formatoProducto" placeholder="Elija una opción" #formatoVentaIdSelect (selectionChange)="cantidadCapture()">
+                <div *ngIf="FormatosbyProductos[i]=='Peso'" >
+                  <mat-option *ngFor="let tipo of metricaPeso" [value]=tipo>
+                    {{tipo}}
+                  </mat-option>
+                </div>
+                <div *ngIf="FormatosbyProductos[i]=='Volumen'" >
+                  <mat-option *ngFor="let tipo of metricaPeso" [value]=tipo>
+                    {{tipo}}
+                  </mat-option>
+                </div>
+                <div *ngIf="FormatosbyProductos[i]=='Unidad'" >
+                  <mat-option *ngFor="let tipo of metricaUnidad;" [value]=tipo>
+                    {{tipo}}
+                  </mat-option>
+                </div>               
               </mat-select>
-              <div class="alert alert-danger" *ngIf="((formatoVenta.touched || formatoVenta.dirty )&& formatoVenta.invalid)">
-                <span *ngIf="formatoVenta.errors.required">
+              <div class="alert alert-danger" *ngIf="((formatoProducto.touched || formatoProducto.dirty )&& formatoProducto.invalid)">
+                <span *ngIf="formatoProducto.errors.required">
                   El campo formatoVenta es requerido
                 </span>
               </div>
@@ -272,7 +284,11 @@
               <input class="form-control"
                      id="cantidadId"
                      type="number"
-                     formControlName="cantidad" (change)="cantidadCapture()" />
+                     formControlName="cantidadDigitada" (change)="cantidadCapture()" />
+              <input class="form-control"
+                     id="cantidadId"
+                     type="hidden"
+                     formControlName="cantidad"/>
               <div class="alert alert-danger" *ngIf="((cantidad.touched || cantidad.dirty )&& cantidad.invalid)">
                 <span *ngIf="cantidad.errors.required">
                   El campo cantidad es requerido
