@@ -1,2 +1,15 @@
 <h1>Configuraciones del sistema</h1>
-<app-card-formato-venta></app-card-formato-venta>
+<div class="row">
+  <mat-card class="example-card col-md-3">
+    <h3>Formatos de venta</h3>
+    <div flex="100">
+      <button mat-button [routerLink]='["/formatoVenta"]'>Ver formatos de venta</button>
+    </div>
+  </mat-card>
+  <mat-card class="example-card col-md-3">
+    <h3>Cuentas</h3>
+    <div flex="100">
+      <button mat-button [routerLink]='["/cuentas"]'>Ver cuentas</button>
+    </div>
+  </mat-card>
+</div>

@@ -104,6 +104,10 @@ import { TableFormatoVentaComponent } from './formato-venta/table-formato-venta/
 import { ContabilidadComponent } from './contabilidad/contabilidad.component';
 import { ConfiguracionesComponent } from './configuraciones/configuraciones.component';
 import { CardFormatoVentaComponent } from './formato-venta/card-formato-venta/card-formato-venta.component';
+import { CuentaComponent } from './contabilidad/cuenta/cuenta.component';
+import { FormCuentaComponent } from './contabilidad/cuenta/form-cuenta/form-cuenta.component';
+import { TableCuentaComponent } from './contabilidad/cuenta/table-cuenta/table-cuenta.component';
+import { CuentaService } from './contabilidad/cuenta/cuenta.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -172,6 +176,9 @@ import { CardFormatoVentaComponent } from './formato-venta/card-formato-venta/ca
     ContabilidadComponent,
     ConfiguracionesComponent,
     CardFormatoVentaComponent,
+    CuentaComponent,
+    FormCuentaComponent,
+    TableCuentaComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -218,6 +225,9 @@ import { CardFormatoVentaComponent } from './formato-venta/card-formato-venta/ca
       { path: 'inventario', component: InventarioComponent, canActivate: [CheckNotloginGuard] },
       { path: 'formatoVenta', component: FormatoVentaComponent, canActivate: [CheckNotloginGuard] },
       { path: 'formatoVenta-crear', component: FormFormatoVentaComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'cuentas', component: CuentaComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'cuenta-crear', component: FormCuentaComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'cuenta-editar/:id', component: FormCuentaComponent, canActivate: [CheckNotloginGuard] },
       { path: 'configuraciones', component: ConfiguracionesComponent, canActivate: [CheckNotloginGuard] },
 
 
@@ -226,7 +236,7 @@ import { CardFormatoVentaComponent } from './formato-venta/card-formato-venta/ca
   ],
   //aca se agregan todos los services
   providers: [ThemeService, UsuariosService, EmpleadosService, FacturasService, TercerosService, BirthdayAlertService,
-    TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
+    TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService, CuentaService,
     BodegasService, PromocionesService, PruebasSinVSService, InventarioService,AlertService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent, TableDetallesComponent, DialogoCrearFacturaComponent, DialogoTipoTerceroComponent],

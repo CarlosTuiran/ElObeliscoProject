@@ -1,0 +1,103 @@
+<h1 *ngIf="modoEdicion">Editar Cuenta</h1>
+<h1 *ngIf="!modoEdicion">Agregar Cuenta</h1>
+<form class="form-horizontal" novalidate autocomplete="off"
+      (ngSubmit)="save()" [formGroup]="formGroup">
+  <fieldset>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((nombre.touched || nombre.dirty) && nombre.invalid)}">
+      <label class="col-md-2 control-label"
+             for="nombreId">Nombre</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="nombreId"
+               type="text"
+               formControlName="nombre"/>
+        
+        <div class="alert alert-danger" *ngIf="((nombre.touched || nombre.dirty )&& nombre.invalid)">
+          <span *ngIf="nombre.errors.required">
+            El campo nombre es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((tipo.touched || tipo.dirty) && tipo.invalid)}">
+      <label class="col-md-2 control-label"
+             for="tipo">Tipo</label>
+      <div class="col-md-8"> 
+        <mat-select formControlName="tipo" placeholder="Elija una opci&oacute;n" #tipoIdSelect>
+          <mat-option *ngFor="let tipo of tipos" [value]="tipo" >
+            {{tipo}}
+          </mat-option>
+        </mat-select>        
+        <div class="alert alert-danger" *ngIf="((tipo.touched || tipo.dirty )&& tipo.invalid)">
+          <span *ngIf="tipo.errors.required">
+            El campo tipo es requerido
+          </span>
+        </div>
+      </div>
+    </div> 
+    <div class="form-group"
+        [ngClass]="{'has-error': ((naturaleza.touched || naturaleza.dirty) && naturaleza.invalid)}">
+        <label class="col-md-2 control-label" for="naturaleza">Naturaleza</label>
+        <div class="col-md-8">
+            <mat-select formControlName="naturaleza" placeholder="Elija una opci&oacute;n" #naturalezaIdSelect>
+                <mat-option *ngFor="let tipo of naturalezas" [value]="tipo">
+                    {{tipo}}
+                </mat-option>
+            </mat-select>
+            <div class="alert alert-danger" *ngIf="((naturaleza.touched || naturaleza.dirty )&& naturaleza.invalid)">
+                <span *ngIf="naturaleza.errors.required">
+                    El campo naturaleza es requerido
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((codigo.touched || codigo.dirty) && codigo.invalid)}">
+      <label class="col-md-2 control-label"
+             for="codigoId">Codigo</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="codigoId"
+               type="text"
+               formControlName="codigo" />
+        <div class="alert alert-danger" *ngIf="((codigo.touched || codigo.dirty )&& codigo.invalid)">
+          <span *ngIf="codigo.errors.required">
+            El campo codigo es requerido
+          </span>
+          <span *ngIf="codigo.errors.pattern">
+            El campo codigo es numerico
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-4 col-md-offset-2">
+        <span>
+          <button class="btn btn-success"
+                  type="submit"
+                  [disabled]="!formGroup.valid">
+            Salvar
+          </button>
+          <button class="btn"
+                  type="button"
+                  [routerLink]='["/cuentas"]'>
+            Cancelar
+          </button>
+        </span>
+
+      </div>
+
+    </div>
+  </fieldset>
+</form>
+

@@ -105,7 +105,7 @@ namespace Infra.Datos
         public DbSet<Tiempo> Tiempo { get; set; }
         public DbSet<TotalLiquidacion> TotalLiquidacion { get; set; }
         public DbSet<FormatoVenta> FormatoVenta { get; set; }
-
+        public DbSet<Cuenta> Cuenta { get; set; }
 
     }
 }

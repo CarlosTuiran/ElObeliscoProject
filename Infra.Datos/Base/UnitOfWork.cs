@@ -134,6 +134,15 @@ namespace Infra.Datos.Base
             }
         }
 
+        private ICuentaServiceRepository _cuentaServiceRepository;
+        public ICuentaServiceRepository CuentaServiceRepository
+        {
+            get
+            {
+                return _cuentaServiceRepository ?? (_cuentaServiceRepository = new CuentaServiceRepository(_dbContext));
+            }
+        }
+
         public int Commit()
         {
             return _dbContext.SaveChanges();
