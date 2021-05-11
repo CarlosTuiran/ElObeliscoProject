@@ -43,9 +43,14 @@ export class TableNominaComponent implements OnInit {
   }
   ngOnInit() {
     this.nominaService.getNominas()
-    .subscribe(nominas =>{ this.dataSource.data = nominas; console.log(nominas);},
-      error => this.alertService.error(error.message));
+      .subscribe(nominas =>{ this.dataSource.data = nominas; console.log(nominas);},
+        error => this.alertService.error(error.message));
 
+    this.nominaService.refresh$.subscribe(() => {
+      this.nominaService.getNominas()
+        .subscribe(nominas => { this.dataSource.data = nominas; console.log(nominas); },
+          error => this.alertService.error(error.message));
+    });
   }
 
   Pagar(idNomina: string, idEmpleado: number) {

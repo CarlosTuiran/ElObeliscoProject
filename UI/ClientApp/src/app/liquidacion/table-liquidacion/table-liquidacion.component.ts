@@ -44,9 +44,13 @@ export class TableLiquidacionComponent implements OnInit {
   }
   ngOnInit() {
     this.liquidacionesService.getLiquidaciones()
-    .subscribe(liquidaciones => this.dataSource.data = liquidaciones,
-      error => console.error(error));
-
+      .subscribe(liquidaciones => this.dataSource.data = liquidaciones,
+        error => console.error(error));
+    this.liquidacionesService.refresh$.subscribe(() => {
+      this.liquidacionesService.getLiquidaciones()
+        .subscribe(liquidaciones => this.dataSource.data = liquidaciones,
+          error => console.error(error));
+    });
   }
 
   Eliminar(idNomina: string, idEmpleado: number) {

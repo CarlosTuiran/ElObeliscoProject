@@ -134,7 +134,8 @@ namespace UI
             // AÑADIMOS EL MIDDLEWARE DE AUTENTICACIÓN
             // DE USUARIOS AL PIPELINE DE ASP.NET CORE
             app.UseAuthentication();
-
+            //Creador de Informes PDF
+            Rotativa.AspNetCore.RotativaConfiguration.Setup(env.WebRootPath, "../Rotativa");
             // AÑADIMOS EL MIDDLEWARE DE SWAGGER (NSwag)
             //app.UseOpenApi();
             //app.UseSwaggerUi3();
