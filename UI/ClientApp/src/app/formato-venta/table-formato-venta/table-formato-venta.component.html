@@ -1,0 +1,52 @@
+<div class="table-responsive">
+  <mat-form-field>
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Descripcion" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <!-- nombre Column -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+    <!-- abreviacion Column -->
+    <ng-container matColumnDef="abreviacion">
+      <th mat-header-cell *matHeaderCellDef> Abreviacion </th>
+      <td *matCellDef="let element"> {{element.abreviacion}} </td>
+    </ng-container>
+    <!-- metrica Column -->
+    <ng-container matColumnDef="metrica">
+      <th mat-header-cell *matHeaderCellDef> Metrica </th>
+      <td *matCellDef="let element"> {{element.metrica}} </td>
+    </ng-container>
+    <!-- factorConversion Column -->
+    <ng-container matColumnDef="factorConversion">
+      <th mat-header-cell *matHeaderCellDef> Factor Conversion </th>
+      <td *matCellDef="let element"> {{element.factorConversion}} </td>
+    </ng-container>
+    <!--Options-->
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef>Opciones</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+        <button mat-icon-button><mat-icon>launch</mat-icon></button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr mat-row *matNoDataRow>
+      <td mat-cell colspan="8">No encontrado "{{input.value}}"</td>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+<button mat-button [routerLink]='["/configuraciones"]'><mat-icon>skip_previous</mat-icon> Regresar </button>

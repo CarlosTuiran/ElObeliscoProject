@@ -11,8 +11,8 @@ export class FacturasService {
   apiURL = this.baseUrl + "api/Factura";
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
-  getFacturas(): Observable<IMFactura[]> {
-    return this.http.get<IMFactura[]>(this.apiURL);
+  getFacturas(TipoMov: string): Observable<IMFactura[]> {
+    return this.http.get<IMFactura[]>(this.apiURL + "/Facturas/" + TipoMov);
   }
   
   getDFacturas(FacturaId: number): Observable<IDFactura[]> {

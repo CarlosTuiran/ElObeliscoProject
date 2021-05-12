@@ -29,8 +29,8 @@ namespace UI.Controllers
         #region: Funcionales
 
 
-        [HttpGet]
-        public Object GetMFacturas()
+        [HttpGet("Facturas/{tipoMov}")]
+        public Object GetMFacturas([FromRoute] string tipoMov)
         {
             var result = (from f in _context.Set<MFactura>()
                           join e in _context.Set<Empleado>()
@@ -39,6 +39,7 @@ namespace UI.Controllers
                           on f.TercerosId equals t.Id
                           join tp in _context.Set<TipoMovimiento>()
                           on f.TipoMovimientoId equals tp.Id
+                          where f.TipoMovimiento == tipoMov
                           select new
                           {
                               MFacturaId = f.Id,
@@ -51,7 +52,8 @@ namespace UI.Controllers
                               Descuento = f.Descuento,
                               IVA = f.IVA,
                               Abono = f.Abono,
-                              EstadoFactura = f.EstadoFactura
+                              EstadoFactura = f.EstadoFactura,
+                              Total = f.Total
 
                           }).ToList();
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
@@ -76,16 +78,17 @@ namespace UI.Controllers
                           select new
                           {
                               EmpleadoId = e.Nombres,
-                              TercerosId = mf.TercerosId,
+                              TercerosId = t.Nombre + " " + t.Apellido,
                               Referencia = p.Descripcion,
-                              idPromocion = df.idPromocion, //* Agregar Promocion Nombre
-                              Bodega = df.Bodega, //* Bodega tambien
-                              Cantidad = df.Cantidad,
-                              PrecioUnitario = df.PrecioUnitario,
-                              PrecioTotal = df.PrecioTotal,
-                              FechaFactura = df.FechaFactura
+                              df.idPromocion, //* Agregar Promocion Nombre
+                              Bodega = "BD-1", //df.Bodega, //* Bodega tambien
+                              df.Cantidad,
+                              CantidadDigitada = df.CantidadDigitada.ToString() + " " + df.FormatoProducto,
+                              df.PrecioUnitario,
+                              df.PrecioTotal,
+                              df.FechaFactura,
+                              df.IVA
                           }).ToList();
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
         }
         [HttpPost]

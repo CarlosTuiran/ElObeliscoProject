@@ -24,7 +24,7 @@ namespace Aplicacion.Services.CrearServices
             if (dFactura == null)
             {
                 MFactura newMFactura = new MFactura(request.idMfactura, request.EmpleadoId, request.TercerosId, request.TipoMovimientoId, request.TipoMovimiento, request.FechaFactura.Date, request.FechaPago,
-                request.SubTotal, request.ValorDevolucion, request.Descuento, request.IVA, /*request.Total,*/ request.Abono, request.EstadoFactura);
+                request.SubTotal, request.ValorDevolucion, request.Descuento, request.IVA, request.Total, request.Abono);
                 IReadOnlyList<string> errors = newMFactura.CanCrear(newMFactura);
                 if (errors.Any())
                 {

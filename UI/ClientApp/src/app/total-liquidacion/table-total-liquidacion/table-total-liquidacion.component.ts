@@ -40,9 +40,14 @@ export class TableTotalLiquidacionComponent implements OnInit {
   }
   ngOnInit() {
     this.totalLiquidacionsService.getTotalLiquidaciones()
-    .subscribe(totalLiquidacions => this.dataSource.data = totalLiquidacions,
-      error => console.error(error));
+      .subscribe(totalLiquidacions => this.dataSource.data = totalLiquidacions,
+        error => console.error(error));
 
+    this.totalLiquidacionsService.refresh$.subscribe(() => {
+      this.totalLiquidacionsService.getTotalLiquidaciones()
+        .subscribe(totalLiquidacions => this.dataSource.data = totalLiquidacions,
+          error => console.error(error));
+    });
   }
 
   Eliminar(idNomina: string) {

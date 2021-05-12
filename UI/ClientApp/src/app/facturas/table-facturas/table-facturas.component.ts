@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog,  MatDialogRef, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { IMFactura } from '../facturas.component';
 import { FacturasService } from '../facturas.service';
 import { TableDetallesComponent } from '../table-detalles/table-detalles.component';
@@ -12,8 +12,10 @@ import { TableDetallesComponent } from '../table-detalles/table-detalles.compone
 })
 export class TableFacturasComponent implements OnInit {
   isAdmin = false;
+    TipoMov: string;
   constructor(private facturasService: FacturasService,
-    private router: Router, private dialog: MatDialog
+    private router: Router, private dialog: MatDialog,
+    private activatedRoute: ActivatedRoute
     ) { }
   facturas!:IMFactura[];  
   displayedColumns: string[] = [
@@ -27,6 +29,7 @@ export class TableFacturasComponent implements OnInit {
     'descuento',
     'iva',
     'abono',
+    'total',
     'estadoFactura',
     'options'
 ];
@@ -45,10 +48,16 @@ export class TableFacturasComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
   ngOnInit() {
-    this.facturasService.getFacturas()
+    const segments: UrlSegment[] = this.activatedRoute.snapshot.url;
+    if (segments[0].toString() == 'facturasVenta') {
+      this.TipoMov = "Venta";
+    } else {
+      this.TipoMov = "Compra";
+    }
+    this.facturasService.getFacturas(this.TipoMov)
     .subscribe(facturas => this.dataSource.data = facturas,
       error => console.error(error));
-
+      
   }
   openDetalles(idMfactura: number){
       const detallesVista= this.dialog.open(TableDetallesComponent, {

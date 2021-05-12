@@ -98,6 +98,16 @@ import { DialogoTipoTerceroComponent } from './facturas/table-facturas/dialogo-t
 import { FlujoVentasLineChartComponent } from './reportes/flujo-ventas-line-chart/flujo-ventas-line-chart.component';
 import { FlujoVentasBarraChartComponent } from './reportes/flujo-ventas-barra-chart/flujo-ventas-barra-chart.component';
 import { IsAdminGuard } from './shared/guards/is-admin.guard';
+import { FormatoVentaComponent } from './formato-venta/formato-venta.component';
+import { FormFormatoVentaComponent } from './formato-venta/form-formato-venta/form-formato-venta.component';
+import { TableFormatoVentaComponent } from './formato-venta/table-formato-venta/table-formato-venta.component';
+import { ContabilidadComponent } from './contabilidad/contabilidad.component';
+import { ConfiguracionesComponent } from './configuraciones/configuraciones.component';
+import { CardFormatoVentaComponent } from './formato-venta/card-formato-venta/card-formato-venta.component';
+import { CuentaComponent } from './contabilidad/cuenta/cuenta.component';
+import { FormCuentaComponent } from './contabilidad/cuenta/form-cuenta/form-cuenta.component';
+import { TableCuentaComponent } from './contabilidad/cuenta/table-cuenta/table-cuenta.component';
+import { CuentaService } from './contabilidad/cuenta/cuenta.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -160,6 +170,15 @@ import { IsAdminGuard } from './shared/guards/is-admin.guard';
     DialogoTipoTerceroComponent,
     FlujoVentasLineChartComponent,
     FlujoVentasBarraChartComponent,
+    FormatoVentaComponent,
+    FormFormatoVentaComponent,
+    TableFormatoVentaComponent,
+    ContabilidadComponent,
+    ConfiguracionesComponent,
+    CardFormatoVentaComponent,
+    CuentaComponent,
+    FormCuentaComponent,
+    TableCuentaComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -188,8 +207,10 @@ import { IsAdminGuard } from './shared/guards/is-admin.guard';
       { path: 'terceros', component: TercerosComponent, canActivate: [CheckNotloginGuard] },
       { path: 'terceros-crear', component: TercerosFormComponent, canActivate: [CheckNotloginGuard] },
       { path: 'terceros-editar/:id', component: TercerosFormComponent, canActivate: [CheckNotloginGuard] },
-      { path: 'facturas', component: FacturasComponent, canActivate: [CheckNotloginGuard] },
-      { path: 'facturas-crear/:tipoMov', component: FacturasFormComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'facturasVenta', component: FacturasComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'facturasCompra', component: FacturasComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'facturas-crearVenta', component: FacturasFormComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'facturas-crearCompra', component: FacturasFormComponent, canActivate: [CheckNotloginGuard] },
       { path: 'empleados', component: EmpleadosComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
       { path: 'empleados-crear', component: EmpleadosFormComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
       { path: 'empleados-editar/:id', component: EmpleadosFormComponent, canActivate: [IsAdminGuard] },
@@ -201,14 +222,21 @@ import { IsAdminGuard } from './shared/guards/is-admin.guard';
       { path: 'pruebasSinVS', component: PruebasSinVSComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
       { path: 'reportes', component: ReportesComponent, canActivate: [IsAdminGuard, CheckNotloginGuard] }, 
       { path: 'login', component: LoginComponent, canActivate: [CheckLoginGuard] },
-      { path: 'inventario', component: InventarioComponent, canActivate: [CheckNotloginGuard]},
+      { path: 'inventario', component: InventarioComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'formatoVenta', component: FormatoVentaComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'formatoVenta-crear', component: FormFormatoVentaComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'cuentas', component: CuentaComponent, canActivate: [CheckNotloginGuard, IsAdminGuard] },
+      { path: 'cuenta-crear', component: FormCuentaComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'cuenta-editar/:id', component: FormCuentaComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'configuraciones', component: ConfiguracionesComponent, canActivate: [CheckNotloginGuard] },
+
 
     ]),
     BrowserAnimationsModule
   ],
   //aca se agregan todos los services
   providers: [ThemeService, UsuariosService, EmpleadosService, FacturasService, TercerosService, BirthdayAlertService,
-    TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService,
+    TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService, CuentaService,
     BodegasService, PromocionesService, PruebasSinVSService, InventarioService,AlertService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent, TableDetallesComponent, DialogoCrearFacturaComponent, DialogoTipoTerceroComponent],

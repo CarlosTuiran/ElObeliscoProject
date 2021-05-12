@@ -76,7 +76,7 @@ namespace Infra.Datos
                 EmpleadoId=1, TercerosId=1, FechaPago=DateTime.Now, IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=1, TipoMovimientoId=1
                 });
             modelBuilder.Entity<DFactura>().HasData(
-                new DFactura(){MfacturaId=1, idDFactura=10001, Cantidad=5, Bodega="BD1", FechaFactura=DateTime.Now, 
+                new DFactura(){MfacturaId=1, Cantidad=5, Bodega="BD1", FechaFactura=DateTime.Now, 
                     PrecioUnitario=3000,Referencia="1000-01", Id=1
                 });
             //Restringe las llaves foraneas en el parametro OnDelete 
@@ -104,7 +104,8 @@ namespace Infra.Datos
         public DbSet<Liquidacion> Liquidacion { get; set; }
         public DbSet<Tiempo> Tiempo { get; set; }
         public DbSet<TotalLiquidacion> TotalLiquidacion { get; set; }
-
+        public DbSet<FormatoVenta> FormatoVenta { get; set; }
+        public DbSet<Cuenta> Cuenta { get; set; }
 
     }
 }

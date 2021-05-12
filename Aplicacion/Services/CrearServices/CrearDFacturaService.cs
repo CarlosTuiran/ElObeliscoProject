@@ -20,11 +20,11 @@ namespace Aplicacion.Services.CrearServices
 
         public CrearDFacturaResponse Ejecutar(CrearDFacturaRequest request)
         {
-            var dFactura = _unitOfWork.DFacturaServiceRepository.FindFirstOrDefault(t => t.idDFactura == request.idDFactura);
+            var dFactura = _unitOfWork.DFacturaServiceRepository.FindFirstOrDefault(t => t.MfacturaId == request.MfacturaId && t.Referencia == request.Referencia);
             if (dFactura == null) 
             {
-
-                DFactura newDFactura = new DFactura(request.idDFactura, request.MfacturaId, request.Referencia, request.PromocionId,request.Bodega, request.Cantidad, request.PrecioUnitario, request.FechaFactura.Date);
+                DFactura newDFactura = new DFactura(request.MfacturaId, request.Referencia,request.PromocionId, request.Bodega, request.FormatoProducto, request.Cantidad, request.CantidadDigitada, request.PrecioUnitario,
+                    request.IVA, request.PrecioTotal, request.FechaFactura.Date);
                 IReadOnlyList<string> errors = newDFactura.CanCrear(newDFactura);
                 if (errors.Any())
                 {

@@ -21,12 +21,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { name: "Gestión de Productos", route: "productos", icon: "assignment" },
     { name: "Inventario", route: "inventario", icon: "assignment" },
     { name: "Gestión de Terceros", route: "terceros", icon: "local_shipping" },
-    { name: "Facturacion", route: "facturas", icon: "shopping_bag" },
+    { name: "Facturacion Venta", route: "facturasVenta", icon: "shopping_bag" },
+    { name: "Facturacion Compra", route: "facturasCompra", icon: "shopping_bag" },
     { name: "Gestión de Empleados", route: "empleados", icon: "perm_contact_calendar" },
     { name: "Gestión de Nomina", route: "nominas", icon: "payments" },
     { name: "Liquidaciones", route: "liquidaciones", icon: "monetization_on" },
     { name: "Total Liquidaciones", route: "total-liquidaciones", icon: "monetization_on" },
-    { name: "Reportes", route: "reportes", icon: "analytics" }
+    { name: "Reportes", route: "reportes", icon: "analytics" },
+    { name: "Configuracion", route: "configuraciones", icon: "build" }
   ]
 
   fillerNavEmpleado = [
@@ -34,7 +36,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { name: "Gestión de Productos", route: "productos", icon: "assignment" },
     { name: "Inventario", route: "inventario", icon: "assignment" },
     { name: "Gestión de Terceros", route: "terceros", icon: "local_shipping" },
-    { name: "Facturacion", route: "facturas", icon: "shopping_bag" }
+    { name: "Facturacion Venta", route: "facturasVenta", icon: "shopping_bag" },
+    { name: "Facturacion Compra", route: "facturasCompra", icon: "shopping_bag" },
   ]
   
 

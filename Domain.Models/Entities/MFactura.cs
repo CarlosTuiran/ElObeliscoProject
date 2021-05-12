@@ -30,7 +30,7 @@ namespace Domain.Models.Entities
 
 
         public MFactura(int idMfactura, int idEmpleado, int nit, int idMovimiento, string tipoMovimiento, DateTime fechaFactura, DateTime? fechaPago,
-            double subTotal, double valorDevolucion, double descuento, double iVA, /*double total,*/ double abono, string estadoFactura)
+            double subTotal, double valorDevolucion, double descuento, double iVA, double total, double abono)
         {
             this.idMfactura = idMfactura;
             this.EmpleadoId = idEmpleado;
@@ -44,48 +44,43 @@ namespace Domain.Models.Entities
             Descuento = descuento;
             IVA = iVA;
             Abono = abono;
-            EstadoFactura = estadoFactura;
-            CalcularTotal();
+            EstadoFactura = this.FechaPago==null?"Pendiente":"Pagado";
+            Total = total;
         }
 
         public IReadOnlyList<string> CanCrear(MFactura mFactura)
         {
             var errors = new List<string>();
-            if (this.idMfactura == 0)
+            if (mFactura.idMfactura == 0)
                 errors.Add("Campo identificacion factura maestra vacio");
-            if (this.EmpleadoId == 0)
+            if (mFactura.EmpleadoId == 0)
                 errors.Add("Campo identificacion empleado vacio");
-            if (this.TercerosId == 0)
+            if (mFactura.TercerosId == 0)
                 errors.Add("Campo identificacion tercero vacio");
-            if (this.TipoMovimientoId == 0)
+            if (mFactura.TipoMovimientoId == 0)
                 errors.Add("Campo identificacion tipo movimiento vacio");
-            if (this.SubTotal == 0)
+            if (mFactura.SubTotal == 0)
                 errors.Add("Campo Sub total vacio");
-            if (this.SubTotal < 0)
+            if (mFactura.SubTotal < 0)
                 errors.Add("Campo Sub total erroneo");
-            if (this.ValorDevolucion < 0)
+            if (mFactura.ValorDevolucion < 0)
                 errors.Add("Campo Valor devolucion vacio");
             //if (!this.FechaFactura.HasValue) Nunca sera Vacio el default es 0
             //    errors.Add("Campo Fecha Factura vacio");
-            if (this.Descuento < 0)
+            if (mFactura.Descuento < 0)
                 errors.Add("Campo Descuento erroneo");
-            if (this.IVA < 0)
+            if (mFactura.IVA < 0)
                 errors.Add("Campo IVA erroneo");
             //if (!this.FechaPago.HasValue) Puede Crearse sin alguna fecha de Pago
             //    errors.Add("Campo Fecha Pago vacio");
-            if (this.ValorDevolucion < 0)
+            if (mFactura.ValorDevolucion < 0)
                 errors.Add("Campo Valor Devolucion Erroneo");
-            if (this.Abono < 0)
+            if (mFactura.Abono < 0)
                 errors.Add("Campo Abonor Erroneo");
-            if (string.IsNullOrEmpty(this.EstadoFactura))
-                errors.Add("Campo Estado Factura vacio");
+            if (mFactura.Total < 0)
+                errors.Add("Campo Total Erroneo");
+
             return errors;
         }
-
-        public void CalcularTotal() 
-        {
-            this.Total = this.SubTotal - (this.SubTotal * this.Descuento) + (this.SubTotal * this.IVA);
-        }
-
     }
 }
