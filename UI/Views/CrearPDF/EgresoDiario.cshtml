@@ -1,0 +1,95 @@
+﻿
+@{
+	ViewData["Title"] = "Index";
+	Layout = "Layout";
+}
+<style>
+.gray{
+    background-color:#cbcdce;
+}
+</style>
+<div class="row">
+      <div class="col-10">     
+         <div class="row">
+            <div class="col-2 gray">     
+                   Señores                 
+            </div>
+            <div class="col-10">     
+                    @Model.Nombre
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 gray">     
+                   NIT                 
+            </div>
+            <div class="col-4">     
+                    @Model.NIT
+            </div>
+            <div class="col-2 gray">     
+                   Telefono                 
+            </div>
+            <div class="col-4">     
+                    @Model.Celular
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 gray">     
+                   Dirección                 
+            </div>
+            <div class="col-4">     
+                    @Model.Dirección
+            </div>
+            <div class="col-2 gray">     
+                   Ciudad                 
+            </div>
+            <div class="col-4">     
+                    @Model.Ciudad
+            </div>
+        </div>        		    
+      </div>
+      <div class="col-2">     
+		   <div class="row">            
+            <div class="col-6 border">     
+                   @Model.FechaComprovante                 
+            </div>
+            <div class="col-6 border">     
+                    @Model.FechaVencimiento
+            </div>
+        </div> 
+      </div>
+</div>
+<table class="table">
+            <tr>
+                <th colspan="2">Celda Combinada</th>
+                <th>Celda Normal</th>
+                <th colspan="2">Celda Combinada>/th>
+            </tr>
+</table>
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">First</th>
+			<th scope="col">Last</th>
+			<th scope="col">Handle</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">1</th>
+			<td>Mark</td>
+			<td>Otto</td>
+		</tr>
+		<tr>
+			<th scope="row">2</th>
+			<td>Jacob</td>
+			<td>Thornton</td>
+		</tr>
+		<tr>
+			<th scope="row">3</th>
+			<td colspan="2">Larry the Bird</td>
+		</tr>
+	</tbody>
+</table>
+
+
