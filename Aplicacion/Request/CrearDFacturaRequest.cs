@@ -13,8 +13,8 @@ namespace Aplicacion.Request
         public double IVA { get; set; }
         public string Bodega { get; set; }
         public string FormatoProducto { get; set; }
-        public int Cantidad { get; set; }
-        public int CantidadDigitada { get; set; }
+        public double Cantidad { get; set; }
+        public double CantidadDigitada { get; set; }
         public double PrecioUnitario { get; set; }
         public DateTime FechaFactura { get => DateTime.Now.Date; }
         public double PrecioTotal { get; set; }

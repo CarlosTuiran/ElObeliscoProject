@@ -69,8 +69,8 @@
       <ng-container matColumnDef="options">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button (click)="openDetalles(element.mFacturaId)">
-          <mat-icon>launch</mat-icon></button>
+          <button mat-icon-button (click)="openDetalles(element.mFacturaId)"><mat-icon>launch</mat-icon></button>
+          <button mat-icon-button (click)="printPDF(element.mFacturaId)"><mat-icon>print</mat-icon></button>
         </td>
       </ng-container>
       

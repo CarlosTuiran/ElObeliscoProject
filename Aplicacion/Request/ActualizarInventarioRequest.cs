@@ -8,7 +8,7 @@ namespace Aplicacion.Request
     {
         
         public string Referencia { get; set; }
-        public int Cantidad { get; set; }
+        public double Cantidad { get; set; }
         public string Bodega { get; set; }  
         public string TipoMovimiento { get; set; }
         

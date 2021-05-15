@@ -177,7 +177,7 @@ private _data:IEmpleado[];*/
     mfactura.total = this.Total;
     this.facturasService.createFacturas(mfactura)
       .subscribe(mfactura => this.onSaveSuccess(),
-        error => this.alertService.error(error.error)
+        error => { this.alertService.error(error.message), console.log(error) }
     );
   }
   onSaveSuccess(){

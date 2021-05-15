@@ -14,7 +14,7 @@ namespace Aplicacion.Test.ConsultarTest
     {
         ObeliscoContext _context;
         UnitOfWork _unitOfWork;
-        ConsultarFacturaCompra _service;
+        //ConsultarFacturaCompra _service;
         DbContextOptions options;
 
         [SetUp]
@@ -22,14 +22,13 @@ namespace Aplicacion.Test.ConsultarTest
         {
             _context = new ObeliscoContext(options);
             _unitOfWork = new UnitOfWork(_context);
-            _service = new ConsultarFacturaCompra(_context,_unitOfWork);
+            //_service = new ConsultarFacturaCompra(_context,_unitOfWork);
         }
         
         [Test]
         public void ConsultarFacturaCompra()
         {
             var IdFactura = 1;
-            var objeto =  _service.Ejecutar(IdFactura);
         }
     }
     

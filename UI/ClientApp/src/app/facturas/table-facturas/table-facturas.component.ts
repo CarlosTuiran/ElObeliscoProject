@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog,  MatDialogRef, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { IMFactura } from '../facturas.component';
@@ -15,7 +15,8 @@ export class TableFacturasComponent implements OnInit {
     TipoMov: string;
   constructor(private facturasService: FacturasService,
     private router: Router, private dialog: MatDialog,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute, 
+    @Inject('BASE_URL') private baseUrl: string
     ) { }
   facturas!:IMFactura[];  
   displayedColumns: string[] = [
@@ -67,5 +68,13 @@ export class TableFacturasComponent implements OnInit {
     });
     detallesVista.componentInstance.idMfactura=idMfactura;
     
+  }
+  printPDF(id:number){
+    if(this.TipoMov = "Compra"){
+      var URL = this.baseUrl+"FacturaCompraPDF/"+id; 
+    }else{
+      var URL = this.baseUrl+"FacturaVentaPDF/"+id; 
+    }
+    window.open(URL, '_blank');
   }
 }

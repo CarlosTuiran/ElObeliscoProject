@@ -17,14 +17,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   fillerNavAdmin = [
     { name: "home", route: "", icon:"home" },
-    { name: "Gestión de Usuarios", route: "usuarios", icon:"supervised_user_circle" },
-    { name: "Gestión de Productos", route: "productos", icon: "assignment" },
+    { name: "Usuarios", route: "usuarios", icon:"supervised_user_circle" },
+    { name: "Productos", route: "productos", icon: "assignment" },
     { name: "Inventario", route: "inventario", icon: "assignment" },
-    { name: "Gestión de Terceros", route: "terceros", icon: "local_shipping" },
+    { name: "Terceros", route: "terceros", icon: "local_shipping" },
     { name: "Facturacion Venta", route: "facturasVenta", icon: "shopping_bag" },
     { name: "Facturacion Compra", route: "facturasCompra", icon: "shopping_bag" },
-    { name: "Gestión de Empleados", route: "empleados", icon: "perm_contact_calendar" },
-    { name: "Gestión de Nomina", route: "nominas", icon: "payments" },
+    { name: "Empleados", route: "empleados", icon: "perm_contact_calendar" },
+    { name: "Nomina", route: "nominas", icon: "payments" },
     { name: "Liquidaciones", route: "liquidaciones", icon: "monetization_on" },
     { name: "Total Liquidaciones", route: "total-liquidaciones", icon: "monetization_on" },
     { name: "Reportes", route: "reportes", icon: "analytics" },
@@ -33,9 +33,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   fillerNavEmpleado = [
     { name: "home", route: "", icon: "home" },
-    { name: "Gestión de Productos", route: "productos", icon: "assignment" },
+    { name: "Productos", route: "productos", icon: "assignment" },
     { name: "Inventario", route: "inventario", icon: "assignment" },
-    { name: "Gestión de Terceros", route: "terceros", icon: "local_shipping" },
+    { name: "Terceros", route: "terceros", icon: "local_shipping" },
     { name: "Facturacion Venta", route: "facturasVenta", icon: "shopping_bag" },
     { name: "Facturacion Compra", route: "facturasCompra", icon: "shopping_bag" },
   ]

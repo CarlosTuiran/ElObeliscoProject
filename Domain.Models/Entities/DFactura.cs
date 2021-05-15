@@ -14,8 +14,8 @@ namespace Domain.Models.Entities
         public string Referencia { get; set; }
         public int? idPromocion { get; set; }
         public string Bodega { get; set; }
-        public int Cantidad { get; set; }
-        public int CantidadDigitada { get; set; }
+        public double Cantidad { get; set; }
+        public double CantidadDigitada { get; set; }
         public string FormatoProducto { get; set; }
         public double PrecioUnitario { get; set; }
         public double IVA { get; set; }
@@ -27,7 +27,7 @@ namespace Domain.Models.Entities
         public DFactura(){}
 
         public DFactura(int mfacturaId, string referencia, int? idPromocion, string bodega, string formatoProducto,
-                        int cantidad, int cantidadDigitada, double precioUnitario, double iVA, double precioTotal, 
+                        double cantidad, double cantidadDigitada, double precioUnitario, double iVA, double precioTotal, 
                         DateTime fechaFactura)
         {
             MfacturaId = mfacturaId;
