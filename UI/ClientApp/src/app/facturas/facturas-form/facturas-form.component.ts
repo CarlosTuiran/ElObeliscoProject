@@ -64,12 +64,14 @@ export class FacturasFormComponent implements OnInit {
   SubTotal = 0;
   Calculoiva = 0;
   Total = 0;
+  Descuento = 0;
 
   //dialogRta respuesta a la ventana de dialogo
   dialogRta = "";
   //* Tipo Movimiento Compra/Venta 
   TipoMov :string;
 
+  Serial:string="";
   tipoMovimientos: ITipoMovimiento[];
   referencias: IProducto[];
   bodegas: IBodega[];
@@ -124,6 +126,8 @@ private _data:IEmpleado[];*/
     abono: ['0', [Validators.pattern(/^\d+$/)]],
     iVA: [],
     total:[],
+    serial:[this.Serial],
+    observaciones:[],
     dFacturas:this.fb.array([])
   });
 
@@ -148,6 +152,11 @@ private _data:IEmpleado[];*/
     this.tipoMovimientoService.getTipoMovimientos()      
     .subscribe(datos =>{ this.tipoMovimientos = datos as ITipoMovimiento[]},
       error => console.error(error));
+
+    this.facturasService.getSerial().subscribe(
+      serial => serial,
+      error => this.Serial = error.error.text);
+
     this.bodegas=this.bodegasService.getBodegas()
   }
   //obtiene la lista de productos de forma asincrona
@@ -227,6 +236,12 @@ private _data:IEmpleado[];*/
   get abono() {
     return this.formGroup.get('abono');
   }
+  get serial() {
+    return this.formGroup.get('serial');
+  }
+  get observaciones() {
+    return this.formGroup.get('observaciones');
+  }
   get estadoFactura() {
     return this.formGroup.get('estadoFactura');
   }
@@ -301,7 +316,8 @@ private _data:IEmpleado[];*/
   cantidadCapture(){
     this.SubTotal = 0;
     this.Calculoiva =0;
-    this.Total=0;
+    this.Total = 0;
+    this.Descuento = 0;
     for (let index = 0; index < this.referenciasEscogidas.length; index++) {
       var cantidad = this.dFacturas.controls[index].value.cantidadDigitada;
       var iva = this.dFacturas.controls[index].value.ivaProducto;
@@ -319,8 +335,9 @@ private _data:IEmpleado[];*/
       this.dFacturas.controls[index].value.precioTotal = totalProducto + ivaProducto;
       this.dFacturas.controls[index].value.iVA = ivaProducto;
     }
-    console.log(this.referenciasEscogidas);
-    this.Total = this.SubTotal + this.Calculoiva;
+    this.Descuento = this.descuento.value;
+    console.log(this.Descuento);
+    this.Total = this.SubTotal + this.Calculoiva - this.Descuento;
   }
   removerDFactura(indice:number){
     let referenciaaEliminar=this.dFacturas.controls[indice].value.referencia;

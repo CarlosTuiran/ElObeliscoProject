@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace UI.Controllers
 {
@@ -19,11 +20,15 @@ namespace UI.Controllers
         private readonly ObeliscoContext _context;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ConsultarFacturaCompraService consultarFacturaCompra;
+        private readonly ConsultarEgresoDiarioService consultarEgresoDiario;
+        CultureInfo provider = CultureInfo.InvariantCulture;
+
         public CrearPDF(ObeliscoContext context)
         {
             _context = context;
             _unitOfWork = new UnitOfWork(_context);
             consultarFacturaCompra = new ConsultarFacturaCompraService(_context, _unitOfWork);
+            consultarEgresoDiario= new ConsultarEgresoDiarioService(_context, _unitOfWork);
         }
 
         [HttpGet]
@@ -33,10 +38,16 @@ namespace UI.Controllers
             {
             };
         }
-        [HttpGet("/d")]
-        public IActionResult EgresoDiario(int facturaId)
-        {            
-            return View();
+        [HttpGet("/EgresoDiario/{tercero}")]
+        public IActionResult EgresoDiario(string tercero)
+        {   
+            //string format = "ddd MMM dd yyyy";
+            //fecha = DateTime.ParseExact(fecha.Substring(0, 15), format, provider).ToString();
+            DateTime Fecha = DateTime.Now.AddDays(-1);
+            var rta = consultarEgresoDiario.Ejecutar(Fecha, tercero);    
+            return new ViewAsPdf("EgresoDiario"){
+                Model=rta
+            };
         }
 
         [HttpGet("/FacturaCompraPDF/{facturaId}")]

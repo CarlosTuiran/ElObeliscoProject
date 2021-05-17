@@ -15,7 +15,7 @@
 }
 </style>
 <div class="row">
-      <div class="col-7">     
+      <div class="col-9">     
          <div class="row">
             <div class="col-2 gray border">     
 				<b> Señores </b>                
@@ -51,18 +51,24 @@
             <div class="col-4 border">     
                     @Model.Ciudad
             </div>
-        </div>        		    
+        </div> 
+         <div class="row">
+           <div class="col-5 gray border">     
+                   <b>Nombre Banco</b>                 
+            </div>
+            <div class="col-7 border">     
+                    @Model.NombreBanco
+            </div>
+         </div>      		    
       </div>
-      <div class="col-5">     
+      <div class="col-3">     
 	    <div class="row" style="text-align: center;">            
-            <div class="col-6 border">
-				<b>FechaComprobante</b> <br /> <br />   
-                   @Model.FechaComprobante                 
-            </div>
-            <div class="col-6 border">  
-				<b>FechaVencimiento </b><br/><br />    
-                    @Model.FechaVencimiento
-            </div>
+            <div class="col-12 border">
+		  <b>FechaComprobante</b> <br/>   
+                   @Model.FechaComprobante <br/>           
+                   <b>Cheque No </b><br/>  
+                    @Model.Cheque       
+            </div>            
         </div> 
       </div>
 </div>
@@ -71,11 +77,9 @@
 	<thead class="thead-light">
 		<tr>
 			<th scope="col">Codigo</th>
+			<th scope="col">Centro de Costo</th>
 			<th scope="col">Descripcion</th>
-			<th scope="col">Unidad</th>
-			<th scope="col">Cantidad</th>
-			<th scope="col">V. Unit</th>
-			<th scope="col">Iva</th>                        
+			<th scope="col">Tercero</th>			                      
 			<th scope="col">Valor Total</th>
 		</tr>
 	</thead>
@@ -83,11 +87,9 @@
         @foreach(var item in Model.Dfacturas){
 		<tr>
 			<th scope="row">@item.Codigo</th>
-			<td>@item.Descripcion</td>
-			<td>@item.Unidad</td>
-			<td class="text-right">@item.Cantidad</td>
-			<td class="text-right">@item.ValorUnitario</td>
-			<td class="text-right">@item.Iva</td>
+			<td>@item.CentroCosto</td>
+			<td>@item.Descripcion</td>			
+			<td class="text-right">@item.Tercero</td>
 			<td class="text-right">@item.ValorTotal</td>
 		</tr>		
         }
@@ -97,24 +99,8 @@
 <div class="col-8"></div>
 <div class="col-4">
 <div class="row border ml-auto">
-        <div class="col-6">
-                <b>Total Bruto</b>
-        </div>
-        <div class="col-6 text-right">
-                @Model.ValorBruto
-        </div>
-</div>
-<div class="row border ml-auto">
-        <div class="col-6">
-                <b>Iva Tarifa</b>
-        </div>
-        <div class="col-6 text-right">
-                @Model.Iva
-        </div>         
-</div>
-<div class="row border ml-auto">
         <div class="col-6 gray">
-                <b>Total a Pagar</b>
+                <b>Total</b>
         </div>
         <div class="col-6 gray text-right">
                 @Model.ValorTotal
@@ -123,6 +109,5 @@
 </div>
 </div>
 
-<b>Condicion de Pago</b> <br />
-@Model.CondicionPago <br />
 <b>Observaciones</b>
+@Model.Observaciones

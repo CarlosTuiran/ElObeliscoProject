@@ -16,6 +16,8 @@ namespace Domain.Models.Entities
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string? Descripcion { get; set; }
+        public string Ciudad { get; set; }
+        public string Telefono { get; set; }
         public string Estado { get; set; }
         public DateTime FechaCumple { get; set; }
         public List<MFactura> MFacturas { get; set; }
@@ -23,7 +25,8 @@ namespace Domain.Models.Entities
         {
 
         }
-        public Terceros(string nit, string nombre, string apellido, string tipoTercero, string celular, string correo, string direccion, string descripcion, string estado, DateTime fechaCumple)
+        public Terceros(string nit, string nombre, string apellido, string tipoTercero, string celular, string correo, string direccion, string descripcion, 
+            string ciudad, string telefono, string estado, DateTime fechaCumple)
         {
             Nit = nit;
             Nombre = nombre;
@@ -33,6 +36,8 @@ namespace Domain.Models.Entities
             Correo = correo;
             Direccion = direccion;
             Descripcion = descripcion;
+            Ciudad = ciudad;
+            Telefono = telefono;
             Estado = estado;
             FechaCumple=fechaCumple;
         }

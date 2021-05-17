@@ -30,6 +30,8 @@ export interface ITercero {
   celular: string,
   correo: string,
   direccion: string,
+  ciudad: string,
+  telefono: string,
   descripcion: string,
   fechaCumple: Date
 }

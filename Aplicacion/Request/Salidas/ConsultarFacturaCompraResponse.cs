@@ -28,6 +28,8 @@ namespace Aplicacion.Request.Salidas
         public double Iva { get; set; }
         public double Cantidad { get; set; }
         public string ValorTotal{ get; set; }
+        public string CentroCosto { get; set; }
+        public string Tercero { get; set; } 
     }
 
 }

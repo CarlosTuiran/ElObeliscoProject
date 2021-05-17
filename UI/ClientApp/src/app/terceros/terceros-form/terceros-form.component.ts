@@ -27,6 +27,8 @@ export class TercerosFormComponent implements OnInit {
     celular: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     correo: ['', [Validators.required]],
     direccion: ['', [Validators.required]],
+    ciudad: ['', [Validators.required]],
+    telefono: ['', [Validators.required]],
     descripcion: ['', [Validators.required]],
     fechaCumple: ['', [Validators.required]]
   });
@@ -98,6 +100,12 @@ export class TercerosFormComponent implements OnInit {
   }
   get direccion() {
     return this.formGroup.get('direccion');
+  }
+  get ciudad() {
+    return this.formGroup.get('ciudad');
+  }
+  get telefono() {
+    return this.formGroup.get('telefono');
   }
   get descripcion() {
     return this.formGroup.get('descripcion');

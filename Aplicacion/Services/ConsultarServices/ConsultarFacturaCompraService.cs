@@ -30,15 +30,17 @@ namespace Aplicacion.Services.ConsultarServices
             var DFacturas = (from df in _context.Set<DFactura>()
                              join p in _context.Set<Producto>()
                              on df.Referencia equals p.Referencia
+                             join fv in _context.Set<FormatoVenta>()
+                             on p.FormatoVenta equals fv.Nombre
                               where df.MfacturaId == idMFactura
                               select new
                               {
                                   Codigo = df.Referencia,
                                   Descripcion = p.Descripcion,
                                   Unidad = df.FormatoProducto,
-                                  ValorUnitario = df.PrecioUnitario,
+                                  ValorUnitario = _context.Set<FormatoVenta>().Where(t => t.Nombre == df.FormatoProducto).Select(t => t.FactorConversion).First() * df.PrecioUnitario / fv.FactorConversion,
                                   p.IVA,
-                                  Cantidad = df.Cantidad,
+                                  Cantidad = df.CantidadDigitada,
                                   ValorTotal = df.PrecioTotal
                               }).ToList();
 
@@ -57,6 +59,7 @@ namespace Aplicacion.Services.ConsultarServices
                               Ciudad = "Valledupar",
                               FechaComprobante = mf.FechaFactura.Date,
                               FechaVencimiento = mf.FechaFactura.Date,
+                              TipoMovimiento = mf.TipoMovimiento,
                               ValorBruto = mf.SubTotal,
                               Iva = mf.IVA,
                               ValorTotal = mf.Total,
@@ -87,7 +90,7 @@ namespace Aplicacion.Services.ConsultarServices
                 detalle.ValorTotal = item.ValorTotal.ToString("C2");;
                 response.Dfacturas.Add(detalle);
             }
-            response.NombreMov="Factura Compra";
+            response.NombreMov="Factura " + result[0].TipoMovimiento;
             response.Serial="SR-2021-" + idMFactura.ToString();
             return response;
 

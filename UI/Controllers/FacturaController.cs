@@ -56,7 +56,6 @@ namespace UI.Controllers
                               Total = f.Total
 
                           }).ToList();
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
         }
         [HttpGet("{id}")]
@@ -90,6 +89,12 @@ namespace UI.Controllers
                               df.IVA
                           }).ToList();
             return result;
+        }
+        [HttpGet("GetSerial")]
+        public object GetSerial(){
+            var id=_context.MFactura.OrderByDescending(x=>x.Id).Select(t => t.Id).First();
+            string serial= "F-"+DateTime.Now.ToString("yyyy")+"-"+id+1;
+            return serial;
         }
         [HttpPost]
         public async Task<IActionResult> CreateFacturas([FromBody] CrearMFacturaRequest request)
@@ -137,7 +142,15 @@ namespace UI.Controllers
                               Mes = newGroup1.Key.Mes_Anio
                           }).OrderBy(x => x.Mes).ToList();
             double TotalPasadoMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
-            double TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            double TotalPresenteMes;
+            try
+            {
+                TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            }
+            catch (Exception)
+            {
+                TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
+            }
             double percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
             if (Double.IsNaN(percentValue))
             {
@@ -196,7 +209,15 @@ namespace UI.Controllers
                           }).OrderBy(x => x.Mes).ToList();
 
             double TotalPasadoMes = !result.Any(x=>x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) ) ? 0 : result[0].Total;
-            double TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            double TotalPresenteMes;
+            try
+            {
+                TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            }
+            catch (Exception)
+            {
+                TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
+            }
             double percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
            
             if (Double.IsNaN(percentValue))
@@ -242,7 +263,15 @@ namespace UI.Controllers
                           }).OrderBy(x => x.Mes).ToList();
 
             double TotalPasadoMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
-            double TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            double TotalPresenteMes;
+            try
+            {
+                TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            }
+            catch (Exception)
+            {
+                TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
+            }
             double percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
             if (Double.IsNaN(percentValue))
             {
@@ -287,7 +316,15 @@ namespace UI.Controllers
                           }).OrderBy(x => x.Mes).ToList();
 
             double TotalPasadoMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.AddMonths(-1).ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
-            double TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            double TotalPresenteMes;
+            try
+            {
+                TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[1].Total;
+            }
+            catch (Exception)
+            {
+                TotalPresenteMes = !result.Any(x => x.Mes_Descripcion == DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US"))) ? 0 : result[0].Total;
+            }
             double percentValue = Math.Abs((TotalPresenteMes - TotalPasadoMes) / TotalPasadoMes);
             if (Double.IsNaN(percentValue))
             {

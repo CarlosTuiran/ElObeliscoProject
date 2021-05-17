@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    
+
 
     <div class="form-group"
          [ngClass]="{'has-error': ((tipoTercero.touched || tipoTercero.dirty)&& tipoTercero.invalid)}">
@@ -111,6 +111,24 @@
     </div>
 
     <div class="form-group"
+         [ngClass]="{'has-error': ((telefono.touched || telefono.dirty) && telefono.invalid)}">
+      <label class="col-md-2 control-label"
+             for="telefonoId">Telefono del Tercero</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="telefonoId"
+               type="text"
+               formControlName="telefono" />
+        <div class="alert alert-danger" *ngIf="((telefono.touched || telefono.dirty ) && telefono.invalid)">
+          <span *ngIf="telefono.errors.required">
+            El campo Telefono es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
          [ngClass]="{'has-error': ((correo.touched || correo.dirty) && correo.invalid)}">
       <label class="col-md-2 control-label"
              for="correoId">Correo del Tercero</label>
@@ -147,6 +165,24 @@
     </div>
 
     <div class="form-group"
+         [ngClass]="{'has-error': ((ciudad.touched || ciudad.dirty) && ciudad.invalid)}">
+      <label class="col-md-2 control-label"
+             for="ciudadId">Ciudad del Tercero</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="ciudadId"
+               type="text"
+               formControlName="ciudad" />
+        <div class="alert alert-danger" *ngIf="((ciudad.touched || ciudad.dirty ) && ciudad.invalid)">
+          <span *ngIf="ciudad.errors.required">
+            El campo Ciudad es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
          [ngClass]="{'has-error': ((descripcion.touched || descripcion.dirty) && descripcion.invalid)}">
       <label class="col-md-2 control-label"
              for="descripcionId">Descripcion del Tercero</label>
@@ -164,22 +200,21 @@
       </div>
     </div>
 
-    <div class="form-group" 
-    [ngClass]="{'has-error': ((fechaCumple.touched || fechaCumple.dirty) && fechaCumple.invalid)}">
+    <div class="form-group"
+         [ngClass]="{'has-error': ((fechaCumple.touched || fechaCumple.dirty) && fechaCumple.invalid)}">
       <div class="col-md-10">
-          <mat-form-field color="accent" appearance="fill">
-            <mat-label>Fecha de Cumplea&ntilde;os</mat-label>
-              <input 
-              id="fechaCumpleId"
-              formControlName="fechaCumple" matInput [matDatepicker]="picker1"/>
-              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-              <mat-datepicker #picker1></mat-datepicker>
-              <div class="alert alert-danger" *ngIf="((fechaCumple.touched || fechaCumple.dirty ) && fechaCumple.invalid)">
-                <span *ngIf="fechaCumple.errors.required">
-                  El campo Fecha de Cumplea&ntilde;os es requerido
-                </span>
-              </div>
-          </mat-form-field>
+        <mat-form-field color="accent" appearance="fill">
+          <mat-label>Fecha de Cumplea&ntilde;os</mat-label>
+          <input id="fechaCumpleId"
+                 formControlName="fechaCumple" matInput [matDatepicker]="picker1" />
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+          <div class="alert alert-danger" *ngIf="((fechaCumple.touched || fechaCumple.dirty ) && fechaCumple.invalid)">
+            <span *ngIf="fechaCumple.errors.required">
+              El campo Fecha de Cumplea&ntilde;os es requerido
+            </span>
+          </div>
+        </mat-form-field>
       </div>
     </div>
 

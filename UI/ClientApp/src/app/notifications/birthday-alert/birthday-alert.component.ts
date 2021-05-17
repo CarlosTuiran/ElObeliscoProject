@@ -22,7 +22,6 @@ export class BirthdayAlertComponent implements OnInit {
         } else {
           this.isAlertMin = true;
           this.terceros=terceros;         
-          console.log(this.terceros);          
         }
       }, error => console.error(error));
   }

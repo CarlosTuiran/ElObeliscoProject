@@ -14,6 +14,8 @@ namespace Aplicacion.Request
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string Descripcion { get; set; }
+        public string Ciudad { get; set; }
+        public string Telefono { get; set; }
         public DateTime FechaCumple{get; set;}
         public string Estado { get; set; }
     }

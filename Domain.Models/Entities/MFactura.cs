@@ -22,6 +22,9 @@ namespace Domain.Models.Entities
         public double Total { get; set; }
         public double Abono { get; set; }
         public string EstadoFactura { get; set; }
+        public string Serial { get; set; }
+        public string Observaciones { get; set; }
+
         public List<DFactura> DFacturas { get; set; }
 
         public MFactura()
@@ -30,7 +33,7 @@ namespace Domain.Models.Entities
 
 
         public MFactura(int idMfactura, int idEmpleado, int nit, int idMovimiento, string tipoMovimiento, DateTime fechaFactura, DateTime? fechaPago,
-            double subTotal, double valorDevolucion, double descuento, double iVA, double total, double abono)
+            double subTotal, double valorDevolucion, double descuento, double iVA, double total, double abono, string serial, string observaciones)
         {
             this.idMfactura = idMfactura;
             this.EmpleadoId = idEmpleado;
@@ -44,6 +47,8 @@ namespace Domain.Models.Entities
             Descuento = descuento;
             IVA = iVA;
             Abono = abono;
+            Serial=Serial;
+            Observaciones=observaciones;
             EstadoFactura = this.FechaPago==null?"Pendiente":"Pagado";
             Total = total;
         }
@@ -54,7 +59,7 @@ namespace Domain.Models.Entities
             if (mFactura.idMfactura == 0)
                 errors.Add("Campo identificacion factura maestra vacio");
             if (mFactura.EmpleadoId == 0)
-                errors.Add("Campo identificacion empleado vacio");
+                errors.Add("Campo identificacion empleado vacio");                
             if (mFactura.TercerosId == 0)
                 errors.Add("Campo identificacion tercero vacio");
             if (mFactura.TipoMovimientoId == 0)

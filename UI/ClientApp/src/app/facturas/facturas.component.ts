@@ -66,6 +66,8 @@ export interface IMFactura{
    abono :number,
    total:number,
    estadoFactura: string,
+   serial:string,
+   observaciones:string,
    dFacturas: IDFactura[] 
 
 }

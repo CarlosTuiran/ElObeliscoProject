@@ -24,7 +24,8 @@ namespace Aplicacion.Services.CrearServices
             if (terceros == null)
             {
                 Terceros newTerceros = new Terceros(request.Nit, request.Nombre, request.Apellido, request.TipoTercero,
-                 request.Celular, request.Correo, request.Direccion, request.Descripcion, request.Estado, request.FechaCumple);
+                 request.Celular, request.Correo, request.Direccion, request.Descripcion, request.Ciudad, request.Telefono,
+                 request.Estado, request.FechaCumple);
                 IReadOnlyList<string> errors = newTerceros.CanCrear(newTerceros);
                 if (errors.Any())
                 {

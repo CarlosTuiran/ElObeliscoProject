@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ITercero } from '../terceros.component';
 import { TercerosService } from '../terceros.service';
@@ -23,6 +23,8 @@ export class TableTercerosComponent implements OnInit {
     'correo',
     'direccion',
     'descripcion',
+    'ciudad',
+    'telefono',
     'fechaCumple',
     'options'];
   dataSource =new MatTableDataSource<ITercero>(this.terceros);
@@ -30,7 +32,7 @@ export class TableTercerosComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
   constructor(private tercerosService: TercerosService, private router: Router, private activatedRoute: ActivatedRoute,
-    private alertService: AlertService){}
+    private alertService: AlertService, @Inject('BASE_URL') private baseUrl: string){}
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -56,5 +58,12 @@ export class TableTercerosComponent implements OnInit {
   onDeleteSuccess() {
     this.router.navigate(["/terceros"]);
     this.alertService.success("Eliminado exitoso");
+  }
+  printPDF(nit: string, tipoTercero:string){
+
+    if(tipoTercero=="Cliente"){
+      var URL = this.baseUrl+"EgresoDiario/"+nit;
+    }
+    window.open(URL, '_blank');
   }
 }

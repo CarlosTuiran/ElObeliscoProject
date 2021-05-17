@@ -21,6 +21,11 @@ namespace Aplicacion.Request
         public double IVA { get; set; }
         public double Total { get; set; }
         public double Abono { get; set; }
+        public string Serial { get; set; }
+        public string Observaciones { get; set; }
+        
+        
+        
         public List<CrearDFacturaRequest> DFacturas { get; set; }
         
 

@@ -33,5 +33,7 @@ export class FacturasService {
   updateFactura(Factura: IMFactura): Observable<IMFactura> {
     return this.http.put<IMFactura>(this.apiURL + "/" + Factura.idMfactura, Factura);
   }
-  
+  getSerial(): Observable<string>{
+    return this.http.get<string>(this.apiURL + '/GetSerial');
+  }  
 }

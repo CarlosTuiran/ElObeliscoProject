@@ -29,6 +29,8 @@ namespace Aplicacion.Services.ActualizarServices
                 terceros.Celular = request.Celular;
                 terceros.Correo = request.Correo;
                 terceros.Descripcion = request.Descripcion;
+                terceros.Ciudad = request.Ciudad;
+                terceros.Telefono = request.Telefono;
                 terceros.Direccion = request.Direccion;
                 terceros.Nit = request.Nit;
                 terceros.Nombre = request.Nombre;
