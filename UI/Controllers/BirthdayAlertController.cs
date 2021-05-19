@@ -30,7 +30,7 @@ namespace UI.InterfazWeb.Controllers
                           where c.FechaCumple.Day == DateTime.Now.Day && c.FechaCumple.Month == DateTime.Now.Month
                           select new
                           {
-                             Nit=c.Nit,
+                             Nit=c.Identificacion,
                              Nombre=c.Nombre,
                              Apellido=c.Apellido
                              

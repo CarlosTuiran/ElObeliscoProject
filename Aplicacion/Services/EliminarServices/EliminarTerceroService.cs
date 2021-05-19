@@ -16,7 +16,7 @@ namespace Aplicacion.Services.EliminarServices
         }
         public EliminarTerceroResponse Ejecutar(EliminarTerceroRequest request)
         {
-            Terceros terceros = _unitOfWork.TercerosServiceRepository.FindFirstOrDefault(t => t.Nit == request.Nit);
+            Terceros terceros = _unitOfWork.TercerosServiceRepository.FindFirstOrDefault(t => t.Identificacion == request.Nit);
             if (terceros == null)
             {
                 return new EliminarTerceroResponse() { Message = $"Empleado no existe" };

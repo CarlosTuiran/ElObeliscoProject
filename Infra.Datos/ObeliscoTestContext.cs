@@ -43,12 +43,12 @@ namespace Infra.Datos
                 new Liquidacion() { Monto=1500000, FechaPago=DateTime.Now, NominaId=1,Id = 1
                 });*/
             modelBuilder.Entity<Terceros>().HasData(
-                new Terceros(){Nit="106583", Nombre="Santana Silva", Apellido="Orosco Eter", Descripcion=" Empresa Ferreos y Mas", 
+                new Terceros(){Identificacion="106583", Nombre="Santana Silva", Apellido="Orosco Eter", Descripcion=" Empresa Ferreos y Mas", 
                     Celular="3128288", Direccion= "Stranger Valley", Correo="ferreymas@gmail.com", TipoTercero="Proveedor", FechaCumple=DateTime.Now,
                     Id = 1
                 });
             modelBuilder.Entity<Terceros>().HasData(
-                new Terceros(){Nit = "10653434", Nombre = "Jose Jose", Apellido = "Joestar",  Descripcion = "Cliente Frecuente",
+                new Terceros(){Identificacion = "10653434", Nombre = "Jose Jose", Apellido = "Joestar",  Descripcion = "Cliente Frecuente",
                     Celular = "3443288",  Direccion = "Stranger Valley",  Correo = "jojo@gmail.com", TipoTercero = "Cliente", FechaCumple=DateTime.Now,
                     Id = 2
                 });
@@ -67,10 +67,6 @@ namespace Infra.Datos
             modelBuilder.Entity<TipoMovimiento>().HasData(
                 new TipoMovimiento{idMovimiento = 5, Nombre = "Devolucion", Id = 5
                 });
-            /*modelBuilder.Entity<Tiempo>().HasData(
-                new Tiempo{ Id=12, Año=2020, Mes=1, Dia=3, DiaDelAño=3, Fecha=Convert.ToDateTime("03-01-2020"), NombreDia="Lunes",
-                NombreDiaCorto="LUN", NombreMes="Enero", NombreMesCorto="ENE", SemanaDelAño=1, Semestre=1, Trimestre=1
-                });*/
             modelBuilder.Entity<MFactura>().HasData(
                 new MFactura() {idMfactura=1000, TipoMovimiento="Compra", FechaFactura=DateTime.Now, EstadoFactura="Pagada",
                 EmpleadoId=1, TercerosId=1, FechaPago=DateTime.Now, IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=1, TipoMovimientoId=1
@@ -106,6 +102,6 @@ namespace Infra.Datos
         public DbSet<TotalLiquidacion> TotalLiquidacion { get; set; }
         public DbSet<FormatoVenta> FormatoVenta { get; set; }
         public DbSet<Cuenta> Cuenta { get; set; }
-
+        public DbSet<Categoria> Categoria { get; set; }
     }
 }

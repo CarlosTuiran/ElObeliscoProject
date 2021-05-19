@@ -53,7 +53,7 @@ namespace Aplicacion.Services.ConsultarServices
                           select new
                           {
                               Nombre = t.Nombre + " " + t.Apellido,
-                              NIT = t.Nit,
+                              NIT = t.Identificacion,
                               t.Celular,
                               t.Direccion,
                               Ciudad = "Valledupar",

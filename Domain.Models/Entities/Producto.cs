@@ -9,21 +9,17 @@ namespace Domain.Models.Entities
 {
     public class Producto : Entity<int>
     {
-        //public int? MyProperty { get; set; } <-- Propiedad Opcional
-        //public Fabrica MyProperty { get; set; } <-- Relacion 1 a 1
-        //public List<Fabrica> MyProperty { get; set; } <-- Relacion 1 a *
-        //[StringLength(100)] <-- Anotacion max 100 caracteres 
-
         public string Referencia { get; set; }
         public string Descripcion { get; set; }
         public string FormatoVenta { get; set; }
-        public string? Marca { get; set; }
+        public int IdMarca { get; set; }
+        public int IdCategoria { get; set; }
+        public int IdProveedor { get; set; }
         public string? Fabrica { get; set; }
         public double Costo { get; set; }
         public double PrecioVenta { get; set; }
         public double IVA { get; set; }
         public int CantidadMinima { get; set; }
-        //public int InventarioId { get; set; } // PENDIENTE: esperando Inclusion al momento de  crear
         public DateTime FechaRegistro { get; set; }
         public string Estado { get; set; }
         public List<ProductoDFactura> ProductoDFacturas { get; set; }
@@ -31,21 +27,25 @@ namespace Domain.Models.Entities
         public Producto()
         {
 
-        }        
-        public Producto(string referencia, string descripcion, string formatoventa, string marca ,string fabrica,
-            double costo, double precioventa, double iva, int cantidadMinima, string estado)
+        }
+
+        public Producto(string referencia, string descripcion, string formatoVenta, int idMarca, 
+            int idCategoria, int idProveedor, string fabrica, double costo, double precioVenta, 
+            double iVA, int cantidadMinima, DateTime fechaRegistro, string estado)
         {
-            this.Referencia = referencia;
-            this.Descripcion = descripcion;
-            this.FormatoVenta = formatoventa;
-            this.Marca = marca;
-            this.Fabrica = fabrica;
-            this.Costo = costo;
-            this.PrecioVenta = precioventa;
-            this.IVA = iva;
-            this.CantidadMinima=cantidadMinima;
-            this.FechaRegistro = DateTime.Now;
-            this.Estado = estado;
+            Referencia = referencia;
+            Descripcion = descripcion;
+            FormatoVenta = formatoVenta;
+            IdMarca = idMarca;
+            IdCategoria = idCategoria;
+            IdProveedor = idProveedor;
+            Fabrica = fabrica;
+            Costo = costo;
+            PrecioVenta = precioVenta;
+            IVA = iVA;
+            CantidadMinima = cantidadMinima;
+            FechaRegistro = fechaRegistro;
+            Estado = estado;
         }
 
         public IReadOnlyList<string> CanCrear(Producto producto)
@@ -53,12 +53,26 @@ namespace Domain.Models.Entities
             var errors = new List<string>();
             if (string.IsNullOrEmpty(producto.Referencia))
                 errors.Add("Campo Referencia vacio");
+            if (string.IsNullOrEmpty(producto.Descripcion))
+                errors.Add("Campo Descripcion vacio");
             if (string.IsNullOrEmpty(producto.FormatoVenta))
                 errors.Add("Campo FormatoVenta vacio");
-            if (producto.Costo < 0)
-                errors.Add("Campo Costo negativo");
-            if (producto.PrecioVenta < 0)
+            if (producto.Costo <= 0)
+                errors.Add("Campo Costo negativo o vacio");
+            if (producto.IdMarca <= 0)
+                errors.Add("Campo marca negativo o vacio");
+            if (producto.IdCategoria <= 0)
+                errors.Add("Campo categoría negativo o vacio");
+            if (producto.IdProveedor <= 0)
+                errors.Add("Campo proveedor negativo o vacio");
+            if (producto.PrecioVenta <= 0)
                 errors.Add("Campo PrecioVenta negativo");
+            if (producto.Costo <= 0)
+                errors.Add("Campo costo negativo o vacio");
+            if (producto.IVA <= 0)
+                errors.Add("Campo iva negativo o vacio");
+            if (producto.CantidadMinima <= 0)
+                errors.Add("Campo cantidad minima negativo o vacio");
             if (string.IsNullOrEmpty(producto.FechaRegistro.ToString()))
                 errors.Add("Campo FechaRegistro vacio");
             if (string.IsNullOrEmpty(producto.Estado))

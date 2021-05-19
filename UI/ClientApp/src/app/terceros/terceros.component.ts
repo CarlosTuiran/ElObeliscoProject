@@ -23,10 +23,17 @@ export class TercerosComponent implements OnInit {
 
 }
 export interface ITercero {
-  nit: string,
+  identificacion: string,
+  tipoId: string,
   nombre: string,
   apellido: string,
   tipoTercero: string,
+  tipoPersona:string,
+  actividadEconomica:string,
+  responsabilidadFiscal:string,
+  responsableIva:bool,
+  autoRetenedor:bool,
+  extranjero:bool,
   celular: string,
   correo: string,
   direccion: string,
@@ -36,5 +43,5 @@ export interface ITercero {
   fechaCumple: Date
 }
 export interface IDeleteTercero {
-  nit: string
+  identificacion: string
 }

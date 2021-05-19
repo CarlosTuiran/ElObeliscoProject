@@ -21,6 +21,8 @@ namespace Domain.Models.Contracts
         ITotalLiquidacionServiceRepository TotalLiquidacionServiceRepository { get; }
         IFormatoVentaServiceRepository FormatoVentaServiceRepository { get; }
         ICuentaServiceRepository CuentaServiceRepository { get; }
+        IMarcaServiceRepository MarcaServiceRepository { get; }
+        ICategoriaServiceRepository CategoriaServiceRepository { get; }
 
         int Commit();
     }

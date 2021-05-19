@@ -50,7 +50,7 @@ namespace UI.InterfazWeb.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTercero([FromRoute] string id)
         {
-            Terceros terceros = await _context.Terceros.SingleOrDefaultAsync(t => t.Nit == id);
+            Terceros terceros = await _context.Terceros.SingleOrDefaultAsync(t => t.Identificacion == id);
             if (terceros == null)
                 return NotFound();
             return Ok(terceros);
@@ -114,7 +114,7 @@ namespace UI.InterfazWeb.Controllers
                            join df in _context.Set<DFactura>()
                            on mf.Id equals df.MfacturaId
                            where mf.TipoMovimiento == "Venta" && t.TipoTercero == "Cliente"
-                           group mf by new { t.Nit, t.Nombre, t.Apellido } into newGroup1
+                           group mf by new { t.Identificacion, t.Nombre, t.Apellido } into newGroup1
                            select new
                            {
                                Nit = newGroup1.Key.Nit,
@@ -142,7 +142,7 @@ namespace UI.InterfazWeb.Controllers
                            on mf.Id equals df.MfacturaId
                            where mf.TipoMovimiento == "Venta" && t.TipoTercero == "Cliente"
                            && mf.FechaPago >= FechaInicio && mf.FechaPago <= FechaFin
-                           group mf by new { t.Nit, t.Nombre, t.Apellido } into newGroup1
+                           group mf by new { t.Identificacion, t.Nombre, t.Apellido } into newGroup1
                            select new
                            {
                                Nit = newGroup1.Key.Nit,
@@ -163,7 +163,7 @@ namespace UI.InterfazWeb.Controllers
                           join df in _context.Set<DFactura>()
                           on mf.Id equals df.MfacturaId
                           where mf.TipoMovimiento == "Compra" && t.TipoTercero == "Proveedor"
-                          group mf by new { t.Nit, t.Nombre, t.Apellido } into newGroup1
+                          group mf by new { t.Identificacion, t.Nombre, t.Apellido } into newGroup1
                           select new
                           {
                               Nit = newGroup1.Key.Nit,
@@ -189,7 +189,7 @@ namespace UI.InterfazWeb.Controllers
                            on mf.Id equals df.MfacturaId
                            where mf.TipoMovimiento == "Compra" && t.TipoTercero == "Proveedore"
                            && mf.FechaPago >= FechaInicio && mf.FechaPago <= FechaFin
-                           group mf by new { t.Nit, t.Nombre, t.Apellido } into newGroup1
+                           group mf by new { t.Identificacion, t.Nombre, t.Apellido } into newGroup1
                            select new
                            {
                                Nit = newGroup1.Key.Nit,

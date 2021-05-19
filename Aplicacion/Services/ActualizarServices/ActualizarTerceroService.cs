@@ -18,7 +18,7 @@ namespace Aplicacion.Services.ActualizarServices
 
         public ActualizarTerceroResponse Ejecutar(ActualizarTerceroRequest request)
         {
-            Terceros terceros = _unitOfWork.TercerosServiceRepository.FindFirstOrDefault(t => t.Nit == request.Nit);
+            Terceros terceros = _unitOfWork.TercerosServiceRepository.FindFirstOrDefault(t => t.Identificacion == request.Nit);
             if (terceros == null)
             {
                 return new ActualizarTerceroResponse() { Message = $"Tercero no existe" };
@@ -32,7 +32,7 @@ namespace Aplicacion.Services.ActualizarServices
                 terceros.Ciudad = request.Ciudad;
                 terceros.Telefono = request.Telefono;
                 terceros.Direccion = request.Direccion;
-                terceros.Nit = request.Nit;
+                terceros.Identificacion = request.Nit;
                 terceros.Nombre = request.Nombre;
                 terceros.FechaCumple=request.FechaCumple;
                 terceros.TipoTercero = request.TipoTercero;

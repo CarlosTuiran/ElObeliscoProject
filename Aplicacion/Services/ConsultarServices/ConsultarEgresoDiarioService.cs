@@ -30,13 +30,13 @@ namespace Aplicacion.Services.ConsultarServices
                              on df.MfacturaId equals mf.Id
                              join t in _context.Set<Terceros>()
                              on mf.TercerosId equals t.Id
-                             where df.FechaFactura.Date == fecha.Date && t.Nit == tercero && mf.TipoMovimiento == "Venta"
+                             where df.FechaFactura.Date == fecha.Date && t.Identificacion == tercero && mf.TipoMovimiento == "Venta"
                              select new
                              {
                                  Codigo = df.Referencia,
                                  Descripcion = p.Descripcion,
                                  CentroCosto = df.Bodega,
-                                 Tercero = t.Nit,
+                                 Tercero = t.Identificacion,
                                  ValorTotal = df.PrecioTotal
                              }).ToList();
 
@@ -45,11 +45,11 @@ namespace Aplicacion.Services.ConsultarServices
                           on mf.TercerosId equals t.Id
                           join tm in _context.Set<TipoMovimiento>()
                           on mf.TipoMovimientoId equals tm.Id
-                          where t.Nit == tercero && mf.FechaFactura.Date == fecha.Date && mf.TipoMovimiento == "Venta"
+                          where t.Identificacion == tercero && mf.FechaFactura.Date == fecha.Date && mf.TipoMovimiento == "Venta"
                           select new
                           {
                               Nombre = t.Nombre + " " + t.Apellido,
-                              NIT = t.Nit,
+                              NIT = t.Identificacion,
                               t.Celular,
                               t.Direccion,
                               Ciudad = "Valledupar",

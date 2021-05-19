@@ -25,16 +25,19 @@ namespace Aplicacion.Services.ActualizarServices
             }
             else
             {
-                producto.Costo = request.Costo;
-                producto.Descripcion = request.Descripcion;
-                producto.Fabrica = request.Fabrica;
-                producto.FechaRegistro = DateTime.Now;
-                producto.FormatoVenta = request.FormatoVenta;
-                producto.IVA = request.IVA;
-                producto.Marca = request.Marca;
-                producto.PrecioVenta = request.PrecioVenta;
                 producto.Referencia = request.Referencia;
+                producto.Descripcion = request.Descripcion;
+                producto.FormatoVenta = request.FormatoVenta;
+                producto.IdMarca = request.IdMarca;
+                producto.IdCategoria = request.IdCategoria;
+                producto.IdProveedor = request.IdProveedor;
+                producto.Fabrica = request.Fabrica;
+                producto.Costo = request.Costo;
+                producto.PrecioVenta = request.PrecioVenta;
+                producto.IVA = request.IVA;
                 producto.CantidadMinima = request.CantidadMinima;
+                producto.FechaRegistro = request.FechaRegistro;
+                producto.Estado = request.Estado;
                 _unitOfWork.ProductoServiceRepository.Edit(producto);
                 _unitOfWork.Commit();
                 return new ActualizarProductoResponse() { Message = $"Producto Actualizado Exitosamente" };

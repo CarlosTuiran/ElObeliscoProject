@@ -143,6 +143,23 @@ namespace Infra.Datos.Base
             }
         }
 
+        private IMarcaServiceRepository _marcaServiceRepository;
+        public IMarcaServiceRepository MarcaServiceRepository
+        {
+            get
+            {
+                return _marcaServiceRepository ?? (_marcaServiceRepository = new MarcaServiceRepository(_dbContext));
+            }
+        }
+        private ICategoriaServiceRepository _categoriaServiceRepository;
+        public ICategoriaServiceRepository CategoriaServiceRepository
+        {
+            get
+            {
+                return _categoriaServiceRepository ?? (_categoriaServiceRepository = new CategoriaServiceRepository(_dbContext));
+            }
+        }
+
         public int Commit()
         {
             return _dbContext.SaveChanges();

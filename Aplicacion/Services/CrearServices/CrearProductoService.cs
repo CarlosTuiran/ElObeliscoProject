@@ -23,15 +23,13 @@ namespace Aplicacion.Services.CrearServices
             var producto = _unitOfWork.ProductoServiceRepository.FindFirstOrDefault(t => t.Referencia == request.Referencia);
             if (producto == null)
             {
-                Producto newProducto = new Producto(request.Referencia, request.Descripcion, request.FormatoVenta, request.Marca, request.Fabrica, request.Costo, request.PrecioVenta, request.IVA, request.CantidadMinima, request.Estado);
+                Producto newProducto = new Producto(request.Referencia, request.Descripcion, request.FormatoVenta, 
+                    request.IdMarca, request.IdCategoria, request.IdProveedor, request.Fabrica, request.Costo, 
+                    request.PrecioVenta, request.IVA, request.CantidadMinima, request.FechaRegistro, request.Estado);
                 IReadOnlyList<string> errors = newProducto.CanCrear(newProducto);
                 if (errors.Any())
                 {
-                    string listaErrors = "Errores:";
-                    foreach (var item in errors)
-                    {
-                        listaErrors += item.ToString();
-                    }
+                    string listaErrors = "Errores:" + string.Join(",", errors);
                     return new CrearProductoResponse() { Message = listaErrors };
                 }
                 else

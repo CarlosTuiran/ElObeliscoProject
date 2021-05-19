@@ -20,12 +20,13 @@ namespace Aplicacion.Services.CrearServices
         public CrearTerceroResponse Ejecutar(CrearTerceroRequest request)
         {
 
-            var terceros = _unitOfWork.TercerosServiceRepository.FindFirstOrDefault(t => t.Nit == request.Nit);
+            var terceros = _unitOfWork.TercerosServiceRepository.FindFirstOrDefault(t => t.Identificacion == request.Nit);
             if (terceros == null)
             {
-                Terceros newTerceros = new Terceros(request.Nit, request.Nombre, request.Apellido, request.TipoTercero,
-                 request.Celular, request.Correo, request.Direccion, request.Descripcion, request.Ciudad, request.Telefono,
-                 request.Estado, request.FechaCumple);
+                Terceros newTerceros = new Terceros(request.identificacion, request.tipoId,request.nombre, request.apellido, request.tipoTercero, 
+            request.tipoPersona,  request.actividadEconomica,request.responsabilidadFiscal, request.responsableIva 
+            ,request.autoRetenedor,request.extranjero, request.celular, request.correo, request.direccion, request.descripcion, 
+            request.ciudad, request.telefono, request.estado, request.fechaCumple);
                 IReadOnlyList<string> errors = newTerceros.CanCrear(newTerceros);
                 if (errors.Any())
                 {

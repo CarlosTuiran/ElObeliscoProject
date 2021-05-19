@@ -8,10 +8,17 @@ namespace Domain.Models.Entities
 {
     public class Terceros : Entity<int>
     {
-        public string Nit { get; set; }
+        public string Identificacion { get; set; }
+        public string TipoId { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string TipoTercero { get; set; }
+        public string TipoPersona { get; set; }
+        public string ActividadEconomica { get; set; }
+        public string ResponsabilidadFiscal { get; set; }      
+        public bool ResponsableIva { get; set; }
+        public bool AutoRetenedor { get; set; }
+        public bool Extranjero { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }
         public string Direccion { get; set; }
@@ -25,13 +32,22 @@ namespace Domain.Models.Entities
         {
 
         }
-        public Terceros(string nit, string nombre, string apellido, string tipoTercero, string celular, string correo, string direccion, string descripcion, 
+        public Terceros(string identificacion, string tipoId,string nombre, string apellido, string tipoTercero, 
+            string tipoPersona,  string actividadEconomica,string responsabilidadFiscal, bool responsableIva 
+            , bool autoRetenedor,bool extranjero, string celular, string correo, string direccion, string descripcion, 
             string ciudad, string telefono, string estado, DateTime fechaCumple)
         {
-            Nit = nit;
+            Identificacion = identificacion;
+            TipoId=tipoId;
             Nombre = nombre;
             Apellido = apellido;
+            TipoPersona=tipoPersona;
             TipoTercero = tipoTercero;
+            ActividadEconomica=actividadEconomica;
+            ResponsabilidadFiscal=responsabilidadFiscal;
+            ResponsableIva=responsableIva;
+            AutoRetenedor=autoRetenedor;
+            Extranjero=extranjero;
             Celular = celular;
             Correo = correo;
             Direccion = direccion;
@@ -45,7 +61,7 @@ namespace Domain.Models.Entities
         public IReadOnlyList<string> CanCrear(Terceros terceros)
         {
             var errors = new List<string>();
-            if (string.IsNullOrEmpty(this.Nit))
+            if (string.IsNullOrEmpty(this.Identificacion))
                 errors.Add("Campo Nit vacio");
             if (string.IsNullOrEmpty(this.Nombre))
                 errors.Add("Campo Nombre vacio");
