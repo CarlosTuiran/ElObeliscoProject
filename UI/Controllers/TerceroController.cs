@@ -71,7 +71,7 @@ namespace UI.InterfazWeb.Controllers
             if (rta.isOk())
             {
                 await _context.SaveChangesAsync();
-                return CreatedAtAction("GetTercero", new { id = tercero.Nit }, tercero);
+                return CreatedAtAction("GetTercero", new { id = tercero.Identificacion }, tercero);
             }
             return BadRequest(rta.Message);
         }
@@ -117,7 +117,7 @@ namespace UI.InterfazWeb.Controllers
                            group mf by new { t.Identificacion, t.Nombre, t.Apellido } into newGroup1
                            select new
                            {
-                               Nit = newGroup1.Key.Nit,
+                               Nit = newGroup1.Key.Identificacion,
                                Nombre = newGroup1.Key.Nombre + " " + newGroup1.Key.Apellido,
                                Total = newGroup1.Sum(c => c.Total)
                            }).OrderByDescending(i => i.Total).Take(10).ToList();
@@ -145,7 +145,7 @@ namespace UI.InterfazWeb.Controllers
                            group mf by new { t.Identificacion, t.Nombre, t.Apellido } into newGroup1
                            select new
                            {
-                               Nit = newGroup1.Key.Nit,
+                               Nit = newGroup1.Key.Identificacion,
                                Nombre = newGroup1.Key.Nombre + " " + newGroup1.Key.Apellido,
                                Total = newGroup1.Sum(c => c.Total)
                            }).OrderByDescending(i => i.Total).Take(10).ToList();
@@ -166,7 +166,7 @@ namespace UI.InterfazWeb.Controllers
                           group mf by new { t.Identificacion, t.Nombre, t.Apellido } into newGroup1
                           select new
                           {
-                              Nit = newGroup1.Key.Nit,
+                              Nit = newGroup1.Key.Identificacion,
                               Nombre = newGroup1.Key.Nombre + " " + newGroup1.Key.Apellido,
                               Total = newGroup1.Sum(c => c.Total)
                           }).OrderByDescending(i => i.Total).Take(10).ToList();
@@ -192,7 +192,7 @@ namespace UI.InterfazWeb.Controllers
                            group mf by new { t.Identificacion, t.Nombre, t.Apellido } into newGroup1
                            select new
                            {
-                               Nit = newGroup1.Key.Nit,
+                               Nit = newGroup1.Key.Identificacion,
                                Nombre = newGroup1.Key.Nombre + " " + newGroup1.Key.Apellido,
                                Total = newGroup1.Sum(c => c.Total)
                            }).OrderByDescending(i => i.Total).Take(10).ToList();

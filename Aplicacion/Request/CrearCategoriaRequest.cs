@@ -13,7 +13,7 @@ namespace Aplicacion.Request
     {
         public string Message { get; set; }
 
-        public CrearMarcaResponse(string message)
+        public CrearCategoriaResponse(string message)
         {
             Message = message;
         }

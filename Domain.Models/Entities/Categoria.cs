@@ -13,6 +13,11 @@ namespace Domain.Models.Entities
         {
             Nombre = nombre;
         }
+
+        public Categoria()
+        {
+        }
+
         public IReadOnlyList<string> CanCrear(Categoria categoria)
         {
             var errors = new List<string>();

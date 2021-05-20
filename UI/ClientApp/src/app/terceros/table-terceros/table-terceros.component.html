@@ -7,9 +7,9 @@
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
       <!-- nit Column -->
-      <ng-container matColumnDef="nit">
-        <th mat-header-cell *matHeaderCellDef> Nit </th>
-        <td *matCellDef="let element"> {{element.nit}} </td>
+      <ng-container matColumnDef="identificacion">
+        <th mat-header-cell *matHeaderCellDef> Identificacion </th>
+        <td *matCellDef="let element"> {{element.identificacion}} </td>
       </ng-container>
       <!-- nombre Column -->
       <ng-container matColumnDef="nombre">
@@ -65,11 +65,11 @@
       <ng-container matColumnDef="options">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="warn" (click)="Eliminar(element.nit)"><mat-icon>delete_outline</mat-icon></button>
-          <button mat-icon-button [routerLink]='["/terceros-editar/" + element.nit]'>
+          <button mat-icon-button color="warn" (click)="Eliminar(element.identificacion)"><mat-icon>delete_outline</mat-icon></button>
+          <button mat-icon-button [routerLink]='["/terceros-editar/" + element.identificacion]'>
             <mat-icon>launch</mat-icon>
           </button>
-          <button mat-icon-button (click)="printPDF(element.nit, element.tipoTercero)"><mat-icon>print</mat-icon></button>
+          <button mat-icon-button (click)="printPDF(element.identificacion, element.tipoTercero)"><mat-icon>print</mat-icon></button>
 
         </td>
       </ng-container>

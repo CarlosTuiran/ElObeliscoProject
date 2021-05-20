@@ -1,11 +1,8 @@
 ﻿using Aplicacion.Request;
 using Domain.Models.Contracts;
 using Domain.Models.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using static Aplicacion.Request.CrearTerceroRequest;
 namespace Aplicacion.Services.CrearServices
 {
     public class CrearTerceroService
@@ -20,13 +17,13 @@ namespace Aplicacion.Services.CrearServices
         public CrearTerceroResponse Ejecutar(CrearTerceroRequest request)
         {
 
-            var terceros = _unitOfWork.TercerosServiceRepository.FindFirstOrDefault(t => t.Identificacion == request.Nit);
+            var terceros = _unitOfWork.TercerosServiceRepository.FindFirstOrDefault(t => t.Identificacion == request.Identificacion);
             if (terceros == null)
             {
-                Terceros newTerceros = new Terceros(request.identificacion, request.tipoId,request.nombre, request.apellido, request.tipoTercero, 
-            request.tipoPersona,  request.actividadEconomica,request.responsabilidadFiscal, request.responsableIva 
-            ,request.autoRetenedor,request.extranjero, request.celular, request.correo, request.direccion, request.descripcion, 
-            request.ciudad, request.telefono, request.estado, request.fechaCumple);
+                Terceros newTerceros = new Terceros(request.Identificacion, request.TipoId, request.Nombre, request.Apellido, request.TipoTercero,
+                request.TipoPersona, request.ActividadEconomica, request.ResponsabilidadFiscal, request.ResponsableIva
+                , request.AutoRetenedor, request.Extranjero, request.Celular, request.Correo, request.Direccion, request.Descripcion,
+                request.Ciudad, request.Telefono, request.Estado, request.FechaCumple);
                 IReadOnlyList<string> errors = newTerceros.CanCrear(newTerceros);
                 if (errors.Any())
                 {

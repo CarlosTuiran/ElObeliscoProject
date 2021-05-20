@@ -37,7 +37,7 @@ export class FormCuentaComponent implements OnInit {
       this.cuentaId = params["id"];
       this.cuentasService.getCuenta(this.cuentaId).subscribe(cuenta => this.cargarFormulario(cuenta),
         error => this.alertService.error(error.message));
-      });
+    });
   }
   cargarFormulario(cuenta: ICuenta) {
     

@@ -15,7 +15,7 @@ export class TableTercerosComponent implements OnInit {
   
   terceros!:ITercero[];  
   displayedColumns: string[] = [
-    'nit',
+    'identificacion',
     'nombre',
     'apellido',
     'tipoTercero',

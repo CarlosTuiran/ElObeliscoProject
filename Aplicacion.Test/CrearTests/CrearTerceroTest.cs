@@ -42,7 +42,7 @@ namespace Aplicacion.Test.CrearTests
                     Correo = "raagamez@unicesar.edu.co",
                     Descripcion = "Hola wenas :v",
                     Direccion = "Calle 22C #21-61",
-                    Nit = "32154968413",
+                    Identificacion = "32154968413",
                     Nombre = "Raul Andres",
                     TipoTercero = "Proveedor",
                     FechaCumple=DateTime.Now

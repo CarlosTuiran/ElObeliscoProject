@@ -20,10 +20,17 @@ export class TercerosFormComponent implements OnInit {
   terceroId: string;
 
   formGroup = this.fb.group({
-    nit: ['', [Validators.required]],
+    identificacion: ['', [Validators.required]],
+    tipoId:['', [Validators.required]],
     nombre: ['', [Validators.required]],
-    apellido: ['', [Validators.required]],
+    apellido: [''],
     tipoTercero: ['', [Validators.required]],
+    tipoPersona:['', [Validators.required]],
+    actividadEconomica:['', [Validators.required]],
+    responsabilidadFiscal:['', [Validators.required]],
+    responsableIva:['', [Validators.required]],
+    autoRetenedor:['', [Validators.required]],
+    extranjero:['', [Validators.required]],
     celular: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     correo: ['', [Validators.required]],
     direccion: ['', [Validators.required]],
@@ -47,10 +54,17 @@ export class TercerosFormComponent implements OnInit {
   }
   cargarFormulario(tercero: ITercero) {
     this.formGroup.patchValue({
-      nit: tercero.nit,
+      identificacion: tercero.identificacion,
+      tipoId:tercero. tipoId,
       nombre: tercero.nombre,
       apellido: tercero.apellido,
       tipoTercero: tercero.tipoTercero,
+      tipoPersona:tercero.tipoPersona,
+      actividadEconomica:tercero.actividadEconomica,
+      responsabilidadFiscal:tercero.responsabilidadFiscal,
+      responsableIva:tercero.responsableIva,
+      autoRetenedor:tercero.autoRetenedor,
+      extranjero:tercero.extranjero,
       celular: tercero.celular,
       correo: tercero.correo,
       direccion: tercero.direccion,
@@ -64,7 +78,7 @@ export class TercerosFormComponent implements OnInit {
     console.table(tercero); //ver usuario por consola
     if (this.modoEdicion) {
       // edita
-      tercero.nit = this.terceroId;
+      tercero.identificacion = this.terceroId;
       this.tercerosService.updateTercero(tercero)
         .subscribe(tercero => this.onSaveSuccess(),
           error => this.alertService.error(error.message));
@@ -79,9 +93,30 @@ export class TercerosFormComponent implements OnInit {
     this.router.navigate(["/terceros"]);
     this.alertService.success("Guardado Exitoso");
   }
-
-  get nit() {
-    return this.formGroup.get('nit');
+  
+  get identificacion() {
+    return this.formGroup.get('identificacion');
+  }
+  get tipoId() {
+    return this.formGroup.get('tipoId');
+  }
+  get tipoPersona() {
+    return this.formGroup.get('tipoPersona');
+  }
+  get  actividadEconomica() {
+    return this.formGroup.get('actividadEconomica');
+  }
+  get responsabilidadFiscal() {
+    return this.formGroup.get('responsabilidadFiscal');
+  }
+  get responsableIva() {
+    return this.formGroup.get('responsableIva');
+  }
+  get autoRetenedor() {
+    return this.formGroup.get('autoRetenedor');
+  }
+  get extranjero() {
+    return this.formGroup.get('extranjero');
   }
   get nombre() {
     return this.formGroup.get('nombre');

@@ -13,6 +13,11 @@ namespace Domain.Models.Entities
         {
             Nombre = nombre;
         }
+
+        public Marca()
+        {
+        }
+
         public IReadOnlyList<string> CanCrear(Marca marca)
         {
             var errors = new List<string>();

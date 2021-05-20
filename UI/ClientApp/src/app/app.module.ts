@@ -108,6 +108,10 @@ import { CuentaComponent } from './contabilidad/cuenta/cuenta.component';
 import { FormCuentaComponent } from './contabilidad/cuenta/form-cuenta/form-cuenta.component';
 import { TableCuentaComponent } from './contabilidad/cuenta/table-cuenta/table-cuenta.component';
 import { CuentaService } from './contabilidad/cuenta/cuenta.service';
+import { MarcaComponent } from './configuraciones/marca/marca.component';
+import { CategoriaComponent } from './configuraciones/categoria/categoria.component';
+import { TableMarcaComponent } from './configuraciones/marca/table-marca/table-marca.component';
+import { DialogoMarcaComponent } from './configuraciones/marca/dialogo-marca/dialogo-marca.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -179,6 +183,10 @@ import { CuentaService } from './contabilidad/cuenta/cuenta.service';
     CuentaComponent,
     FormCuentaComponent,
     TableCuentaComponent,
+    MarcaComponent,
+    CategoriaComponent,
+    TableMarcaComponent,
+    DialogoMarcaComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -229,7 +237,7 @@ import { CuentaService } from './contabilidad/cuenta/cuenta.service';
       { path: 'cuenta-crear', component: FormCuentaComponent, canActivate: [CheckNotloginGuard] },
       { path: 'cuenta-editar/:id', component: FormCuentaComponent, canActivate: [CheckNotloginGuard] },
       { path: 'configuraciones', component: ConfiguracionesComponent, canActivate: [CheckNotloginGuard] },
-
+      { path: 'marcas', component: MarcaComponent, canActivate: [CheckNotloginGuard] },
 
     ]),
     BrowserAnimationsModule

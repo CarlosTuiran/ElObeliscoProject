@@ -28,7 +28,7 @@ export class TercerosService {
   }
 
   updateTercero(tercero: ITercero): Observable<ITercero> {
-    return this.http.put<ITercero>(this.apiURL + "/" + tercero.nit, tercero);
+    return this.http.put<ITercero>(this.apiURL + "/" + tercero.identificacion, tercero);
   }
 
   deleteTerceros(nit: string): Observable<IDeleteTercero> {

@@ -1,234 +1,287 @@
 <h1 *ngIf="modoEdicion">Editar Tercero</h1>
 <h1 *ngIf="!modoEdicion">Agregar Tercero</h1>
-<form class="form-horizontal" novalidate
-      (ngSubmit)="save()" [formGroup]="formGroup">
+<form class="form-horizontal" novalidate (ngSubmit)="save()" [formGroup]="formGroup">
   <fieldset>
+    <div class="row">
+      <div class="form-group col-md-3"
+        [ngClass]="{'has-error': ((tipoPersona.touched || tipoPersona.dirty)&& tipoPersona.invalid)}">
+        <label class="col-md-6 control-label" for="tipoPersonaId">Tipo Persona</label>
 
-    <div class="form-group"
-         [ngClass]="{'has-error': ((nit.touched || nit.dirty) && nit.invalid)}">
-      <label class="col-md-2 control-label"
-             for="nitId">Nit del Tercero</label>
-
-      <div class="col-md-8">
-        <input class="form-control"
-               id="nitId"
-               type="text"
-               formControlName="nit"
-               *ngIf="!modoEdicion" />
-        <input class="form-control"
-               id="nitId"
-               type="text"
-               formControlName="nit"
-               *ngIf="modoEdicion"
-               disabled />
-        <div class="alert alert-danger" *ngIf="((nit.touched || nit.dirty )&& nit.invalid)">
-          <span *ngIf="nit.errors.required">
-            El campo Nit es requerido
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group"
-         [ngClass]="{'has-error': ((nombre.touched || nombre.dirty) && nombre.invalid)}">
-      <label class="col-md-2 control-label"
-             for="nombreId">Nombre del Tercero</label>
-
-      <div class="col-md-8">
-        <input class="form-control"
-               id="nombreId"
-               type="text"
-               formControlName="nombre" />
-        <div class="alert alert-danger" *ngIf="((nombre.touched || nombre.dirty ) && nombre.invalid)">
-          <span *ngIf="nombre.errors.required">
-            El campo Nombre es requerido
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group"
-         [ngClass]="{'has-error': ((apellido.touched || apellido.dirty) && apellido.invalid)}">
-      <label class="col-md-2 control-label"
-             for="apellidoId">Apellido del Tercero</label>
-
-      <div class="col-md-8">
-        <input class="form-control"
-               id="apellidoId"
-               type="text"
-               formControlName="apellido" />
-        <div class="alert alert-danger" *ngIf="((apellido.touched || apellido.dirty )&& apellido.invalid)">
-          <span *ngIf="apellido.errors.required">
-            El campo Apellido es requerido
-          </span>
-        </div>
-      </div>
-    </div>
-
-
-
-    <div class="form-group"
-         [ngClass]="{'has-error': ((tipoTercero.touched || tipoTercero.dirty)&& tipoTercero.invalid)}">
-      <label class="col-md-2 control-label"
-             for="tipoTerceroId">Tipo Tercero</label>
-
-      <div class="col-md-8">
-        <select class="form-control"
-                id="tipoTerceroId"
-                type="text"
-                required
-                formControlName="tipoTercero">
-          <option value="Cliente">Cliente</option>
-          <option value="Proveedor">Proveedor</option>
-        </select>
-        <div class="alert alert-danger" *ngIf="((tipoTercero.touched || tipoTercero.dirty)&& tipoTercero.invalid)">
-          <span *ngIf="tipoTercero.errors.required">
-            El campo Tipo Tercero es requerido
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group"
-         [ngClass]="{'has-error': ((celular.touched || celular.dirty) && celular.invalid)}">
-      <label class="col-md-2 control-label"
-             for="celularId">Celular del Tercero</label>
-
-      <div class="col-md-8">
-        <input class="form-control"
-               id="celularId"
-               type="text"
-               formControlName="celular" />
-        <div class="alert alert-danger" *ngIf="((celular.touched || celular.dirty )&& celular.invalid)">
-          <span *ngIf="celular.errors.required">
-            El campo Celular es requerido
-          </span>
-          <span *ngIf="celular.errors.pattern">
-            El campo Celular es numerico
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group"
-         [ngClass]="{'has-error': ((telefono.touched || telefono.dirty) && telefono.invalid)}">
-      <label class="col-md-2 control-label"
-             for="telefonoId">Telefono del Tercero</label>
-
-      <div class="col-md-8">
-        <input class="form-control"
-               id="telefonoId"
-               type="text"
-               formControlName="telefono" />
-        <div class="alert alert-danger" *ngIf="((telefono.touched || telefono.dirty ) && telefono.invalid)">
-          <span *ngIf="telefono.errors.required">
-            El campo Telefono es requerido
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group"
-         [ngClass]="{'has-error': ((correo.touched || correo.dirty) && correo.invalid)}">
-      <label class="col-md-2 control-label"
-             for="correoId">Correo del Tercero</label>
-
-      <div class="col-md-8">
-        <input class="form-control"
-               id="correoId"
-               type="email"
-               formControlName="correo" />
-        <div class="alert alert-danger" *ngIf="((correo.touched || correo.dirty ) && correo.invalid)">
-          <span *ngIf="correo.errors.required">
-            El campo Correo es requerido
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group"
-         [ngClass]="{'has-error': ((direccion.touched || direccion.dirty) && direccion.invalid)}">
-      <label class="col-md-2 control-label"
-             for="direccionId">Direccion del Tercero</label>
-
-      <div class="col-md-8">
-        <input class="form-control"
-               id="direccionId"
-               type="text"
-               formControlName="direccion" />
-        <div class="alert alert-danger" *ngIf="((direccion.touched || direccion.dirty ) && direccion.invalid)">
-          <span *ngIf="direccion.errors.required">
-            El campo Direccion es requerido
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group"
-         [ngClass]="{'has-error': ((ciudad.touched || ciudad.dirty) && ciudad.invalid)}">
-      <label class="col-md-2 control-label"
-             for="ciudadId">Ciudad del Tercero</label>
-
-      <div class="col-md-8">
-        <input class="form-control"
-               id="ciudadId"
-               type="text"
-               formControlName="ciudad" />
-        <div class="alert alert-danger" *ngIf="((ciudad.touched || ciudad.dirty ) && ciudad.invalid)">
-          <span *ngIf="ciudad.errors.required">
-            El campo Ciudad es requerido
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group"
-         [ngClass]="{'has-error': ((descripcion.touched || descripcion.dirty) && descripcion.invalid)}">
-      <label class="col-md-2 control-label"
-             for="descripcionId">Descripcion del Tercero</label>
-
-      <div class="col-md-8">
-        <input class="form-control"
-               id="descripcionId"
-               type="text"
-               formControlName="descripcion" />
-        <div class="alert alert-danger" *ngIf="((descripcion.touched || descripcion.dirty ) && descripcion.invalid)">
-          <span *ngIf="descripcion.errors.required">
-            El campo Descripcion es requerido
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group"
-         [ngClass]="{'has-error': ((fechaCumple.touched || fechaCumple.dirty) && fechaCumple.invalid)}">
-      <div class="col-md-10">
-        <mat-form-field color="accent" appearance="fill">
-          <mat-label>Fecha de Cumplea&ntilde;os</mat-label>
-          <input id="fechaCumpleId"
-                 formControlName="fechaCumple" matInput [matDatepicker]="picker1" />
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-          <div class="alert alert-danger" *ngIf="((fechaCumple.touched || fechaCumple.dirty ) && fechaCumple.invalid)">
-            <span *ngIf="fechaCumple.errors.required">
-              El campo Fecha de Cumplea&ntilde;os es requerido
+        <div class="col-md-8">
+          <select class="form-control" id="tipoPersonaId" type="text" required formControlName="tipoPersona">
+            <option value="Natural">Natural</option>
+            <option value="Juridica">Juridica</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="((tipoPersona.touched || tipoPersona.dirty)&& tipoPersona.invalid)">
+            <span *ngIf="tipoPersona.errors.required">
+              El campo Tipo Persona es requerido
             </span>
           </div>
-        </mat-form-field>
+        </div>
+      </div>
+      <div class="form-group col-md-3" [ngClass]="{'has-error': ((tipoId.touched || tipoId.dirty)&& tipoId.invalid)}">
+        <label class="col-md-6 control-label" for="tipoIdId">Tipo Id</label>
+
+        <div class="col-md-8">
+          <select class="form-control" id="tipoIdId" type="text" required formControlName="tipoId">
+            <option value="CC">CC</option>
+            <option value="NIT">NIT</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="((tipoId.touched || tipoId.dirty)&& tipoId.invalid)">
+            <span *ngIf="tipoId.errors.required">
+              El campo Tipo Id es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-3"
+        [ngClass]="{'has-error': ((identificacion.touched || identificacion.dirty) && identificacion.invalid)}">
+        <label class="col-md-6 control-label" for="identificacionId">Identificacion</label>
+
+        <div class="col-md-8">
+          <input class="form-control" id="identificacionId" type="text" formControlName="identificacion"
+            *ngIf="!modoEdicion" />
+          <input class="form-control" id="identificacionId" type="text" formControlName="identificacion"
+            *ngIf="modoEdicion" disabled />
+          <div class="alert alert-danger"
+            *ngIf="((identificacion.touched || identificacion.dirty )&& identificacion.invalid)">
+            <span *ngIf="identificacion.errors.required">
+              El campo identificacion es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-3" [ngClass]="{'has-error': ((nombre.touched || nombre.dirty) && nombre.invalid)}">
+        <label class="col-md-6 control-label" for="nombreId">Nombre</label>
+
+        <div class="col-md-8">
+          <input class="form-control" id="nombreId" type="text" formControlName="nombre" />
+          <div class="alert alert-danger" *ngIf="((nombre.touched || nombre.dirty ) && nombre.invalid)">
+            <span *ngIf="nombre.errors.required">
+              El campo Nombre es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label class="col-md-6 control-label" for="apellidoId">Apellido</label>
+
+        <div class="col-md-8">
+          <input class="form-control" id="apellidoId" type="text" formControlName="apellido" />
+        </div>
+      </div>
+      <div class="form-group col-md-3"
+        [ngClass]="{'has-error': ((tipoTercero.touched || tipoTercero.dirty)&& tipoTercero.invalid)}">
+        <label class="col-md-6 control-label" for="tipoTerceroId">Tipo Tercero</label>
+
+        <div class="col-md-8">
+          <select class="form-control" id="tipoTerceroId" type="text" required formControlName="tipoTercero">
+            <option value="Cliente">Cliente</option>
+            <option value="Proveedor">Proveedor</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="((tipoTercero.touched || tipoTercero.dirty)&& tipoTercero.invalid)">
+            <span *ngIf="tipoTercero.errors.required">
+              El campo Tipo Tercero es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-3"
+        [ngClass]="{'has-error': ((actividadEconomica.touched || actividadEconomica.dirty) && actividadEconomica.invalid)}">
+        <label class="col-md-12 control-label" for="actividadEconomicaId">Actividad Economica</label>
+
+        <div class="col-md-8">
+          <input class="form-control" id="actividadEconomicaId" type="text" formControlName="actividadEconomica" />
+          <div class="alert alert-danger"
+            *ngIf="((actividadEconomica.touched || actividadEconomica.dirty ) && actividadEconomica.invalid)">
+            <span *ngIf="actividadEconomica.errors.required">
+              El campo actividad economica es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-3"
+        [ngClass]="{'has-error': ((responsabilidadFiscal.touched || responsabilidadFiscal.dirty) && responsabilidadFiscal.invalid)}">
+        <label class="col-md-12 control-label" for="responsabilidadFiscalId">Responsabilidad Fiscal</label>
+
+        <div class="col-md-8">
+          <input class="form-control" id="responsabilidadFiscalId" type="text"
+            formControlName="responsabilidadFiscal" />
+          <div class="alert alert-danger"
+            *ngIf="((responsabilidadFiscal.touched || responsabilidadFiscal.dirty ) && responsabilidadFiscal.invalid)">
+            <span *ngIf="responsabilidadFiscal.errors.required">
+              El campo responsabilidad fiscal es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3"
+           [ngClass]="{'has-error': ((responsableIva.touched || responsableIva.dirty) && responsableIva.invalid)}">
+        <label class="col-md-12 control-label" for="responsableIvaId">¿Responsable de Iva?</label>
+
+        <div class="col-md-8">
+          <select class="form-control" id="responsableIvaId" type="text" required formControlName="responsableIva">
+            <option value=true>Si</option>
+            <option value=false>No</option>
+          </select>
+          <div class="alert alert-danger"
+               *ngIf="((responsableIva.touched || responsableIva.dirty ) && responsableIva.invalid)">
+            <span *ngIf="responsableIva.errors.required">
+              El campo responsable Iva es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-3"
+           [ngClass]="{'has-error': ((autoRetenedor.touched || autoRetenedor.dirty) && autoRetenedor.invalid)}">
+        <label class="col-md-12 control-label" for="autoRetenedorId">¿AutoRetenedor?</label>
+        <div class="col-md-8">
+          <select class="form-control" id="autoRetenedorId" type="text" required formControlName="autoRetenedor">
+            <option value=true>Si</option>
+            <option value=false>No</option>
+          </select>
+          <div class="alert alert-danger"
+               *ngIf="((autoRetenedor.touched || autoRetenedor.dirty ) && autoRetenedor.invalid)">
+            <span *ngIf="autoRetenedor.errors.required">
+              El campo auto Retenedor es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-3"
+           [ngClass]="{'has-error': ((extranjero.touched || extranjero.dirty) && extranjero.invalid)}">
+        <label class="col-md-12 control-label" for="extranjeroId">¿Es extranjero?</label>
+        <div class="col-md-8">
+          
+          <select class="form-control" id="extranjeroId" type="text" required formControlName="extranjero">
+          <option value=true>Si</option>
+          <option value=false>No</option>
+        </select>
+        <div class="alert alert-danger" *ngIf="((extranjero.touched || extranjero.dirty ) && extranjero.invalid)">
+          <span *ngIf="extranjero.errors.required">
+            El campo extranjero es requerido
+          </span>
+        </div>
+      </div>
+      </div>
+
+      <div class="form-group col-md-3" [ngClass]="{'has-error': ((celular.touched || celular.dirty) && celular.invalid)}">
+        <label class="col-md-12 control-label" for="celularId">Celular</label>
+        <div class="col-md-8">
+          <input class="form-control" id="celularId" type="text" formControlName="celular" />
+          <div class="alert alert-danger" *ngIf="((celular.touched || celular.dirty )&& celular.invalid)">
+            <span *ngIf="celular.errors.required">
+              El campo Celular es requerido
+            </span>
+            <span *ngIf="celular.errors.pattern">
+              El campo Celular es numerico
+            </span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="row">
+      <div class="form-group col-md-3" [ngClass]="{'has-error': ((telefono.touched || telefono.dirty) && telefono.invalid)}">
+        <label class="col-md-12 control-label" for="telefonoId">Telefono</label>
+
+        <div class="col-md-8">
+          <input class="form-control" id="telefonoId" type="text" formControlName="telefono" />
+          <div class="alert alert-danger" *ngIf="((telefono.touched || telefono.dirty ) && telefono.invalid)">
+            <span *ngIf="telefono.errors.required">
+              El campo Telefono es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-3" [ngClass]="{'has-error': ((correo.touched || correo.dirty) && correo.invalid)}">
+        <label class="col-md-12 control-label" for="correoId">Correo</label>
+
+        <div class="col-md-8">
+          <input class="form-control" id="correoId" type="email" formControlName="correo" />
+          <div class="alert alert-danger" *ngIf="((correo.touched || correo.dirty ) && correo.invalid)">
+            <span *ngIf="correo.errors.required">
+              El campo Correo es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-3" [ngClass]="{'has-error': ((direccion.touched || direccion.dirty) && direccion.invalid)}">
+        <label class="col-md-12 control-label" for="direccionId">Direccion</label>
+
+        <div class="col-md-8">
+          <input class="form-control" id="direccionId" type="text" formControlName="direccion" />
+          <div class="alert alert-danger" *ngIf="((direccion.touched || direccion.dirty ) && direccion.invalid)">
+            <span *ngIf="direccion.errors.required">
+              El campo Direccion es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-3" [ngClass]="{'has-error': ((ciudad.touched || ciudad.dirty) && ciudad.invalid)}">
+        <label class="col-md-12 control-label" for="ciudadId">Ciudad</label>
+
+        <div class="col-md-8">
+          <input class="form-control" id="ciudadId" type="text" formControlName="ciudad" />
+          <div class="alert alert-danger" *ngIf="((ciudad.touched || ciudad.dirty ) && ciudad.invalid)">
+            <span *ngIf="ciudad.errors.required">
+              El campo Ciudad es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+    <div class="row">
+      <div class="form-group col-md-9"
+        [ngClass]="{'has-error': ((descripcion.touched || descripcion.dirty) && descripcion.invalid)}">
+        <label class="col-md-12 control-label" for="descripcionId">Descripcion</label>
+
+        <div class="col-md-12">
+          <input class="form-control" id="descripcionId" type="text" formControlName="descripcion" />
+          <div class="alert alert-danger" *ngIf="((descripcion.touched || descripcion.dirty ) && descripcion.invalid)">
+            <span *ngIf="descripcion.errors.required">
+              El campo Descripcion es requerido
+            </span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="form-group col-md-3"
+    [ngClass]="{'has-error': ((fechaCumple.touched || fechaCumple.dirty) && fechaCumple.invalid)}">
+    <div class="col-md-10">
+      <mat-form-field color="accent" appearance="fill">
+        <mat-label>Fecha de Cumplea&ntilde;os</mat-label>
+        <input id="fechaCumpleId" formControlName="fechaCumple" matInput [matDatepicker]="picker1" />
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <div class="alert alert-danger"
+          *ngIf="((fechaCumple.touched || fechaCumple.dirty ) && fechaCumple.invalid)">
+          <span *ngIf="fechaCumple.errors.required">
+            El campo Fecha de Cumplea&ntilde;os es requerido
+          </span>
+        </div>
+      </mat-form-field>
+    </div>
+  </div>
+    <div class="form-group col-md-12 row">
       <div class="col-md-4 col-md-offset-2">
         <span>
-          <button class="btn btn-success"
-                  type="submit"
-                  [disabled]="!formGroup.valid">
+          <button class="btn btn-success" type="submit" [disabled]="!formGroup.valid">
             Salvar
           </button>
-          <button class="btn"
-                  type="button"
-                  [routerLink]='["/terceros"]'>
+          <button class="btn" type="button" [routerLink]='["/terceros"]'>
             Cancelar
           </button>
         </span>

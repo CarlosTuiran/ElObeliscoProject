@@ -62,11 +62,9 @@ namespace Domain.Models.Entities
         {
             var errors = new List<string>();
             if (string.IsNullOrEmpty(this.Identificacion))
-                errors.Add("Campo Nit vacio");
+                errors.Add("Campo Identificacion vacio");
             if (string.IsNullOrEmpty(this.Nombre))
-                errors.Add("Campo Nombre vacio");
-            if (string.IsNullOrEmpty(this.Apellido))
-                errors.Add("Campo Apellido vacio");
+                errors.Add("Campo Nombre vacio");            
             if (string.IsNullOrEmpty(this.TipoTercero))
                 errors.Add("Campo TipoTercero vacio");
             if (string.IsNullOrEmpty(this.Celular))
