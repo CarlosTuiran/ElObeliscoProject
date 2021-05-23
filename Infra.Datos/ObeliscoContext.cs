@@ -25,7 +25,7 @@ namespace Infra.Datos
             //        puede ignorarse con IgnoreQueryFliters
             modelBuilder.Entity<Producto>().HasData(
                 new Producto() { Referencia = "1000-01", Costo = 3000, Descripcion = "Llave Inglesa", IdMarca = 1,
-                    IdCategoria=1, IdProveedor=1, Fabrica = "Ferres SAS", FechaRegistro = DateTime.Now, 
+                    IdCategoria=1, IdProveedor= "106583", Fabrica = "Ferres SAS", FechaRegistro = DateTime.Now, 
                     FormatoVenta = "Unidad", IVA = 0.3, PrecioVenta = 5000, Id=1 });
             modelBuilder.Entity<Inventario>().HasData(
                 new Inventario() { Referencia= "1000-01", Bodega="BD01", Cantidad=5, Id=1
@@ -129,7 +129,7 @@ namespace Infra.Datos
         public DbSet<Cuenta> Cuenta { get; set; }
         public DbSet<Marca> Marca { get; set; }
         public DbSet<Categoria> Categoria { get; set; }
-
+        public DbSet<Impuesto> Impuesto { get; set; }
 
     }
 }

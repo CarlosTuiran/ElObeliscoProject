@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { DialogoMarcaComponent } from './dialogo-marca/dialogo-marca.component';
 
 @Component({
   selector: 'app-marca',
@@ -7,11 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarcaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
+  openDialog() {
+    const detallesVista = this.dialog.open(DialogoMarcaComponent, {
+      disableClose: false,
+      autoFocus: true,
+      width: 'auto'
+    });
+  }
 }
 export interface IMarca{
   id: number,

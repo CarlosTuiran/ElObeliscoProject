@@ -20,7 +20,7 @@ namespace Aplicacion.Request
 
         public bool IsOk()
         {
-            return this.Message.Equals("Categoria Actualizada Exitosamente");
+            return this.Message.Equals("Categoria Creada Exitosamente");
         }
     }
 }

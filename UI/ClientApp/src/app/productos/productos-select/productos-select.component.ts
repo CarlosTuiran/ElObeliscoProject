@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { IProducto } from '../productos.component';
+import { IProducto, IProducto2 } from '../productos.component';
 import { ProductosService } from '../productos.service';
 
 @Component({
@@ -10,16 +10,16 @@ import { ProductosService } from '../productos.service';
 export class ProductosSelectComponent implements OnInit {
 
   keyword='descripcion';
-  data: IProducto[];
-  item:IProducto;
+  data: IProducto2[];
+  item:IProducto2;
   
-  @Output() messageEvent= new EventEmitter<IProducto>();
+  @Output() messageEvent= new EventEmitter<IProducto2>();
 
   constructor(private service: ProductosService) { }
 
   ngOnInit() {
     this.service.getProductos()      
-    .subscribe(datos => this.data = datos as IProducto[],
+    .subscribe(datos => this.data = datos as IProducto2[],
       error => console.error(error));
       
   }
@@ -27,6 +27,6 @@ export class ProductosSelectComponent implements OnInit {
   selectEvent(item: any) {
     this.messageEvent.emit(item);    
   }
-
+ 
 
 }

@@ -13,7 +13,8 @@ import { MarcaService } from '../marca.service';
 })
 export class TableMarcaComponent implements OnInit {
 
-  constructor(private marcaService: MarcaService, private router: Router, private alertService: AlertService, private dialog: MatDialog) { }
+  constructor(private marcaService: MarcaService, private router: Router,
+    private alertService: AlertService, private dialog: MatDialog) { }
 
   marcas!: IMarca[];
   displayedColumns: string[] = [
@@ -52,17 +53,17 @@ export class TableMarcaComponent implements OnInit {
         error => this.alertService.error(error.error))
   }
 
-  onDeleteSuccess() {
-    this.router.navigate(["/cuentas"]);
-    this.alertService.success("Eliminado exitoso");
-  }
-
   openDialog(id: number) {
     const detallesVista = this.dialog.open(DialogoMarcaComponent, {
       disableClose: false,
       autoFocus: true,
       width: 'auto'
     });
+    detallesVista.componentInstance.idMarca = id;
+  }
+
+  onDeleteSuccess() {
+    this.alertService.success("Eliminado exitoso");
   }
 
 }

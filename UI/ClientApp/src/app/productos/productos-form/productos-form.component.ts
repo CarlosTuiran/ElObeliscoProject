@@ -6,6 +6,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../notifications/_services';
 import { IFormatoVenta } from '../../formato-venta/formato-venta.component';
 import { FormatoVentaService } from '../../formato-venta/formato-venta.service';
+import { IMarca } from '../../configuraciones/marca/marca.component';
+import { ICategoria } from '../../configuraciones/categoria/categoria.component';
+import { ITercero } from '../../terceros/terceros.component';
+import { MarcaService } from '../../configuraciones/marca/marca.service';
+import { CategoriaService } from '../../configuraciones/categoria/categoria.service';
+import { TercerosService } from '../../terceros/terceros.service';
+import { error } from 'jquery';
+import { ReplaySubject } from 'rxjs';
+import { ICuenta } from '../../contabilidad/cuenta/cuenta.component';
 
 @Component({
   selector: 'app-productos-form',
@@ -15,22 +24,38 @@ import { FormatoVentaService } from '../../formato-venta/formato-venta.service';
 export class ProductosFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private productosService: ProductosService,
-    private router: Router, private formatoVentaService: FormatoVentaService,private activatedRoute: ActivatedRoute, 
+    private router: Router, private formatoVentaService: FormatoVentaService,
+    private activatedRoute: ActivatedRoute, private marcaService: MarcaService,
+    private categoriaService: CategoriaService, private terceroService: TercerosService,
     private alertService: AlertService) { }
 
   modoEdicion: boolean = false;
   productoId: string;
-  formatosVenta:IFormatoVenta[];
+  formatosVenta: IFormatoVenta[];
+  marcas: IMarca[];
+  categorias: ICategoria[];
+  proveedores: ITercero[];
+ 
+
+
+//Filtros de select cuenta
+public cuentaFilter:FormControl= new FormControl();
+public filteredcuentas: ReplaySubject<ICuenta[]> = new ReplaySubject<ICuenta[]>(1);
+//@ViewChild('cuentaSelect', { static: true }) singleCuentaSelect: MatSelect;
+
   formGroup = this.fb.group({
     referencia: ['', [Validators.required]],
     descripcion: ['', [Validators.required]],
     formatoVenta: ['', [Validators.required]],
-    marca: ['', [Validators.required]],
+    idMarca: ['', [Validators.required]],
+    idCategoria: ['', [Validators.required]],
+    idProveedor: ['', [Validators.required]],
     fabrica: ['', [Validators.required]],
     costo: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     precioVenta: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     iVA: ['0', [Validators.required]],
-    cantidadMinima:['', [Validators.required, Validators.pattern(/^\d+$/)]]
+    cantidadMinima:['', [Validators.required, Validators.pattern(/^\d+$/)]],
+    cuentaIngreso:['',[Validators.required]]
   });
  
   ngOnInit() {
@@ -42,12 +67,20 @@ export class ProductosFormComponent implements OnInit {
       this.modoEdicion = true;
       this.productoId = params["id"];
       this.productosService.getProducto(this.productoId).subscribe(producto => this.cargarFormulario(producto),
-        error => this.alertService.error(error.message));
+        error => this.alertService.error(error.error));
     });
     this.formatoVentaService.getFormatosVenta().subscribe(
-      formatos=>this.formatosVenta=formatos,
-      error=>this.alertService.error(error.message)
+      formatos => this.formatosVenta=formatos,
+        error => this.alertService.error(error.message)
     );
+
+    this.marcaService.getMarcas().subscribe(marcas => this.marcas = marcas,
+      error => this.alertService.error(error.message));
+    this.categoriaService.getCategorias().subscribe(categorias => this.categorias = categorias,
+      error => this.alertService.error(error.message));
+    this.terceroService.getTercerostipoTercero("Compra").subscribe(terceros => this.proveedores = terceros,
+      error => this.alertService.error(error.message));
+
   }
   cargarFormulario(producto: IProducto) {
     console.log(producto);
@@ -56,7 +89,9 @@ export class ProductosFormComponent implements OnInit {
       descripcion: producto.descripcion,
       formatoVenta: producto.formatoVenta,
       fabrica: producto.fabrica,
-      marca: producto.marca,
+      idMarca: producto.idMarca,
+      idCategoria: producto.idCategoria,
+      idProveedor: producto.idProveedor,
       costo: producto.costo,
       precioVenta: producto.precioVenta,
       iVA: producto.iva,
@@ -94,8 +129,14 @@ export class ProductosFormComponent implements OnInit {
   get formatoVenta() {
     return this.formGroup.get('formatoVenta');
   }
-  get marca() {
-    return this.formGroup.get('marca');
+  get idMarca() {
+    return this.formGroup.get('idMarca');
+  }
+  get idCategoria() {
+    return this.formGroup.get('idCategoria');
+  }
+  get idProveedor() {
+    return this.formGroup.get('idProveedor');
   }
   get fabrica() {
     return this.formGroup.get('fabrica');
@@ -111,5 +152,12 @@ export class ProductosFormComponent implements OnInit {
   }
   get cantidadMinima() {
     return this.formGroup.get('cantidadMinima');
+  }
+  get cuentaIngreso(){
+    return this.formGroup.get('cuentaIngreso');
+  }
+  //Recibe la idCuenta desde el componente select
+  receiveMessageCuentaIngreso($event){
+    this.cuentaIngreso.setValue($event.id);   
   }
 }

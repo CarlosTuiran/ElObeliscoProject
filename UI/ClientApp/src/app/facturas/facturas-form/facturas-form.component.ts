@@ -93,7 +93,7 @@ export class FacturasFormComponent implements OnInit {
   public filteredEstados: ReplaySubject<Estado[]> = new ReplaySubject<Estado[]>(1);
   @ViewChild('estadoSelect', { static: true }) singleEstadoSelect: MatSelect;
 
-  //Filtros de select empleado
+  //Filtros de select empleado 
   public empleadoFilter:FormControl= new FormControl();
   public filteredEmpleados: ReplaySubject<IEmpleado[]> = new ReplaySubject<IEmpleado[]>(1);
   @ViewChild('empleadoSelect', { static: true }) singleEmpleadoSelect: MatSelect;

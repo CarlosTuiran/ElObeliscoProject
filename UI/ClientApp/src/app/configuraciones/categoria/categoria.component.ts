@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { DialogoCategoriaComponent } from './dialogo-categoria/dialogo-categoria.component';
 
 @Component({
   selector: 'app-categoria',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+  openDialog() {
+    const detallesVista = this.dialog.open(DialogoCategoriaComponent, {
+      disableClose: false,
+      autoFocus: true,
+      width: 'auto'
+    });
   }
 
 }

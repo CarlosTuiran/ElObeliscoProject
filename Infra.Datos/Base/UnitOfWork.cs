@@ -159,6 +159,14 @@ namespace Infra.Datos.Base
                 return _categoriaServiceRepository ?? (_categoriaServiceRepository = new CategoriaServiceRepository(_dbContext));
             }
         }
+        private IImpuestoServiceRepository _impuestoServiceRepository;
+        public IImpuestoServiceRepository ImpuestoServiceRepository
+        {
+            get
+            {
+                return _impuestoServiceRepository ?? (_impuestoServiceRepository = new ImpuestoServiceRepository(_dbContext));
+            }
+        }
 
         public int Commit()
         {

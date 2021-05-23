@@ -112,6 +112,12 @@ import { MarcaComponent } from './configuraciones/marca/marca.component';
 import { CategoriaComponent } from './configuraciones/categoria/categoria.component';
 import { TableMarcaComponent } from './configuraciones/marca/table-marca/table-marca.component';
 import { DialogoMarcaComponent } from './configuraciones/marca/dialogo-marca/dialogo-marca.component';
+import { TableCategoriaComponent } from './configuraciones/categoria/table-categoria/table-categoria.component';
+import { DialogoCategoriaComponent } from './configuraciones/categoria/dialogo-categoria/dialogo-categoria.component';
+import { SelectCuentaComponent } from './contabilidad/cuenta/select-cuenta/select-cuenta.component';
+import { ImpuestoComponent } from './contabilidad/impuesto/impuesto.component';
+import { TableImpuestoComponent } from './contabilidad/impuesto/table-impuesto/table-impuesto.component';
+import { DialogoImpuestoComponent } from './contabilidad/impuesto/dialogo-impuesto/dialogo-impuesto.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -187,6 +193,12 @@ import { DialogoMarcaComponent } from './configuraciones/marca/dialogo-marca/dia
     CategoriaComponent,
     TableMarcaComponent,
     DialogoMarcaComponent,
+    TableCategoriaComponent,
+    DialogoCategoriaComponent,
+    SelectCuentaComponent,
+    ImpuestoComponent,
+    TableImpuestoComponent,
+    DialogoImpuestoComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -238,6 +250,8 @@ import { DialogoMarcaComponent } from './configuraciones/marca/dialogo-marca/dia
       { path: 'cuenta-editar/:id', component: FormCuentaComponent, canActivate: [CheckNotloginGuard] },
       { path: 'configuraciones', component: ConfiguracionesComponent, canActivate: [CheckNotloginGuard] },
       { path: 'marcas', component: MarcaComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'categorias', component: CategoriaComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'impuestos', component: ImpuestoComponent, canActivate: [CheckNotloginGuard] },
 
     ]),
     BrowserAnimationsModule
@@ -247,7 +261,8 @@ import { DialogoMarcaComponent } from './configuraciones/marca/dialogo-marca/dia
     TipoMovimientosService, EmpleadosService, NominaService, LiquidacionService, TotalLiquidacionService, CuentaService,
     BodegasService, PromocionesService, PruebasSinVSService, InventarioService,AlertService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
-  entryComponents: [SidebarComponent, TableDetallesComponent, DialogoCrearFacturaComponent, DialogoTipoTerceroComponent],
+  entryComponents: [SidebarComponent, TableDetallesComponent, DialogoCrearFacturaComponent, DialogoTipoTerceroComponent,
+    DialogoMarcaComponent, DialogoCategoriaComponent, DialogoImpuestoComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

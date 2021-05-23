@@ -8,15 +8,10 @@ import { ProductosService } from './productos.service';
 })
 export class ProductosComponent implements OnInit {
 
-  productos: IProducto[];
-  dtOptions: DataTables.Settings = {};
-
-  constructor(private productosService: ProductosService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.productosService.getProductos()
-      .subscribe(productos => this.productos = productos,
-        error => console.error(error));
+
   }
 }
 
@@ -24,7 +19,24 @@ export interface IProducto {
   referencia: string,
   descripcion: string,
   formatoVenta: string,
-  marca: string,
+  idMarca: number,
+  idCategoria: number,
+  idProveedor: string,
+  fabrica: string,
+  costo: number,
+  precioVenta: number,
+  iva: number,
+  fechaRegistro: Date,
+  cantidadMinima: number
+}
+
+export interface IProducto2 {
+  referencia: string,
+  descripcion: string,
+  formatoVenta: string,
+  idMarca: string,
+  idCategoria: string,
+  idProveedor: string,
   fabrica: string,
   costo: number,
   precioVenta: number,

@@ -11,7 +11,7 @@ namespace Aplicacion.Request
         public string FormatoVenta { get; set; }
         public int IdMarca { get; set; }
         public int IdCategoria { get; set; }
-        public int IdProveedor { get; set; }
+        public string IdProveedor { get; set; }
         public string? Fabrica { get; set; }
         public double Costo { get; set; }
         public double PrecioVenta { get; set; }

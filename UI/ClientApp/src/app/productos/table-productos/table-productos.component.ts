@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { IProducto } from '../productos.component';
+import { IProducto, IProducto2 } from '../productos.component';
 import { ProductosService } from '../productos.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../notifications/_services';
@@ -12,19 +12,21 @@ import { AlertService } from '../../notifications/_services';
 })
 export class TableProductosComponent implements OnInit {
 
-  productos!:IProducto[];  
+  productos!:IProducto2[];  
   displayedColumns: string[] = [
     'referencia',
     'descripcion',
     'formatoVenta',
-    'marca',
+    'idMarca',
+    'idCategoria',
+    'idProveedor',
     'fabrica',
     'costo',
     'precioVenta',
     'iva',
     'fechaRegistro',
     'options'];
-  dataSource =new MatTableDataSource<IProducto>(this.productos);
+  dataSource =new MatTableDataSource<IProducto2>(this.productos);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
@@ -41,7 +43,7 @@ export class TableProductosComponent implements OnInit {
   }
   ngOnInit() {
     this.productosService.getProductos()
-    .subscribe(productos => {this.dataSource.data = productos; console.log(this.dataSource.data);},
+    .subscribe(productos => this.dataSource.data = productos,
       error => console.error(error));
 
   }

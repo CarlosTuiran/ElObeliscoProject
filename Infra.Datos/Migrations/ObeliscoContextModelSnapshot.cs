@@ -41,16 +41,16 @@ namespace Infra.Datos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Codigo")
+                    b.Property<string>("Clase")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Codigo")
+                        .HasColumnType("int");
 
                     b.Property<string>("Naturaleza")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tipo")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -153,7 +153,7 @@ namespace Infra.Datos.Migrations
                             Correo = "RHerna@gmail.com",
                             Direccion = "Stranger Valley",
                             Estado = "Activo",
-                            FechaIngreso = new DateTime(2021, 5, 19, 21, 38, 51, 195, DateTimeKind.Local).AddTicks(8302),
+                            FechaIngreso = new DateTime(2021, 5, 22, 22, 13, 21, 29, DateTimeKind.Local).AddTicks(6078),
                             IdEmpleado = 2699540,
                             Nombres = "Raul Hernandez"
                         });
@@ -181,6 +181,30 @@ namespace Infra.Datos.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FormatoVenta");
+                });
+
+            modelBuilder.Entity("Domain.Models.Entities.Impuesto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Tarifa")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Tipo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Impuesto");
                 });
 
             modelBuilder.Entity("Domain.Models.Entities.Inventario", b =>
@@ -458,8 +482,8 @@ namespace Infra.Datos.Migrations
                     b.Property<int>("IdMarca")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdProveedor")
-                        .HasColumnType("int");
+                    b.Property<string>("IdProveedor")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("InventarioId")
                         .HasColumnType("int");
@@ -484,12 +508,12 @@ namespace Infra.Datos.Migrations
                             Costo = 3000.0,
                             Descripcion = "Llave Inglesa",
                             Fabrica = "Ferres SAS",
-                            FechaRegistro = new DateTime(2021, 5, 19, 21, 38, 51, 189, DateTimeKind.Local).AddTicks(3347),
+                            FechaRegistro = new DateTime(2021, 5, 22, 22, 13, 21, 26, DateTimeKind.Local).AddTicks(4582),
                             FormatoVenta = "Unidad",
                             IVA = 0.29999999999999999,
                             IdCategoria = 1,
                             IdMarca = 1,
-                            IdProveedor = 1,
+                            IdProveedor = "106583",
                             PrecioVenta = 5000.0,
                             Referencia = "1000-01"
                         });
@@ -574,7 +598,7 @@ namespace Infra.Datos.Migrations
                             Descripcion = " Empresa Ferreos y Mas",
                             Direccion = "Stranger Valley",
                             Extranjero = false,
-                            FechaCumple = new DateTime(2021, 5, 19, 21, 38, 51, 197, DateTimeKind.Local).AddTicks(16),
+                            FechaCumple = new DateTime(2021, 5, 22, 22, 13, 21, 30, DateTimeKind.Local).AddTicks(3503),
                             Identificacion = "106583",
                             Nombre = "Santana Silva",
                             ResponsableIva = false,
@@ -590,7 +614,7 @@ namespace Infra.Datos.Migrations
                             Descripcion = "Cliente Frecuente",
                             Direccion = "Stranger Valley",
                             Extranjero = false,
-                            FechaCumple = new DateTime(2021, 5, 19, 21, 38, 51, 197, DateTimeKind.Local).AddTicks(1184),
+                            FechaCumple = new DateTime(2021, 5, 22, 22, 13, 21, 30, DateTimeKind.Local).AddTicks(4216),
                             Identificacion = "10653434",
                             Nombre = "Jose Jose",
                             ResponsableIva = false,

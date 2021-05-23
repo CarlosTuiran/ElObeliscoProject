@@ -26,18 +26,18 @@
     
 
     <div class="form-group"
-         [ngClass]="{'has-error': ((tipo.touched || tipo.dirty) && tipo.invalid)}">
+         [ngClass]="{'has-error': ((clase.touched || clase.dirty) && clase.invalid)}">
       <label class="col-md-2 control-label"
-             for="tipo">Tipo</label>
+             for="clase">Clase</label>
       <div class="col-md-8"> 
-        <mat-select formControlName="tipo" placeholder="Elija una opci&oacute;n" #tipoIdSelect>
-          <mat-option *ngFor="let tipo of tipos" [value]="tipo" >
-            {{tipo}}
+        <mat-select formControlName="clase" placeholder="Elija una opci&oacute;n" #claseIdSelect>
+          <mat-option *ngFor="let clase of clases" [value]="clase">
+            {{clase}}
           </mat-option>
         </mat-select>        
-        <div class="alert alert-danger" *ngIf="((tipo.touched || tipo.dirty )&& tipo.invalid)">
-          <span *ngIf="tipo.errors.required">
-            El campo tipo es requerido
+        <div class="alert alert-danger" *ngIf="((clase.touched || clase.dirty )&& clase.invalid)">
+          <span *ngIf="clase.errors.required">
+            El campo clase es requerido
           </span>
         </div>
       </div>

@@ -12,7 +12,7 @@ export class TableDetallesComponent implements OnInit {
 
   isAdmin = false;
   facturas!:IDFactura[];  
-  public idMfactura: number;  
+  public idMfactura: number;
   displayedColumns: string[] = [
     'empleadoId',
     'tercerosId' ,

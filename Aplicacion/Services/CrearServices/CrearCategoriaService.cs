@@ -30,7 +30,7 @@ namespace Aplicacion.Services.CrearServices
             }
             _unitOfWork.CategoriaServiceRepository.Add(newCategoria);
             _unitOfWork.Commit();
-            return new CrearCategoriaResponse($"Cuenta Creada Exitosamente");
+            return new CrearCategoriaResponse($"Categoria Creada Exitosamente");
         }
     }
 }

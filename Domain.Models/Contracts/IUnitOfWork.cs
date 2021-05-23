@@ -23,6 +23,7 @@ namespace Domain.Models.Contracts
         ICuentaServiceRepository CuentaServiceRepository { get; }
         IMarcaServiceRepository MarcaServiceRepository { get; }
         ICategoriaServiceRepository CategoriaServiceRepository { get; }
+        IImpuestoServiceRepository ImpuestoServiceRepository { get; }
 
         int Commit();
     }

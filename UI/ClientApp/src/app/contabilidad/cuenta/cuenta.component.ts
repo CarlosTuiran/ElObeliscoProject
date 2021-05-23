@@ -14,10 +14,11 @@ export class CuentaComponent implements OnInit {
 
 }
 
+
 export interface ICuenta{
   id:number,
   nombre:string,
-  tipo:string,
+  clase:string,
   codigo:number,
   naturaleza:string
 }

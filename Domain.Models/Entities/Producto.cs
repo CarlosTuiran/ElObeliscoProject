@@ -14,7 +14,7 @@ namespace Domain.Models.Entities
         public string FormatoVenta { get; set; }
         public int IdMarca { get; set; }
         public int IdCategoria { get; set; }
-        public int IdProveedor { get; set; }
+        public string IdProveedor { get; set; }
         public string? Fabrica { get; set; }
         public double Costo { get; set; }
         public double PrecioVenta { get; set; }
@@ -30,7 +30,7 @@ namespace Domain.Models.Entities
         }
 
         public Producto(string referencia, string descripcion, string formatoVenta, int idMarca, 
-            int idCategoria, int idProveedor, string fabrica, double costo, double precioVenta, 
+            int idCategoria, string idProveedor, string fabrica, double costo, double precioVenta, 
             double iVA, int cantidadMinima, DateTime fechaRegistro, string estado)
         {
             Referencia = referencia;
@@ -63,8 +63,8 @@ namespace Domain.Models.Entities
                 errors.Add("Campo marca negativo o vacio");
             if (producto.IdCategoria <= 0)
                 errors.Add("Campo categoría negativo o vacio");
-            if (producto.IdProveedor <= 0)
-                errors.Add("Campo proveedor negativo o vacio");
+            if (string.IsNullOrEmpty(producto.IdProveedor))
+                errors.Add("Campo proveedor vacio");
             if (producto.PrecioVenta <= 0)
                 errors.Add("Campo PrecioVenta negativo");
             if (producto.Costo <= 0)

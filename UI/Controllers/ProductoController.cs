@@ -34,9 +34,31 @@ namespace UI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Producto> GetProductos()
+        public object GetProductos()
         {
-            return _context.Producto;
+            var result = (from p in _context.Set<Producto>()
+                          join m in _context.Set<Marca>()
+                          on p.IdMarca equals m.Id
+                          join c in _context.Set<Categoria>()
+                          on p.IdCategoria equals c.Id
+                          join t in _context.Set<Terceros>()
+                          on p.IdProveedor equals t.Identificacion
+                          select new
+                          {
+                              referencia = p.Referencia,
+                              descripcion = p.Descripcion,
+                              formatoVenta = p.FormatoVenta,
+                              idMarca = m.Nombre,
+                              idCategoria = c.Nombre,
+                              idProveedor = t.Nombre+" "+t.Apellido,
+                              fabrica = p.Fabrica,
+                              costo = p.Costo,
+                              precioVenta = p.PrecioVenta,
+                              iva = p.IVA,
+                              fechaRegistro = p.FechaRegistro,
+                              cantidadMinima = p.CantidadMinima
+                          }).ToList();
+            return result;
         }
 
         [HttpGet("{id}")]

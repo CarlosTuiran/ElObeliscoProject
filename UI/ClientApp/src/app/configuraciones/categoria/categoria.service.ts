@@ -25,7 +25,10 @@ export class CategoriaService {
   }
 
   createCategoria(marca: ICategoria): Observable<ICategoria> {
-    return this.http.post<ICategoria>(this.apiURL, marca);
+    return this.http.post<ICategoria>(this.apiURL, marca).
+      pipe(tap(() => {
+        this._refresh$.next();
+      }));
   }
 
   updateCategoria(marca: ICategoria): Observable<ICategoria> {

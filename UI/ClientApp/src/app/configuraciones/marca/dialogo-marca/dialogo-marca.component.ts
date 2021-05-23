@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../../../notifications/_services';
 import { IMarca } from '../marca.component';
@@ -14,25 +15,20 @@ export class DialogoMarcaComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private marcaService: MarcaService,
     private router: Router, private activatedRoute: ActivatedRoute,
-    private alertService: AlertService) { }
+    private alertService: AlertService, private dialogRef: MatDialogRef<DialogoMarcaComponent>) { }
 
-  modoEdicion: boolean = false;
-  idMarca: number;
+
+  public idMarca: number;
 
   formGroup = this.fb.group({
     nombre: ['', [Validators.required]]
   });
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      if (params["id"] == undefined) {
-        return;
-      }
 
-      this.modoEdicion = true;
-      this.idMarca = params["id"];
+  ngOnInit() {
+    if (this.idMarca != null) {
       this.marcaService.getMarca(this.idMarca).subscribe(marca => this.cargarFormulario(marca),
         error => this.alertService.error(error.error));
-    });
+    }
   }
 
   cargarFormulario(marca: IMarca) {
@@ -44,21 +40,26 @@ export class DialogoMarcaComponent implements OnInit {
   save() {
     let marca: IMarca = Object.assign({}, this.formGroup.value);
     console.table(marca);
-    if (this.modoEdicion) {
+    if (this.idMarca != null) {
       // edita
       marca.id = this.idMarca;
       this.marcaService.updateMarca(marca)
         .subscribe(marca => this.onSaveSuccess(),
           error => this.alertService.error(error.error));
+      this.dialogRef.close();
     } else {
       // crea
       this.marcaService.createMarca(marca)
         .subscribe(marca => this.onSaveSuccess(),
           error => this.alertService.error(error.error));
+      this.dialogRef.close();
     }
   }
   onSaveSuccess() {
-    this.router.navigate(["/marcas"]);
     this.alertService.success("Guardado Exitoso");
+  }
+
+  get nombre() {
+    return this.formGroup.get('nombre');
   }
 }

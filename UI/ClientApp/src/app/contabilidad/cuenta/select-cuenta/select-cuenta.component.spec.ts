@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TableMarcaComponent } from './table-marca.component';
+import { SelectCuentaComponent } from './select-cuenta.component';
 
-describe('TableMarcaComponent', () => {
-  let component: TableMarcaComponent;
-  let fixture: ComponentFixture<TableMarcaComponent>;
+describe('SelectCuentaComponent', () => {
+  let component: SelectCuentaComponent;
+  let fixture: ComponentFixture<SelectCuentaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableMarcaComponent ]
+      declarations: [ SelectCuentaComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TableMarcaComponent);
+    fixture = TestBed.createComponent(SelectCuentaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

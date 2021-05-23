@@ -44,7 +44,7 @@ namespace Aplicacion.Test.CrearTests
                     IVA = 0.19,
                     IdMarca=1,
                     IdCategoria=1,
-                    IdProveedor=1,
+                    IdProveedor="1",
                     PrecioVenta = 12000,
                     Referencia = "tampoco recuerdo que va aqui :'v",
                 },

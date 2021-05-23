@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IProducto, IDeleteProducto } from './productos.component';
+import { IProducto, IDeleteProducto, IProducto2 } from './productos.component';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,8 @@ export class ProductosService {
   apiURL = this.baseUrl + "api/Producto";
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
-  getProductos(): Observable<IProducto[]> {
-    return this.http.get<IProducto[]>(this.apiURL);
+  getProductos(): Observable<IProducto2[]> {
+    return this.http.get<IProducto2[]>(this.apiURL);
   }
 
   getProducto(productoId: string): Observable<IProducto> {

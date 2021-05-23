@@ -54,6 +54,7 @@ namespace UI.Controllers
             if (rta.IsOk())
             {
                 await _context.SaveChangesAsync();
+                return CreatedAtAction("GetCategoria", new { categoria.Id }, categoria);
             }
             return BadRequest(rta.Message);
         }
@@ -66,6 +67,7 @@ namespace UI.Controllers
             if (rta.IsOk())
             {
                 await _context.SaveChangesAsync();
+                return CreatedAtAction("GetCategoria", new { categoria.Id }, categoria);
             }
             return BadRequest(rta.Message);
         }
@@ -77,6 +79,7 @@ namespace UI.Controllers
             if (rta.IsOk())
             {
                 await _context.SaveChangesAsync();
+                return CreatedAtAction("GetCategoria", new { id });
             }
             return BadRequest(rta.Message);
         }

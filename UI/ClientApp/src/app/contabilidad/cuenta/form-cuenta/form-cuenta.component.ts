@@ -18,11 +18,11 @@ export class FormCuentaComponent implements OnInit {
 
   modoEdicion: boolean = false;
   cuentaId:number;
-  tipos:string[]=['Clase', 'Grupo', 'Cuenta', 'Subcuenta'];
+  clases:string[]=['Clase', 'Grupo', 'Cuenta', 'Subcuenta'];
   naturalezas:string[]=['Debe', 'Haber'];  
   formGroup = this.fb.group({  
   nombre:['', [Validators.required]],
-  tipo:['', [Validators.required]],
+  clase:['', [Validators.required]],
   codigo:['', [Validators.required, Validators.pattern(/^\d+$/)]],
   naturaleza:['', [Validators.required]]    
   });
@@ -43,7 +43,7 @@ export class FormCuentaComponent implements OnInit {
     
     this.formGroup.patchValue({
       nombre:cuenta.nombre,
-      tipo:cuenta.tipo,
+      tipo: cuenta.clase,
       codigo:cuenta.codigo,
       naturaleza:cuenta.naturaleza   
     });
@@ -77,7 +77,7 @@ export class FormCuentaComponent implements OnInit {
     return this.formGroup.get('codigo');
   }get naturaleza() {
     return this.formGroup.get('naturaleza');
-  }get tipo() {
-    return this.formGroup.get('tipo');
+  }get clase() {
+    return this.formGroup.get('clase');
   }
 }

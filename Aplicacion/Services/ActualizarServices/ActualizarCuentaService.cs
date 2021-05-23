@@ -27,7 +27,7 @@ namespace Aplicacion.Services.ActualizarServices
                 cuenta.Codigo = request.Codigo;
                 cuenta.Naturaleza = request.Naturaleza;
                 cuenta.Nombre = request.Nombre;
-                cuenta.Tipo = request.Tipo;
+                cuenta.Clase = request.Clase;
                 _unitOfWork.CuentaServiceRepository.Edit(cuenta);
                 _unitOfWork.Commit();
                 return new ActualizarCuentaResponse() { Message = $"Cuenta Actualizada Exitosamente" };

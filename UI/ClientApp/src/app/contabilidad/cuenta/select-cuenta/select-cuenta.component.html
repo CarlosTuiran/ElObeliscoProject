@@ -1,0 +1,21 @@
+<div class="container">
+    <h6>Buscar Cuentas</h6>
+<div class="ng-autocomplete"  style="z-index: 1000">
+    <ng-autocomplete 
+      [data]="data"
+      [searchKeyword]="keyword"
+      (selected)='selectEvent($event)'      
+      [itemTemplate]="itemTemplate"
+      [notFoundTemplate]="notFoundTemplate">
+                                       
+    </ng-autocomplete>
+     
+    <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item.codigo+'-'+item.nombre"></a>       
+    </ng-template>
+     
+    <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]="notFound"></div>
+    </ng-template>
+</div>
+</div>

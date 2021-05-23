@@ -21,7 +21,7 @@ namespace Aplicacion.Services.CrearServices
             var cuenta = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == request.Codigo);
             if (cuenta == null)
             {
-                Cuenta newCuenta = new Cuenta(request.Nombre, request.Tipo, request.Codigo, request.Naturaleza);
+                Cuenta newCuenta = new Cuenta(request.Codigo,request.Nombre, request.Naturaleza, request.Clase);
                 IReadOnlyList<string> errors = newCuenta.CanCrear(newCuenta);
                 if (errors.Any())
                 {

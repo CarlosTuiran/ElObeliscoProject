@@ -66,7 +66,9 @@ export class TercerosFormComponent implements OnInit {
       autoRetenedor:tercero.autoRetenedor,
       extranjero:tercero.extranjero,
       celular: tercero.celular,
+      telefono:tercero.telefono,
       correo: tercero.correo,
+      ciudad:tercero.ciudad,
       direccion: tercero.direccion,
       descripcion: tercero.descripcion,
       fechaCumple: tercero.fechaCumple
