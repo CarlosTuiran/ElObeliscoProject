@@ -11,21 +11,19 @@ import { TipoMovimientosService } from '../tipo-movimentos/tipo-movimientos.serv
 import {IProducto} from 'src/app/productos/productos.component';
 import { IBodega } from 'src/app/bodegas/bodegas.component';
 import { IPromocion } from 'src/app/promociones/promociones.component';
-import { Observable, ReplaySubject, Subject, Subscription } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { MatSelect } from '@angular/material/select';
-import { debounceTime, delay, filter, map, take, takeUntil, tap, startWith } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 import { IMFactura } from '../facturas.component';
 import { BodegasService } from 'src/app/bodegas/bodegas.service';
 import { ProductosService } from '../../productos/productos.service';
 import { AlertService } from '../../notifications/_services';
-import { DialogoCrearFacturaComponent } from './dialogo-crear-factura/dialogo-crear-factura.component';
-
-
-//import { MatDialog } from '@angular/material/typings';
 import { MatDialog } from '@angular/material/dialog';
 import { IFormatoVenta } from '../../formato-venta/formato-venta.component';
 import { FormatoVentaService } from '../../formato-venta/formato-venta.service';
-//import { MatDialog } from '@angular/material';
+import { IImpuesto } from '../../contabilidad/impuesto/impuesto.component';
+import { ImpuestoService } from '../../contabilidad/impuesto/impuesto.service';
+import { forEachChild } from 'typescript';
 
 @Component({
   selector: 'app-facturas-form',
@@ -40,7 +38,7 @@ export class FacturasFormComponent implements OnInit {
     private tipoMovimientoService: TipoMovimientosService, 
     private bodegasService: BodegasService, private productosService: ProductosService, 
     private alertService: AlertService, public dialog: MatDialog,
-    private formatoVentaService: FormatoVentaService) { }
+    private formatoVentaService: FormatoVentaService, private impuestoService: ImpuestoService) { }
 
 
   modoEdicion: boolean = false;
@@ -78,7 +76,9 @@ export class FacturasFormComponent implements OnInit {
   promociones: IPromocion[];
   estados:Estado[]= [{'nombre':'Pagada'}, {'nombre':'Pendiente'}];
   usuarioId: number;
-  Formatos:IFormatoVenta[];
+  Formatos: IFormatoVenta[];
+  impuestos: IImpuesto[];
+  impuesto: IImpuesto;
   dFacturaFormGroup;
   protected _onDestroy = new Subject<void>();
   
@@ -163,11 +163,6 @@ private _data:IEmpleado[];*/
   getInfo(productos:IProducto[]){
     this.productos=productos;
     console.log(this.productos);
-    /*this.filteredOptions = this.referencia.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );*/
   }
   
   ngAfterViewInit() {
@@ -185,8 +180,8 @@ private _data:IEmpleado[];*/
     mfactura.tipoMovimiento = this.TipoMov;
     mfactura.total = this.Total;
     this.facturasService.createFacturas(mfactura)
-      .subscribe(mfactura => this.onSaveSuccess(),
-        error => { this.alertService.error(error.message), console.log(error) }
+      .subscribe(() => this.onSaveSuccess(),
+        error => { this.alertService.error(error.message) }
     );
   }
   onSaveSuccess(){
@@ -278,6 +273,7 @@ private _data:IEmpleado[];*/
   get cantidad() {
     return this.dFacturaFormGroup.get('cantidad');
   }
+
   agregarDFactura() {
     if (this.currentProductoReferencia == "") {
       this.alertService.error("Seleccione un producto primero");
@@ -318,26 +314,35 @@ private _data:IEmpleado[];*/
     this.Calculoiva =0;
     this.Total = 0;
     this.Descuento = 0;
-    for (let index = 0; index < this.referenciasEscogidas.length; index++) {
+    for (let index = 0; index < this.referenciasEscogidas.length; index++) {      
       var cantidad = this.dFacturas.controls[index].value.cantidadDigitada;
-      var iva = this.dFacturas.controls[index].value.ivaProducto;
       var formatoProducto=this.dFacturas.controls[index].value.formatoProducto; 
       var formatoVentaOriginal=this.dFacturas.controls[index].value.formatoVentaOriginal;
       var precio=this.dFacturas.controls[index].value.precioUnitario; console.log(formatoProducto);
       var formatoConvert=this.Formatos.filter(x=>x.nombre==formatoProducto);
       var formatoConvertOriginal=this.Formatos.filter(x=>x.nombre==formatoVentaOriginal);
       var totalProducto = ((cantidad * formatoConvert[0].factorConversion) * (precio / formatoConvertOriginal[0].factorConversion));
-      var ivaProducto = totalProducto * (iva / 100);
-      this.SubTotal = this.SubTotal + totalProducto;
-      var calculoCantidad = totalProducto / precio;
-      this.dFacturas.controls[index].value.cantidad=calculoCantidad;
-      this.Calculoiva = this.Calculoiva + ivaProducto;     
-      this.dFacturas.controls[index].value.precioTotal = totalProducto + ivaProducto;
-      this.dFacturas.controls[index].value.iVA = ivaProducto;
+      var ivaProducto = 0;
+
+      this.impuestoService.getImpuestosProducto(this.referenciasEscogidas[index]).subscribe(impuestosProducto =>
+      {
+        this.impuestos = impuestosProducto;
+        this.impuestos.forEach(function (impuesto) {
+          ivaProducto = ivaProducto + (totalProducto * (impuesto.tarifa / 100));
+        });
+        this.SubTotal = this.SubTotal + totalProducto;
+        var calculoCantidad = totalProducto / precio;
+        this.dFacturas.controls[index].value.cantidad = calculoCantidad;
+        this.Calculoiva = this.Calculoiva + ivaProducto;
+        this.dFacturas.controls[index].value.precioTotal = totalProducto + ivaProducto;
+        this.dFacturas.controls[index].value.iVA = ivaProducto;
+      }); 
     }
-    this.Descuento = this.descuento.value;
-    console.log(this.Descuento);
-    this.Total = this.SubTotal + this.Calculoiva - this.Descuento;
+    setTimeout(() => {
+      this.Descuento = this.descuento.value;
+      this.Total = this.SubTotal + this.Calculoiva - this.Descuento;  
+    }, 1000);
+    
   }
   removerDFactura(indice:number){
     let referenciaaEliminar=this.dFacturas.controls[indice].value.referencia;

@@ -12,11 +12,10 @@ namespace Aplicacion.Services.CrearServices
     public class CrearFacturasService
     {
         readonly IUnitOfWork _unitOfWork;
-        public CrearMFacturaService crearMFacturaService;
-        public CrearDFacturaService crearDFacturaService;
-        public ComprarProductoService comprarProductoservice;
-
-        private int Incremento = 1;
+        public readonly CrearMFacturaService crearMFacturaService;
+        public readonly CrearDFacturaService crearDFacturaService;
+        public readonly ComprarProductoService comprarProductoservice;
+        public readonly PartidaDobleService partidaDobleService;
 
         public CrearFacturasService(IUnitOfWork unitOfWork)
         {
@@ -24,11 +23,12 @@ namespace Aplicacion.Services.CrearServices
             this.crearMFacturaService = new CrearMFacturaService(_unitOfWork);
             this.crearDFacturaService = new CrearDFacturaService(_unitOfWork);
             this.comprarProductoservice=new ComprarProductoService(_unitOfWork);
-
+            this.partidaDobleService= new PartidaDobleService(_unitOfWork);
         }
 
         public CrearFacturasResponse Ejecutar(CrearMFacturaRequest requestM)
-        {            
+        {
+            
             var listMFacturas=_unitOfWork.MFacturaServiceRepository.GetAll();
             var lastMFactura = listMFacturas.TakeLast(1).ToArray();//ultima factura
             try
@@ -59,6 +59,14 @@ namespace Aplicacion.Services.CrearServices
                     if(!rta.isOk())
                         return new CrearFacturasResponse { Message = rta.Message };
                 }
+                int rtaPD;
+                if(requestM.TipoMovimiento=="Compra"){
+                     rtaPD=partidaDobleService.Comprar(requestM);
+                }else{
+                     rtaPD=partidaDobleService.Vender(requestM);
+                }
+                if(rtaPD!=1)
+                    return new CrearFacturasResponse { Message = "Error Partida Doble" };
                 _unitOfWork.Commit(); 
                 return new CrearFacturasResponse { Message = "Factura Creada Exitosamente" };
             }
@@ -67,9 +75,8 @@ namespace Aplicacion.Services.CrearServices
                 return new CrearFacturasResponse { Message = rtaMService.Message };
             }
   
-            
         }
-        public CrearFacturasResponse PreEjecutar(CrearMFacturaRequest requestM){
+        /*public CrearFacturasResponse PreEjecutar(CrearMFacturaRequest requestM){
             var dfacturas=requestM.DFacturas;
             double subTotal=0;
             double iva = 0;
@@ -81,7 +88,7 @@ namespace Aplicacion.Services.CrearServices
             }
             return new   CrearFacturasResponse
             { Message = "Subtotal calculado", SubTotal = subTotal, IVA = iva };
-        }
+        }*/
     }
 
 }

@@ -21,6 +21,10 @@ export class ImpuestoService {
     return this.http.get<IImpuesto[]>(this.apiURL);
   }
 
+  getImpuestosProducto(referencia: string): Observable<IImpuesto[]> {
+    return this.http.get<IImpuesto[]>(this.apiURL +"/impuestosProducto/"+referencia);
+  }
+
   getImpuesto(id: number): Observable<IImpuesto> {
     return this.http.get<IImpuesto>(this.apiURL + '/' + id);
   }

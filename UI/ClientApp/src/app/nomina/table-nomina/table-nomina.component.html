@@ -6,39 +6,45 @@
     
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
-      <!-- idEmpleado Column -->
-      <ng-container matColumnDef="idEmpleado" hidden>
-        <th mat-header-cell *matHeaderCellDef> Empleado ID </th>
-        <td *matCellDef="let element"> {{element.idEmpleado}} </td>
+      <!-- idNomina Column -->
+      <ng-container matColumnDef="idNomina" hidden>
+        <th mat-header-cell *matHeaderCellDef> Nomina ID </th>
+        <td *matCellDef="let element"> {{element.idNomina}} </td>
       </ng-container>
-      <ng-container matColumnDef="nombreEmpleado">
+      <!-- idEmpleado Column -->
+      <ng-container matColumnDef="idEmpleado">
         <th mat-header-cell *matHeaderCellDef> Empleado </th>
-        <td *matCellDef="let element"> {{element.nombreEmpleado}} </td>
+        <td *matCellDef="let element"> {{element.idEmpleado}} </td>
       </ng-container>
       <!-- diasTrabajados Column -->
       <ng-container matColumnDef="diasTrabajados">
         <th mat-header-cell *matHeaderCellDef> Dias Trabajados </th>
         <td *matCellDef="let element"> {{element.diasTrabajados}} </td>
       </ng-container>
-      <!-- horasExtras Column -->
-      <ng-container matColumnDef="horasExtras">
-        <th mat-header-cell *matHeaderCellDef> HorasExtras </th>
-        <td *matCellDef="let element"> {{element.horasExtras}} </td>
+      <!-- horaExtraDiurna Column -->
+      <ng-container matColumnDef="horaExtraDiurna">
+        <th mat-header-cell *matHeaderCellDef> Horas Extras Diurna </th>
+        <td *matCellDef="let element"> {{element.horaExtraDiurna}} </td>
+      </ng-container>
+      <!-- horaExtraDiurnaFestivo Column -->
+      <ng-container matColumnDef="horaExtraDiurnaFestivo">
+        <th mat-header-cell *matHeaderCellDef> Horas Extras Diurna Festivo </th>
+        <td *matCellDef="let element"> {{element.horaExtraDiurnaFestivo}} </td>
+      </ng-container>
+      <!-- horaExtraNocturna Column -->
+      <ng-container matColumnDef="horaExtraNocturna">
+        <th mat-header-cell *matHeaderCellDef> Horas Extras Nocturna </th>
+        <td *matCellDef="let element"> {{element.horaExtraNocturna}} </td>
+      </ng-container>
+      <!-- horaExtraNocturnaFestivo Column -->
+      <ng-container matColumnDef="horaExtraNocturnaFestivo">
+        <th mat-header-cell *matHeaderCellDef> Horas Extras Nocturna Festivo </th>
+        <td *matCellDef="let element"> {{element.horaExtraNocturnaFestivo}} </td>
       </ng-container>
       <!-- salarioBase Column -->
       <ng-container matColumnDef="salarioBase">
         <th mat-header-cell *matHeaderCellDef> SalarioBase </th>
         <td *matCellDef="let element"> {{element.salarioBase | currency: 'USD'}} </td>
-      </ng-container>
-      <!-- subTransporte Column -->
-      <ng-container matColumnDef="subTransporte">
-        <th mat-header-cell *matHeaderCellDef> SubTransporte </th>
-        <td *matCellDef="let element"> {{element.subTransporte | currency: 'USD'}} </td>
-      </ng-container>
-      <!-- idNomina Column -->
-      <ng-container matColumnDef="idNomina">
-        <th mat-header-cell *matHeaderCellDef> idNomina </th>
-        <td *matCellDef="let element"> {{element.idNomina }} </td>
       </ng-container>
       <!--Options-->
       <ng-container matColumnDef="options">

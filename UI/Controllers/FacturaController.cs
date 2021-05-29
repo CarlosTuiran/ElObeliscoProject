@@ -5,7 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aplicacion.Request;
 using Aplicacion.Services.CrearServices;
-using Domain.Models.Entities;
+using
+ Domain.Models.Entities;
 using Infra.Datos;
 using Infra.Datos.Base;
 using Microsoft.AspNetCore.Mvc;
@@ -108,6 +109,7 @@ namespace UI.Controllers
             }
             return BadRequest(rta.Message);
         }
+        /*
         [HttpPost("preCreateFacturas")]
         public async Task<IActionResult> PreCreateFactura([FromBody] CrearMFacturaRequest request)
         {
@@ -119,7 +121,7 @@ namespace UI.Controllers
                 return Ok(rta);
             }
             return BadRequest(rta.Message);
-        }
+        }*/
         #endregion
 
         #region: Reportes Tarjetas

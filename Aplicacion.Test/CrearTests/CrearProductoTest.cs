@@ -41,7 +41,6 @@ namespace Aplicacion.Test.CrearTests
                     Descripcion = "Cemento Blanco",
                     Fabrica = "Argos",
                     FormatoVenta = "que va aqui xd",
-                    IVA = 0.19,
                     IdMarca=1,
                     IdCategoria=1,
                     IdProveedor="1",

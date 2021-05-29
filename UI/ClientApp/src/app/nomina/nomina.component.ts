@@ -33,13 +33,15 @@ export class NominaComponent implements OnInit {
     this.router.navigate(["/liquidaciones"]);
   }
 }
-export interface INomina {
-  idEmpleado: number,
+export interface INomina {  
   idNomina: string,
+  idEmpleado: number,
   diasTrabajados: number,
-  horasExtras: number,
-  salarioBase: number,
-  subTransporte: number
+  horaExtraDiurna: number,
+  horaExtraDiurnaFestivo: number,
+  horaExtraNocturna: number,
+  horaExtraNocturnaFestivo: number,
+  salarioBase: number
 }
 export interface INominaPago{
   idEmpleado: number

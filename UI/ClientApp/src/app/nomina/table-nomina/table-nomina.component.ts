@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { INomina, INominaPago } from '../nomina.component';
 import { NominaService } from '../nomina.service';
-import { NominaComponent } from '../nomina.component';
 import { LiquidacionService } from '../../liquidacion/liquidacion.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../../notifications/_services';
@@ -17,13 +16,14 @@ export class TableNominaComponent implements OnInit {
 
   nominas!:INomina[];  
   displayedColumns: string[] = [
-    'idEmpleado',
-    'nombreEmpleado',
-    'diasTrabajados',
-    'horasExtras',
-    'salarioBase',
-    'subTransporte',
     'idNomina',
+    'idEmpleado',
+    'diasTrabajados',
+    'horaExtraDiurna',
+    'horaExtraDiurnaFestivo',
+    'horaExtraNocturna',
+    'horaExtraNocturnaFestivo',
+    'salarioBase',
     'options'];
     
     dataSource =new MatTableDataSource<INomina>(this.nominas);
@@ -67,7 +67,7 @@ export class TableNominaComponent implements OnInit {
 
   Eliminar(idNomina: string, idEmpleado: number) {
     this.nominaService.deleteNomina(idNomina, idEmpleado).
-      subscribe(idNomina => this.onDeleteSuccess(),
+      subscribe(() => this.onDeleteSuccess(),
         error => this.alertService.error(error.error.message));
   }
 

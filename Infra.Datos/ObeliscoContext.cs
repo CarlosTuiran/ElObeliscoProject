@@ -16,27 +16,59 @@ namespace Infra.Datos
             //optionsBuilder.UseSqlServer("Server=localhost/SQLEXPRESS;Database=master;Trusted_Connection=True;");
             optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=ObeliescoDB; Integrated Security=True; MultipleActiveResultSets=True");
         }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
             //modelBuilder.Entity<EstudianteCuerso>().HasKey(x => new { x.CursoId, x.EstudianteId });//llave compuesta 
             //modelBuilder.Entity<EstudianteCuerso>().HasQueryFilter(x=> x.Estado=="Activo");//Filtro por tipo que siempre se activa
             //        puede ignorarse con IgnoreQueryFliters
             modelBuilder.Entity<Producto>().HasData(
-                new Producto() { Referencia = "1000-01", Costo = 3000, Descripcion = "Llave Inglesa", IdMarca = 1,
-                    IdCategoria=1, IdProveedor= "106583", Fabrica = "Ferres SAS", FechaRegistro = DateTime.Now, 
-                    FormatoVenta = "Unidad", IVA = 0.3, PrecioVenta = 5000, Id=1 });
+                new Producto()
+                {
+                    Referencia = "1000-01",
+                    Costo = 3000,
+                    Descripcion = "Llave Inglesa",
+                    IdMarca = 1,
+                    IdCategoria = 1,
+                    IdProveedor = "106583",
+                    Fabrica = "Ferres SAS",
+                    FechaRegistro = DateTime.Now,
+                    FormatoVenta = "Unidad",
+                    PrecioVenta = 5000,
+                    Id = 1
+                });
             modelBuilder.Entity<Inventario>().HasData(
-                new Inventario() { Referencia= "1000-01", Bodega="BD01", Cantidad=5, Id=1
-                    
-            });
-             modelBuilder.Entity<Empleado>().HasData(
-                new Empleado(){IdEmpleado= 2699540, Nombres="Raul Hernandez", Apellidos="Ferra Ito", Cargo="Cajero", Celular="31688888",
-                Correo="RHerna@gmail.com", Direccion="Stranger Valley", Estado="Activo", FechaIngreso=DateTime.Now,Id=1
-                }); 
+                new Inventario()
+                {
+                    Referencia = "1000-01",
+                    Bodega = "BD01",
+                    Cantidad = 5,
+                    Id = 1
+
+                });
+            modelBuilder.Entity<Empleado>().HasData(
+               new Empleado()
+               {
+                   IdEmpleado = 2699540,
+                   Nombres = "Raul Hernandez",
+                   Apellidos = "Ferra Ito",
+                   Cargo = "Cajero",
+                   Celular = "31688888",
+                   Correo = "RHerna@gmail.com",
+                   Direccion = "Stranger Valley",
+                   Estado = "Activo",
+                   FechaIngreso = DateTime.Now,
+                   Id = 1
+               });
             modelBuilder.Entity<Usuario>().HasData(
-                new Usuario(){EmpleadoId= 1, Nombre="RaulH", Password= "EAAAAHDlgUkazfaO5QNj7D / gFmseTKDUliA11ginT5ElAN + V", Rol="Admin" ,Id=1
+                new Usuario()
+                {
+                    EmpleadoId = 1,
+                    Nombre = "RaulH",
+                    Password = "EAAAAHDlgUkazfaO5QNj7D / gFmseTKDUliA11ginT5ElAN + V",
+                    Rol = "Admin",
+                    Id = 1
                 });
             //CREAR SEEDS CUANTO SE TENGA CLARO LA NOMINA
             /*modelBuilder.Entity<Nomina>().HasData(
@@ -47,71 +79,295 @@ namespace Infra.Datos
                     FechaPago=DateTime.Now, NominaId=1,Id = 1
                 });*/
             modelBuilder.Entity<Terceros>().HasData(
-                new Terceros(){Identificacion="106583", Nombre="Santana Silva", Apellido="Orosco Eter", Descripcion=" Empresa Ferreos y Mas", 
-                    Celular="3128288", Direccion= "Stranger Valley", Correo="ferreymas@gmail.com", TipoTercero="Proveedor", FechaCumple=DateTime.Now,
+                new Terceros()
+                {
+                    Identificacion = "106583",
+                    Nombre = "Santana Silva",
+                    Apellido = "Orosco Eter",
+                    Descripcion = " Empresa Ferreos y Mas",
+                    Celular = "3128288",
+                    Direccion = "Stranger Valley",
+                    Correo = "ferreymas@gmail.com",
+                    TipoTercero = "Proveedor",
+                    FechaCumple = DateTime.Now,
                     Id = 1
                 });
             modelBuilder.Entity<Terceros>().HasData(
-                new Terceros(){Identificacion = "10653434", Nombre = "Jose Jose", Apellido = "Joestar",  Descripcion = "Cliente Frecuente",
-                    Celular = "3443288",  Direccion = "Stranger Valley",  Correo = "jojo@gmail.com", TipoTercero = "Cliente",FechaCumple=DateTime.Now,
+                new Terceros()
+                {
+                    Identificacion = "10653434",
+                    Nombre = "Jose Jose",
+                    Apellido = "Joestar",
+                    Descripcion = "Cliente Frecuente",
+                    Celular = "3443288",
+                    Direccion = "Stranger Valley",
+                    Correo = "jojo@gmail.com",
+                    TipoTercero = "Cliente",
+                    FechaCumple = DateTime.Now,
                     Id = 2
-                }); 
-            modelBuilder.Entity<TipoMovimiento>().HasData(
-                new TipoMovimiento{ idMovimiento=1, Nombre="Efectivo", Id=1
                 });
             modelBuilder.Entity<TipoMovimiento>().HasData(
-                new TipoMovimiento{ idMovimiento = 2, Nombre = "Credito", Id = 2
+                new TipoMovimiento
+                {
+                    idMovimiento = 1,
+                    Nombre = "Efectivo",
+                    Id = 1
                 });
             modelBuilder.Entity<TipoMovimiento>().HasData(
-                new TipoMovimiento{idMovimiento = 3, Nombre = "Cheque", Id = 3
+                new TipoMovimiento
+                {
+                    idMovimiento = 2,
+                    Nombre = "Credito",
+                    Id = 2
                 });
             modelBuilder.Entity<TipoMovimiento>().HasData(
-                new TipoMovimiento{idMovimiento = 4, Nombre = "Pago Virtual", Id = 4
+                new TipoMovimiento
+                {
+                    idMovimiento = 3,
+                    Nombre = "Cheque",
+                    Id = 3
                 });
             modelBuilder.Entity<TipoMovimiento>().HasData(
-                new TipoMovimiento{idMovimiento = 5, Nombre = "Devolucion", Id = 5
+                new TipoMovimiento
+                {
+                    idMovimiento = 4,
+                    Nombre = "Pago Virtual",
+                    Id = 4
                 });
-            // modelBuilder.Entity<Tiempo>().HasData(
-            //     new Tiempo{ Id=12, Año=2020, Mes=1, Dia=3, DiaDelAño=3, Fecha=Convert.ToDateTime("03-01-2020"), NombreDia="Lunes",
-            //     NombreDiaCorto="LUN", NombreMes="Enero", NombreMesCorto="ENE", SemanaDelAño=1, Semestre=1, Trimestre=1
-            //     });
-            /*
-            modelBuilder.Entity<MFactura>().HasData(
-                new MFactura() {idMfactura=1000, TipoMovimiento="Compra", FechaFactura= DateTime.Now.Date, EstadoFactura="Pagada",
-                EmpleadoId=1, TercerosId=1, FechaPago=DateTime.Now, IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=1, TipoMovimientoId=1
+            modelBuilder.Entity<TipoMovimiento>().HasData(
+                new TipoMovimiento
+                {
+                    idMovimiento = 5,
+                    Nombre = "Devolucion",
+                    Id = 5
                 });
-            modelBuilder.Entity<DFactura>().HasData(
-                new DFactura(){MfacturaId=1, idDFactura=10001, Cantidad=5, Bodega="BD1", FechaFactura=DateTime.Now, 
-                    PrecioUnitario=3000,Referencia="1000-01", Id=1
-                });
-            modelBuilder.Entity<MFactura>().HasData(
-                new MFactura() {idMfactura=1001, TipoMovimiento="Venta", FechaFactura= DateTime.Now.Date, EstadoFactura="Pagada",
-                EmpleadoId=1, TercerosId=2, FechaPago=DateTime.Now.AddMonths(-1), IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=2, TipoMovimientoId=1
-                });
-            modelBuilder.Entity<DFactura>().HasData(
-                new DFactura(){MfacturaId=2, idDFactura=10003, Cantidad=5, Bodega="BD1", FechaFactura=DateTime.Now.AddMonths(-1), 
-                    PrecioUnitario=3000,Referencia="1000-01", Id=2
-                });
-            modelBuilder.Entity<MFactura>().HasData(
-                new MFactura() {idMfactura=1003, TipoMovimiento="Venta", FechaFactura=DateTime.Now.Date, EstadoFactura="Pagada",
-                EmpleadoId=1, TercerosId=2, FechaPago=DateTime.Now, IVA=0.3, SubTotal=15000, Descuento=0, Abono=0, Id=3, TipoMovimientoId=1
-                });
-            modelBuilder.Entity<DFactura>().HasData(
-                new DFactura(){MfacturaId=3, idDFactura=10002, Cantidad=5, Bodega="BD1", FechaFactura=DateTime.Now, 
-                    PrecioUnitario=3000,Referencia="1000-01", Id=3 
-                });*/
+
+
+
+
+
+            modelBuilder.Entity<Parametros>().HasData(
+            //Partida Doble Cuenta Nomina Agrupacion 1 
+            new Parametros
+            {
+                Agrupacion = "CuentaNomina",
+                Descripcion = "retencion aporte nomina",
+                ValorNumerico = 2370,
+                ValorTxt = "",
+                Id = 1
+            },
+            new Parametros
+            {
+                Agrupacion = "CuentaNomina",
+                Descripcion = "acreedores varios",
+                ValorNumerico = 2380,
+                ValorTxt = "",
+                Id = 2
+            },
+            new Parametros
+            {
+                Agrupacion = "CuentaNomina",
+                Descripcion = "provision",
+                ValorNumerico = 2610,
+                ValorTxt = "",
+                Id = 3
+            },
+            new Parametros
+            {
+                Agrupacion = "CuentaNomina",
+                Descripcion = "salarios por pagar",
+                ValorNumerico = 2505,
+                ValorTxt = "",
+                Id = 4
+            },
+            new Parametros
+            {
+                Agrupacion = "CuentaNomina",
+                Descripcion = "gasto personal",
+                ValorNumerico = 5105,
+                ValorTxt = "",
+                Id = 5
+
+            },
+            //Parametros Nomina
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "SALUDEMPLEADOR",
+                ValorNumerico = 8.5,
+                ValorTxt = "TOTAL_SALARIO",
+                Id = 6
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "SALUDTRABAJADOR",
+                ValorNumerico = 4,
+                ValorTxt = "TOTAL_SALARIO",
+                Id = 7
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "PENSIONEMPLEADOR",
+                ValorNumerico = 12,
+                ValorTxt = "TOTAL_SALARIO",
+                Id = 8
+
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "PENSIONTRABAJADOR",
+                ValorNumerico = 4,
+                ValorTxt = "TOTAL_SALARIO",
+                Id = 9
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "ARL",
+                ValorNumerico = 0.52,
+                ValorTxt = "TOTAL_SALARIO",
+                Id = 10
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "CESANTIAS",
+                ValorNumerico = 8.33,
+                ValorTxt = "TOTAL_DEVENGADO",
+                Id = 11
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "INT CESANTIAS",
+                ValorNumerico = 1,
+                ValorTxt = "CESANTIA",
+                Id = 12
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "VACACIONES",
+                ValorNumerico = 4.17,
+                ValorTxt = "SALARIO_BASICO",
+                Id = 13
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "CAJACOMPENSACION",
+                ValorNumerico = 4,
+                ValorTxt = "TOTAL_SALARIO",
+                Id = 14
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "ICBF",
+                ValorNumerico = 3,
+                ValorTxt = "TOTAL_SALARIO",
+                Id = 15
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "SENA",
+                ValorNumerico = 2,
+                ValorTxt = "TOTAL_SALARIO",
+                Id = 16
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "SALARIO_MINIMO",
+                ValorNumerico = 908.526,
+                ValorTxt = "",
+                Id = 17
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosNomina",
+                Descripcion = "AUX_TRANSPORTE",
+                ValorNumerico = 106.454,
+                ValorTxt = "",
+                Id = 18
+            },
+
+            //Parametros Tipo pago
+            new Parametros
+            {
+                Agrupacion = "ParametrosTipoPago",
+                Descripcion = "Efectivo",
+                ValorNumerico = 1105,
+                ValorTxt = "",
+                Id = 19
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosTipoPago",
+                Descripcion = "Credito",
+                ValorNumerico = 2335,
+                ValorTxt = "",
+                Id = 20
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosTipoPago",
+                Descripcion = "Cheque",
+                ValorNumerico = 1110,
+                ValorTxt = "",
+                Id = 21
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosTipoPago",
+                Descripcion = "Pago Virtual",
+                ValorNumerico = 1110,
+                ValorTxt = "",
+                Id = 22
+            },
+            // Parametros Horas extras
+            new Parametros
+            {
+                Agrupacion = "ParametrosHorasExtras",
+                Descripcion = "Diurno",
+                ValorNumerico = 25,
+                ValorTxt = "",
+                Id = 23
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosHorasExtras",
+                Descripcion = "Nocturno",
+                ValorNumerico = 75,
+                ValorTxt = "",
+                Id = 24
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosHorasExtras",
+                Descripcion = "Diurno_Festivo",
+                ValorNumerico = 100,
+                ValorTxt = "",
+                Id = 25
+            },
+            new Parametros
+            {
+                Agrupacion = "ParametrosHorasExtras",
+                Descripcion = "Nocturno_Festivo",
+                ValorNumerico = 150,
+                ValorTxt = "",
+                Id = 26
+            });
+
             //Restringe las llaves foraneas en el parametro OnDelete 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-           {
-             relationship.DeleteBehavior = DeleteBehavior.Restrict;
-           }
-
-            /*MODELO PARA AÑADIR SEEDS
-             * modelBuilder.Entity<>().HasData(
-                new
-                {
-                });
-            */
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
         public DbSet<DFactura> DFactura { get; set; }
         public DbSet<MFactura> MFactura { get; set; }
@@ -130,6 +386,9 @@ namespace Infra.Datos
         public DbSet<Marca> Marca { get; set; }
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Impuesto> Impuesto { get; set; }
+        public DbSet<ImpuestosProducto> ImpuestosProducto { get; set; }
+        public DbSet<LibroContable> LibroContable { get; set; }
+        public DbSet<Parametros> Parametros { get; set; }
 
     }
 }

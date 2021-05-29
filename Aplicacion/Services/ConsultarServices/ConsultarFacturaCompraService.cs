@@ -39,7 +39,6 @@ namespace Aplicacion.Services.ConsultarServices
                                   Descripcion = p.Descripcion,
                                   Unidad = df.FormatoProducto,
                                   ValorUnitario = _context.Set<FormatoVenta>().Where(t => t.Nombre == df.FormatoProducto).Select(t => t.FactorConversion).First() * df.PrecioUnitario / fv.FactorConversion,
-                                  p.IVA,
                                   Cantidad = df.CantidadDigitada,
                                   ValorTotal = df.PrecioTotal
                               }).ToList();
@@ -85,7 +84,6 @@ namespace Aplicacion.Services.ConsultarServices
                 detalle.Codigo = item.Codigo;
                 detalle.Descripcion = item.Descripcion;
                 detalle.Unidad = item.Unidad;
-                detalle.Iva = item.IVA;
                 detalle.ValorUnitario = item.ValorUnitario.ToString("C2");
                 detalle.ValorTotal = item.ValorTotal.ToString("C2");;
                 response.Dfacturas.Add(detalle);

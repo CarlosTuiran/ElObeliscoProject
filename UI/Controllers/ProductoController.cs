@@ -54,7 +54,6 @@ namespace UI.Controllers
                               fabrica = p.Fabrica,
                               costo = p.Costo,
                               precioVenta = p.PrecioVenta,
-                              iva = p.IVA,
                               fechaRegistro = p.FechaRegistro,
                               cantidadMinima = p.CantidadMinima
                           }).ToList();
@@ -62,12 +61,33 @@ namespace UI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProducto([FromRoute] string id)
+        public object GetProducto([FromRoute] string id)
         {
-            Producto producto = await _context.Producto.SingleOrDefaultAsync(t => t.Referencia == id);
-            if (producto == null)
-                return NotFound();
-            return Ok(producto);
+            var lista = _context.ImpuestosProducto.Where(i=> i.IdProducto == id).Select(i=> i.IdImpuesto).ToArray();
+            var result = (from p in _context.Set<Producto>()
+                          join m in _context.Set<Marca>()
+                          on p.IdMarca equals m.Id
+                          join c in _context.Set<Categoria>()
+                          on p.IdCategoria equals c.Id
+                          join t in _context.Set<Terceros>()
+                          on p.IdProveedor equals t.Identificacion
+                          where p.Referencia == id
+                          select new
+                          {
+                              referencia = p.Referencia,
+                              descripcion = p.Descripcion,
+                              formatoVenta = p.FormatoVenta,
+                              idMarca = m.Id,
+                              idCategoria = c.Id,
+                              idProveedor = t.Identificacion,
+                              fabrica = p.Fabrica,
+                              costo = p.Costo,
+                              idImpuestos = lista,
+                              precioVenta = p.PrecioVenta,
+                              fechaRegistro = p.FechaRegistro,
+                              cantidadMinima = p.CantidadMinima
+                          }).ToList();
+            return result;
         }
 
         [HttpPost]

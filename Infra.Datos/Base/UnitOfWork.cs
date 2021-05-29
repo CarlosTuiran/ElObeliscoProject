@@ -168,6 +168,30 @@ namespace Infra.Datos.Base
             }
         }
 
+        private IImpuestosProductoServiceRepository _impuestosProductoServiceRepository;
+        public IImpuestosProductoServiceRepository ImpuestosProductoServiceRepository
+        {
+            get
+            {
+                return _impuestosProductoServiceRepository ?? (_impuestosProductoServiceRepository = new ImpuestosProductoServiceRepository(_dbContext));
+            }
+        }
+        private ILibroContableServiceRepository _libroCOntableServiceRepository;
+        public ILibroContableServiceRepository LibroContableServiceRepository
+        {
+            get
+            {
+                return _libroCOntableServiceRepository ?? (_libroCOntableServiceRepository = new LibroContableServiceRepository(_dbContext));
+            }
+        }
+        private IParametrosServiceRepository _parametrosServiceRepository;
+        public IParametrosServiceRepository ParametrosServiceRepository
+        {
+            get
+            {
+                return _parametrosServiceRepository ?? (_parametrosServiceRepository = new ParametrosServiceRepository(_dbContext));
+            }
+        }
         public int Commit()
         {
             return _dbContext.SaveChanges();

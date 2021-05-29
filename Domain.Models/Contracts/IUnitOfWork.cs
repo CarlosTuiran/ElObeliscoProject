@@ -24,7 +24,9 @@ namespace Domain.Models.Contracts
         IMarcaServiceRepository MarcaServiceRepository { get; }
         ICategoriaServiceRepository CategoriaServiceRepository { get; }
         IImpuestoServiceRepository ImpuestoServiceRepository { get; }
-
+        IImpuestosProductoServiceRepository ImpuestosProductoServiceRepository { get; }
+        ILibroContableServiceRepository LibroContableServiceRepository { get; }
+        IParametrosServiceRepository ParametrosServiceRepository { get; }
         int Commit();
     }
 }

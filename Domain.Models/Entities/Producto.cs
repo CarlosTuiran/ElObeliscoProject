@@ -18,10 +18,13 @@ namespace Domain.Models.Entities
         public string? Fabrica { get; set; }
         public double Costo { get; set; }
         public double PrecioVenta { get; set; }
-        public double IVA { get; set; }
         public int CantidadMinima { get; set; }
         public DateTime FechaRegistro { get; set; }
         public string Estado { get; set; }
+        public int CuentaIngreso { get; set; }
+        public int CuentaDevolucion { get; set; }
+           
+        
         public List<ProductoDFactura> ProductoDFacturas { get; set; }
 
         public Producto()
@@ -31,7 +34,8 @@ namespace Domain.Models.Entities
 
         public Producto(string referencia, string descripcion, string formatoVenta, int idMarca, 
             int idCategoria, string idProveedor, string fabrica, double costo, double precioVenta, 
-            double iVA, int cantidadMinima, DateTime fechaRegistro, string estado)
+            int cantidadMinima, DateTime fechaRegistro, string estado, int cuentaIngreso,
+            int cuentaDevolucion)
         {
             Referencia = referencia;
             Descripcion = descripcion;
@@ -42,10 +46,11 @@ namespace Domain.Models.Entities
             Fabrica = fabrica;
             Costo = costo;
             PrecioVenta = precioVenta;
-            IVA = iVA;
             CantidadMinima = cantidadMinima;
             FechaRegistro = fechaRegistro;
             Estado = estado;
+            CuentaIngreso=cuentaIngreso;
+            CuentaDevolucion=cuentaDevolucion;
         }
 
         public IReadOnlyList<string> CanCrear(Producto producto)
@@ -69,14 +74,16 @@ namespace Domain.Models.Entities
                 errors.Add("Campo PrecioVenta negativo");
             if (producto.Costo <= 0)
                 errors.Add("Campo costo negativo o vacio");
-            if (producto.IVA <= 0)
-                errors.Add("Campo iva negativo o vacio");
             if (producto.CantidadMinima <= 0)
                 errors.Add("Campo cantidad minima negativo o vacio");
             if (string.IsNullOrEmpty(producto.FechaRegistro.ToString()))
                 errors.Add("Campo FechaRegistro vacio");
             if (string.IsNullOrEmpty(producto.Estado))
                 errors.Add("Campo Estado vacio");
+            if(producto.CuentaIngreso<= 0)
+                errors.Add("Campo CuentaIngreso vacio");
+            if(producto.CuentaDevolucion<= 0)
+                errors.Add("Campo CuentaDevolucion vacio");
             return errors;
         }
     }

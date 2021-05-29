@@ -37,6 +37,19 @@ namespace UI.Controllers
         {
             return _context.Impuesto;
         }
+
+        [HttpGet("impuestosProducto/{id}")]
+        public IEnumerable<Impuesto> GetImpuestosProducto(string id)
+        {
+            List<Impuesto> impuestos = new List<Impuesto>();
+            var impuestosProducto = _context.ImpuestosProducto.Where(t => t.IdProducto == id);
+            foreach (var item in impuestosProducto)
+            {
+                impuestos.Add(_context.Impuesto.SingleOrDefault(t => t.Id == item.IdImpuesto));
+            }
+            return impuestos;
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetImpuesto([FromRoute] int id)
         {

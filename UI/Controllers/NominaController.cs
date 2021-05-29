@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Aplicacion.Request;
-using Aplicacion.Services.CrearServices;
+﻿using Aplicacion.Request;
 using Aplicacion.Services.ActualizarServices;
+using Aplicacion.Services.CrearServices;
+using Aplicacion.Services.EliminarServices;
 using Domain.Models.Entities;
 using Infra.Datos;
 using Infra.Datos.Base;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Aplicacion.Services.EliminarServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace UI.InterfazWeb.Controllers
 {
@@ -24,7 +23,7 @@ namespace UI.InterfazWeb.Controllers
         private UnitOfWork _unitOfWork;
         private ActualizarNominaService _actualizarService;
         private EliminarNominaService _eliminarService;
-        
+
         public NominaController(ObeliscoContext context)
         {
             _context = context;
@@ -39,15 +38,15 @@ namespace UI.InterfazWeb.Controllers
                           on n.IdEmpleado equals e.Id
                           select new
                           {
-                              IdEmpleado = e.Id,
-                              NombreEmpleado = e.Nombres,
-                              DiasTrabajados = n.DiasTrabajados,
-                              HorasExtras = n.HorasExtras,
-                              SalarioBase = n.SalarioBase,
-                              SubTransporte = n.SubTransporte,
-                              IdNomina=n.IdNomina
+                              n.IdNomina,
+                              IdEmpleado = e.Nombres + " " + e.Apellidos,
+                              n.DiasTrabajados,
+                              n.HoraExtraDiurna,
+                              n.HoraExtraDiurnaFestivo,
+                              n.HoraExtraNocturna,
+                              n.HoraExtraNocturnaFestivo,
+                              n.SalarioBase
                           }).ToList();
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
         }
 
@@ -76,9 +75,9 @@ namespace UI.InterfazWeb.Controllers
         [HttpDelete("{idN}/{id}")]
         public object DeleteNomina([FromRoute] string idN, int id)
         {
-            _eliminarService=new EliminarNominaService(_unitOfWork);
-            EliminarNominaRequest request=new EliminarNominaRequest();
-            request.IdNomina=idN;
+            _eliminarService = new EliminarNominaService(_unitOfWork);
+            EliminarNominaRequest request = new EliminarNominaRequest();
+            request.IdNomina = idN;
             request.IdEmpleado = id;
             var rta = _eliminarService.Ejecutar(request);
             if (rta.isOk())

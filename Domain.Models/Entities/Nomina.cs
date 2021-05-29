@@ -6,23 +6,29 @@ using System.Text;
 namespace Domain.Models.Entities
 {
     public class Nomina : Entity<int>
-    {
-        
+    {        
         public string IdNomina { get; set; }
         public int IdEmpleado { get; set; }
         public int DiasTrabajados { get; set; }
-        public int HorasExtras { get; set; }
+        public double HoraExtraDiurna { get; set; }
+        public double HoraExtraNocturna { get; set; }
+        public double HoraExtraDiurnaFestivo { get; set; }
+        public double HoraExtraNocturnaFestivo { get; set; }
         public double SalarioBase { get; set; }
-        public double SubTransporte { get; set; }
         public List<Liquidacion> Liquidacion { get; set; }
-        public Nomina(string idNomina, int idEmpleado, int diasTrabajados, int horasExtras, double salarioBase, double subTransporte)
+
+        public Nomina(string idNomina, int idEmpleado, int diasTrabajados, 
+            double horaExtraDiurna, double horaExtraNocturna, double horaExtraDiurnaFestivo, 
+            double horaExtraNocturnaFestivo, double salarioBase)
         {
             IdNomina = idNomina;
             IdEmpleado = idEmpleado;
             DiasTrabajados = diasTrabajados;
-            HorasExtras = horasExtras;
+            HoraExtraDiurna = horaExtraDiurna;
+            HoraExtraNocturna = horaExtraNocturna;
+            HoraExtraDiurnaFestivo = horaExtraDiurnaFestivo;
+            HoraExtraNocturnaFestivo = horaExtraNocturnaFestivo;
             SalarioBase = salarioBase;
-            SubTransporte = subTransporte;
         }
 
         public Nomina()

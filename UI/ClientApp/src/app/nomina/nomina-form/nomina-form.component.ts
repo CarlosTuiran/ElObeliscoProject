@@ -26,9 +26,11 @@ export class NominaFormComponent implements OnInit {
   formGroup = this.fb.group({
     idEmpleado: ['', [Validators.required]],
     diasTrabajados: ['', [Validators.required]],
-    horasExtras: ['', [Validators.required]],
-    salarioBase: ['', [Validators.required]],
-    subTransporte: ['', [Validators.required]]
+    horaExtraDiurna: ['', [Validators.required]],
+    horaExtraDiurnaFestivo: ['', [Validators.required]],
+    horaExtraNocturna: ['', [Validators.required]],
+    horaExtraNocturnaFestivo: ['', [Validators.required]],
+    salarioBase: ['', [Validators.required]]
   });
   empleados: IEmpleado[];
   ngOnInit() {
@@ -51,10 +53,13 @@ export class NominaFormComponent implements OnInit {
 
   cargarFormulario(nomina: INomina) {
     this.formGroup.patchValue({
+      idEmpleado: nomina.idEmpleado,
       diasTrabajados: nomina.diasTrabajados,
-      horasExtras: nomina.horasExtras,
-      salarioBase: nomina.salarioBase,
-      subTransporte: nomina.subTransporte
+      horaExtraDiurna: nomina.horaExtraDiurna,
+      horaExtraDiurnaFestivo: nomina.horaExtraDiurnaFestivo,
+      horaExtraNocturna: nomina.horaExtraNocturna,
+      horaExtraNocturnaFestivo: nomina.horaExtraNocturnaFestivo,
+      salarioBase: nomina.salarioBase
     });
   }
 
@@ -85,14 +90,20 @@ export class NominaFormComponent implements OnInit {
   get diasTrabajados() {
     return this.formGroup.get('diasTrabajados');
   }
-  get horasExtras() {
-    return this.formGroup.get('horasExtras');
+  get horaExtraDiurna() {
+    return this.formGroup.get('horaExtraDiurna');
+  }
+  get horaExtraDiurnaFestivo() {
+    return this.formGroup.get('horaExtraDiurnaFestivo');
+  }
+  get horaExtraNocturna() {
+    return this.formGroup.get('horaExtraNocturna');
+  }
+  get horaExtraNocturnaFestivo() {
+    return this.formGroup.get('horaExtraNocturnaFestivo');
   }
   get salarioBase() {
     return this.formGroup.get('salarioBase');
-  }
-  get subTransporte() {
-    return this.formGroup.get('subTransporte');
   }
 
 }

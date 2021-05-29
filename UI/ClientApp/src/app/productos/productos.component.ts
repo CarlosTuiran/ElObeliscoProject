@@ -25,9 +25,11 @@ export interface IProducto {
   fabrica: string,
   costo: number,
   precioVenta: number,
-  iva: number,
+  idImpuestos: number[],
   fechaRegistro: Date,
-  cantidadMinima: number
+  cantidadMinima: number,
+  cuentaIngreso:number,
+  cuentaDevolucion:number
 }
 
 export interface IProducto2 {
@@ -40,11 +42,15 @@ export interface IProducto2 {
   fabrica: string,
   costo: number,
   precioVenta: number,
-  iva: number,
+  idImpuestos: number[],
   fechaRegistro: Date,
   cantidadMinima: number
 }
 
 export interface IDeleteProducto {
   referencia: string
+}
+
+export interface IImpuestosProducto {
+  idImpuesto: number
 }

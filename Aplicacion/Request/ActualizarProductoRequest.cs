@@ -19,7 +19,9 @@ namespace Aplicacion.Request
         public int CantidadMinima { get; set; }
         public DateTime FechaRegistro { get; set; }
         public string Estado { get; set; }
-
+        public int CuentaIngreso { get; set; }
+        public int CuentaDevolucion { get; set; }
+        public List<int> IdImpuestos { get; set; }
     }
     public class ActualizarProductoResponse
     {

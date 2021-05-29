@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { IProducto } from '../productos.component';
 import { ProductosService } from '../productos.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../notifications/_services';
@@ -15,6 +14,9 @@ import { TercerosService } from '../../terceros/terceros.service';
 import { error } from 'jquery';
 import { ReplaySubject } from 'rxjs';
 import { ICuenta } from '../../contabilidad/cuenta/cuenta.component';
+import { ImpuestoService } from '../../contabilidad/impuesto/impuesto.service';
+import { IImpuesto } from '../../contabilidad/impuesto/impuesto.component';
+import { IProducto } from '../productos.component';
 
 @Component({
   selector: 'app-productos-form',
@@ -27,7 +29,7 @@ export class ProductosFormComponent implements OnInit {
     private router: Router, private formatoVentaService: FormatoVentaService,
     private activatedRoute: ActivatedRoute, private marcaService: MarcaService,
     private categoriaService: CategoriaService, private terceroService: TercerosService,
-    private alertService: AlertService) { }
+    private alertService: AlertService, private impuestoService: ImpuestoService) { }
 
   modoEdicion: boolean = false;
   productoId: string;
@@ -35,8 +37,7 @@ export class ProductosFormComponent implements OnInit {
   marcas: IMarca[];
   categorias: ICategoria[];
   proveedores: ITercero[];
- 
-
+  impuestos: IImpuesto[];
 
 //Filtros de select cuenta
 public cuentaFilter:FormControl= new FormControl();
@@ -53,9 +54,10 @@ public filteredcuentas: ReplaySubject<ICuenta[]> = new ReplaySubject<ICuenta[]>(
     fabrica: ['', [Validators.required]],
     costo: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     precioVenta: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-    iVA: ['0', [Validators.required]],
+    idImpuestos: ['', [Validators.required]],
     cantidadMinima:['', [Validators.required, Validators.pattern(/^\d+$/)]],
-    cuentaIngreso:['',[Validators.required]]
+    cuentaIngreso:['',[Validators.required]],    
+    cuentaDevolucion:['',[Validators.required]]
   });
  
   ngOnInit() {
@@ -66,7 +68,7 @@ public filteredcuentas: ReplaySubject<ICuenta[]> = new ReplaySubject<ICuenta[]>(
 
       this.modoEdicion = true;
       this.productoId = params["id"];
-      this.productosService.getProducto(this.productoId).subscribe(producto => this.cargarFormulario(producto),
+      this.productosService.getProducto(this.productoId).subscribe(producto => this.cargarFormulario(producto[0]),
         error => this.alertService.error(error.error));
     });
     this.formatoVentaService.getFormatosVenta().subscribe(
@@ -80,10 +82,12 @@ public filteredcuentas: ReplaySubject<ICuenta[]> = new ReplaySubject<ICuenta[]>(
       error => this.alertService.error(error.message));
     this.terceroService.getTercerostipoTercero("Compra").subscribe(terceros => this.proveedores = terceros,
       error => this.alertService.error(error.message));
-
+    this.impuestoService.getImpuestos().subscribe(impuestos => this.impuestos = impuestos,
+      error => this.alertService.error(error.message));
   }
   cargarFormulario(producto: IProducto) {
     console.log(producto);
+    
     this.formGroup.patchValue({
       referencia: producto.referencia,
       descripcion: producto.descripcion,
@@ -93,15 +97,15 @@ public filteredcuentas: ReplaySubject<ICuenta[]> = new ReplaySubject<ICuenta[]>(
       idCategoria: producto.idCategoria,
       idProveedor: producto.idProveedor,
       costo: producto.costo,
+      idImpuestos: producto.idImpuestos,
       precioVenta: producto.precioVenta,
-      iVA: producto.iva,
       cantidadMinima:producto.cantidadMinima
     });
   }
 
   save() {
     let producto: IProducto = Object.assign({}, this.formGroup.value);
-    console.table(producto); //ver usuario por consola
+    console.log(producto);
     if (this.modoEdicion) {
       // edita
       producto.referencia = this.productoId;
@@ -112,7 +116,7 @@ public filteredcuentas: ReplaySubject<ICuenta[]> = new ReplaySubject<ICuenta[]>(
       // crea
       this.productosService.createProductos(producto)
         .subscribe(usuario => this.onSaveSuccess(),
-          error => this.alertService.error(error.message));
+          error => { this.alertService.error(error.error), console.log(error)});
     }
   }
   onSaveSuccess() {
@@ -147,8 +151,8 @@ public filteredcuentas: ReplaySubject<ICuenta[]> = new ReplaySubject<ICuenta[]>(
   get precioVenta() {
     return this.formGroup.get('precioVenta');
   }
-  get iVA() {
-    return this.formGroup.get('iVA');
+  get idImpuestos() {
+    return this.formGroup.get('idImpuestos');
   }
   get cantidadMinima() {
     return this.formGroup.get('cantidadMinima');
@@ -156,8 +160,14 @@ public filteredcuentas: ReplaySubject<ICuenta[]> = new ReplaySubject<ICuenta[]>(
   get cuentaIngreso(){
     return this.formGroup.get('cuentaIngreso');
   }
+  get cuentaDevolucion(){
+    return this.formGroup.get('cuentaDevolucion');
+  }
   //Recibe la idCuenta desde el componente select
   receiveMessageCuentaIngreso($event){
     this.cuentaIngreso.setValue($event.id);   
+  }
+  receiveMessageCuentaDevolucion($event){
+    this.cuentaDevolucion.setValue($event.id);   
   }
 }

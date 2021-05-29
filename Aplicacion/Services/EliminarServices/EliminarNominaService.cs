@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Aplicacion.Request;
+﻿using Aplicacion.Request;
 using Domain.Models.Contracts;
 using Domain.Models.Entities;
 
@@ -15,27 +12,20 @@ namespace Aplicacion.Services.EliminarServices
             _unitOfWork = unitOfWork;
         }
         public EliminarNominaResponse Ejecutar(EliminarNominaRequest request)
-        {
-            Nomina nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina == request.IdNomina && t.IdEmpleado == request.IdEmpleado);
+        {            
             Liquidacion liquidacion = _unitOfWork.LiquidacionServiceRepository.FindFirstOrDefault(t => t.IdEmpleado == request.IdEmpleado);
-            if (liquidacion == null)
-            {
-                if (nomina == null)
-                {
-                    return new EliminarNominaResponse() { Message = $"Nomina no existe" };
-                }
-                else
-                {
-                    _unitOfWork.NominaServiceRepository.Delete(nomina);
-                    _unitOfWork.Commit();
-                    return new EliminarNominaResponse() { Message = $"Nomina Eliminado Exitosamente" };
-                }
-            }
-            else
+            if (liquidacion != null)
             {
                 return new EliminarNominaResponse() { Message = $"Para borrar nomina, primero elimine Liquidacion" };
             }
-            
+            Nomina nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina == request.IdNomina && t.IdEmpleado == request.IdEmpleado);
+            if (nomina == null)
+            {
+                return new EliminarNominaResponse() { Message = $"Nomina no existe" };
+            }
+            _unitOfWork.NominaServiceRepository.Delete(nomina);
+            _unitOfWork.Commit();
+            return new EliminarNominaResponse() { Message = $"Nomina Eliminado Exitosamente" };
         }
     }
 }
