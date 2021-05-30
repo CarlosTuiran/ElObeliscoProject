@@ -1,11 +1,10 @@
-﻿using Infra.Datos;
-using NUnit.Framework;
+﻿using Aplicacion.Request;
+using Aplicacion.Services.CrearServices;
+using Infra.Datos;
 using Infra.Datos.Base;
 using Microsoft.EntityFrameworkCore;
-using Aplicacion.Services.CrearServices;
+using NUnit.Framework;
 using System.Collections.Generic;
-using Aplicacion.Request;
-using System;
 
 namespace Aplicacion.Test.CrearTests
 {
@@ -38,11 +37,14 @@ namespace Aplicacion.Test.CrearTests
             yield return new TestCaseData(
                 new CrearNominaRequest
                 {
-                    IdEmpleado = 2699540,
-                    DiasTrabajados = 1300000,
-                    HorasExtras = 4,
-                    SalarioBase = 1389000,
-                    SubTransporte = 143000
+                    IdEmpleado = 123456,
+                    DiasTrabajados = 30,
+                    HoraExtraDiurna = 0,
+                    HoraExtraNocturna = 0,
+                    HoraExtraDiurnaFestivo = 0,
+                    HoraExtraNocturnaFestivo = 0,
+                    SalarioBase = 1300000,
+                    Comisiones = 100000
                 },
                 "Empleado en Nomina Creado Exitosamente"
                 ).SetName("Crear Nomina Correctamente");

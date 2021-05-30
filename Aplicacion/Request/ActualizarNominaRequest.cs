@@ -17,6 +17,7 @@ namespace Aplicacion.Request
         public double HoraExtraDiurnaFestivo { get; set; }
         public double HoraExtraNocturnaFestivo { get; set; }
         public double SalarioBase { get; set; }
+        public double Comisiones { get; set; }
     }
     public class ActualizarNominaResponse
     {

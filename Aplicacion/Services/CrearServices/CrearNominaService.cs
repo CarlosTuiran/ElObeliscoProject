@@ -25,7 +25,7 @@ namespace Aplicacion.Services.CrearServices
             }
             Nomina newNomina = new Nomina(request.IdNomina, request.IdEmpleado, request.DiasTrabajados,
                 request.HoraExtraDiurna, request.HoraExtraNocturna, request.HoraExtraDiurnaFestivo,
-                request.HoraExtraNocturnaFestivo, request.SalarioBase);
+                request.HoraExtraNocturnaFestivo, request.SalarioBase, request.Comisiones);
             IReadOnlyList<string> errors = newNomina.CanCrear(newNomina);
             if (errors.Any())
             {

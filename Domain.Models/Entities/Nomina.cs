@@ -15,11 +15,12 @@ namespace Domain.Models.Entities
         public double HoraExtraDiurnaFestivo { get; set; }
         public double HoraExtraNocturnaFestivo { get; set; }
         public double SalarioBase { get; set; }
+        public double Comisiones { get; set; }
         public List<Liquidacion> Liquidacion { get; set; }
 
-        public Nomina(string idNomina, int idEmpleado, int diasTrabajados, 
-            double horaExtraDiurna, double horaExtraNocturna, double horaExtraDiurnaFestivo, 
-            double horaExtraNocturnaFestivo, double salarioBase)
+        public Nomina(string idNomina, int idEmpleado, int diasTrabajados, double horaExtraDiurna, 
+            double horaExtraNocturna, double horaExtraDiurnaFestivo, double horaExtraNocturnaFestivo, 
+            double salarioBase, double comisiones)
         {
             IdNomina = idNomina;
             IdEmpleado = idEmpleado;
@@ -29,6 +30,7 @@ namespace Domain.Models.Entities
             HoraExtraDiurnaFestivo = horaExtraDiurnaFestivo;
             HoraExtraNocturnaFestivo = horaExtraNocturnaFestivo;
             SalarioBase = salarioBase;
+            Comisiones = comisiones;
         }
 
         public Nomina()
@@ -44,6 +46,10 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Dias Trabajados vacio");
             if (nomina.SalarioBase == 0)
                 errors.Add("Campo Salario Base vacio");
+            if (nomina.Comisiones == 0)
+                errors.Add("Campo Comisiones Base vacio");
+            if (nomina.DiasTrabajados == 0)
+                errors.Add("Campo Dias Trabajados Base vacio");
             if (string.IsNullOrEmpty(nomina.IdNomina))
                 errors.Add("Campo Subsidio Identificacion Nomina vacio");
             return errors;

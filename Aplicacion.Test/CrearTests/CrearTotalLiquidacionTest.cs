@@ -39,9 +39,9 @@ namespace Aplicacion.Test.CrearTests
             yield return new TestCaseData(
                 new CrearTotalLiquidacionRequest
                 {
-                    NominaId = "11 - 2020",
-                    Mes = 11,
-                    Anio = 2020
+                    NominaId = "05 - 2021",
+                    Mes = 05,
+                    Anio = 2021
                 },
                 "Total Liquidacion creado Exitosamente"
                 ).SetName("Crear Total Liquidacion Correctamente");

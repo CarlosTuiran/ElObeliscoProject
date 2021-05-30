@@ -10,10 +10,8 @@ namespace Aplicacion.Request
         int Year = DateTime.Now.Year;
         public string IdNomina { get => Month + " - " + Year; }
         public int IdEmpleado { get; set; }
-        public int DiasTrabajados { get; set; }
-        public int HorasExtras { get; set; }
-        public double SalarioBase { get; set; }
-        public double SubTransporte { get; set; }
+        public int Mes { get; set; }
+        public int Anio { get; set; }
     }
     public class PagarEmpleadoResponse
     {
