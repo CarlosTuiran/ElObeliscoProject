@@ -11,16 +11,15 @@ namespace Aplicacion.Test.Eventos
     [TestFixture]
     public class PagarEmpleadoTest
     {
-        ObeliscoTestContext _context;
+        ObeliscoContext _context;
         UnitOfWork _unitOfWork;
         PagarEmpleadoService _PagarEmpleadoservice;
 
         [SetUp]
         public void Setup()
         {
-            //optionsBuilder.UseMySql(@"Server=localhost; database=cempreddp;uid=acceso;pwd=acceso;");
-            var optionsInMemory = new DbContextOptionsBuilder<ObeliscoTestContext>().UseInMemoryDatabase("Obelisco").Options;
-            _context = new ObeliscoTestContext(optionsInMemory);
+            var options = new DbContextOptionsBuilder<ObeliscoContext>().UseSqlServer(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=ObeliescoDB; Integrated Security=True; MultipleActiveResultSets=True").Options;
+            _context = new ObeliscoContext(options);
             _unitOfWork = new UnitOfWork(_context);
         }
 
@@ -37,7 +36,7 @@ namespace Aplicacion.Test.Eventos
             yield return new TestCaseData(
                 new PagarEmpleadoRequest
                 {
-                    IdEmpleado = 123456,
+                    IdEmpleado = 1,
                     Mes = 05,
                     Anio = 2021
                 },

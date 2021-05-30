@@ -45,7 +45,8 @@ namespace UI.InterfazWeb.Controllers
                               n.HoraExtraDiurnaFestivo,
                               n.HoraExtraNocturna,
                               n.HoraExtraNocturnaFestivo,
-                              n.SalarioBase
+                              n.SalarioBase,
+                              n.Comisiones
                           }).ToList();
             return result;
         }

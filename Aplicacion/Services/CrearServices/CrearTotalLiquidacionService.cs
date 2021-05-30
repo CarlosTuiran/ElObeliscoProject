@@ -38,8 +38,9 @@ namespace Aplicacion.Services.CrearServices
             newTotalLiquidacion.Anio = Year;
             foreach (var item in liquidaciones)
             {
+                var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdEmpleado == item.IdEmpleado && t.IdNomina == item.NominaId);
                 newTotalLiquidacion.ValorTotalNomina += item.TotalPagar;
-                newTotalLiquidacion.Sueldo += item.SueldoOrdinario;
+                newTotalLiquidacion.Sueldo += nomina.SalarioBase;
                 newTotalLiquidacion.SubTransporte += item.SubTransporte;
                 newTotalLiquidacion.TotalDevengado += item.TotalDevengado;
                 newTotalLiquidacion.Salud_Empleador += item.Salud_Empleador;
@@ -61,7 +62,7 @@ namespace Aplicacion.Services.CrearServices
                     + item.ICBF + item.SENA;
                 newTotalLiquidacion.AcreedoresVarios += (item.Pension_Empleador + item.Pension_Trabajador);
                 newTotalLiquidacion.Provision += item.Cesantias + item.Int_Cesantias + item.Vacaciones + item.Prima;
-                newTotalLiquidacion.SalariosPagar += item.TotalDevengado + item.Salud_Trabajador + item.Pension_Trabajador;
+                newTotalLiquidacion.SalariosPagar += item.TotalDevengado - item.Salud_Trabajador - item.Pension_Trabajador;
                 newTotalLiquidacion.Parafiscales += item.Caja_Comp + item.ICBF + item.SENA;
             }            
             newTotalLiquidacion.NominaId = nominaid;

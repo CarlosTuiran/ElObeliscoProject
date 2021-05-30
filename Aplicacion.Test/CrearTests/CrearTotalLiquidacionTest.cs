@@ -13,16 +13,15 @@ namespace Aplicacion.Test.CrearTests
     [TestFixture]
     public class CrearTotalLiquidacionTest
     {
-        ObeliscoTestContext _context;
+        ObeliscoContext _context;
         UnitOfWork _unitOfWork;
         CrearTotalLiquidacionService _CrearTotalLiquidacionservice;
 
         [SetUp]
         public void Setup()
         {
-            //optionsBuilder.UseMySql(@"Server=localhost; database=cempreddp;uid=acceso;pwd=acceso;");
-            var optionsInMemory = new DbContextOptionsBuilder<ObeliscoTestContext>().UseInMemoryDatabase("Obelisco").Options;
-            _context = new ObeliscoTestContext(optionsInMemory);
+            var options = new DbContextOptionsBuilder<ObeliscoContext>().UseSqlServer(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=ObeliescoDB; Integrated Security=True; MultipleActiveResultSets=True").Options;
+            _context = new ObeliscoContext(options);
             _unitOfWork = new UnitOfWork(_context);
         }
 
@@ -43,7 +42,7 @@ namespace Aplicacion.Test.CrearTests
                     Mes = 05,
                     Anio = 2021
                 },
-                "Total Liquidacion creado Exitosamente"
+                "Total Liquidacion Creado Exitosamente"
                 ).SetName("Crear Total Liquidacion Correctamente");
         }
     }

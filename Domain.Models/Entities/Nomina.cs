@@ -46,8 +46,6 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Dias Trabajados vacio");
             if (nomina.SalarioBase == 0)
                 errors.Add("Campo Salario Base vacio");
-            if (nomina.Comisiones == 0)
-                errors.Add("Campo Comisiones Base vacio");
             if (nomina.DiasTrabajados == 0)
                 errors.Add("Campo Dias Trabajados Base vacio");
             if (string.IsNullOrEmpty(nomina.IdNomina))

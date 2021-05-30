@@ -55,17 +55,17 @@ namespace Aplicacion.Services.Eventos
                 + (((1 + diurno/100) * ValorHora) * nomina.HoraExtraDiurna)
                 + (((1 + nocturno / 100) * ValorHora) * nomina.HoraExtraNocturna)
                 + (((1 + diurnoFestivo / 100) * ValorHora) * nomina.HoraExtraDiurnaFestivo)
-                + (((1 + nocturnoFestivo / 100) * ValorHora) * nomina.HoraExtraNocturnaFestivo);
+                + (((1 + nocturnoFestivo / 100) * ValorHora) * nomina.HoraExtraNocturnaFestivo) + nomina.Comisiones;
             newLiquidacion.SubTransporte = nomina.SalarioBase < (salarioMinimo * 2) ? auxTransporte : 0;
             newLiquidacion.Salud_Empleador = newLiquidacion.SueldoOrdinario * saludEmpleador / 100;
             newLiquidacion.Salud_Trabajador = newLiquidacion.SueldoOrdinario * saludTrabajador / 100;
             newLiquidacion.Pension_Trabajador = newLiquidacion.SueldoOrdinario * pensionTrabajador / 100;
             newLiquidacion.Pension_Empleador = newLiquidacion.SueldoOrdinario * pensionEmpleador / 100;
-            newLiquidacion.TotalDevengado = newLiquidacion.SueldoOrdinario + newLiquidacion.SubTransporte;
-            newLiquidacion.Prima = newLiquidacion.TotalDevengado * cesantias / 100;
+            newLiquidacion.TotalDevengado = nomina.SalarioBase + newLiquidacion.SubTransporte + nomina.Comisiones;
+            newLiquidacion.Prima = newLiquidacion.TotalDevengado * (cesantias / 100);
             newLiquidacion.Cesantias = newLiquidacion.TotalDevengado * cesantias / 100;
             newLiquidacion.Int_Cesantias = newLiquidacion.Cesantias * intCesantias / 100;
-            newLiquidacion.Vacaciones = newLiquidacion.SueldoOrdinario * vacaciones / 100;
+            newLiquidacion.Vacaciones = nomina.SalarioBase * vacaciones / 100;
             newLiquidacion.Arl = newLiquidacion.SueldoOrdinario * arl / 100;
             newLiquidacion.Caja_Comp = newLiquidacion.SueldoOrdinario * cajaCompensacion / 100;
             newLiquidacion.ICBF = nomina.SalarioBase > (salarioMinimo * 10) ? (newLiquidacion.SueldoOrdinario * icbf / 100) : 0;  

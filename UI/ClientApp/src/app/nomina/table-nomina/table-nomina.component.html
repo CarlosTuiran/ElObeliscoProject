@@ -46,6 +46,11 @@
         <th mat-header-cell *matHeaderCellDef> SalarioBase </th>
         <td *matCellDef="let element"> {{element.salarioBase | currency: 'USD'}} </td>
       </ng-container>
+      <!-- comisiones Column -->
+      <ng-container matColumnDef="comisiones">
+        <th mat-header-cell *matHeaderCellDef> Comisiones </th>
+        <td *matCellDef="let element"> {{element.comisiones | currency: 'USD'}} </td>
+      </ng-container>
       <!--Options-->
       <ng-container matColumnDef="options">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>

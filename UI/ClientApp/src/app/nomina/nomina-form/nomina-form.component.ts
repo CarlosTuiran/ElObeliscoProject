@@ -30,7 +30,8 @@ export class NominaFormComponent implements OnInit {
     horaExtraDiurnaFestivo: ['', [Validators.required]],
     horaExtraNocturna: ['', [Validators.required]],
     horaExtraNocturnaFestivo: ['', [Validators.required]],
-    salarioBase: ['', [Validators.required]]
+    salarioBase: ['', [Validators.required]],
+    comisiones: ['', []]
   });
   empleados: IEmpleado[];
   ngOnInit() {
@@ -59,7 +60,8 @@ export class NominaFormComponent implements OnInit {
       horaExtraDiurnaFestivo: nomina.horaExtraDiurnaFestivo,
       horaExtraNocturna: nomina.horaExtraNocturna,
       horaExtraNocturnaFestivo: nomina.horaExtraNocturnaFestivo,
-      salarioBase: nomina.salarioBase
+      salarioBase: nomina.salarioBase,
+      comisiones: nomina.comisiones
     });
   }
 
@@ -104,6 +106,9 @@ export class NominaFormComponent implements OnInit {
   }
   get salarioBase() {
     return this.formGroup.get('salarioBase');
+  }
+  get comisiones() {
+    return this.formGroup.get('comisiones');
   }
 
 }

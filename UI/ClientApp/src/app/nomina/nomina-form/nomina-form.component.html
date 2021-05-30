@@ -139,6 +139,22 @@
       </div>
     </div>
 
+    <div class="form-group"
+         [ngClass]="{'has-error': ((comisiones.touched || comisiones.dirty)&& comisiones.invalid)}">
+      <label class="col-md-2 control-label"
+             for="comisionesId">Comisiones del empleado</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="comisionesId"
+               type="number"
+               required
+               formControlName="comisiones" />
+        <div class="alert alert-danger" *ngIf="((comisiones.touched || comisiones.dirty)&& comisiones.invalid)">
+        </div>
+      </div>
+    </div>
+
 
     <div class="form-group">
       <div class="col-md-4 col-md-offset-2">

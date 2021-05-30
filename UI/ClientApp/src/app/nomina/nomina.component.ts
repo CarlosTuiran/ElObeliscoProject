@@ -41,7 +41,8 @@ export interface INomina {
   horaExtraDiurnaFestivo: number,
   horaExtraNocturna: number,
   horaExtraNocturnaFestivo: number,
-  salarioBase: number
+  salarioBase: number,
+  comisiones: number
 }
 export interface INominaPago{
   idEmpleado: number

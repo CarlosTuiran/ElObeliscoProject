@@ -24,6 +24,7 @@ export class TableNominaComponent implements OnInit {
     'horaExtraNocturna',
     'horaExtraNocturnaFestivo',
     'salarioBase',
+    'comisiones',
     'options'];
     
     dataSource =new MatTableDataSource<INomina>(this.nominas);
