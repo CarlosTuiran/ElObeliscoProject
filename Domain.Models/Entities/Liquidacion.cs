@@ -63,7 +63,7 @@ namespace Domain.Models.Entities
             return errors;
         }
 
-        public void CalculoLiquidacion(Nomina nomina) 
+        /*public void CalculoLiquidacion(Nomina nomina) 
         {
             int Month = DateTime.Now.Month;
             int Year = DateTime.Now.Year;
@@ -79,7 +79,6 @@ namespace Domain.Models.Entities
             this.Pension = (this.TotalDevengado - this.SubTransporte) * 0.04;
             this.TotalDeducido = this.Salud + this.Pension;
             this.TotalPagar = this.TotalDevengado - this.TotalDeducido;
-        }
-
+        }*/
     }
 }

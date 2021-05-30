@@ -4,13 +4,12 @@ using System.Text;
 
 namespace Aplicacion.Request
 {
-   
-    public class EliminarCuentaResponse
+    public class EliminarParametrosResponse
     {
         public string Message { get; set; }
         public bool IsOk()
         {
-            return this.Message.Equals("Cuenta Eliminada Exitosamente");
+            return this.Message.Equals("Parametro Eliminado Exitosamente");
         }
     }
 }

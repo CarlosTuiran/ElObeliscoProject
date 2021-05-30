@@ -49,7 +49,7 @@ import { TotalLiquidacionService } from './total-liquidacion/total-liquidacion.s
 import { LiquidacionComponent } from './liquidacion/liquidacion.component';
 import { LiquidacionService } from './liquidacion/liquidacion.service';
 
-import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+//import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import {MatDatepickerModule ,MatInputModule,MatNativeDateModule} from '@angular/material';
 import { ChartsModule, ThemeService } from 'ng2-charts';
 import { SelectorEmpleadoComponent } from './selector-empleado/selector-empleado.component';
@@ -118,6 +118,9 @@ import { SelectCuentaComponent } from './contabilidad/cuenta/select-cuenta/selec
 import { ImpuestoComponent } from './contabilidad/impuesto/impuesto.component';
 import { TableImpuestoComponent } from './contabilidad/impuesto/table-impuesto/table-impuesto.component';
 import { DialogoImpuestoComponent } from './contabilidad/impuesto/dialogo-impuesto/dialogo-impuesto.component';
+import { ParametrosComponent } from './configuraciones/parametros/parametros.component';
+import { TableParametrosComponent } from './configuraciones/parametros/table-parametros/table-parametros.component';
+import { FormParametrosComponent } from './configuraciones/parametros/form-parametros/form-parametros.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -199,6 +202,9 @@ import { DialogoImpuestoComponent } from './contabilidad/impuesto/dialogo-impues
     ImpuestoComponent,
     TableImpuestoComponent,
     DialogoImpuestoComponent,
+    ParametrosComponent,
+    TableParametrosComponent,
+    FormParametrosComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -214,7 +220,7 @@ import { DialogoImpuestoComponent } from './contabilidad/impuesto/dialogo-impues
     DataTablesModule, MatDatepickerModule, MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxMatDatetimePickerModule, NgxMatTimepickerModule,
+    //NgxMatDatetimePickerModule, NgxMatTimepickerModule,
     //ACA SE REGISTRAN TODOS LOS COMPONENTES
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate:[CheckNotloginGuard] },
