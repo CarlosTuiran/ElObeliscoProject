@@ -18,12 +18,15 @@ export class FormParametrosComponent implements OnInit {
   constructor(private parametrosService: ParametrosService, private fb: FormBuilder,
     private router: Router, private activatedRoute: ActivatedRoute, private alertService: AlertService) { }
 
+  agrupaciones: string[];
+
   formGroup = this.fb.group({
     descripcion: ['', [Validators.required]],
     agrupacion: ['', [Validators.required]],
     valorTxt: ['', [Validators.required]],
     valorNumerico: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
   });
+
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
@@ -33,9 +36,11 @@ export class FormParametrosComponent implements OnInit {
 
       this.modoEdicion = true;
       this.parametrosId = params["id"];
-      this.parametrosService.getParametro(this.parametrosId).subscribe(parametros => this.cargarFormulario(parametros)),
+      this.parametrosService.getParametro(this.parametrosId).subscribe(parametros =>  this.cargarFormulario(parametros)),
         error => this.alertService.error(error.message);
     });
+    this.parametrosService.getAgrupaciones().subscribe(agrupaciones => { this.agrupaciones = agrupaciones; console.log(agrupaciones); },
+      error => this.alertService.error(error.message))
   }
   cargarFormulario(formato: IParametros) {
     this.formGroup.patchValue({

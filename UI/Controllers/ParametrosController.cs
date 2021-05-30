@@ -37,6 +37,11 @@ namespace UI.Controllers
         {
             return _context.Parametros;
         }
+        [HttpGet("GetAgrupaciones")]
+        public IEnumerable<string> GetAgrupaciones()
+        {
+            return _context.Parametros.Select(x=>x.Agrupacion).Distinct();
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetParametros([FromRoute] int id)
         {

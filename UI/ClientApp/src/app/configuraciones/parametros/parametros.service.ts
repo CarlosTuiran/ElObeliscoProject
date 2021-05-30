@@ -24,7 +24,9 @@ export class ParametrosService {
   getParametro(id: number): Observable<IParametros> {
     return this.http.get<IParametros>(this.apiURL + '/' + id);
   }
-
+  getAgrupaciones(): Observable<string[]> {
+    return this.http.get<string[]>(this.apiURL+'/GetAgrupaciones');
+  }
   createParametros(Parametros: IParametros): Observable<IParametros> {
     return this.http.post<IParametros>(this.apiURL, Parametros).
       pipe(tap(() => {

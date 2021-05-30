@@ -7,7 +7,7 @@
     <div class="form-group"
          [ngClass]="{'has-error': ((descripcion.touched || descripcion.dirty) && descripcion.invalid)}">
       <label class="col-md-2 control-label"
-             for="descripcionId">descripcion</label>
+             for="descripcionId">Descripcion</label>
 
       <div class="col-md-8">
         <input class="form-control"
@@ -29,7 +29,7 @@
     <div class="form-group"
          [ngClass]="{'has-error': ((valorTxt.touched || valorTxt.dirty) && valorTxt.invalid)}">
       <label class="col-md-2 control-label"
-             for="valorTxtId">valorTxt</label>
+             for="valorTxtId">Valor Textual</label>
 
       <div class="col-md-8">
         <input class="form-control"
@@ -47,7 +47,7 @@
     <div class="form-group"
          [ngClass]="{'has-error': ((valorNumerico.touched || valorNumerico.dirty) && valorNumerico.invalid)}">
       <label class="col-md-2 control-label"
-             for="valorNumericoId">valorNumerico</label>
+             for="valorNumericoId">ValorNumerico</label>
 
       <div class="col-md-8">
         <input class="form-control"
@@ -67,14 +67,13 @@
     <div class="form-group"
          [ngClass]="{'has-error': ((agrupacion.touched || agrupacion.dirty) && agrupacion.invalid)}">
       <label class="col-md-2 control-label"
-             for="agrupacionId">agrupacion</label>
+             for="agrupacionId">Agrupacion</label>
 
       <div class="col-md-8">
         <mat-select formControlName="agrupacion" placeholder="Elija una opción" #agrupacionSelect>
-          <mat-option value="Peso">Peso</mat-option>
-          <mat-option value="Volumen">Volumen</mat-option>
-          <mat-option value="Unidad">Unidad</mat-option>
-          <mat-option value="Otra">Otra</mat-option>
+          <mat-option *ngFor="let tipo of agrupaciones" [value]="tipo">
+            {{tipo}}
+          </mat-option>          
         </mat-select>
         <div class="alert alert-danger" *ngIf="((agrupacion.touched || agrupacion.dirty )&& agrupacion.invalid)">
           <span *ngIf="agrupacion.errors.required">
@@ -83,10 +82,6 @@
         </div>
       </div>
     </div>
-
-
-
-
 
     <div class="form-group">
       <div class="col-md-4 col-md-offset-2">

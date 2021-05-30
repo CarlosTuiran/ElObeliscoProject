@@ -257,6 +257,9 @@ import { FormParametrosComponent } from './configuraciones/parametros/form-param
       { path: 'configuraciones', component: ConfiguracionesComponent, canActivate: [CheckNotloginGuard] },
       { path: 'marcas', component: MarcaComponent, canActivate: [CheckNotloginGuard] },
       { path: 'categorias', component: CategoriaComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'parametros', component: ParametrosComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'parametros-crear', component: FormParametrosComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'parametros-editar/:id', component: FormParametrosComponent, canActivate: [CheckNotloginGuard] },
       { path: 'impuestos', component: ImpuestoComponent, canActivate: [CheckNotloginGuard] },
 
     ]),
