@@ -47,8 +47,6 @@ namespace UI.Controllers
                               SueldoOrdinario = l.SueldoOrdinario,
                               SubTransporte = l.SubTransporte,
                               TotalDevengado = l.TotalDevengado,
-                              Salud = l.Salud,
-                              Pension = l.Pension,
                               TotalDeducido = l.TotalDeducido,
                               TotalPagar = l.TotalPagar,
                           }).ToList();

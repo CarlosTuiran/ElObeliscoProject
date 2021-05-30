@@ -1,11 +1,10 @@
-﻿using Infra.Datos;
-using NUnit.Framework;
+﻿using Aplicacion.Request;
+using Aplicacion.Services.Eventos;
+using Infra.Datos;
 using Infra.Datos.Base;
 using Microsoft.EntityFrameworkCore;
-using Aplicacion.Services.Eventos;
+using NUnit.Framework;
 using System.Collections.Generic;
-using Aplicacion.Request;
-using System;
 
 namespace Aplicacion.Test.Eventos
 {
@@ -38,11 +37,9 @@ namespace Aplicacion.Test.Eventos
             yield return new TestCaseData(
                 new PagarEmpleadoRequest
                 {
-                    IdEmpleado = 2699540,                    
-                    DiasTrabajados = 1300000,
-                    HorasExtras = 4,
-                    SalarioBase = 1389000,
-                    SubTransporte = 143000
+                    IdEmpleado = 123456,
+                    Mes = 05,
+                    Anio = 2021
                 },
                 "Empleado Pagado Exitosamente"
                 ).SetName("Pagar Empleado Correctamente");

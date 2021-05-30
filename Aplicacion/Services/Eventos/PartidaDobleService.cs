@@ -172,14 +172,14 @@ namespace Aplicacion.Services.Eventos
                 var libroContable3 = new LibroContable(provisionCuenta.Codigo, "Provision" +  nominaActual, Nomina.Id, "Nomina", DateTime.Now);
                 var libroContable4 = new LibroContable(salariosCuenta.Codigo, "Salarios por pagar" +  nominaActual, Nomina.Id, "Nomina", DateTime.Now);
                 var libroContable5 = new LibroContable(gastopersonalCuenta.Codigo, "Gasto personal" +  nominaActual, Nomina.Id, "Nomina", DateTime.Now);
-                libroContable1.Haber=Nomina.Salud+ Nomina.Arl+ Nomina.Caja+ Nomina.ICBF+ Nomina.SENA;
+                /*libroContable1.Haber=Nomina.Salud+ Nomina.Arl+ Nomina.Caja+ Nomina.ICBF+ Nomina.SENA;
                 libroContable2.Haber=Nomina.Pension;
                 libroContable3.Haber=Nomina.Cesantias+ Nomina.CesantiasInteres+Nomina.Vacaciones+Nomina.Prima;
                 libroContable4.Haber= Nomina.SalariosxPagar;
                 //Pendiente separcion de Gastos de personal
                 libroContable5.Debe=Nomina.Sueldo+Nomina.Aux_Transporte+Nomina.Comicion+Nomina.Salud+Nomina.Pension+Nomina.Arl+
                                     Nomina.Parafiscales+Nomina.Caja_Comp+Nomina.ICBF+Nomina.SENA+Nomina.Prima+Nomina.Cesantias+
-                                    Nomina.CesantiasInteres+Nomina.Vacaciones;
+                                    Nomina.CesantiasInteres+Nomina.Vacaciones;*/
                 _unitOfWork.LibroContableServiceRepository.Add(libroContable1);
                 _unitOfWork.LibroContableServiceRepository.Add(libroContable2);
                 _unitOfWork.LibroContableServiceRepository.Add(libroContable3);

@@ -10,21 +10,65 @@ namespace Domain.Models.Entities
         public int Mes { get; set; }
         public int Anio { get; set; }
         public double ValorTotalNomina { get; set; }
-        public double Sena { get; set; }
-        public double Icbf { get; set; }
-        public double Comfacesar { get; set; }
-        public double Total { get; set; }
+        public double Sueldo { get; set; }
+        public double SubTransporte { get; set; }
+        public double TotalDevengado { get; set; }
+        public double Salud_Empleador { get; set; }
+        public double Salud_Trabajador { get; set; }
+        public double Salud { get; set; }
+        public double Pension_Trabajador { get; set; }
+        public double Pension_Empleador { get; set; }
+        public double Pension { get; set; }
+        public double Prima { get; set; }
+        public double Cesantias { get; set; }
+        public double Int_Cesantias { get; set; }
+        public double Vacaciones { get; set; }
+        public double Arl { get; set; }
+        public double Caja_Comp { get; set; }
+        public double ICBF { get; set; }
+        public double SENA { get; set; }
+        public double RetencionAporteNomina { get; set; }
+        public double AcreedoresVarios { get; set; }
+        public double Provision { get; set; }
+        public double SalariosPagar { get; set; }
+        public double Parafiscales { get; set; }
         public string NominaId { get; set; }
 
-        public TotalLiquidacion(int mes, int anio, double valorTotalNomina, double sena, double icbf, double comfacesar, double total, string nominaId)
+        public TotalLiquidacion(int mes, int anio, double valorTotalNomina, 
+            double sueldo, double subTransporte, double totalDevengado, 
+            double salud_Empleador, double salud_Trabajador, double salud, 
+            double pension_Trabajador, double pension_Empleador, double pension, 
+            double prima, double cesantias, double int_Cesantias, double vacaciones, 
+            double arl, double caja_Comp, double iCBF, double sENA, 
+            double retencionAporteNomina, double acreedoresVarios, 
+            double provision, double salariosPagar, double parafiscales, 
+            string nominaId)
         {
             Mes = mes;
             Anio = anio;
             ValorTotalNomina = valorTotalNomina;
-            Sena = sena;
-            Icbf = icbf;
-            Comfacesar = comfacesar;
-            Total = total;
+            Sueldo = sueldo;
+            SubTransporte = subTransporte;
+            TotalDevengado = totalDevengado;
+            Salud_Empleador = salud_Empleador;
+            Salud_Trabajador = salud_Trabajador;
+            Salud = salud;
+            Pension_Trabajador = pension_Trabajador;
+            Pension_Empleador = pension_Empleador;
+            Pension = pension;
+            Prima = prima;
+            Cesantias = cesantias;
+            Int_Cesantias = int_Cesantias;
+            Vacaciones = vacaciones;
+            Arl = arl;
+            Caja_Comp = caja_Comp;
+            ICBF = iCBF;
+            SENA = sENA;
+            RetencionAporteNomina = retencionAporteNomina;
+            AcreedoresVarios = acreedoresVarios;
+            Provision = provision;
+            SalariosPagar = salariosPagar;
+            Parafiscales = parafiscales;
             NominaId = nominaId;
         }
 
@@ -39,18 +83,11 @@ namespace Domain.Models.Entities
                 errors.Add("Campo Año vacio");
             if (totalLiquidacion.ValorTotalNomina == 0)
                 errors.Add("Campo Valor Total de Nomina vacio");
-            if (totalLiquidacion.Sena == 0)
+            if (totalLiquidacion.NominaId == null)
                 errors.Add("Campo Sena vacio");
-            if (totalLiquidacion.Icbf == 0)
-                errors.Add("Campo ICBF vacio");
-            if (totalLiquidacion.Comfacesar == 0)
-                errors.Add("Campo Comfacesar vacio");
-            if (totalLiquidacion.Total == 0)
-                errors.Add("Campo Total vacio");
-
             return errors;
         }
-
+        /*
         public void CrearTotalLiquidacion(List<Liquidacion> Liquidaciones) 
         {
             
@@ -62,6 +99,6 @@ namespace Domain.Models.Entities
             this.Icbf = this.ValorTotalNomina * 0.03;
             this.Comfacesar = this.ValorTotalNomina * 0.04;
             this.Total = this.Sena + this.Icbf + this.Comfacesar;
-        }
+        }*/
     }
 }
