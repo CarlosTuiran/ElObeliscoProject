@@ -1,0 +1,107 @@
+<h1 *ngIf="modoEdicion">Editar Parametro</h1>
+<h1 *ngIf="!modoEdicion">Agregar Parametro</h1>
+<form class="form-horizontal" novalidate
+      (ngSubmit)="save()" [formGroup]="formGroup">
+  <fieldset>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((descripcion.touched || descripcion.dirty) && descripcion.invalid)}">
+      <label class="col-md-2 control-label"
+             for="descripcionId">Descripcion</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="descripcionId"
+               type="text"
+               formControlName="descripcion"
+               *ngIf="!modoEdicion" />
+
+        <div class="alert alert-danger" *ngIf="((descripcion.touched || descripcion.dirty )&& descripcion.invalid)">
+          <span *ngIf="descripcion.errors.required">
+            El campo descripcion es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((valorTxt.touched || valorTxt.dirty) && valorTxt.invalid)}">
+      <label class="col-md-2 control-label"
+             for="valorTxtId">Valor Textual</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="valorTxtId"
+               type="text"
+               formControlName="valorTxt" />
+        <div class="alert alert-danger" *ngIf="((valorTxt.touched || valorTxt.dirty )&& valorTxt.invalid)">
+          <span *ngIf="valorTxt.errors.required">
+            El campo valorTxt es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': ((valorNumerico.touched || valorNumerico.dirty) && valorNumerico.invalid)}">
+      <label class="col-md-2 control-label"
+             for="valorNumericoId">ValorNumerico</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="valorNumericoId"
+               type="text"
+               formControlName="valorNumerico" />
+        <div class="alert alert-danger" *ngIf="((valorNumerico.touched || valorNumerico.dirty ) && valorNumerico.invalid)">
+          <span *ngIf="valorNumerico.errors.required">
+            El campo valorNumerico es requerido
+          </span>
+          <span *ngIf="valorNumerico.errors.pattern">
+            El campo valorNumerico es numerico
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group"
+         [ngClass]="{'has-error': ((agrupacion.touched || agrupacion.dirty) && agrupacion.invalid)}">
+      <label class="col-md-2 control-label"
+             for="agrupacionId">Agrupacion</label>
+
+      <div class="col-md-8">
+        <mat-select formControlName="agrupacion" placeholder="Elija una opción" #agrupacionSelect>
+          <mat-option *ngFor="let tipo of agrupaciones" [value]="tipo">
+            {{tipo}}
+          </mat-option>          
+        </mat-select>
+        <div class="alert alert-danger" *ngIf="((agrupacion.touched || agrupacion.dirty )&& agrupacion.invalid)">
+          <span *ngIf="agrupacion.errors.required">
+            El campo agrupacion es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-4 col-md-offset-2">
+        <span>
+          <button class="btn btn-success"
+                  type="submit"
+                  [disabled]="!formGroup.valid">
+            Salvar
+          </button>
+          <button class="btn"
+                  type="button"
+                  [routerLink]='["/empleados"]'>
+            Cancelar
+          </button>
+        </span>
+
+      </div>
+
+    </div>
+  </fieldset>
+</form>
+
+

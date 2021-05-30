@@ -24,6 +24,12 @@ namespace Domain.Models.Entities
         {
 
         }
-       
+        public IReadOnlyList<string> CanCrear(Parametros parametros)
+        {
+            var errors = new List<string>();
+            if (string.IsNullOrEmpty(parametros.Agrupacion))
+                errors.Add("Campo Agrupacion vacio");
+            return errors;
+        }
     }
 }
