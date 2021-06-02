@@ -13,7 +13,7 @@
       </ng-container>
       <!-- idEmpleado Column -->
       <ng-container matColumnDef="idEmpleado">
-        <th mat-header-cell *matHeaderCellDef> NIdEmpleado </th>
+        <th mat-header-cell *matHeaderCellDef> IdEmpleado </th>
         <td *matCellDef="let element"> {{element.idEmpleado}} </td>
       </ng-container>
       <!-- nombreEmpleado Column -->
@@ -28,7 +28,7 @@
       </ng-container>
       <!-- anio Column -->
       <ng-container matColumnDef="anio">
-        <th mat-header-cell *matHeaderCellDef> año </th>
+        <th mat-header-cell *matHeaderCellDef> Año </th>
         <td *matCellDef="let element"> {{element.anio}} </td>
       </ng-container>
       <!-- sueldoOrdinario Column -->
@@ -46,24 +46,75 @@
         <th mat-header-cell *matHeaderCellDef> TotalDevengado </th>
         <td *matCellDef="let element"> {{element.totalDevengado| currency: 'USD'}} </td>
       </ng-container>
-      <!-- salud Column -->
-      <ng-container matColumnDef="salud">
-        <th mat-header-cell *matHeaderCellDef> Salud </th>
-        <td *matCellDef="let element"> {{element.salud| currency: 'USD'}} </td>
-      </ng-container>
-      <!-- pension Column -->
-      <ng-container matColumnDef="pension">
-        <th mat-header-cell *matHeaderCellDef> Pension </th>
-        <td *matCellDef="let element"> {{element.pension| currency: 'USD'}} </td>
-      </ng-container>
+      
+      <!-- salud_Empleador Column -->
+      <!--<ng-container matColumnDef="salud_Empleador">
+        <th mat-header-cell *matHeaderCellDef> Salud Empleador </th>
+        <td *matCellDef="let element"> {{element.salud_Empleador| currency: 'USD'}} </td>
+      </ng-container>-->
+      <!-- salud_Trabajado Column -->
+      <!--<ng-container matColumnDef="salud_Trabajador">
+        <th mat-header-cell *matHeaderCellDef> Salud Trabajador </th>
+        <td *matCellDef="let element"> {{element.salud_Trabajador| currency: 'USD'}} </td>
+      </ng-container>-->
+      <!-- pension_Trabajado Column -->
+      <!--<ng-container matColumnDef="pension_Trabajador">
+        <th mat-header-cell *matHeaderCellDef> Pension Trabajador </th>
+        <td *matCellDef="let element"> {{element.pension_Trabajador| currency: 'USD'}} </td>
+      </ng-container>-->
+      <!-- pension_Empleado Column -->
+      <!--<ng-container matColumnDef="pension_Empleado">
+        <th mat-header-cell *matHeaderCellDef> Pension Empleado </th>
+        <td *matCellDef="let element"> {{element.pension_Empleado| currency: 'USD'}} </td>
+      </ng-container>-->
+      <!-- prima Column -->
+      <!--<ng-container matColumnDef="prima">
+        <th mat-header-cell *matHeaderCellDef> Prima </th>
+        <td *matCellDef="let element"> {{element.prima| currency: 'USD'}} </td>
+      </ng-container>-->
+      <!-- cesantia Column -->
+      <!--<ng-container matColumnDef="cesantia">
+        <th mat-header-cell *matHeaderCellDef> Cesantias </th>
+        <td *matCellDef="let element"> {{element.cesantia| currency: 'USD'}} </td>
+      </ng-container>-->
+      <!-- int_Cesantia Column -->
+      <!--<ng-container matColumnDef="int_Cesantia">
+        <th mat-header-cell *matHeaderCellDef> Cesantias Int </th>
+        <td *matCellDef="let element"> {{element.int_Cesantia| currency: 'USD'}} </td>
+      </ng-container>-->
+      <!-- vacaciones Column -->
+      <!--<ng-container matColumnDef="vacaciones">
+        <th mat-header-cell *matHeaderCellDef> Vacaciones </th>
+        <td *matCellDef="let element"> {{element.vacaciones| currency: 'USD'}} </td>
+      </ng-container>-->
+      <!-- arl Column -->
+      <!--<ng-container matColumnDef="arl">
+        <th mat-header-cell *matHeaderCellDef> ARL </th>
+        <td *matCellDef="let element"> {{element.arl| currency: 'USD'}} </td>
+      </ng-container>-->
+      <!-- caja_Comp Column -->
+      <!--<ng-container matColumnDef="caja_Comp">
+        <th mat-header-cell *matHeaderCellDef> Caja Comp </th>
+        <td *matCellDef="let element"> {{element.caja_Comp| currency: 'USD'}} </td>
+      </ng-container>-->
+      <!-- iCBF Column -->
+      <!--<ng-container matColumnDef="iCBF">
+        <th mat-header-cell *matHeaderCellDef> ICBF </th>
+        <td *matCellDef="let element"> {{element.iCBF| currency: 'USD'}} </td>
+      </ng-container>-->
+      <!-- sENA Column -->
+      <!--<ng-container matColumnDef="sENA">
+        <th mat-header-cell *matHeaderCellDef> SENA </th>
+        <td *matCellDef="let element"> {{element.sENA| currency: 'USD'}} </td>
+      </ng-container>-->
       <!-- totalDeducido Column -->
       <ng-container matColumnDef="totalDeducido">
-        <th mat-header-cell *matHeaderCellDef> TotalDeducido </th>
+        <th mat-header-cell *matHeaderCellDef> Total Deducido </th>
         <td *matCellDef="let element"> {{element.totalDeducido| currency: 'USD'}} </td>
       </ng-container>
       <!-- totalPagar Column -->
       <ng-container matColumnDef="totalPagar">
-        <th mat-header-cell *matHeaderCellDef> TotalPagar </th>
+        <th mat-header-cell *matHeaderCellDef> Total Pagar </th>
         <td *matCellDef="let element"> {{element.totalPagar| currency: 'USD'}} </td>
       </ng-container>
 

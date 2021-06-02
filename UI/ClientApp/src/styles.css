@@ -28,6 +28,10 @@ table {
   width: 100%;
 }
 
+div, mat-sidenav-container, mat-nav-list, form, table, a, mat-card, mat-icon, ng-template, button {
+  font-size: 90%;
+}
+
 .mat-dialog-container {
   width: 1000px;
 }

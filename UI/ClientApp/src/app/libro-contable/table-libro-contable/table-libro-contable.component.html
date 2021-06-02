@@ -1,0 +1,55 @@
+<div class="table-responsive">
+    <mat-form-field>
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input>
+    </mat-form-field>
+    
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-bordered" matSort>
+
+      <!-- codigo Column -->
+      <ng-container matColumnDef="codigo">
+        <th mat-header-cell *matHeaderCellDef> Codigo </th>
+        <td *matCellDef="let element"> {{element.codigo}} </td>
+      </ng-container>
+      <!-- descripcion Column -->
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+        <td *matCellDef="let element"> {{element.descripcion}} </td>
+      </ng-container>
+      <!-- debe Column -->
+      <ng-container matColumnDef="debe">
+        <th mat-header-cell *matHeaderCellDef> Debe </th>
+        <td *matCellDef="let element" class="grisClaro"> {{element.debe| currency: 'USD'}} </td>
+      </ng-container>
+      <!--haber Column -->
+      <ng-container matColumnDef="haber">
+        <th mat-header-cell *matHeaderCellDef>Haber </th>
+        <td *matCellDef="let element" class="grisOscuro"> {{element.haber| currency: 'USD'}} </td>
+      </ng-container>
+      <!-- origenId Column -->
+      <ng-container matColumnDef="origenId">
+        <th mat-header-cell *matHeaderCellDef> Origen </th>
+        <td *matCellDef="let element"> {{element.origenId}} </td>
+      </ng-container>
+      <!-- origenTipo Column -->
+      <ng-container matColumnDef="origenTipo">
+        <th mat-header-cell *matHeaderCellDef> OrigenTipo </th>
+        <td *matCellDef="let element" > {{element.origenTipo}} </td>
+      </ng-container>
+      <!-- fecha Column -->
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+        <td *matCellDef="let element" > {{element.fecha|date: 'shortDate'}} </td>
+      </ng-container>
+      
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr mat-row *matNoDataRow>
+        <td mat-cell colspan="8">No encontrado "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>    
+</div>

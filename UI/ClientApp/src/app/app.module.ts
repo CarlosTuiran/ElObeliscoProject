@@ -121,6 +121,8 @@ import { DialogoImpuestoComponent } from './contabilidad/impuesto/dialogo-impues
 import { ParametrosComponent } from './configuraciones/parametros/parametros.component';
 import { TableParametrosComponent } from './configuraciones/parametros/table-parametros/table-parametros.component';
 import { FormParametrosComponent } from './configuraciones/parametros/form-parametros/form-parametros.component';
+import { LibroContableComponent } from './libro-contable/libro-contable.component';
+import { TableLibroContableComponent } from './libro-contable/table-libro-contable/table-libro-contable.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -205,6 +207,8 @@ import { FormParametrosComponent } from './configuraciones/parametros/form-param
     ParametrosComponent,
     TableParametrosComponent,
     FormParametrosComponent,
+    LibroContableComponent,
+    TableLibroContableComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -261,6 +265,7 @@ import { FormParametrosComponent } from './configuraciones/parametros/form-param
       { path: 'parametros-crear', component: FormParametrosComponent, canActivate: [CheckNotloginGuard] },
       { path: 'parametros-editar/:id', component: FormParametrosComponent, canActivate: [CheckNotloginGuard] },
       { path: 'impuestos', component: ImpuestoComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'libroContable', component: LibroContableComponent, canActivate: [CheckNotloginGuard] },
 
     ]),
     BrowserAnimationsModule

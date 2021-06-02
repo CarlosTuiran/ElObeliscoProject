@@ -13,8 +13,13 @@
       </ng-container>
       <!-- idEmpleado Column -->
       <ng-container matColumnDef="idEmpleado">
-        <th mat-header-cell *matHeaderCellDef> Empleado </th>
+        <th mat-header-cell *matHeaderCellDef> Id Empleado </th>
         <td *matCellDef="let element"> {{element.idEmpleado}} </td>
+      </ng-container>
+      <!-- nombreEmpleado Column -->
+      <ng-container matColumnDef="nombreEmpleado">
+        <th mat-header-cell *matHeaderCellDef> Empleado </th>
+        <td *matCellDef="let element"> {{element.nombreEmpleado}} </td>
       </ng-container>
       <!-- diasTrabajados Column -->
       <ng-container matColumnDef="diasTrabajados">
@@ -59,7 +64,7 @@
           <button mat-icon-button [routerLink]='["/nominas-editar/" + element.idEmpleado+"/"+element.idNomina]'>
             <mat-icon>launch</mat-icon>
           </button>
-          <button mat-icon-button color="green" (click)="Pagar(element.idNomina, element.idEmpleado)">
+          <button mat-icon-button color="green" (click)="Pagar(element.idEmpleado)">
             <mat-icon>local_atm</mat-icon>
           </button>
         </td>

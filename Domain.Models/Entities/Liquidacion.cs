@@ -1,5 +1,4 @@
 ﻿using Domain.Models.Base;
-using System;
 using System.Collections.Generic;
 
 namespace Domain.Models.Entities
@@ -13,7 +12,7 @@ namespace Domain.Models.Entities
         public double SueldoOrdinario { get; set; }
         public double SubTransporte { get; set; }
         public double TotalDevengado { get; set; }
-        public double Salud_Empleador  { get; set; }
+        public double Salud_Empleador { get; set; }
         public double Salud_Trabajador { get; set; }
         public double Pension_Trabajador { get; set; }
         public double Pension_Empleador { get; set; }
@@ -34,9 +33,9 @@ namespace Domain.Models.Entities
 
         }
 
-        public Liquidacion(string nominaId, int idEmpleado, int mes, int anio, double sueldoOrdinario, double subTransporte, 
-            double totalDevengado, double salud_Empleador, double salud_Trabajador, double pension_Trabajador, double pension_Empleador, 
-            double prima, double cesantias, double int_Cesantias, double vacaciones, double arl, double caja_Comp, 
+        public Liquidacion(string nominaId, int idEmpleado, int mes, int anio, double sueldoOrdinario, double subTransporte,
+            double totalDevengado, double salud_Empleador, double salud_Trabajador, double pension_Trabajador, double pension_Empleador,
+            double prima, double cesantias, double int_Cesantias, double vacaciones, double arl, double caja_Comp,
             double iCBF, double sENA, double totalDeducido, double totalPagar)
         {
             NominaId = nominaId;
@@ -74,7 +73,7 @@ namespace Domain.Models.Entities
             if (liquidacion.TotalDeducido == 0)
                 errors.Add("Campo Total Deducido vacio");
             if (liquidacion.TotalDevengado == 0)
-                errors.Add("Campo Total Devengado vacio");            
+                errors.Add("Campo Total Devengado vacio");
             if (liquidacion.TotalPagar == 0)
                 errors.Add("Campo Total a Pagar vacio");
             if (liquidacion.Mes == 0)

@@ -39,7 +39,8 @@ namespace UI.InterfazWeb.Controllers
                           select new
                           {
                               n.IdNomina,
-                              IdEmpleado = e.Nombres + " " + e.Apellidos,
+                              IdEmpleado = n.IdEmpleado,
+                              NombreEmpleado = e.Nombres + " " + e.Apellidos,
                               n.DiasTrabajados,
                               n.HoraExtraDiurna,
                               n.HoraExtraDiurnaFestivo,

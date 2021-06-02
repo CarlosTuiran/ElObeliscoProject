@@ -1,0 +1,47 @@
+﻿@{
+	ViewData["Title"] = "Libro Contable";
+	Layout = "Layout";
+}
+<style>
+	.gray {
+		background-color: #cbcdce;
+	}
+
+	.negrita {
+	}
+
+	.alineacionDerecha {
+		text-align: right;
+	}
+</style>
+<br />
+<h5>Fecha Impresión @DateTime.Now</h5>
+<br />
+<table class="table table-bordered">
+	<thead class="thead-light">
+		<tr>
+			<th scope="col">Codigo</th>
+			<th scope="col">Descripcion</th>
+			<th scope="col">Unidad</th>
+			<th scope="col">Cantidad</th>
+			<th scope="col">V. Unit</th>
+			<th scope="col">Iva</th>
+			<th scope="col">Valor Total</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Responses)
+		{
+			<tr>
+				<th scope="row">@item.Codigo</th>
+				<td>@item.Descripcion</td>
+				<td class="text-right">@item.Debe</td>
+				<td class="text-right">@item.Haber</td>
+				<td>@item.OrigenId</td>
+				<td>@item.OrigenTipo</td>
+				<td>@item.Fecha</td>
+			</tr>
+
+		}
+	</tbody>
+</table>

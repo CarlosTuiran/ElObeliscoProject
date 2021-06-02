@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Aplicacion.Request;
-using Aplicacion.Services.CrearServices;
+﻿using Aplicacion.Request;
+using Aplicacion.Services.EliminarServices;
 using Aplicacion.Services.Eventos;
-using Aplicacion.Services.ActualizarServices;
 using Domain.Models.Entities;
 using Infra.Datos;
 using Infra.Datos.Base;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Aplicacion.Services.EliminarServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace UI.Controllers
 {
@@ -39,18 +36,29 @@ namespace UI.Controllers
                           on l.IdEmpleado equals e.Id
                           select new
                           {
-                              NominaId = l.NominaId,
+                              l.NominaId,
                               IdEmpleado = e.Id,
-                              NombreEmpelado = e.Nombres,
-                              Mes = l.Mes,
-                              Anio = l.Anio,
-                              SueldoOrdinario = l.SueldoOrdinario,
-                              SubTransporte = l.SubTransporte,
-                              TotalDevengado = l.TotalDevengado,
-                              TotalDeducido = l.TotalDeducido,
-                              TotalPagar = l.TotalPagar,
+                              NombreEmpleado = e.Nombres,
+                              l.Mes,
+                              l.Anio,
+                              l.SueldoOrdinario,
+                              l.SubTransporte,
+                              l.TotalDevengado,
+                              l.Salud_Empleador,
+                              l.Salud_Trabajador,
+                              l.Pension_Trabajador,
+                              l.Pension_Empleador,
+                              l.Prima,
+                              l.Cesantias,
+                              l.Int_Cesantias,
+                              l.Vacaciones,
+                              l.Arl,
+                              l.Caja_Comp,
+                              l.ICBF,
+                              l.SENA,
+                              l.TotalDeducido,
+                              l.TotalPagar
                           }).ToList();
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
         }
 
@@ -71,7 +79,7 @@ namespace UI.Controllers
             if (rta.isOk())
             {
                 await _context.SaveChangesAsync();
-                return CreatedAtAction("GetLiquidacion", new { idN = nomina.IdNomina, idL = nomina.IdEmpleado }, nomina);
+                return CreatedAtAction("GetLiquidacion", nomina);
             }
             return BadRequest(rta);
         }

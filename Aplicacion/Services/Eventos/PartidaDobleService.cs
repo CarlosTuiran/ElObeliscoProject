@@ -109,8 +109,8 @@ namespace Aplicacion.Services.Eventos
                     {
                         case 1:
                             //"Efectivo"
-                            cuentaDebe= _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo ==
-                              _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Efectivo").ValorNumerico);
+                            cuentaDebe = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo ==
+                               _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Efectivo").ValorNumerico);
                             break;
                         case 2:
                             //"Credito"
@@ -151,7 +151,7 @@ namespace Aplicacion.Services.Eventos
             }
             return 1;
         }
-        public int LiquidarNomina()
+        public int LiquidarTotalLiquidacion(TotalLiquidacion TotalLiquidacion)
         {
             try
             {
@@ -165,27 +165,26 @@ namespace Aplicacion.Services.Eventos
                 var provisionCuenta = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == provisionParam.ValorNumerico);
                 var salariosCuenta = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == salariosParam.ValorNumerico);
                 var gastopersonalCuenta = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == gastopersonalParam.ValorNumerico);
-                var nominaActual= DateTime.Now.Month+ " - " + DateTime.Now.Year;
-                var Nomina=_unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdNomina==nominaActual);
-                var libroContable1 = new LibroContable(retencionesCuenta.Codigo, "Retencion aporte nomina" +  nominaActual, Nomina.Id, "Nomina", DateTime.Now);
-                var libroContable2 = new LibroContable(acreedoresCuenta.Codigo, "Acreedores varios" +  nominaActual, Nomina.Id, "Nomina", DateTime.Now);
-                var libroContable3 = new LibroContable(provisionCuenta.Codigo, "Provision" +  nominaActual, Nomina.Id, "Nomina", DateTime.Now);
-                var libroContable4 = new LibroContable(salariosCuenta.Codigo, "Salarios por pagar" +  nominaActual, Nomina.Id, "Nomina", DateTime.Now);
-                var libroContable5 = new LibroContable(gastopersonalCuenta.Codigo, "Gasto personal" +  nominaActual, Nomina.Id, "Nomina", DateTime.Now);
-                /*libroContable1.Haber=Nomina.Salud+ Nomina.Arl+ Nomina.Caja+ Nomina.ICBF+ Nomina.SENA;
-                libroContable2.Haber=Nomina.Pension;
-                libroContable3.Haber=Nomina.Cesantias+ Nomina.CesantiasInteres+Nomina.Vacaciones+Nomina.Prima;
-                libroContable4.Haber= Nomina.SalariosxPagar;
+                var nominaActual = DateTime.Now.Month + " - " + DateTime.Now.Year;
+                //var TotalLiquidacion = _unitOfWork.TotalLiquidacionServiceRepository.FindFirstOrDefault(t => t.NominaId == nominaActual);
+                var libroContable1 = new LibroContable(retencionesCuenta.Codigo, "Retencion aporte nomina " + nominaActual, TotalLiquidacion.Id, "Nomina", DateTime.Now);
+                var libroContable2 = new LibroContable(acreedoresCuenta.Codigo, "Acreedores varios " + nominaActual, TotalLiquidacion.Id, "Nomina", DateTime.Now);
+                var libroContable3 = new LibroContable(provisionCuenta.Codigo, "Provision " + nominaActual, TotalLiquidacion.Id, "Nomina", DateTime.Now);
+                var libroContable4 = new LibroContable(salariosCuenta.Codigo, "Salarios por pagar " + nominaActual, TotalLiquidacion.Id, "Nomina", DateTime.Now);
+                var libroContable5 = new LibroContable(gastopersonalCuenta.Codigo, "Gasto personal " + nominaActual, TotalLiquidacion.Id, "Nomina", DateTime.Now);
+                libroContable1.Haber = TotalLiquidacion.Salud + TotalLiquidacion.Arl + TotalLiquidacion.Caja_Comp + TotalLiquidacion.ICBF + TotalLiquidacion.SENA;
+                libroContable2.Haber = TotalLiquidacion.Pension;
+                libroContable3.Haber = TotalLiquidacion.Cesantias + TotalLiquidacion.Int_Cesantias + TotalLiquidacion.Vacaciones + TotalLiquidacion.Prima;
+                libroContable4.Haber = TotalLiquidacion.SalariosPagar;
                 //Pendiente separcion de Gastos de personal
-                libroContable5.Debe=Nomina.Sueldo+Nomina.Aux_Transporte+Nomina.Comicion+Nomina.Salud+Nomina.Pension+Nomina.Arl+
-                                    Nomina.Parafiscales+Nomina.Caja_Comp+Nomina.ICBF+Nomina.SENA+Nomina.Prima+Nomina.Cesantias+
-                                    Nomina.CesantiasInteres+Nomina.Vacaciones;*/
+                libroContable5.Debe = TotalLiquidacion.Sueldo + TotalLiquidacion.SubTransporte + TotalLiquidacion.Comisiones + TotalLiquidacion.Salud_Empleador + TotalLiquidacion.Pension_Empleador + TotalLiquidacion.Arl +
+                                    TotalLiquidacion.Parafiscales + TotalLiquidacion.Prima + TotalLiquidacion.Cesantias +
+                                    TotalLiquidacion.Int_Cesantias + TotalLiquidacion.Vacaciones;
                 _unitOfWork.LibroContableServiceRepository.Add(libroContable1);
                 _unitOfWork.LibroContableServiceRepository.Add(libroContable2);
                 _unitOfWork.LibroContableServiceRepository.Add(libroContable3);
                 _unitOfWork.LibroContableServiceRepository.Add(libroContable4);
                 _unitOfWork.LibroContableServiceRepository.Add(libroContable5);
-                
             }
             catch (Exception)
             {

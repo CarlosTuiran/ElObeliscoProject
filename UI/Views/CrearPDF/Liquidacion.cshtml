@@ -1,0 +1,55 @@
+﻿
+@{
+	ViewData["Title"] = "Liquidacion";
+	Layout = "Layout";
+}
+<style>
+	.gray {
+		background-color: #cbcdce;
+	}
+
+	.negrita {
+	}
+
+	.alineacionDerecha {
+		text-align: right;
+	}
+</style>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="col-auto">
+				Nombre Empleado
+			</div>
+			<div class="col-auto">
+				@Model.Nombre
+			</div>
+		</div>
+		<div class="col">
+			<div class="row">
+				Dirección Empleado
+			</div>
+			<div class="row">
+				@Model.Direccion
+			</div>
+		</div>
+		<div class="col">
+			<div class="col-auto">
+				Identificación Empleado
+			</div>
+			<div class="col-auto">
+				@Model.IdEmpleado
+			</div>
+		</div>
+		<div class="col">
+			<div class="col-auto">
+				Celular Empleado
+			</div>
+			<div class="col-auto">
+				@Model.Celular
+			</div>
+		</div>
+	</div>
+
+
+</div>

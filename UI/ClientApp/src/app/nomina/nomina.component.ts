@@ -16,26 +16,13 @@ export class NominaComponent implements OnInit {
   constructor(private nominaService: NominaService, private liquidacionService: LiquidacionService, private router: Router) { }
 
   ngOnInit() {
-    this.nominaService.getNominas()
-      .subscribe(nominas => this.nominas = nominas,
-        error => console.error(error));
   }
 
-  Pagar(idNomina: string, idEmpleado: number) {
-    let nomina: INominaPago = { 'idEmpleado': idEmpleado };
-    console.table(nomina);
-    this.liquidacionService.createLiquidacion(nomina)
-        .subscribe(usuario => this.onSaveSuccess(),
-          error => console.error(error));
-  }
-
-  onSaveSuccess() {
-    this.router.navigate(["/liquidaciones"]);
-  }
 }
 export interface INomina {  
   idNomina: string,
   idEmpleado: number,
+  nombreEmpleado: string,
   diasTrabajados: number,
   horaExtraDiurna: number,
   horaExtraDiurnaFestivo: number,

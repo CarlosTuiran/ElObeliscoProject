@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Request;
+using Aplicacion.Services.Eventos;
 using Domain.Models.Contracts;
 using Domain.Models.Entities;
 using System;
@@ -10,11 +11,12 @@ namespace Aplicacion.Services.CrearServices
     public class CrearTotalLiquidacionService
     {
         readonly IUnitOfWork _unitOfWork;
-
+        private PartidaDobleService PartidaDobleService;
 
         public CrearTotalLiquidacionService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            PartidaDobleService=new PartidaDobleService(unitOfWork);
         }
 
         public CrearTotalLiquidacionResponse Ejecutar()
@@ -43,6 +45,7 @@ namespace Aplicacion.Services.CrearServices
                 newTotalLiquidacion.Sueldo += nomina.SalarioBase;
                 newTotalLiquidacion.SubTransporte += item.SubTransporte;
                 newTotalLiquidacion.TotalDevengado += item.TotalDevengado;
+                newTotalLiquidacion.Comisiones += item.SueldoOrdinario - nomina.SalarioBase;
                 newTotalLiquidacion.Salud_Empleador += item.Salud_Empleador;
                 newTotalLiquidacion.Salud_Trabajador += item.Salud_Trabajador;
                 newTotalLiquidacion.Salud += (item.Salud_Empleador + item.Salud_Trabajador);
@@ -79,6 +82,7 @@ namespace Aplicacion.Services.CrearServices
             else
             {
                 _unitOfWork.TotalLiquidacionServiceRepository.Add(newTotalLiquidacion);
+                PartidaDobleService.LiquidarTotalLiquidacion(newTotalLiquidacion);
                 _unitOfWork.Commit();
                 return new CrearTotalLiquidacionResponse() { Message = $"Total Liquidacion Creado Exitosamente" };
             }

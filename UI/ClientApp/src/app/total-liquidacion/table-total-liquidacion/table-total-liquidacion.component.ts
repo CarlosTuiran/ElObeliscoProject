@@ -14,15 +14,19 @@ export class TableTotalLiquidacionComponent implements OnInit {
 
   totalLiquidacions!:ITotalLiquidacion[];  
   displayedColumns: string[] = [
-  'mes',
-  'anio',
-  'valorTotalNomina',
-  'sena',
-  'icbf',
-  'comfacesar',
-  'total',
-  'nominaId',
-  'options'];
+    'nominaId',
+    'mes',
+    'anio',
+    'valorTotalNomina',
+    'sueldo',
+    'subTransporte',
+    'totalDevengado',
+    'retencionAporteNomina',
+    'acreedoresVarios',
+    'provision',
+    'salariosPagar',
+    'parafiscales',  
+    'options'];
   dataSource =new MatTableDataSource<ITotalLiquidacion>(this.totalLiquidacions);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;

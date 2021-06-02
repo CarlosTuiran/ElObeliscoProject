@@ -24,6 +24,10 @@ namespace Aplicacion.Services.Eventos
                 return new PagarEmpleadoResponse() { Message = $"Ya le ha pagado a este empleado" };
             }
             var nomina = _unitOfWork.NominaServiceRepository.FindFirstOrDefault(t => t.IdEmpleado == request.IdEmpleado && t.IdNomina == request.IdNomina);
+            if (nomina == null)
+            {
+                return new PagarEmpleadoResponse() { Message = $"Nomina no existe" };
+            }
             var parametrosNomina = _unitOfWork.ParametrosServiceRepository.FindBy(t => t.Agrupacion == "ParametrosNomina");
             var parametrosHorasExtras = _unitOfWork.ParametrosServiceRepository.FindBy(t => t.Agrupacion == "ParametrosHorasExtras");
             var saludEmpleador = parametrosNomina.FirstOrDefault(t => t.Descripcion == "SALUDEMPLEADOR").ValorNumerico;

@@ -1,12 +1,10 @@
+using Aplicacion.Request.Salidas;
 using Domain.Models.Contracts;
 using Domain.Models.Entities;
 using Infra.Datos;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Newtonsoft.Json;
-using Aplicacion.Request.Salidas;
 
 namespace Aplicacion.Services.ConsultarServices
 {
@@ -14,15 +12,18 @@ namespace Aplicacion.Services.ConsultarServices
     {
         readonly ObeliscoContext _context;
         readonly IUnitOfWork _unitOfWork;
-       ConsultarEgresoDiarioResponse response;
+        ConsultarEgresoDiarioResponse response;
         public ConsultarEgresoDiarioService(ObeliscoContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;
-            response = new ConsultarEgresoDiarioResponse();
-            response.Dfacturas = new List<DetallesFactura>();
+            response = new ConsultarEgresoDiarioResponse
+            {
+                Dfacturas = new List<DetallesFactura>()
+            };
         }
-        public ConsultarEgresoDiarioResponse Ejecutar(DateTime fecha, string tercero){
+        public ConsultarEgresoDiarioResponse Ejecutar(DateTime fecha, string tercero)
+        {
             var DFacturas = (from df in _context.Set<DFactura>()
                              join p in _context.Set<Producto>()
                              on df.Referencia equals p.Referencia
@@ -56,12 +57,13 @@ namespace Aplicacion.Services.ConsultarServices
                               FechaComprobante = mf.FechaFactura.Date,
                               Cheque = "100-019",
                               ValorTotal = mf.Total,
-                              NombreMov = tm.Nombre, 
+                              NombreMov = tm.Nombre,
                               Serial = "1000-A10",
                               NombreBanco = "CAJA GENERAL",
                               DFacturas
                           }).ToList();
-            if(result[0]!=null){
+            if (result[0] != null)
+            {
                 response.Nombre = result[0].Nombre;
                 response.NIT = result[0].NIT;
                 response.Ciudad = result[0].Ciudad;
@@ -81,11 +83,11 @@ namespace Aplicacion.Services.ConsultarServices
                         ValorTotal = item.ValorTotal.ToString("C2")
                     };
                     response.Dfacturas.Add(detalle);
-                }    
+                }
             }
             response.Observaciones = "";
             response.NombreMov = "EGRESO DIARIO";
-            response.Serial = "EG-01010-"+tercero;
+            response.Serial = "EG-01010-" + tercero;
             return response;
         }
     }

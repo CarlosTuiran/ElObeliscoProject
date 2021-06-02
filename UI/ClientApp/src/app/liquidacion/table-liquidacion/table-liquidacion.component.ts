@@ -14,18 +14,16 @@ export class TableLiquidacionComponent implements OnInit {
 
   liquidaciones!:ILiquidacion[];  
   displayedColumns: string[] = [
-  'nominaId',
+    'nominaId',
     'idEmpleado',
-  'nombreEmpleado',
-  'mes',
-  'anio',
-  'sueldoOrdinario',
-  'subTransporte',
-  'totalDevengado',
-  'salud',
-  'pension',
-  'totalDeducido',
-  'totalPagar',
+    'nombreEmpleado',
+    'mes',
+    'anio',
+    'sueldoOrdinario',
+    'subTransporte',
+    'totalDevengado',
+    'totalDeducido',
+    'totalPagar',
     'options'];
   dataSource =new MatTableDataSource<ILiquidacion>(this.liquidaciones);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

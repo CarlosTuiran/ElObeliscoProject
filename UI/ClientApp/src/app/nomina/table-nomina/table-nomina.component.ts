@@ -18,6 +18,7 @@ export class TableNominaComponent implements OnInit {
   displayedColumns: string[] = [
     'idNomina',
     'idEmpleado',
+    'nombreEmpleado',
     'diasTrabajados',
     'horaExtraDiurna',
     'horaExtraDiurnaFestivo',
@@ -54,11 +55,11 @@ export class TableNominaComponent implements OnInit {
     });
   }
 
-  Pagar(idNomina: string, idEmpleado: number) {
-    let nomina: INominaPago = { 'idEmpleado': idEmpleado };
+  Pagar(idEmpleado: number) {
+    let nomina: INominaPago = { 'idEmpleado': +idEmpleado };
     this.liquidacionService.createLiquidacion(nomina)
       .subscribe(usuario => this.onSaveSuccess(),
-        error => this.alertService.error(error.error.message));
+        error => { this.alertService.error(error.error.message); console.log(error) });
   }
 
   onSaveSuccess() {

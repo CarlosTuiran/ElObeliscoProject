@@ -4,22 +4,19 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input>
     </mat-form-field>
     
-    <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-        'mes',
-        'anio',
-        'valorTotalNomina',
-        'sena',
-        'icbf',
-        'comfacesar',
-        'total',
-        'nominaId'        
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+      <!-- nominaId Column -->
+      <ng-container matColumnDef="nominaId">
+        <th mat-header-cell *matHeaderCellDef> Nomina Id </th>
+        <td *matCellDef="let element"> {{element.nominaId}} </td>
+      </ng-container>
       <!-- mes Column -->
-       <ng-container matColumnDef="mes">
-         <th mat-header-cell *matHeaderCellDef> Mes </th>
-         <td *matCellDef="let element"> {{element.mes}} </td>
-       </ng-container>
-       <!-- anio Column -->
-       <ng-container matColumnDef="anio">
+      <ng-container matColumnDef="mes">
+        <th mat-header-cell *matHeaderCellDef> Mes </th>
+        <td *matCellDef="let element"> {{element.mes}} </td>
+      </ng-container>
+      <!-- anio Column -->
+      <ng-container matColumnDef="anio">
         <th mat-header-cell *matHeaderCellDef> Año </th>
         <td *matCellDef="let element"> {{element.anio}} </td>
       </ng-container>
@@ -28,30 +25,45 @@
         <th mat-header-cell *matHeaderCellDef> ValorTotalNomina </th>
         <td *matCellDef="let element"> {{element.valorTotalNomina| currency: 'USD'}} </td>
       </ng-container>
-      <!-- sena Column -->
-      <ng-container matColumnDef="sena">
-        <th mat-header-cell *matHeaderCellDef> SENA </th>
-        <td *matCellDef="let element"> {{element.sena| currency: 'USD'}} </td>
+      <!-- sueldo Column -->
+      <ng-container matColumnDef="sueldo">
+        <th mat-header-cell *matHeaderCellDef> Sueldo </th>
+        <td *matCellDef="let element"> {{element.sueldo| currency: 'USD'}} </td>
       </ng-container>
-      <!-- icbf Column -->
-      <ng-container matColumnDef="icbf">
-        <th mat-header-cell *matHeaderCellDef> ICBF </th>
-        <td *matCellDef="let element"> {{element.icbf| currency: 'USD'}} </td>
+      <!-- subTransporte Column -->
+      <ng-container matColumnDef="subTransporte">
+        <th mat-header-cell *matHeaderCellDef> SubTransporte </th>
+        <td *matCellDef="let element"> {{element.subTransporte| currency: 'USD'}} </td>
       </ng-container>
-      <!-- confacesar Column -->
-      <ng-container matColumnDef="comfacesar">
-        <th mat-header-cell *matHeaderCellDef> ComfaCesar </th>
-        <td *matCellDef="let element"> {{element.comfacesar| currency: 'USD'}} </td>
+      <!-- totalDevengado Column -->
+      <ng-container matColumnDef="totalDevengado">
+        <th mat-header-cell *matHeaderCellDef> TotalDevengado </th>
+        <td *matCellDef="let element"> {{element.totalDevengado| currency: 'USD'}} </td>
       </ng-container>
-      <!-- total Column -->
-      <ng-container matColumnDef="total">
-        <th mat-header-cell *matHeaderCellDef> Total </th>
-        <td *matCellDef="let element"> {{element.total| currency: 'USD'}} </td>
+      <!-- retencionAporteNomina Column -->
+      <ng-container matColumnDef="retencionAporteNomina">
+        <th mat-header-cell *matHeaderCellDef> Retenciones </th>
+        <td *matCellDef="let element"> {{element.retencionAporteNomina| currency: 'USD'}} </td>
       </ng-container>
-      <!-- nominaId Column -->
-      <ng-container matColumnDef="nominaId">
-        <th mat-header-cell *matHeaderCellDef> NominaId </th>
-        <td *matCellDef="let element"> {{element.nominaId}} </td>
+      <!-- acreedoresVarios Column -->
+      <ng-container matColumnDef="acreedoresVarios">
+        <th mat-header-cell *matHeaderCellDef> AcreedoresVarios </th>
+        <td *matCellDef="let element"> {{element.acreedoresVarios| currency: 'USD'}} </td>
+      </ng-container>
+  <!-- provision Column -->
+      <ng-container matColumnDef="provision">
+        <th mat-header-cell *matHeaderCellDef> Provision </th>
+        <td *matCellDef="let element"> {{element.provision| currency: 'USD'}} </td>
+      </ng-container>
+  <!-- salariosPagar Column -->
+      <ng-container matColumnDef="salariosPagar">
+        <th mat-header-cell *matHeaderCellDef> Salarios x Pagar </th>
+        <td *matCellDef="let element"> {{element.salariosPagar| currency: 'USD'}} </td>
+      </ng-container>
+  <!-- parafiscales Column -->
+      <ng-container matColumnDef="parafiscales">
+        <th mat-header-cell *matHeaderCellDef> Parafiscales </th>
+        <td *matCellDef="let element"> {{element.parafiscales| currency: 'USD'}} </td>
       </ng-container>
       <!--Options-->
       <ng-container matColumnDef="options">
@@ -63,9 +75,9 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
+
       <!-- Row shown when there is no matching data. -->
-      <tr mat-row  *matNoDataRow>
+      <tr mat-row *matNoDataRow>
         <td mat-cell colspan="8">No encontrado "{{input.value}}"</td>
       </tr>
     </table>

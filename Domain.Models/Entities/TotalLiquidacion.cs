@@ -13,6 +13,7 @@ namespace Domain.Models.Entities
         public double Sueldo { get; set; }
         public double SubTransporte { get; set; }
         public double TotalDevengado { get; set; }
+        public double Comisiones { get; set; }
         public double Salud_Empleador { get; set; }
         public double Salud_Trabajador { get; set; }
         public double Salud { get; set; }
