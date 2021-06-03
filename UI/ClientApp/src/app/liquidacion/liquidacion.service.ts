@@ -38,4 +38,8 @@ export class LiquidacionService {
         this._refresh$.next();
       }));
   }
+
+  getPDFLiquidacion(idEmpleado: number, idNomina: string) {
+    return this.http.get(this.apiURL + "/Liquidacion/" + idEmpleado + "/"+idNomina);
+  }
 }

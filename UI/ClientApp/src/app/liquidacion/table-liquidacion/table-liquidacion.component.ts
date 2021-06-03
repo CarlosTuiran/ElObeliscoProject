@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ILiquidacion } from '../liquidacion.component';
 import { LiquidacionService } from '../liquidacion.service';
@@ -30,7 +30,7 @@ export class TableLiquidacionComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
   constructor(private liquidacionesService: LiquidacionService, private router: Router,
-    private alertService: AlertService){}
+    private alertService: AlertService, @Inject('BASE_URL') private baseUrl: string){}
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -60,6 +60,11 @@ export class TableLiquidacionComponent implements OnInit {
   onDeleteSuccess() {
     this.router.navigate(["/liquidaciones"]);
     this.alertService.success("Eliminado exitoso");
+  }
+
+  printPDFLiquidacion(idEmpleado: number, idNomina: string) {
+    var URL = this.baseUrl + "Liquidacion/" + idEmpleado + "/" + idNomina;
+    window.open(URL, '_blank');
   }
 
 }

@@ -11,6 +11,7 @@ namespace Aplicacion.Request.Salidas
         public string NombreMov { get; set; }
         public string Serial { get; set; }
         public string Nombre { get; set; }
+        public int DiasTrabajados { get; set; }
         public string Cargo { get; set; }
         public string Correo { get; set; }
         public string Celular { get; set; }
@@ -18,11 +19,13 @@ namespace Aplicacion.Request.Salidas
         public string Direccion { get; set; }
         public int Mes { get; set; }
         public int Anio { get; set; }
-        public double SueldoOrdinario { get; set; }
-        public double SubTransporte { get; set; }
-        public double Comisiones { get; set; }
-        public double Salud_Trabajador { get; set; }
-        public double Pension_Trabajador { get; set; }
-        public double TotalPagar { get; set; }
+        public string SueldoOrdinario { get; set; }
+        public string SubTransporte { get; set; }
+        public string Comisiones { get; set; }
+        public string Salud_Trabajador { get; set; }
+        public string Pension_Trabajador { get; set; }
+        public string TotalDevengos { get; set; }
+        public string TotalDeducciones { get; set; }
+        public string TotalPagar { get; set; }
     }
 }

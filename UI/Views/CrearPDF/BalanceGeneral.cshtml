@@ -1,0 +1,69 @@
+﻿@{
+	ViewData["Title"] = "Libro Contable";
+	Layout = "Layout";
+}
+<style>
+	.gray {
+		background-color: #cbcdce;
+	}
+
+	.negrita {
+	}
+
+	.alineacionDerecha {
+		text-align: right;v
+	}
+    .col{
+    border:1px solid ;
+    }
+</style>
+<br />
+<h5>Fecha Impresión @DateTime.Now</h5>
+<br />
+<h4 class="text-center">Balance General</h4>
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center"><b>Activos</b></div>
+    <div class="col text-center"><b>Pasivos</b></div>
+    <div class="w-100"></div>
+    <div class="col"><b>Activos Corrientes</b></div>
+    <div class="col"><b>Pasivos Corrientes</b></div>
+  </div>
+  <div class="row">
+    <div class="col">
+    <!--Activos corrietes-->
+        <div class="row">
+            <div class="col">Efectivo o caja</div>
+            <div class="col">@Model.Cuentas.Efectivo</div>
+        </div>
+        <div class="row">
+            <div class="col">Inventario</div>
+            <div class="col">@Model.Cuentas.Inventario</div>
+        </div>
+    </div>
+    <div class="col">
+        <!--Pasivos corrietes-->
+    </div>
+    
+  </div>
+  <div class="row">
+    <div class="col"><br/></div>
+    <div class="col"> <br/></div>
+    <div class="w-100"></div>
+    <div class="col">
+        <div class="row">
+            <div class="col">Total</div>
+            <div class="col">@Model.Cuenta.TotalActivo</div>
+        </div>
+    </div>
+    <div class="col"><b>Patrimonio</b>
+        <div class="row">
+                <div class="col">Utilidades retenidas</div>
+                <div class="col">@Model.Cuenta.TotalPatrimonio</div>
+        </div>
+    </div>
+  </div>
+</div>
+
+

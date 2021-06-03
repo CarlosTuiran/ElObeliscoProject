@@ -33,6 +33,7 @@ namespace Aplicacion.Services.ConsultarServices
                                    NombreMov = "Liquidacion",
                                    Serial = nom.IdNomina + "-" + emp.IdEmpleado,
                                    Nombre = emp.Nombres+" "+emp.Apellidos,
+                                   nom.DiasTrabajados,
                                    emp.Cargo,
                                    emp.Correo,
                                    emp.Celular,
@@ -54,19 +55,25 @@ namespace Aplicacion.Services.ConsultarServices
                 _response.NombreMov = liquidacion.NombreMov;
                 _response.Serial = liquidacion.Serial;
                 _response.Cargo = liquidacion.Cargo;
+                _response.DiasTrabajados = liquidacion.DiasTrabajados;
                 _response.Correo = liquidacion.Correo;
                 _response.Celular = liquidacion.Celular;
                 _response.FechaIngreso = liquidacion.FechaIngreso;
                 _response.Direccion = liquidacion.Direccion;
                 _response.Mes = liquidacion.Mes;
                 _response.Anio = liquidacion.Anio;
-                _response.SueldoOrdinario = liquidacion.SueldoOrdinario;
-                _response.SubTransporte = liquidacion.SubTransporte;
-                _response.Comisiones = liquidacion.Comisiones;
-                _response.Salud_Trabajador = liquidacion.Salud_Trabajador;
-                _response.Pension_Trabajador = liquidacion.Pension_Trabajador;
+                _response.SueldoOrdinario = liquidacion.SueldoOrdinario.ToString("C2");
+                _response.SubTransporte = liquidacion.SubTransporte.ToString("C2");
+                _response.Comisiones = liquidacion.Comisiones.ToString("C2");
+                _response.Salud_Trabajador = liquidacion.Salud_Trabajador.ToString("C2");
+                _response.Pension_Trabajador = liquidacion.Pension_Trabajador.ToString("C2");
                 _response.Nombre = liquidacion.Nombre;
-                _response.TotalPagar = liquidacion.TotalPagar;
+                _response.TotalDevengos = (liquidacion.SueldoOrdinario 
+                    + liquidacion.SubTransporte 
+                    + liquidacion.Comisiones).ToString("C2");
+                _response.TotalDeducciones = (liquidacion.Salud_Trabajador
+                    + liquidacion.Pension_Trabajador).ToString("C2");
+                _response.TotalPagar = liquidacion.TotalPagar.ToString("C2");
             }
             return _response;
         }

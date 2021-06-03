@@ -14,42 +14,195 @@
 	.alineacionDerecha {
 		text-align: right;
 	}
+
+	.centro{
+		text-align: center;
+	}
+
 </style>
 <div class="container">
-	<div class="row">
-		<div class="col">
-			<div class="col-auto">
+	<div class="row centro border">
+		<div class="col-auto">
+			<div class="col-12 gray">
 				Nombre Empleado
 			</div>
-			<div class="col-auto">
+			<div class="col-12">
 				@Model.Nombre
 			</div>
 		</div>
-		<div class="col">
-			<div class="row">
+		<div class="col-auto">
+			<div class="col-12 gray">
 				Dirección Empleado
 			</div>
-			<div class="row">
+			<div class="col-12">
 				@Model.Direccion
 			</div>
 		</div>
-		<div class="col">
-			<div class="col-auto">
+		<div class="col-auto">
+			<div class="col-12 gray">
 				Identificación Empleado
 			</div>
-			<div class="col-auto">
+			<div class="col-12">
 				@Model.IdEmpleado
 			</div>
 		</div>
-		<div class="col">
-			<div class="col-auto">
+		<div class="col-auto">
+			<div class="col-12 gray">
 				Celular Empleado
 			</div>
-			<div class="col-auto">
+			<div class="col-12">
 				@Model.Celular
 			</div>
 		</div>
 	</div>
 
+	<div class="row centro border">
+		<div class="col">
+			<div class="col-auto gray">
+				Correo Empleado
+			</div>
+			<div class="col-auto">
+				@Model.Correo
+			</div>
+		</div>
+		<div class="col centro">
+			<div class="col-auto gray">
+				Cargo Empleado
+			</div>
+			<div class="col-auto">
+				@Model.Cargo
+			</div>
+		</div>
+		<div class="col">
+			<div class="col-auto gray">
+				Fecha Ingreso Empleado
+			</div>
+			<div class="col-auto">
+				@Model.FechaIngreso
+			</div>
+		</div>
+	</div>
+
+	<div class="row centro border">
+		<div class="col">
+			<div class="col-auto gray">
+				Mes Liquidación
+			</div>
+			<div class="col-auto">
+				@Model.Mes
+			</div>
+		</div>
+		<div class="col centro">
+			<div class="col-auto gray">
+				Año Liquidación
+			</div>
+			<div class="col-auto">
+				@Model.Anio
+			</div>
+		</div>
+		<div class="col">
+			<div class="col-auto gray">
+				Días Trabajados
+			</div>
+			<div class="col-auto">
+				@Model.DiasTrabajados
+			</div>
+		</div>
+	</div>
+
+	<br />
+
+	<div class="row centro border">
+		<div class="col-6 gray">
+			<h3>Concepto</h3>
+		</div>
+		<div class="col-3 gray alineacionDerecha">
+			<h3>Devengos</h3>
+		</div>
+		<div class="col-3 gray alineacionDerecha">
+			<h3>Deducciones</h3>
+		</div>
+	</div>
+
+	<br />
+
+	<div class="row border">
+		<div class="col-6">
+			<h5>Salario Base</h5>
+		</div>
+		<div class="col-3 alineacionDerecha">
+			<h5>@Model.SueldoOrdinario</h5>
+		</div>
+		<div class="col-3">
+		</div>
+	</div>
+	<div class="row border">
+		<div class="col-6">
+			<h5>Comisiones</h5>
+		</div>
+		<div class="col-3 alineacionDerecha">
+			<h5>@Model.Comisiones</h5>
+		</div>
+		<div class="col-3">
+		</div>
+	</div>
+	<div class="row border">
+		<div class="col-6">
+			<h5>Subsidio de Transporte</h5>
+		</div>
+		<div class="col-3 alineacionDerecha">
+			<h5>@Model.SubTransporte</h5>
+		</div>
+		<div class="col-3">
+		</div>
+	</div>
+
+	<br />
+
+	<div class="row border">
+		<div class="col-6">
+			<h5>Salud</h5>
+		</div>
+		<div class="col-3">
+		</div>
+		<div class="col-3 alineacionDerecha">
+			<h5>@Model.Salud_Trabajador</h5>
+		</div>
+	</div>
+	<div class="row border">
+		<div class="col-6">
+			<h5>Pensión</h5>
+		</div>
+		<div class="col-3">
+		</div>
+		<div class="col-3 alineacionDerecha">
+			<h5>@Model.Pension_Trabajador</h5>
+		</div>
+	</div>
+
+	<br />
+
+	<div class="row border gray">
+		<div class="col-6">
+			<h3>Totales</h3>
+		</div>
+		<div class="col-3 alineacionDerecha">
+			<h5>@Model.TotalDevengos</h5>
+		</div>
+		<div class="col-3 alineacionDerecha">
+			<h5>@Model.TotalDeducciones</h5>
+		</div>
+	</div>
+
+	<br />
+
+	<div class="row border gray">
+		<div class="col-6">
+			<h3>Total a Pagar</h3>
+		</div>
+		<div class="col-6 alineacionDerecha">
+			<h5>@Model.TotalPagar</h5>
+		</div>
+	</div>
 
 </div>

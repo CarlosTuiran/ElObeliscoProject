@@ -11,13 +11,13 @@ namespace Aplicacion.Services.ConsultarServices
     {
         readonly ObeliscoContext _context;
         readonly ConsultarLibroContableResponse _response;
-        readonly ListConsultarLibroContableResponse response;
+        //readonly ListConsultarLibroContableResponse response;
 
         public ConsultarLibroContableService(ObeliscoContext context)
         {
             _context = context;
             _response = new ConsultarLibroContableResponse();
-            response = new ListConsultarLibroContableResponse();
+            //response = new ListConsultarLibroContableResponse();
         }
 
         public ConsultarLibroContableResponse Ejecutar()
@@ -29,6 +29,7 @@ namespace Aplicacion.Services.ConsultarServices
             {
                 foreach (var libroContable in librosContable)
                 {
+                    ListConsultarLibroContableResponse response= new ListConsultarLibroContableResponse();
                     response.Codigo = libroContable.Codigo;
                     response.Descripcion = libroContable.Descripcion;
                     response.Debe = string.Format("{0:c}", libroContable.Debe);

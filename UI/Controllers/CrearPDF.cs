@@ -61,10 +61,10 @@ namespace UI.Controllers
             };
         }
 
-        [HttpGet("/Liquidacion/{IdEmpleado}/{idNomina}")]
-        public IActionResult Liquidacion(int IdEmpleado, string idNomina)
+        [HttpGet("/Liquidacion/{idEmpleado}/{idNomina}")]
+        public IActionResult Liquidacion(int idEmpleado, string idNomina)
         {
-            var rta = consultarLiquidacion.Ejecutar(IdEmpleado, idNomina);
+            var rta = consultarLiquidacion.Ejecutar(idEmpleado, idNomina);
             return new ViewAsPdf("Liquidacion")
             {
                 Model = rta
@@ -73,6 +73,15 @@ namespace UI.Controllers
 
         [HttpGet("/LibroContablePDF")]
         public IActionResult LibroContable()
+        {
+            var rta = consultarLibroContable.Ejecutar();
+            return new ViewAsPdf("LibroContable")
+            {
+                Model = rta
+            };
+        }
+        [HttpGet("/BalanceGeneral")]
+        public IActionResult BalanceGeneral()
         {
             var rta = consultarLibroContable.Ejecutar();
             return new ViewAsPdf("LibroContable")

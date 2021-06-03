@@ -349,8 +349,7 @@ namespace UI.Controllers
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(cardRta, Newtonsoft.Json.Formatting.Indented);
             return cardRta;
         }
-
-
+        
         [HttpGet("ConsultasCartas")]
         public object ConsultasCartas()
         {
