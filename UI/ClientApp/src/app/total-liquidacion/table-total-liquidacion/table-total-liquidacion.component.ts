@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ITotalLiquidacion } from '../total-liquidacion.component';
 import { TotalLiquidacionService } from '../total-liquidacion.service';
@@ -32,7 +32,7 @@ export class TableTotalLiquidacionComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
   constructor(private totalLiquidacionsService: TotalLiquidacionService, private router: Router,
-    private alertService: AlertService){}
+    private alertService: AlertService, @Inject('BASE_URL') private baseUrl: string){}
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -65,4 +65,8 @@ export class TableTotalLiquidacionComponent implements OnInit {
     this.alertService.success("Eliminado exitoso");
   }
 
+  printPDFTotalLiquidacion(idNomina: string) {
+    var URL = this.baseUrl + "TotalLiquidacion/" + idNomina;
+    window.open(URL, '_blank');
+  }
 }

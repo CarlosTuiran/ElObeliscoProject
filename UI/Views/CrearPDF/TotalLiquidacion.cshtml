@@ -1,0 +1,254 @@
+﻿
+@{
+	ViewData["Title"] = "Liquidacion";
+	Layout = "Layout";
+}
+<style>
+	.gray {
+		background-color: #cbcdce;
+	}
+
+	.negrita {
+	}
+
+	.centro {
+		text-align: center;
+	}
+
+	.alineacionDerecha {
+		text-align: right;
+	}
+
+	.alineacionIzquierda {
+		text-align: left;
+	}
+</style>
+<div class="container">
+	<div class="row">
+
+		<div class="col-6 border col">
+			<h4>Retención aporte nómina</h4>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Salud (12,5%)
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Salud
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Arl (0.52%)
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Arl
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Caja Compensación (4%)
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Caja_Comp
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					ICBF (3%)
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.ICBF
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					SENA (2%)
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.SENA
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					<strong>Total Retención</strong>
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.RetencionAporteNomina
+				</div>
+			</div>
+
+			<h4>Acreedores Varios</h4>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Pensión (16%)
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Pension
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					<strong>Total Acreedores varios</strong>
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.AcreedoresVarios
+				</div>
+			</div>
+
+			<h4>Provisiones</h4>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Cesantias (8,33%)
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Cesantias
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Intereses Cesantías (12%)
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Int_Cesantias
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Vacaciones (4,17%)
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Vacaciones
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Prima
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Prima
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					<strong>Total Provisiones</strong>
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Provision
+				</div>
+			</div>
+
+			<h4>Salarios por Pagar</h4>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					<strong>Total Salarios</strong>
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.SalariosPagar
+				</div>
+			</div>
+		</div>
+
+		<div class="col-6 border col">
+			<h4>Gasto Personal</h4>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Sueldo
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Sueldo
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Auxilio de transporte
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.SubTransporte
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Comisión
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Comisiones
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Salud
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Salud_Empleador
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Pensión
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Pension_Empleador
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					ARL
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Arl
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Parafiscales
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Parafiscales
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Prima
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Prima
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Cesantias
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Cesantias
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Intereses Cesantias
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Int_Cesantias
+				</div>
+			</div>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					Vacaciones
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.Vacaciones
+				</div>
+			</div>
+
+			<h4>Valor Total Nomina</h4>
+			<div class="row col-12 border">
+				<div class="col-8 alineacionIzquierda">
+					<strong>Total Nomina</strong>
+				</div>
+				<div class="col-4 alineacionDerecha">
+					@Model.ValorTotalNomina
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

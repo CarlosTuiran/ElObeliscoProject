@@ -19,7 +19,8 @@ namespace UI.Controllers
         private readonly ConsultarEgresoDiarioService consultarEgresoDiario;
         private readonly ConsultarLibroContableService consultarLibroContable;
         private readonly ConsultarLiquidacionService consultarLiquidacion;
-        CultureInfo provider = CultureInfo.InvariantCulture;
+        private readonly ConsultarTotalLiquidacionService consultarTotalLiquidacion;
+        private readonly ConsultarBalanceGeneralService consultarBalanceGeneral;
 
         public CrearPDF(ObeliscoContext context)
         {
@@ -29,6 +30,8 @@ namespace UI.Controllers
             consultarEgresoDiario = new ConsultarEgresoDiarioService(_context, _unitOfWork);
             consultarLibroContable = new ConsultarLibroContableService(_context);
             consultarLiquidacion = new ConsultarLiquidacionService(_context);
+            consultarTotalLiquidacion = new ConsultarTotalLiquidacionService(_context);
+            consultarBalanceGeneral = new ConsultarBalanceGeneralService(_context);
         }
 
         [HttpGet]
@@ -41,8 +44,6 @@ namespace UI.Controllers
         [HttpGet("/EgresoDiario/{tercero}")]
         public IActionResult EgresoDiario(string tercero)
         {
-            //string format = "ddd MMM dd yyyy";
-            //fecha = DateTime.ParseExact(fecha.Substring(0, 15), format, provider).ToString();
             DateTime Fecha = DateTime.Now.AddDays(-1);
             var rta = consultarEgresoDiario.Ejecutar(Fecha, tercero);
             return new ViewAsPdf("EgresoDiario")
@@ -80,11 +81,22 @@ namespace UI.Controllers
                 Model = rta
             };
         }
+        
         [HttpGet("/BalanceGeneral")]
         public IActionResult BalanceGeneral()
         {
-            var rta = consultarLibroContable.Ejecutar();
+            var rta = consultarBalanceGeneral.Ejecutar();
             return new ViewAsPdf("LibroContable")
+            {
+                Model = rta
+            };
+        }
+        
+        [HttpGet("/TotalLiquidacion/{idNomina}")]
+        public IActionResult TotalLiquidacion(string idNomina)
+        {
+            var rta = consultarTotalLiquidacion.Ejecutar(idNomina);
+            return new ViewAsPdf("TotalLiquidacion")
             {
                 Model = rta
             };
