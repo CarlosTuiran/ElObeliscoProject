@@ -157,7 +157,7 @@ private _data:IEmpleado[];*/
       serial => serial,
       error => this.Serial = error.error.text);
 
-    this.bodegas=this.bodegasService.getBodegas()
+    this.bodegasService.getBodegas().subscribe(bodegas => this.bodegas = bodegas);
   }
   //obtiene la lista de productos de forma asincrona
   getInfo(productos:IProducto[]){

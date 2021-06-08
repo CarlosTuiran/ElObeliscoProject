@@ -1,0 +1,46 @@
+<div class="container">
+  <mat-dialog-content>
+    <form class="form-horizontal" novalidate autocomplete="off"
+          (ngSubmit)="save()" [formGroup]="formGroup">
+      <fieldset>
+
+        <div class="form-group"
+             [ngClass]="{'has-error': ((nombre.touched || nombre.dirty) && nombre.invalid)}">
+          <label class="col-md-2 control-label"
+                 for="nombreId">Nombre</label>
+
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="nombreId"
+                   type="text"
+                   formControlName="nombre" />
+
+            <div class="alert alert-danger" *ngIf="((nombre.touched || nombre.dirty )&& nombre.invalid)">
+              <span *ngIf="nombre.errors.required">
+                El campo nombre es requerido
+              </span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-md-4 col-md-offset-2">
+            <span>
+              <button class="btn btn-success"
+                      type="submit"
+                      [disabled]="!formGroup.valid">
+                Salvar
+              </button>
+            </span>
+
+          </div>
+
+        </div>
+      </fieldset>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cerrar</button>
+  </mat-dialog-actions>
+</div>  

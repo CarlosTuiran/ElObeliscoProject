@@ -1,6 +1,7 @@
 ﻿using Aplicacion.Request.Salidas;
 using Domain.Models.Entities;
 using Infra.Datos;
+using System.Globalization;
 using System.Linq;
 
 namespace Aplicacion.Services.ConsultarServices
@@ -50,9 +51,9 @@ namespace Aplicacion.Services.ConsultarServices
                                         t.Parafiscales,
                                         t.NominaId,
                                     }).FirstOrDefault(t => t.NominaId == idNomina);
-
-
-            _response.Mes = totalLiquidacion.Mes;
+            var cultureInfo = new CultureInfo("es");
+            var dtf = CultureInfo.CurrentCulture.DateTimeFormat;
+            _response.Mes = dtf.GetMonthName(totalLiquidacion.Mes).ToString(cultureInfo);
             _response.Anio = totalLiquidacion.Anio;
             _response.ValorTotalNomina = totalLiquidacion.ValorTotalNomina.ToString("C2");
             _response.Sueldo = totalLiquidacion.Sueldo.ToString("C2");

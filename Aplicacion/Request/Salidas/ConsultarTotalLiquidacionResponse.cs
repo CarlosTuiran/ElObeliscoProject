@@ -6,7 +6,7 @@ namespace Aplicacion.Request.Salidas
 {
     public class ConsultarTotalLiquidacionResponse
     {
-        public int Mes { get; set; }
+        public string Mes { get; set; }
         public int Anio { get; set; }
         public string ValorTotalNomina { get; set; }
         public string Sueldo { get; set; }

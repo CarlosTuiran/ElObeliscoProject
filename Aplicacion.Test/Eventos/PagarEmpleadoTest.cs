@@ -36,9 +36,7 @@ namespace Aplicacion.Test.Eventos
             yield return new TestCaseData(
                 new PagarEmpleadoRequest
                 {
-                    IdEmpleado = 1,
-                    Mes = 05,
-                    Anio = 2021
+                    IdEmpleado = 1
                 },
                 "Empleado Pagado Exitosamente"
                 ).SetName("Pagar Empleado Correctamente");

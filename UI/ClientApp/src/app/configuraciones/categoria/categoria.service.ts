@@ -32,7 +32,10 @@ export class CategoriaService {
   }
 
   updateCategoria(marca: ICategoria): Observable<ICategoria> {
-    return this.http.put<ICategoria>(this.apiURL, marca);
+    return this.http.put<ICategoria>(this.apiURL, marca).
+      pipe(tap(() => {
+        this._refresh$.next();
+      }));
   }
 
   deleteCategoria(id: number): Observable<number> {

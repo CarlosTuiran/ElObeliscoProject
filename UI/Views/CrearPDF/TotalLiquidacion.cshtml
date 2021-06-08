@@ -1,6 +1,6 @@
 ﻿
 @{
-	ViewData["Title"] = "Liquidacion";
+	ViewData["Title"] = "Valor de la nomina mensual";
 	Layout = "Layout";
 }
 <style>
@@ -24,8 +24,25 @@
 	}
 </style>
 <div class="container">
+	<div class="row centro border">
+		<div class="col-6">
+			<div class="col-12 gray">
+				Año liquidación
+			</div>
+			<div class="col-12">
+				@Model.Anio
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="col-12 gray">
+				Mes liquidación
+			</div>
+			<div class="col-12">
+				@Model.Mes
+			</div>
+		</div>
+	</div>
 	<div class="row">
-
 		<div class="col-6 border col">
 			<h4>Retención aporte nómina</h4>
 			<div class="row col-12 border">
@@ -68,7 +85,7 @@
 					@Model.SENA
 				</div>
 			</div>
-			<div class="row col-12 border">
+			<div class="row col-12 border gray">
 				<div class="col-8 alineacionIzquierda">
 					<strong>Total Retención</strong>
 				</div>
@@ -76,7 +93,7 @@
 					@Model.RetencionAporteNomina
 				</div>
 			</div>
-
+			<br />
 			<h4>Acreedores Varios</h4>
 			<div class="row col-12 border">
 				<div class="col-8 alineacionIzquierda">
@@ -86,7 +103,7 @@
 					@Model.Pension
 				</div>
 			</div>
-			<div class="row col-12 border">
+			<div class="row col-12 border gray">
 				<div class="col-8 alineacionIzquierda">
 					<strong>Total Acreedores varios</strong>
 				</div>
@@ -94,7 +111,7 @@
 					@Model.AcreedoresVarios
 				</div>
 			</div>
-
+			<br />
 			<h4>Provisiones</h4>
 			<div class="row col-12 border">
 				<div class="col-8 alineacionIzquierda">
@@ -128,7 +145,7 @@
 					@Model.Prima
 				</div>
 			</div>
-			<div class="row col-12 border">
+			<div class="row col-12 border gray">
 				<div class="col-8 alineacionIzquierda">
 					<strong>Total Provisiones</strong>
 				</div>
@@ -136,9 +153,9 @@
 					@Model.Provision
 				</div>
 			</div>
-
+			<br />
 			<h4>Salarios por Pagar</h4>
-			<div class="row col-12 border">
+			<div class="row col-12 border gray">
 				<div class="col-8 alineacionIzquierda">
 					<strong>Total Salarios</strong>
 				</div>
@@ -238,9 +255,9 @@
 					@Model.Vacaciones
 				</div>
 			</div>
-
+			<br />
 			<h4>Valor Total Nomina</h4>
-			<div class="row col-12 border">
+			<div class="row col-12 border gray">
 				<div class="col-8 alineacionIzquierda">
 					<strong>Total Nomina</strong>
 				</div>

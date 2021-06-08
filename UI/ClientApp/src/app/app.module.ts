@@ -123,6 +123,8 @@ import { TableParametrosComponent } from './configuraciones/parametros/table-par
 import { FormParametrosComponent } from './configuraciones/parametros/form-parametros/form-parametros.component';
 import { LibroContableComponent } from './libro-contable/libro-contable.component';
 import { TableLibroContableComponent } from './libro-contable/table-libro-contable/table-libro-contable.component';
+import { DialogoBodegasComponent } from './bodegas/dialogo-bodegas/dialogo-bodegas.component';
+import { TableBodegasComponent } from './bodegas/table-bodegas/table-bodegas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -209,6 +211,8 @@ import { TableLibroContableComponent } from './libro-contable/table-libro-contab
     FormParametrosComponent,
     LibroContableComponent,
     TableLibroContableComponent,
+    DialogoBodegasComponent,
+    TableBodegasComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -266,6 +270,7 @@ import { TableLibroContableComponent } from './libro-contable/table-libro-contab
       { path: 'parametros-editar/:id', component: FormParametrosComponent, canActivate: [CheckNotloginGuard] },
       { path: 'impuestos', component: ImpuestoComponent, canActivate: [CheckNotloginGuard] },
       { path: 'libroContable', component: LibroContableComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'bodegas', component: BodegasComponent, canActivate: [CheckNotloginGuard] },
 
     ]),
     BrowserAnimationsModule
@@ -276,7 +281,7 @@ import { TableLibroContableComponent } from './libro-contable/table-libro-contab
     BodegasService, PromocionesService, PruebasSinVSService, InventarioService,AlertService,DatePipe,//{provide: THEME_CONFIG, useValue: COMMON_CONSTANTS.themeServiceConfig,  },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
   entryComponents: [SidebarComponent, TableDetallesComponent, DialogoCrearFacturaComponent, DialogoTipoTerceroComponent,
-    DialogoMarcaComponent, DialogoCategoriaComponent, DialogoImpuestoComponent],
+    DialogoMarcaComponent, DialogoCategoriaComponent, DialogoImpuestoComponent, DialogoBodegasComponent],
   bootstrap: [AppComponent, SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

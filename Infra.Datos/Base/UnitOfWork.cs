@@ -192,6 +192,14 @@ namespace Infra.Datos.Base
                 return _parametrosServiceRepository ?? (_parametrosServiceRepository = new ParametrosServiceRepository(_dbContext));
             }
         }
+        private IBodegaServiceRepository _bodegaServiceRepository;
+        public IBodegaServiceRepository BodegaServiceRepository
+        {
+            get
+            {
+                return _bodegaServiceRepository ?? (_bodegaServiceRepository = new BodegaServiceRepository(_dbContext));
+            }
+        }
         public int Commit()
         {
             return _dbContext.SaveChanges();

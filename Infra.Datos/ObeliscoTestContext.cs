@@ -113,5 +113,6 @@ namespace Infra.Datos
         public DbSet<ImpuestosProducto> ImpuestosProducto { get; set; }
         public DbSet<LibroContable> LibroContable { get; set; }
         public DbSet<Parametros> Parametros { get; set; }
+        public DbSet<Bodega> Bodega { get; set; }
     }
 }

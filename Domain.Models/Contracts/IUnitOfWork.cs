@@ -27,6 +27,7 @@ namespace Domain.Models.Contracts
         IImpuestosProductoServiceRepository ImpuestosProductoServiceRepository { get; }
         ILibroContableServiceRepository LibroContableServiceRepository { get; }
         IParametrosServiceRepository ParametrosServiceRepository { get; }
+        IBodegaServiceRepository BodegaServiceRepository { get; }
         int Commit();
     }
 }
