@@ -35,15 +35,30 @@ namespace Aplicacion.Services.ConsultarServices
             var activosCorrientes2=activosCorrientes1.GroupBy(l => l.Codigo).Select(cl => new CuentasBalances
              {
                  Concepto = _context.Cuenta.Where(x => x.Codigo == cl.FirstOrDefault().Codigo).FirstOrDefault().Nombre,
-                 ValorTotal = (cl.Sum(c => c.Debe) - cl.Sum(c => c.Haber)).Value.ToString("C2")
-             }).ToList();
-            
-            // foreach (var item in activosCorrientes)
-            // {
-            //     var WTF=item.ValorTotal;    
-            // }
-            
-           
+                 ValorTotal = (cl.Sum(c => c.Debe) - cl.Sum(c => c.Haber)).Value.ToString("C2"),
+                 ValorNumerico= cl.Sum(c => c.Debe) - cl.Sum(c => c.Haber)
+            }).ToList();
+            var pasivosCorrientes1 = _context.LibroContable.Where(t => t.Codigo.ToString().StartsWith("2")).ToList();
+            var pasivosCorrientes2 = pasivosCorrientes1.GroupBy(l => l.Codigo).Select(cl => new CuentasBalances
+            {
+                Concepto = _context.Cuenta.Where(x => x.Codigo == cl.FirstOrDefault().Codigo).FirstOrDefault().Nombre,
+                ValorTotal = (cl.Sum(c => c.Debe) - cl.Sum(c => c.Haber)).Value.ToString("C2"),
+                 ValorNumerico= cl.Sum(c => c.Debe) - cl.Sum(c => c.Haber)
+            }).ToList();
+            var patrimonio1 = _context.LibroContable.Where(t => t.Codigo.ToString().StartsWith("3")).ToList();
+            var patrimonio2 = patrimonio1.GroupBy(l => l.Codigo).Select(cl => new CuentasBalances
+            {
+                Concepto = _context.Cuenta.Where(x => x.Codigo == cl.FirstOrDefault().Codigo).FirstOrDefault().Nombre,
+                ValorTotal = (cl.Sum(c => c.Debe) - cl.Sum(c => c.Haber)).Value.ToString("C2"),
+                ValorNumerico = cl.Sum(c => c.Debe) - cl.Sum(c => c.Haber)
+            }).ToList();
+            response.ActivosCorrientes = activosCorrientes2;
+            response.PasivosCorrientes = pasivosCorrientes2;
+            response.PasivosCorrientes = patrimonio2;
+            response.ActivoCorrienteTotal = (activosCorrientes2.Sum(x => x.ValorNumerico)).Value.ToString("C2");
+            response.PasivoCorrienteTotal = (pasivosCorrientes2.Sum(x => x.ValorNumerico)).Value.ToString("C2");
+            response.PatrimonioTotal = (patrimonio2.Sum(x => x.ValorNumerico)).Value.ToString("C2");
+
             response.NombreMov = "Balance General";
             response.Serial = "BG-"+ DateTime.Now.ToString("dd-MM-yyyy");
             return response;

@@ -9,6 +9,7 @@ namespace Aplicacion.Request.Salidas
         public List<CuentasBalances> ActivosCorrientes { get; set; }
         public List<CuentasBalances> PasivosCorrientes { get; set; }
         public List<CuentasBalances> Patrimonio { get; set; }
+        public string PatrimonioTotal { get; set; }
         public string ActivoCorrienteTotal { get; set; }
         public string ActivoTotal { get; set; }
         public string PasivoCorrienteTotal { get; set; }
@@ -16,7 +17,8 @@ namespace Aplicacion.Request.Salidas
     }
     public class CuentasBalances{
         public string Concepto { get; set; }
-        public string ValorTotal { get; set; }   
+        public string ValorTotal { get; set; }
+        public double? ValorNumerico { get; set; }
     }
 
 }

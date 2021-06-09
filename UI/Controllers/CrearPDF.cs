@@ -86,7 +86,8 @@ namespace UI.Controllers
         public IActionResult BalanceGeneral()
         {
             var rta = consultarBalanceGeneral.Ejecutar();
-            return new ViewAsPdf("LibroContable")
+            //return View(rta);
+            return new ViewAsPdf("BalanceGeneral")
             {
                 Model = rta
             };
