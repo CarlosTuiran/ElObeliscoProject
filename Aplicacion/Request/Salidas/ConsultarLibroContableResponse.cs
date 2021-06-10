@@ -15,7 +15,7 @@ namespace Aplicacion.Request.Salidas
         public string Descripcion { get; set; }
         public string Debe { get; set; }
         public string Haber { get; set; }
-        public int OrigenId { get; set; }
+        public string OrigenId { get; set; }
         public string OrigenTipo { get; set; }
         public string Fecha { get; set; }
     }

@@ -92,7 +92,16 @@ namespace UI.Controllers
                 Model = rta
             };
         }
-        
+        [HttpGet("/BalanceGeneral")]
+        public IActionResult EstadoResultado()
+        {
+            var rta = consultarBalanceGeneral.Ejecutar();
+            //return View(rta);
+            return new ViewAsPdf("BalanceGeneral")
+            {
+                Model = rta
+            };
+        }
         [HttpGet("/TotalLiquidacion/{idNomina}")]
         public IActionResult TotalLiquidacion(string idNomina)
         {

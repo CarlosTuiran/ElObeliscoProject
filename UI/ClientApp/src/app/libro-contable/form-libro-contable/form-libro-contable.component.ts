@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ReplaySubject } from 'rxjs';
 import { ICuenta } from '../../contabilidad/cuenta/cuenta.component';
 import { CuentaService } from '../../contabilidad/cuenta/cuenta.service';
-import { IFormatoVenta } from '../../formato-venta/formato-venta.component';
+import { ITipoMovimiento } from '../../facturas/tipo-movimentos/tipo-movimentos.component';
+import { TipoMovimientosService } from '../../facturas/tipo-movimentos/tipo-movimientos.service';
 import { FormatoVentaService } from '../../formato-venta/formato-venta.service';
 import { AlertService } from '../../notifications/_services';
 import { ILibroContable2 } from '../libro-contable.component';
@@ -20,11 +22,10 @@ export class FormLibroContableComponent implements OnInit {
     private fb: FormBuilder, private libroContableService: LibroContableService,
     private router: Router, private activatedRoute: ActivatedRoute,
     private alertService: AlertService, private cuentaService: CuentaService,
-    private formatoVentaService: FormatoVentaService
+    private tipoMovimientoService: TipoMovimientosService
   ) { }
 
-  formatos: IFormatoVenta[];
-  cuentas: ICuenta[];
+  tiposMovimiento: ITipoMovimiento[];
   modoEdicion: boolean = false;
   libroContableId: number;
 
@@ -36,11 +37,8 @@ export class FormLibroContableComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.cuentaService.getCuentas().subscribe(cuentas => {
-      this.cuentas = cuentas;
-      this.formatoVentaService.getFormatosVenta().subscribe(formatos => {
-        this.formatos = formatos
-      });
+    this.tipoMovimientoService.getTipoMovimientos().subscribe(tiposMovimiento => {
+      this.tiposMovimiento = tiposMovimiento
     });
 
     this.activatedRoute.params.subscribe(params => {
@@ -96,6 +94,10 @@ export class FormLibroContableComponent implements OnInit {
   }
   get codigo() {
     return this.formGroup.get('codigo');
+  }
+
+  receiveMessageCuenta($event) {
+    this.codigo.setValue($event.id);
   }
 
 }

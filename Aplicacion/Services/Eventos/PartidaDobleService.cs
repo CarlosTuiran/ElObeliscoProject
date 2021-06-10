@@ -84,7 +84,7 @@ namespace Aplicacion.Services.Eventos
 
         public CrearLibroContableResponse RegistroLibroContable(LibroContableRequest libroContableRequest)
         {
-
+            libroContableRequest.Codigo = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Id == libroContableRequest.Codigo).Codigo;
             var cuenta = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == libroContableRequest.Codigo);
             if (cuenta == null)
             {
@@ -100,21 +100,33 @@ namespace Aplicacion.Services.Eventos
             {
                 libroContable.Haber = libroContableRequest.Valor;
             }
-
-            Cuenta
-                                //"Efectivo"
-                                cuentaHaber = libroContableRequest.TipoMovimientoId switch
-                                {
-                                    1 => _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo ==
-                                               _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Efectivo").ValorNumerico),//"Efectivo"
-                                    2 => _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo ==
-                                                _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Credito").ValorNumerico),//"Credito"
-                                    3 => _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo ==
-                                                _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Cheque").ValorNumerico),//"Cheque"
-                                    4 => _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo ==
-                                                _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Pago Virtual").ValorNumerico),//"Pago Virtual"
-                                    _ => _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == 1105),
-                                };
+            Cuenta cuentaHaber;
+            switch (libroContableRequest.TipoMovimientoId)
+            {
+                case 1:
+                    //"Efectivo"
+                    var efectivo = _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Efectivo").ValorNumerico;
+                    cuentaHaber = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == efectivo);
+                    break;
+                case 2:
+                    //"Credito"
+                    var credito = _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Credito").ValorNumerico;
+                    cuentaHaber = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == credito);
+                    break;
+                case 3:
+                    //"Cheque"
+                    var cheque = _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Cheque").ValorNumerico;
+                    cuentaHaber = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == cheque);
+                    break;
+                case 4:
+                    //"Pago Virtual"
+                    var pagoVirtual = _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Pago Virtual").ValorNumerico;
+                    cuentaHaber = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == pagoVirtual);
+                    break;
+                default:
+                    cuentaHaber = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == 1105);
+                    break;
+            }
             var libroContableHaber = new LibroContable(cuentaHaber.Codigo, "Registro libro contable " + libroContableRequest.Descripcion, libroContableRequest.OrigenId.ToString(), "Libro Contable", libroContableRequest.Fecha)
             {
                 Haber = libroContableRequest.Valor
