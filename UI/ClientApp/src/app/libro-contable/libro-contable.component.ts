@@ -15,6 +15,10 @@ export class LibroContableComponent implements OnInit {
     var URL = this.baseUrl+"LibroContablePDF"; 
     window.open(URL, '_blank');
   }
+  balanceGeneralPDF() {
+    var URL = this.baseUrl + "BalanceGeneral";
+    window.open(URL, '_blank');
+  }
 }
 export interface ILibroContable{
   codigo: number,

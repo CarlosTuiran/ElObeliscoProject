@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Aplicacion.Request.Salidas
+@model ConsultarBalanceGeneralResponse
+@{
 	ViewData["Title"] = "Libro Contable";
 	Layout = "Layout";
 }
@@ -11,7 +13,7 @@
 	}
 
 	.alineacionDerecha {
-		text-align: right;v
+		text-align: right;
 	}
     .col{
     border:1px solid ;
@@ -23,45 +25,54 @@
 <h4 class="text-center">Balance General</h4>
 
 <div class="container">
-  <div class="row">
-    <div class="col text-center"><b>Activos</b></div>
-    <div class="col text-center"><b>Pasivos</b></div>
-    <div class="w-100"></div>
-    <div class="col"><b>Activos Corrientes</b></div>
-    <div class="col"><b>Pasivos Corrientes</b></div>
-  </div>
-  <div class="row">
-    <div class="col">
-    <!--Activos corrietes-->
-        <div class="row">
-            <div class="col">Efectivo o caja</div>
-            <div class="col">@Model.Cuentas.Efectivo</div>
-        </div>
-        <div class="row">
-            <div class="col">Inventario</div>
-            <div class="col">@Model.Cuentas.Inventario</div>
-        </div>
+    <div class="row">
+        <div class="col text-center"><b>Activos</b></div>
+        <div class="col text-center"><b>Pasivos</b></div>        
     </div>
-    <div class="col">
-        <!--Pasivos corrietes-->
+    <div class="row">
+        <div class="col"><b>Activos Corrientes</b></div>
+        <div class="col"><b>Pasivos Corrientes</b></div>
     </div>
+  <div class="row">
+      <div class="col">
+          <!--Activos corrietes-->
+          @foreach (var item in Model.ActivosCorrientes)
+          {
+              <div class="row">
+                  <div class="col">@item.Concepto</div>
+                  <div class="col">@item.ValorTotal</div>
+              </div>
+          }         
+      </div>
+      <div class="col">
+          <!--Pasivos corrietes-->
+          @foreach (var item in Model.PasivosCorrientes)
+          {
+              <div class="row">
+                  <div class="col">@item.Concepto</div>
+                  <div class="col">@item.ValorTotal</div>
+              </div>
+          }
+      </div>
     
   </div>
   <div class="row">
     <div class="col"><br/></div>
     <div class="col"> <br/></div>
-    <div class="w-100"></div>
     <div class="col">
         <div class="row">
             <div class="col">Total</div>
-            <div class="col">@Model.Cuenta.TotalActivo</div>
+            <div class="col">@Model.ActivoTotal</div>
         </div>
     </div>
-    <div class="col"><b>Patrimonio</b>
-        <div class="row">
-                <div class="col">Utilidades retenidas</div>
-                <div class="col">@Model.Cuenta.TotalPatrimonio</div>
-        </div>
+    <div class="col"><b>Patrimonio</b>        
+        @foreach (var item in Model.Patrimonio)
+        {
+            <div class="row">
+                <div class="col">@item.Concepto</div>
+                <div class="col">@item.ValorTotal</div>
+            </div>
+        }        
     </div>
   </div>
 </div>
