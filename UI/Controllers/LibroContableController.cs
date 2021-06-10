@@ -1,3 +1,5 @@
+using Aplicacion.Request;
+using Aplicacion.Services.Eventos;
 using Domain.Models.Entities;
 using Infra.Datos;
 using Infra.Datos.Base;
@@ -15,18 +17,32 @@ namespace UI.InterfazWeb.Controllers
     public class LibroContableController : ControllerBase
     {
         private readonly ObeliscoContext _context;
-        private UnitOfWork _unitOfWork;
-        
+        private readonly UnitOfWork _unitOfWork;
+        private readonly PartidaDobleService _partidaDobleService;
+
         public LibroContableController(ObeliscoContext context)
         {
             _context = context;
             _unitOfWork = new UnitOfWork(_context);
+            _partidaDobleService = new PartidaDobleService(_unitOfWork);
         }
 
         [HttpGet]
         public object LibroContable()
         {
             return _context.LibroContable;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateLibroContable([FromBody] LibroContableRequest request)
+        {
+            var rta = _partidaDobleService.RegistroLibroContable(request);
+            if (rta.IsOk())
+            {
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("GetLibroContable", request);
+            }
+            return BadRequest(rta.Message);
         }
 
     }

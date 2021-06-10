@@ -21,7 +21,7 @@ namespace Aplicacion.Services.Eventos
                 {
                     var producto = _unitOfWork.ProductoServiceRepository.FindFirstOrDefault(t => t.Referencia == item.Referencia);
                     var cuenta = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Id == producto.CuentaIngreso);
-                    var libroContable = new LibroContable(cuenta.Codigo, "Compra Producto " + producto.Descripcion, mFactura.idMfactura, "Factura", mFactura.FechaFactura);
+                    var libroContable = new LibroContable(cuenta.Codigo, "Compra Producto " + producto.Descripcion, mFactura.idMfactura.ToString(), "Factura", mFactura.FechaFactura);
                     //Debe o Haber
                     if (cuenta.Naturaleza == "Débito")
                     {
@@ -32,7 +32,7 @@ namespace Aplicacion.Services.Eventos
                         libroContable.Haber = item.PrecioTotal - item.IVA;
                     }
                     //impuestos y deveg
-                    var libroContableImp = new LibroContable(cuentaImpuesto.Codigo, "Impuestos Producto " + producto.Descripcion, mFactura.idMfactura, "Factura", mFactura.FechaFactura);
+                    var libroContableImp = new LibroContable(cuentaImpuesto.Codigo, "Impuestos Producto " + producto.Descripcion, mFactura.idMfactura.ToString(), "Factura", mFactura.FechaFactura);
                     libroContableImp.Debe = item.IVA;
                     Cuenta cuentaHaber;
                     switch (mFactura.TipoMovimientoId)
@@ -65,7 +65,7 @@ namespace Aplicacion.Services.Eventos
                             cuentaHaber = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == 1105);
                             break;
                     }
-                    var libroContableHaber = new LibroContable(cuentaHaber.Codigo, "Compra Producto " + producto.Descripcion, mFactura.idMfactura, "Factura", mFactura.FechaFactura);
+                    var libroContableHaber = new LibroContable(cuentaHaber.Codigo, "Compra Producto " + producto.Descripcion, mFactura.idMfactura.ToString(), "Factura", mFactura.FechaFactura);
                     libroContableHaber.Haber = item.PrecioTotal;
 
                     //?que estoy haciendo?=
@@ -81,6 +81,50 @@ namespace Aplicacion.Services.Eventos
             }
             return 1;
         }
+
+        public CrearLibroContableResponse RegistroLibroContable(LibroContableRequest libroContableRequest)
+        {
+
+            var cuenta = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == libroContableRequest.Codigo);
+            if (cuenta == null)
+            {
+                return new CrearLibroContableResponse($"No existe la cuenta");
+            }
+            var libroContable = new LibroContable(libroContableRequest.Codigo, "Registro libro contable " + libroContableRequest.Descripcion, libroContableRequest.OrigenId.ToString(), "Libro Contable", libroContableRequest.Fecha);
+            //Debe o Haber
+            if (cuenta.Naturaleza == "Débito")
+            {
+                libroContable.Debe = libroContableRequest.Valor;
+            }
+            else
+            {
+                libroContable.Haber = libroContableRequest.Valor;
+            }
+
+            Cuenta
+                                //"Efectivo"
+                                cuentaHaber = libroContableRequest.TipoMovimientoId switch
+                                {
+                                    1 => _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo ==
+                                               _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Efectivo").ValorNumerico),//"Efectivo"
+                                    2 => _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo ==
+                                                _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Credito").ValorNumerico),//"Credito"
+                                    3 => _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo ==
+                                                _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Cheque").ValorNumerico),//"Cheque"
+                                    4 => _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo ==
+                                                _unitOfWork.ParametrosServiceRepository.FindFirstOrDefault(t => t.Descripcion == "Pago Virtual").ValorNumerico),//"Pago Virtual"
+                                    _ => _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == 1105),
+                                };
+            var libroContableHaber = new LibroContable(cuentaHaber.Codigo, "Registro libro contable " + libroContableRequest.Descripcion, libroContableRequest.OrigenId.ToString(), "Libro Contable", libroContableRequest.Fecha)
+            {
+                Haber = libroContableRequest.Valor
+            };
+
+            _unitOfWork.LibroContableServiceRepository.Add(libroContable);
+            _unitOfWork.LibroContableServiceRepository.Add(libroContableHaber);
+            _unitOfWork.Commit();
+            return new CrearLibroContableResponse($"Libro Contable Creado Exitosamente");
+        }
         public int Vender(CrearMFacturaRequest mFactura)
         {
             try
@@ -91,7 +135,7 @@ namespace Aplicacion.Services.Eventos
                     var producto = _unitOfWork.ProductoServiceRepository.FindFirstOrDefault(t => t.Referencia == item.Referencia);
                     //? 4135 Comercio al por mayor
                     var cuenta = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == 4135);
-                    var libroContable = new LibroContable(cuenta.Codigo, "Venta Producto " + producto.Descripcion, mFactura.idMfactura, "Factura", mFactura.FechaFactura);
+                    var libroContable = new LibroContable(cuenta.Codigo, "Venta Producto " + producto.Descripcion, mFactura.idMfactura.ToString(), "Factura", mFactura.FechaFactura);
                     //Debe o Haber
                     if (cuenta.Naturaleza == "Débito")
                     {
@@ -102,7 +146,7 @@ namespace Aplicacion.Services.Eventos
                         libroContable.Haber = item.PrecioTotal - item.IVA;
                     }
                     //impuestos y deveg
-                    var libroContableImp = new LibroContable(cuentaImpuesto.Codigo, "Impuestos Producto " + producto.Descripcion, mFactura.idMfactura, "Factura", mFactura.FechaFactura);
+                    var libroContableImp = new LibroContable(cuentaImpuesto.Codigo, "Impuestos Producto " + producto.Descripcion, mFactura.idMfactura.ToString(), "Factura", mFactura.FechaFactura);
                     libroContableImp.Haber = item.IVA;
                     Cuenta cuentaDebe;
                     switch (mFactura.TipoMovimientoId)
@@ -135,7 +179,7 @@ namespace Aplicacion.Services.Eventos
                             cuentaDebe = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == 1105);
                             break;
                     }
-                    var libroContableDebe = new LibroContable(cuentaDebe.Codigo, "Compra Producto " + producto.Descripcion, mFactura.idMfactura, "Factura", mFactura.FechaFactura);
+                    var libroContableDebe = new LibroContable(cuentaDebe.Codigo, "Compra Producto " + producto.Descripcion, mFactura.idMfactura.ToString(), "Factura", mFactura.FechaFactura);
                     libroContableDebe.Debe = item.PrecioTotal;
 
                     //?que estoy haciendo?=
@@ -167,11 +211,11 @@ namespace Aplicacion.Services.Eventos
                 var gastopersonalCuenta = _unitOfWork.CuentaServiceRepository.FindFirstOrDefault(t => t.Codigo == gastopersonalParam.ValorNumerico);
                 var nominaActual = DateTime.Now.Month + " - " + DateTime.Now.Year;
                 //var TotalLiquidacion = _unitOfWork.TotalLiquidacionServiceRepository.FindFirstOrDefault(t => t.NominaId == nominaActual);
-                var libroContable1 = new LibroContable(retencionesCuenta.Codigo, "Retencion aporte nomina " + nominaActual, TotalLiquidacion.Id, "Nomina", DateTime.Now);
-                var libroContable2 = new LibroContable(acreedoresCuenta.Codigo, "Acreedores varios " + nominaActual, TotalLiquidacion.Id, "Nomina", DateTime.Now);
-                var libroContable3 = new LibroContable(provisionCuenta.Codigo, "Provision " + nominaActual, TotalLiquidacion.Id, "Nomina", DateTime.Now);
-                var libroContable4 = new LibroContable(salariosCuenta.Codigo, "Salarios por pagar " + nominaActual, TotalLiquidacion.Id, "Nomina", DateTime.Now);
-                var libroContable5 = new LibroContable(gastopersonalCuenta.Codigo, "Gasto personal " + nominaActual, TotalLiquidacion.Id, "Nomina", DateTime.Now);
+                var libroContable1 = new LibroContable(retencionesCuenta.Codigo, "Retencion aporte nomina " + nominaActual, nominaActual, "Nomina", DateTime.Now);
+                var libroContable2 = new LibroContable(acreedoresCuenta.Codigo, "Acreedores varios " + nominaActual, nominaActual, "Nomina", DateTime.Now);
+                var libroContable3 = new LibroContable(provisionCuenta.Codigo, "Provision " + nominaActual, nominaActual, "Nomina", DateTime.Now);
+                var libroContable4 = new LibroContable(salariosCuenta.Codigo, "Salarios por pagar " + nominaActual, nominaActual, "Nomina", DateTime.Now);
+                var libroContable5 = new LibroContable(gastopersonalCuenta.Codigo, "Gasto personal " + nominaActual, nominaActual, "Nomina", DateTime.Now);
                 libroContable1.Haber = TotalLiquidacion.Salud + TotalLiquidacion.Arl + TotalLiquidacion.Caja_Comp + TotalLiquidacion.ICBF + TotalLiquidacion.SENA;
                 libroContable2.Haber = TotalLiquidacion.Pension;
                 libroContable3.Haber = TotalLiquidacion.Cesantias + TotalLiquidacion.Int_Cesantias + TotalLiquidacion.Vacaciones + TotalLiquidacion.Prima;
@@ -194,18 +238,3 @@ namespace Aplicacion.Services.Eventos
         }
     }
 }
-/*
-        public int idMfactura { get; set; } 
-        public int EmpleadoId { get; set; }
-        public int TercerosId { get; set; }
-        public int TipoMovimientoId { get; set; }
-        public string TipoMovimiento { get; set; }
-        public DateTime FechaFactura { get => DateTime.Now; }
-        public DateTime? FechaPago { get; set; }
-        public double SubTotal { get; set; }
-        public double ValorDevolucion { get; set; }
-        public double Descuento { get; set; }
-        public double IVA { get; set; }
-        public double Total { get; set; }
-        public double Abono { get; set; }
-*/

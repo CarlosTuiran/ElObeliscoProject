@@ -11,11 +11,11 @@ namespace Domain.Models.Entities
         public string Descripcion { get; set; }
         public double? Debe { get; set; }            
         public double? Haber { get; set; }
-        public int OrigenId { get; set; }
+        public string OrigenId { get; set; }
         public string OrigenTipo { get; set; }
         public DateTime Fecha { get; set; }
 
-        public LibroContable(int codigo, string descripcion, int origenId, string origenTipo, DateTime fecha)
+        public LibroContable(int codigo, string descripcion, string origenId, string origenTipo, DateTime fecha)
         {
             Codigo = codigo;
             Descripcion = descripcion;           

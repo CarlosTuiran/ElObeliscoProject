@@ -25,3 +25,13 @@ export interface ILibroContable{
   origenTipo : string,
   fecha: Date
 }
+
+export interface ILibroContable2{
+  id: number,
+  codigo: number,
+  descripcion :string,
+  tipoMovimientoId:number,
+  valor : number,
+  origenId : number,
+  origenTipo : string
+}

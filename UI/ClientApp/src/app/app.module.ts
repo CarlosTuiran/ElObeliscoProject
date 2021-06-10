@@ -125,6 +125,7 @@ import { LibroContableComponent } from './libro-contable/libro-contable.componen
 import { TableLibroContableComponent } from './libro-contable/table-libro-contable/table-libro-contable.component';
 import { DialogoBodegasComponent } from './bodegas/dialogo-bodegas/dialogo-bodegas.component';
 import { TableBodegasComponent } from './bodegas/table-bodegas/table-bodegas.component';
+import { FormLibroContableComponent } from './libro-contable/form-libro-contable/form-libro-contable.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -213,6 +214,7 @@ import { TableBodegasComponent } from './bodegas/table-bodegas/table-bodegas.com
     TableLibroContableComponent,
     DialogoBodegasComponent,
     TableBodegasComponent,
+    FormLibroContableComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -270,6 +272,8 @@ import { TableBodegasComponent } from './bodegas/table-bodegas/table-bodegas.com
       { path: 'parametros-editar/:id', component: FormParametrosComponent, canActivate: [CheckNotloginGuard] },
       { path: 'impuestos', component: ImpuestoComponent, canActivate: [CheckNotloginGuard] },
       { path: 'libroContable', component: LibroContableComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'libroContable-crear', component: FormLibroContableComponent, canActivate: [CheckNotloginGuard] },
+      { path: 'libroContable-editar/:id', component: FormLibroContableComponent, canActivate: [CheckNotloginGuard] },
       { path: 'bodegas', component: BodegasComponent, canActivate: [CheckNotloginGuard] },
 
     ]),
