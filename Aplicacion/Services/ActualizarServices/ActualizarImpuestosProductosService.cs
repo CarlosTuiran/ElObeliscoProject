@@ -28,6 +28,7 @@ namespace Aplicacion.Services.ActualizarServices
             {
                 _unitOfWork.ImpuestosProductoServiceRepository.Delete(item);
             }
+            _unitOfWork.Commit();
             var respuestaCrear = _crearImpuestosProducto.Ejecutar(impuestos, idProducto);
             if (respuestaCrear.IsOk())
             {

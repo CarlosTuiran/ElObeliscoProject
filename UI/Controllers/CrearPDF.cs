@@ -86,7 +86,6 @@ namespace UI.Controllers
         public IActionResult BalanceGeneral()
         {
             var rta = consultarBalanceGeneral.Ejecutar();
-            //return View(rta);
             return new ViewAsPdf("BalanceGeneral")
             {
                 Model = rta
@@ -96,7 +95,6 @@ namespace UI.Controllers
         public IActionResult EstadoResultado()
         {
             var rta = consultarBalanceGeneral.Ejecutar();
-            //return View(rta);
             return new ViewAsPdf("BalanceGeneral")
             {
                 Model = rta

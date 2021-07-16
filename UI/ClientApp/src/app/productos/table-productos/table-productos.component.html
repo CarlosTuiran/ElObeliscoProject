@@ -51,11 +51,6 @@
         <th mat-header-cell *matHeaderCellDef> PrecioVenta </th>
         <td *matCellDef="let element"> {{element.precioVenta| currency:'USD'}} </td>
       </ng-container>
-      <!-- iva Column -->
-      <ng-container matColumnDef="iva">
-        <th mat-header-cell *matHeaderCellDef> IVA </th>
-        <td *matCellDef="let element"> {{element.iva }} % </td>
-      </ng-container>
       <!-- fecharegistro Column -->
       <ng-container matColumnDef="fechaRegistro">
         <th mat-header-cell *matHeaderCellDef> FechaRegistro </th>

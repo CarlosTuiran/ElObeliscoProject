@@ -9,7 +9,7 @@ import { IBodega } from './bodegas.component';
 })
 export class BodegasService {
 
-  apiURL = this.baseUrl + "api/Categoria";
+  apiURL = this.baseUrl + "api/Bodega";
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
   private _refresh$ = new Subject<void>();
 
