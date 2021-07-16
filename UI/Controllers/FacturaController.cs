@@ -93,7 +93,16 @@ namespace UI.Controllers
         }
         [HttpGet("GetSerial")]
         public object GetSerial(){
-            var id=_context.MFactura.OrderByDescending(x=>x.Id).Select(t => t.Id).First();
+            int id;
+            try
+            {
+                 id=_context.MFactura.OrderByDescending(x=>x.Id).Select(t => t.Id).First();
+
+            }
+            catch (Exception)
+            {
+                id = 0;
+            }
             string serial= "F-"+DateTime.Now.ToString("yyyy")+"-"+id+1;
             return serial;
         }

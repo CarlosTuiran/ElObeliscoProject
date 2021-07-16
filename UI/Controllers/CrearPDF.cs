@@ -92,7 +92,7 @@ namespace UI.Controllers
                 Model = rta
             };
         }
-        [HttpGet("/BalanceGeneral")]
+        [HttpGet("/EstadoResultado")]
         public IActionResult EstadoResultado()
         {
             var rta = consultarBalanceGeneral.Ejecutar();
