@@ -32,12 +32,12 @@ namespace UI.InterfazWeb.Controllers
                           on i.Referencia equals p.Referencia
                           select new
                           {
-                              Referencia = i.Referencia,
-                              Descripcion = p.Descripcion,
-                              Cantidad = i.Cantidad,
-                              PrecioVenta = p.PrecioVenta
+                              i.Referencia,
+                              p.Descripcion,
+                              p.FormatoVenta,
+                              i.Cantidad,
+                              p.PrecioVenta
                           }).ToList();
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
             return result;
         }
     }

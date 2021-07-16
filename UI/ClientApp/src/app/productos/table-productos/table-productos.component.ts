@@ -23,7 +23,6 @@ export class TableProductosComponent implements OnInit {
     'fabrica',
     'costo',
     'precioVenta',
-    'iva',
     'fechaRegistro',
     'options'];
   dataSource =new MatTableDataSource<IProducto2>(this.productos);

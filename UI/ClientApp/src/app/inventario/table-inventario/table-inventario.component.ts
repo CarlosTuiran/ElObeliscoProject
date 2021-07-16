@@ -17,6 +17,7 @@ export class TableInventarioComponent implements OnInit {
   displayedColumns: string[] = [
     'referencia',
     'descripcion',
+    'formatoVenta',
     'cantidad',
     'precioVenta',
     'options'];

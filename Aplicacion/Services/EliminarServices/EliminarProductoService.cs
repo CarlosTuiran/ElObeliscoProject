@@ -17,6 +17,16 @@ namespace Aplicacion.Services.EliminarServices
         public EliminarProductoResponse Ejecutar(EliminarProductoRequest request)
         {
             Producto producto = _unitOfWork.ProductoServiceRepository.FindFirstOrDefault(t => t.Referencia == request.Referencia);
+            var dfactura = _unitOfWork.DFacturaServiceRepository.FindFirstOrDefault(t => t.Referencia == request.Referencia);
+            var inventario = _unitOfWork.InventarioServiceRepository.FindFirstOrDefault(t => t.Referencia == request.Referencia);
+            if (dfactura != null)
+            {
+                return new EliminarProductoResponse() { Message = $"Elimine de las facturas primero" };
+            }
+            if (inventario != null)
+            {
+                return new EliminarProductoResponse() { Message = $"Elimine del inventario primero" };
+            }
             if (producto == null)
             {
                 return new EliminarProductoResponse() { Message = $"Producto no existe" };

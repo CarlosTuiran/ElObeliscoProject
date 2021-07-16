@@ -27,6 +27,7 @@ export class InventarioComponent implements OnInit {
 export interface IInventario {
   referencia: string,
   descripcion: string,
+  formatoVenta: string,
   cantidad: number,
   precioVenta: number
 }

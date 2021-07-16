@@ -116,7 +116,7 @@ public filteredcuentas: ReplaySubject<ICuenta[]> = new ReplaySubject<ICuenta[]>(
       // crea
       this.productosService.createProductos(producto)
         .subscribe(usuario => this.onSaveSuccess(),
-          error => { this.alertService.error(error.error), console.log(error)});
+          error => this.alertService.error(error.error));
     }
   }
   onSaveSuccess() {
