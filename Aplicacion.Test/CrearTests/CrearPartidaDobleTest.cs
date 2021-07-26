@@ -13,17 +13,16 @@ namespace Aplicacion.Test.CrearTests
     [TestFixture]
     public class CrearPartidaDobleTest
     {
-        ObeliscoContext _context;
+        ObeliscoTestContext _context;
         UnitOfWork _unitOfWork;
         PartidaDobleService _partidaDobleService;
 
         [SetUp]
         public void Setup()
         {
-            var options = new DbContextOptionsBuilder<ObeliscoContext>().UseSqlServer(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=ObeliescoDB; Integrated Security=True; MultipleActiveResultSets=True").Options;
-            _context = new ObeliscoContext(options);
+            var optionsInMemory = new DbContextOptionsBuilder<ObeliscoTestContext>().UseInMemoryDatabase("Obelisco").Options;
+            _context = new ObeliscoTestContext(optionsInMemory);
             _unitOfWork = new UnitOfWork(_context);
-            _partidaDobleService = new PartidaDobleService(_unitOfWork);
         }
         [TestCaseSource("CreationsLibroContable")]
         public void CrearLibroContable(LibroContableRequest libroContableRequest, string expected)
