@@ -22,7 +22,6 @@ namespace Aplicacion.Test.Eventos
             _context = new ObeliscoContext(options);
             _unitOfWork = new UnitOfWork(_context);
         }
-
         [TestCaseSource("CreationsPagarEmpleado")]
         public void PagarEmpleado(PagarEmpleadoRequest nominaRequest, string expected)
         {

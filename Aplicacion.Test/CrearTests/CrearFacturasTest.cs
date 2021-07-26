@@ -26,7 +26,7 @@ namespace Aplicacion.Test
             _context = new ObeliscoTestContext(optionsInMemory); 
             _unitOfWork = new UnitOfWork(_context);
         }
-
+        [TestCaseSource("CreationsMFactura")]
         public void CrearMFacturas(CrearMFacturaRequest mFacturaRequest, string expected)
         {
             _Mservice = new CrearMFacturaService(_unitOfWork);

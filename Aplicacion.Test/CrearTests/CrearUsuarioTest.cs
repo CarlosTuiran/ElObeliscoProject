@@ -24,7 +24,7 @@ namespace Aplicacion.Test.CrearTests
             _context = new ObeliscoTestContext(optionsInMemory);
             _unitOfWork = new UnitOfWork(_context);
         }
-
+        [TestCaseSource("CreationsUsuario")]
         public void CrearUsuario(CrearUsuarioRequest UsuarioRequest, string expected)
         {
             _Usuarioservice = new CrearUsuarioService(_unitOfWork);
