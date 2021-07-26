@@ -27,7 +27,6 @@ namespace Aplicacion.Test
             _unitOfWork = new UnitOfWork(_context);
         }
 
-        [TestCaseSource("CreationsMFactura")]
         public void CrearMFacturas(CrearMFacturaRequest mFacturaRequest, string expected)
         {
             _Mservice = new CrearMFacturaService(_unitOfWork);
@@ -57,7 +56,6 @@ namespace Aplicacion.Test
                 ).SetName("Crear M Factura Correctamente");
         }
 
-        [TestCaseSource("CreationsDFactura")]
         public void CrearDFacturas( List<CrearDFacturaRequest> crearDFacturaRequests, string expected)
         {
             _Dservice = new CrearDFacturaService(_unitOfWork);

@@ -12,7 +12,6 @@ namespace Domain.Test
         {
         }
 
-        [TestCaseSource("CifradoData")]
         public void Cifradousuario(string nombre, string password, int idempleado, string tipo,string expected)
         {
             Usuario = new Usuario(nombre, password, idempleado, tipo);
