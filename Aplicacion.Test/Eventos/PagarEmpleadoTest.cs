@@ -11,15 +11,15 @@ namespace Aplicacion.Test.Eventos
     [TestFixture]
     public class PagarEmpleadoTest
     {
-        ObeliscoContext _context;
+        ObeliscoTestContext _context;
         UnitOfWork _unitOfWork;
         PagarEmpleadoService _PagarEmpleadoservice;
 
         [SetUp]
         public void Setup()
         {
-            var options = new DbContextOptionsBuilder<ObeliscoContext>().UseSqlServer(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=ObeliescoDB; Integrated Security=True; MultipleActiveResultSets=True").Options;
-            _context = new ObeliscoContext(options);
+            var optionsInMemory = new DbContextOptionsBuilder<ObeliscoTestContext>().UseInMemoryDatabase("Obelisco").Options;
+            _context = new ObeliscoTestContext(optionsInMemory);
             _unitOfWork = new UnitOfWork(_context);
         }
         [TestCaseSource("CreationsPagarEmpleado")]
