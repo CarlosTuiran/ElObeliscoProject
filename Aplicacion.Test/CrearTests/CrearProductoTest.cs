@@ -19,14 +19,13 @@ namespace Aplicacion.Test.CrearTests
         [SetUp]
         public void Setup()
         {
-            //optionsBuilder.UseMySql(@"Server=localhost; database=cempreddp;uid=acceso;pwd=acceso;");
             var optionsInMemory = new DbContextOptionsBuilder<ObeliscoTestContext>().UseInMemoryDatabase("Obelisco").Options;
             _context = new ObeliscoTestContext(optionsInMemory);
             _unitOfWork = new UnitOfWork(_context);
         }
 
         [TestCaseSource("CreationsProducto")]
-        public void CrearEmpleado(CrearProductoRequest ProductoRequest, string expected)
+        public void CrearProducto(CrearProductoRequest ProductoRequest, string expected)
         {
             _Productoservice = new CrearProductoService(_unitOfWork);
             var response = _Productoservice.Ejecutar(ProductoRequest);
@@ -37,16 +36,21 @@ namespace Aplicacion.Test.CrearTests
             yield return new TestCaseData(
                 new CrearProductoRequest
                 {
-                    Costo = 10000,
-                    Descripcion = "Cemento Blanco",
-                    Fabrica = "Argos",
-                    FormatoVenta = "que va aqui xd",
-                    IdMarca=1,
-                    IdCategoria=1,
-                    IdProveedor="1",
-                    PrecioVenta = 12000,
-                    Referencia = "tampoco recuerdo que va aqui :'v",
-                },
+                    Referencia = "10002",
+                    Descripcion = "Cemento",
+                    FormatoVenta = "Unidad",
+                    IdMarca = 1,
+                    IdCategoria = 1,
+                    IdProveedor = "106583",
+                    Fabrica = "ARGOS",
+                    Costo = 25000,
+                    PrecioVenta = 30000,
+                    CantidadMinima = 10,
+                    FechaRegistro = DateTime.Now.Date,
+                    CuentaIngreso = 1,
+                    CuentaDevolucion = 1,
+                    IdImpuestos = new List<int> { }
+    },
                 "Producto Creado Exitosamente"
                 ).SetName("Crear Producto Correctamente");
         }

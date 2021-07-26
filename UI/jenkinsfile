@@ -1,0 +1,28 @@
+node {
+
+  stage('Checkout') {
+	   git url: 'https://github.com/CarlosTuiran/ElObeliscoProject.git',branch: 'master'
+  }
+
+ stage ('Restore Nuget') {
+    bat "dotnet restore UI/UI.csproj"
+  }
+  
+  stage('Clean') {
+    bat 'dotnet clean UI/UI.csproj'
+  }
+  
+  stage('Build') {
+    bat 'dotnet build UI/UI.csproj --configuration Release'
+  }
+
+  stage ('Test') {
+    bat "dotnet test Aplicacion.Test/Aplicacion.Test.csproj --logger trx;LogFileName=unit_tests.trx"
+    mstest testResultsFile:"**/*.trx", keepLongStdio: true
+  }
+
+  stage('Publish') {
+    bat 'dotnet publish UI/UI.csproj -c Release -o D:/Proyectos/Publicados/ElObelisco'
+  }
+  
+}

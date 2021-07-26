@@ -18,6 +18,11 @@ namespace Domain.Models.Entities
             Tipo = tipo;
             Activo = activo;
         }
+
+        public Impuesto()
+        {
+        }
+
         public IReadOnlyList<string> CanCrear(Impuesto impuesto)
         {
             var errors = new List<string>();

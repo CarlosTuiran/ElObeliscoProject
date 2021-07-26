@@ -26,7 +26,7 @@ namespace Aplicacion.Test.CrearTests
         }
 
         [TestCaseSource("CreationsUsuario")]
-        public void CrearEmpleado(CrearUsuarioRequest UsuarioRequest, string expected)
+        public void CrearUsuario(CrearUsuarioRequest UsuarioRequest, string expected)
         {
             _Usuarioservice = new CrearUsuarioService(_unitOfWork);
             var response = _Usuarioservice.Ejecutar(UsuarioRequest);
@@ -39,7 +39,8 @@ namespace Aplicacion.Test.CrearTests
                 {
                     EmpleadoId = 1002301,
                     Nombre = "RaulAgamez",
-                    Password="acceso123"
+                    Password="acceso123",
+                    Rol = "Admin"
 
                 },
                 "Usuario Creado Exitosamente"
@@ -49,17 +50,19 @@ namespace Aplicacion.Test.CrearTests
                 {
                     EmpleadoId = 1002301,
                     Nombre = "RaulAgamez",
-                    Password="acceso123"
+                    Password="acceso123",
+                    Rol = "Admin"
 
                 },
-                "Empleado ya tine un Usuario"
+                "Empleado ya tiene un Usuario"
                 ).SetName("Crear Usuario con Id Repetido");
             yield return new TestCaseData(
                 new CrearUsuarioRequest
                 {
                     EmpleadoId = 1003301,
                     Nombre = "RaulAgamez",
-                    Password="acceso123"
+                    Password="acceso123",
+                    Rol = "Admin"
 
                 },
                 "Nombre de Usuario ya existe"
@@ -69,7 +72,8 @@ namespace Aplicacion.Test.CrearTests
                 {
                     
                     Nombre = "RaulAgamez1",
-                    Password="acceso123"
+                    Password="acceso123",
+                    Rol = "Admin"
 
                 },
                 "Errores: Campo IdEmpleado vacio"
@@ -79,7 +83,8 @@ namespace Aplicacion.Test.CrearTests
                 {
                     EmpleadoId = 10033012,
                     
-                    Password="acceso123"
+                    Password="acceso123",
+                    Rol = "Admin"
 
                 },
                 "Errores: Campo Nombre vacio"
@@ -89,6 +94,7 @@ namespace Aplicacion.Test.CrearTests
                 {
                     EmpleadoId = 1003303,
                     Nombre = "RaulAgamez3",
+                    Rol = "Admin"
 
                 },
                 "Errores: Campo Password vacio"
@@ -98,9 +104,7 @@ namespace Aplicacion.Test.CrearTests
                 {
                     EmpleadoId = 10033014,
                     Nombre = "RaulAgamez4",
-                    Password="acceso123"
-                    
-
+                    Password="acceso123",
                 },
                 "Errores: Campo Tipo vacio"
                 ).SetName("Crear Usuario con Campo Tipo vacio");
@@ -109,7 +113,8 @@ namespace Aplicacion.Test.CrearTests
                 {
                     EmpleadoId = 10033015,
                     Nombre = "RaulAgamez5",
-                    Password="ac"
+                    Password="ac",
+                    Rol = "Admin"
 
                 },
                 "Errores: Campo Password debe tener minimo 6 caracteres"

@@ -126,6 +126,7 @@ import { TableLibroContableComponent } from './libro-contable/table-libro-contab
 import { DialogoBodegasComponent } from './bodegas/dialogo-bodegas/dialogo-bodegas.component';
 import { TableBodegasComponent } from './bodegas/table-bodegas/table-bodegas.component';
 import { FormLibroContableComponent } from './libro-contable/form-libro-contable/form-libro-contable.component';
+import { EstadoFinancieroComponent } from './configuraciones/estado-financiero/estado-financiero.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -215,6 +216,7 @@ import { FormLibroContableComponent } from './libro-contable/form-libro-contable
     DialogoBodegasComponent,
     TableBodegasComponent,
     FormLibroContableComponent,
+    EstadoFinancieroComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

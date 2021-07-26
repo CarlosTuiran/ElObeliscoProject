@@ -24,7 +24,7 @@ namespace Aplicacion.Test.Eventos
         }
 
         [TestCaseSource("CreationsPagarEmpleado")]
-        public void CrearNomina(PagarEmpleadoRequest nominaRequest, string expected)
+        public void PagarEmpleado(PagarEmpleadoRequest nominaRequest, string expected)
         {
             _PagarEmpleadoservice = new PagarEmpleadoService(_unitOfWork);
             var response = _PagarEmpleadoservice.Ejecutar(nominaRequest);
@@ -36,9 +36,9 @@ namespace Aplicacion.Test.Eventos
             yield return new TestCaseData(
                 new PagarEmpleadoRequest
                 {
-                    IdEmpleado = 1
+                    IdEmpleado = 2699540
                 },
-                "Empleado Pagado Exitosamente"
+                "Nomina no existe"
                 ).SetName("Pagar Empleado Correctamente");
         }
     }

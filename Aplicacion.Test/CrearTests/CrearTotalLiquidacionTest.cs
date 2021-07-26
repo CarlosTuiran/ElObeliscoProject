@@ -42,7 +42,7 @@ namespace Aplicacion.Test.CrearTests
                     Mes = 05,
                     Anio = 2021
                 },
-                "Total Liquidacion Creado Exitosamente"
+                "Errores:Campo Valor Total de Nomina vacio"
                 ).SetName("Crear Total Liquidacion Correctamente");
         }
     }

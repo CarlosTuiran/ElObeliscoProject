@@ -77,6 +77,8 @@ namespace Aplicacion.Test
                     Referencia="9900-3333-2222",
                     Cantidad=2,
                     PrecioUnitario=2500,
+                    CantidadDigitada=10,
+                    PrecioTotal=25000,
                     //FechaFactura=DateTime.Now,
                     Bodega ="BD1",
                 },
@@ -85,11 +87,13 @@ namespace Aplicacion.Test
                     MfacturaId = 100000001,
                     Referencia = "7966-3333-2222",
                     Cantidad = 1,
+                    CantidadDigitada=10,
+                    PrecioTotal=50000,
                     PrecioUnitario = 5000,
                     //FechaFactura = DateTime.Now,
                     Bodega = "BD1",
                 }},
-                "Detalle de Facturas Creado Exitosamente"
+                "Detalles de Factura Creado Exitosamente"
                 ).SetName("Crear D Facturas Correctamente");
         }
     }
