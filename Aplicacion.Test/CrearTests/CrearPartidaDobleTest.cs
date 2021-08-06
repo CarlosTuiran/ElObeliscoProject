@@ -23,6 +23,7 @@ namespace Aplicacion.Test.CrearTests
             var optionsInMemory = new DbContextOptionsBuilder<ObeliscoTestContext>().UseInMemoryDatabase("Obelisco").Options;
             _context = new ObeliscoTestContext(optionsInMemory);
             _unitOfWork = new UnitOfWork(_context);
+            _partidaDobleService = new PartidaDobleService(_unitOfWork);
         }
         [TestCaseSource("CreationsLibroContable")]
         public void CrearLibroContable(LibroContableRequest libroContableRequest, string expected)

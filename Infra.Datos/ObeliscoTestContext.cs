@@ -164,6 +164,15 @@ namespace Infra.Datos
                     SalarioBase = 1200000
                 });
 
+            modelBuilder.Entity<Cuenta>().HasData(
+                new Cuenta
+                {
+                    Codigo= 1105,
+                    Nombre="Banco",
+                    Naturaleza="Debito",
+                    Clase="Activo",
+                });
+
 
             modelBuilder.Entity<Parametros>().HasData(
             //Partida Doble Cuenta Nomina Agrupacion 1 

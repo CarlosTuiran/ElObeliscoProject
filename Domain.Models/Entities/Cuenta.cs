@@ -12,6 +12,10 @@ namespace Domain.Models.Entities
         public string Naturaleza { get; set; }
         public string Clase { get; set; }
 
+        public Cuenta()
+        {
+        }
+
         public Cuenta(int codigo, string nombre, string naturaleza, string clase)
         {
             Codigo = codigo;
