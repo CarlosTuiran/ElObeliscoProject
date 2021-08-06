@@ -13,7 +13,7 @@ namespace Infra.Datos
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS; Initial Catalog=ObeliescoDB; Integrated Security=True; MultipleActiveResultSets=True");
+            optionsBuilder.UseSqlServer(@"Server=tcp:desarrollo-raul-agamez.database.windows.net,1433;Initial Catalog=ObeliescoDB;Persist Security Info=False;User ID=raulAgamez;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
