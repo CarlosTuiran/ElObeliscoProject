@@ -167,6 +167,7 @@ namespace Infra.Datos
             modelBuilder.Entity<Cuenta>().HasData(
                 new Cuenta
                 {
+                    Id = 1,
                     Codigo= 1105,
                     Nombre="Banco",
                     Naturaleza="Debito",
