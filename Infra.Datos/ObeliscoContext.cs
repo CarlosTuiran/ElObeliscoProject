@@ -13,7 +13,7 @@ namespace Infra.Datos
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=tcp:desarrollo-raul-agamez.database.windows.net,1433;Initial Catalog=ObeliescoDB;Persist Security Info=False;User ID=raulAgamez;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            optionsBuilder.UseSqlServer(@"Server=tcp:uidbserver.database.windows.net,1433;Initial Catalog=UI_db;Persist Security Info=False;User ID=raulAgamez;Password=Raul123456789;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -70,13 +70,6 @@ namespace Infra.Datos
                     Id = 1
                 });
             //CREAR SEEDS CUANTO SE TENGA CLARO LA NOMINA
-            /*modelBuilder.Entity<Nomina>().HasData(
-                new Nomina(){ IdEmpleado= 2699540, IdNomina=1,  SalarioBase=1400000, Seguro=100000, Id=1
-                });
-            modelBuilder.Entity<Liquidacion>().HasData(
-                new Liquidacion() { Monto=1500000, 
-                    FechaPago=DateTime.Now, NominaId=1,Id = 1
-                });*/
             modelBuilder.Entity<Terceros>().HasData(
                 new Terceros()
                 {

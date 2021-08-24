@@ -12,7 +12,7 @@ namespace Aplicacion.Services.Eventos
     public class ComprarProductoService
     {
         readonly IUnitOfWork _unitOfWork;
-        private ActualizarInventarioService actualizarInventarioService;
+        private readonly ActualizarInventarioService actualizarInventarioService;
         public ComprarProductoService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -28,8 +28,6 @@ namespace Aplicacion.Services.Eventos
                 foreach (var dproducto in dFactura)
                 {
                     //! problema aca
-                    //var producto = _unitOfWork.ProductoServiceRepository.FindFirstOrDefault(t => t.Referencia == dproducto.Referencia);
-                    //IList<Producto> producto = _unitOfWork.ProductoServiceRepository.FindFirstOrDefault(t => t.Referencia == dproducto.Referencia);
                     if (false)
                     { 
                         //si no existe el producto
