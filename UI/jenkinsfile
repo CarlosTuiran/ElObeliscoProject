@@ -22,7 +22,7 @@ node {
   }
 
   stage('Publish') {
-    bat 'dotnet publish UI/UI.csproj -c Release -o D:/Proyectos/Publicados/ElObelisco'
+    bat 'dotnet publish UI/UI.csproj -c master -o D:/Proyectos/Publicados/ElObelisco'
   }
   
 }
